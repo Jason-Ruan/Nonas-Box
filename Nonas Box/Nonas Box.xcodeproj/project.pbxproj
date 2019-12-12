@@ -1,0 +1,615 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0868904823A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */; };
+		0868904923A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */; };
+		0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6272385F40C0059D9CE /* AppDelegate.swift */; };
+		0899D62A2385F40C0059D9CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6292385F40C0059D9CE /* SceneDelegate.swift */; };
+		0899D62C2385F40C0059D9CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D62B2385F40C0059D9CE /* ViewController.swift */; };
+		0899D62F2385F40C0059D9CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0899D62D2385F40C0059D9CE /* Main.storyboard */; };
+		0899D6312385F4120059D9CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0899D6302385F4120059D9CE /* Assets.xcassets */; };
+		0899D6342385F4120059D9CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0899D6322385F4120059D9CE /* LaunchScreen.storyboard */; };
+		0899D63F2385F4130059D9CE /* Nonas_BoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */; };
+		4E2233E9397E315372802D26 /* Pods_Nonas_Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C71C6CA5F5790FBDE3AF31 /* Pods_Nonas_Box.framework */; };
+		A8627457D506B64FEDAE4A95 /* Pods_Nonas_BoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5623B55D7F3F483C96EF9F6B /* Pods_Nonas_BoxTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0899D63B2385F4130059D9CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0899D61C2385F40C0059D9CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0899D6232385F40C0059D9CE;
+			remoteInfo = "Nonas Box";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0199D650FA580171DDA2C1F6 /* Pods-Nonas Box.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas Box.debug.xcconfig"; path = "Target Support Files/Pods-Nonas Box/Pods-Nonas Box.debug.xcconfig"; sourceTree = "<group>"; };
+		0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0899D6242385F40C0059D9CE /* Nonas Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nonas Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0899D6272385F40C0059D9CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0899D6292385F40C0059D9CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0899D62B2385F40C0059D9CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0899D62E2385F40C0059D9CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0899D6302385F4120059D9CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0899D6332385F4120059D9CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0899D6352385F4120059D9CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0899D63A2385F4130059D9CE /* Nonas BoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nonas BoxTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonas_BoxTests.swift; sourceTree = "<group>"; };
+		0899D6402385F4130059D9CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12BAA1A5019748459BDFEE55 /* Pods-Nonas BoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas BoxTests.release.xcconfig"; path = "Target Support Files/Pods-Nonas BoxTests/Pods-Nonas BoxTests.release.xcconfig"; sourceTree = "<group>"; };
+		5623B55D7F3F483C96EF9F6B /* Pods_Nonas_BoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_BoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2C71C6CA5F5790FBDE3AF31 /* Pods_Nonas_Box.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC2A9FA1F42A6B923B25B640 /* Pods-Nonas BoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas BoxTests.debug.xcconfig"; path = "Target Support Files/Pods-Nonas BoxTests/Pods-Nonas BoxTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EC2A5EA78F60A26AD0A662C0 /* Pods-Nonas Box.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas Box.release.xcconfig"; path = "Target Support Files/Pods-Nonas Box/Pods-Nonas Box.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0899D6212385F40C0059D9CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E2233E9397E315372802D26 /* Pods_Nonas_Box.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0899D6372385F4130059D9CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8627457D506B64FEDAE4A95 /* Pods_Nonas_BoxTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0899D61B2385F40C0059D9CE = {
+			isa = PBXGroup;
+			children = (
+				0899D6262385F40C0059D9CE /* Nonas Box */,
+				0899D63D2385F4130059D9CE /* Nonas BoxTests */,
+				0899D6252385F40C0059D9CE /* Products */,
+				958A17F2EEB5B10332FAA565 /* Pods */,
+				377F5205AF49960A514D5206 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0899D6252385F40C0059D9CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0899D6242385F40C0059D9CE /* Nonas Box.app */,
+				0899D63A2385F4130059D9CE /* Nonas BoxTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0899D6262385F40C0059D9CE /* Nonas Box */ = {
+			isa = PBXGroup;
+			children = (
+				0899D64C2385F5950059D9CE /* Models */,
+				0899D64A2385F5840059D9CE /* View Controllers */,
+				0899D64B2385F5900059D9CE /* Views */,
+				0899D6492385F4220059D9CE /* Supporting Files */,
+				0899D6302385F4120059D9CE /* Assets.xcassets */,
+				0899D6352385F4120059D9CE /* Info.plist */,
+				0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */,
+			);
+			path = "Nonas Box";
+			sourceTree = "<group>";
+		};
+		0899D63D2385F4130059D9CE /* Nonas BoxTests */ = {
+			isa = PBXGroup;
+			children = (
+				0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */,
+				0899D6402385F4130059D9CE /* Info.plist */,
+			);
+			path = "Nonas BoxTests";
+			sourceTree = "<group>";
+		};
+		0899D6492385F4220059D9CE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0899D6272385F40C0059D9CE /* AppDelegate.swift */,
+				0899D6292385F40C0059D9CE /* SceneDelegate.swift */,
+				0899D6322385F4120059D9CE /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0899D64A2385F5840059D9CE /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0899D62B2385F40C0059D9CE /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		0899D64B2385F5900059D9CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0899D62D2385F40C0059D9CE /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0899D64C2385F5950059D9CE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		377F5205AF49960A514D5206 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2C71C6CA5F5790FBDE3AF31 /* Pods_Nonas_Box.framework */,
+				5623B55D7F3F483C96EF9F6B /* Pods_Nonas_BoxTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		958A17F2EEB5B10332FAA565 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0199D650FA580171DDA2C1F6 /* Pods-Nonas Box.debug.xcconfig */,
+				EC2A5EA78F60A26AD0A662C0 /* Pods-Nonas Box.release.xcconfig */,
+				DC2A9FA1F42A6B923B25B640 /* Pods-Nonas BoxTests.debug.xcconfig */,
+				12BAA1A5019748459BDFEE55 /* Pods-Nonas BoxTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0899D6232385F40C0059D9CE /* Nonas Box */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0899D6432385F4130059D9CE /* Build configuration list for PBXNativeTarget "Nonas Box" */;
+			buildPhases = (
+				1EA228DB327E41B4BD5AD88E /* [CP] Check Pods Manifest.lock */,
+				0899D6202385F40C0059D9CE /* Sources */,
+				0899D6212385F40C0059D9CE /* Frameworks */,
+				0899D6222385F40C0059D9CE /* Resources */,
+				ABE871FF2DA89FBB05B635B8 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Nonas Box";
+			productName = "Nonas Box";
+			productReference = 0899D6242385F40C0059D9CE /* Nonas Box.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0899D6392385F4130059D9CE /* Nonas BoxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0899D6462385F4130059D9CE /* Build configuration list for PBXNativeTarget "Nonas BoxTests" */;
+			buildPhases = (
+				63FAF51C1CF9F68F96062607 /* [CP] Check Pods Manifest.lock */,
+				0899D6362385F4130059D9CE /* Sources */,
+				0899D6372385F4130059D9CE /* Frameworks */,
+				0899D6382385F4130059D9CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0899D63C2385F4130059D9CE /* PBXTargetDependency */,
+			);
+			name = "Nonas BoxTests";
+			productName = "Nonas BoxTests";
+			productReference = 0899D63A2385F4130059D9CE /* Nonas BoxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0899D61C2385F40C0059D9CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "Jason Ruan";
+				TargetAttributes = {
+					0899D6232385F40C0059D9CE = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+					0899D6392385F4130059D9CE = {
+						CreatedOnToolsVersion = 11.2.1;
+						TestTargetID = 0899D6232385F40C0059D9CE;
+					};
+				};
+			};
+			buildConfigurationList = 0899D61F2385F40C0059D9CE /* Build configuration list for PBXProject "Nonas Box" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0899D61B2385F40C0059D9CE;
+			productRefGroup = 0899D6252385F40C0059D9CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0899D6232385F40C0059D9CE /* Nonas Box */,
+				0899D6392385F4130059D9CE /* Nonas BoxTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0899D6222385F40C0059D9CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0899D6342385F4120059D9CE /* LaunchScreen.storyboard in Resources */,
+				0868904823A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */,
+				0899D6312385F4120059D9CE /* Assets.xcassets in Resources */,
+				0899D62F2385F40C0059D9CE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0899D6382385F4130059D9CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0868904923A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1EA228DB327E41B4BD5AD88E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nonas Box-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63FAF51C1CF9F68F96062607 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nonas BoxTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ABE871FF2DA89FBB05B635B8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nonas Box/Pods-Nonas Box-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nonas Box/Pods-Nonas Box-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nonas Box/Pods-Nonas Box-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0899D6202385F40C0059D9CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0899D62C2385F40C0059D9CE /* ViewController.swift in Sources */,
+				0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */,
+				0899D62A2385F40C0059D9CE /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0899D6362385F4130059D9CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0899D63F2385F4130059D9CE /* Nonas_BoxTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0899D63C2385F4130059D9CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0899D6232385F40C0059D9CE /* Nonas Box */;
+			targetProxy = 0899D63B2385F4130059D9CE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0899D62D2385F40C0059D9CE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0899D62E2385F40C0059D9CE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0899D6322385F4120059D9CE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0899D6332385F4120059D9CE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0899D6412385F4130059D9CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0899D6422385F4130059D9CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0899D6442385F4130059D9CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0199D650FA580171DDA2C1F6 /* Pods-Nonas Box.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P7Q76CBS9B;
+				INFOPLIST_FILE = "Nonas Box/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasonruan.nonasbox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0899D6452385F4130059D9CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC2A5EA78F60A26AD0A662C0 /* Pods-Nonas Box.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P7Q76CBS9B;
+				INFOPLIST_FILE = "Nonas Box/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasonruan.nonasbox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0899D6472385F4130059D9CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC2A9FA1F42A6B923B25B640 /* Pods-Nonas BoxTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P7Q76CBS9B;
+				INFOPLIST_FILE = "Nonas BoxTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "nonas-box.Nonas-BoxTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nonas Box.app/Nonas Box";
+			};
+			name = Debug;
+		};
+		0899D6482385F4130059D9CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12BAA1A5019748459BDFEE55 /* Pods-Nonas BoxTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P7Q76CBS9B;
+				INFOPLIST_FILE = "Nonas BoxTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "nonas-box.Nonas-BoxTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nonas Box.app/Nonas Box";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0899D61F2385F40C0059D9CE /* Build configuration list for PBXProject "Nonas Box" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0899D6412385F4130059D9CE /* Debug */,
+				0899D6422385F4130059D9CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0899D6432385F4130059D9CE /* Build configuration list for PBXNativeTarget "Nonas Box" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0899D6442385F4130059D9CE /* Debug */,
+				0899D6452385F4130059D9CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0899D6462385F4130059D9CE /* Build configuration list for PBXNativeTarget "Nonas BoxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0899D6472385F4130059D9CE /* Debug */,
+				0899D6482385F4130059D9CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0899D61C2385F40C0059D9CE /* Project object */;
+}

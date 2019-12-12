@@ -1,0 +1,18 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Nonas Box' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Nonas Box
+	pod 'Firebase/Auth'
+	pod 'Firebase/Firestore'
+	pod 'Firebase/MLVision'
+
+  target 'Nonas BoxTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

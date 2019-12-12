@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1063394556871-u84tuaj116o8pb6opcn436a2d9m58ka2.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1063394556871-u84tuaj116o8pb6opcn436a2d9m58ka2</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAtMXZWvkCUVxx9Zkk-a9Ys632bPeaz2hM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1063394556871</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.jasonruan.nonasbox</string>
+	<key>PROJECT_ID</key>
+	<string>nonas-box</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nonas-box.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1063394556871:ios:8bb8b7efb0546b170777e2</string>
+	<key>DATABASE_URL</key>
+	<string>https://nonas-box.firebaseio.com</string>
+</dict>
+</plist>

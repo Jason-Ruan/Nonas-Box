@@ -219,3 +219,29 @@ extension RecipeCreationVC: UITextFieldDelegate {
         return true
     }
 }
+
+
+//MARK: - TextView Delegates
+extension RecipeCreationVC: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool{
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        } else {
+            updateDataFieldTextForSegment(segment: self.currentDataEntryField, text: instructionsTextView.text)
+        }
+        return true
+    }
+}
+
+
+//MARK: - ImagePicker Delegates
+extension RecipeCreationVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.originalImage] as? UIImage else {
+            return
+        }
+        self.photoButton.setBackgroundImage(image, for: .normal)
+        dismiss(animated: true, completion: nil)
+    }
+}

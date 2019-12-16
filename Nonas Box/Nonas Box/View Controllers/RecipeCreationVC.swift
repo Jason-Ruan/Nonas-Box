@@ -10,6 +10,10 @@ import UIKit
 import Speech
 import AVFoundation
 
+fileprivate enum DataEntryField: Int {
+    case ingredients = 0, directions, notes
+}
+
 class RecipeCreationVC: UIViewController {
     //MARK: - IBOutlets
     @IBOutlet weak var instructionsTextView: UITextView!

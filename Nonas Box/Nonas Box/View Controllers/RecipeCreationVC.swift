@@ -171,6 +171,34 @@ class RecipeCreationVC: UIViewController {
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
     }
     
+    private func switchTextForSegment(segment: DataEntryField) {
+        switch segment {
+        case .ingredients:
+            instructionsTextView.text = ingredientsText
+        case .directions:
+            instructionsTextView.text = directionsText
+        case .notes:
+            instructionsTextView.text = notesText
+        }
+    }
+    
+    private func updateDataFieldTextForSegment(segment: DataEntryField, text: String) {
+        switch segment {
+        case .ingredients:
+            ingredientsText = text
+        case .directions:
+            directionsText = text
+        case .notes:
+            notesText = text
+        }
+    }
+    
+    private func openImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
 }
 
 

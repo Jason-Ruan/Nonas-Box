@@ -202,11 +202,20 @@ class RecipeCreationVC: UIViewController {
 }
 
 
+//MARK: - TextField Delegates
 extension RecipeCreationVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let text = textField.text {
-            instructionsTextView.text.append("\n\(text)")
+        guard textField != nameOfDishTextField else {
+            textField.resignFirstResponder()
+            return true
         }
+        
+        if let text = textField.text {
+            instructionsTextView.text.append("\(text)\n\n")
+            updateDataFieldTextForSegment(segment: self.currentDataEntryField, text: instructionsTextView.text)
+        }
+        
+        textField.resignFirstResponder()
         return true
     }
 }

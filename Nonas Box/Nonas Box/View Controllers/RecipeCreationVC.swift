@@ -214,7 +214,7 @@ extension RecipeCreationVC: UITextFieldDelegate {
             instructionsTextView.text.append("\(text)\n\n")
             updateDataFieldTextForSegment(segment: self.currentDataEntryField, text: instructionsTextView.text)
         }
-        
+        textField.text?.removeAll()
         textField.resignFirstResponder()
         return true
     }

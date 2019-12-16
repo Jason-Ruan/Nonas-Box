@@ -47,6 +47,13 @@ class RecipeCreationVC: UIViewController {
         openImagePicker()
     }
     
+    @IBAction func checkmarkTextFieldButtonPressed(_ sender: UIButton) {
+        if let text = inputTextField.text {
+            instructionsTextView.text.append("\(text)\n\n")
+            inputTextField.text?.removeAll()
+        }
+    }
+    
     @IBAction func submitButtonPressed(_ sender: UIButton) {
            
     }

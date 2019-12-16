@@ -141,7 +141,7 @@ class RecipeCreationVC: UIViewController {
         recognizerTask = speechRecognizer?.recognitionTask(with: recognizerRequest) { result, error in
             if let result = result {
                 DispatchQueue.main.async {
-                    self.inputTextField.text = result.bestTranscription.formattedString
+                    self.inputTextField.text = "\(result.bestTranscription.formattedString)\n\n"
                 }
             }
             if error != nil {

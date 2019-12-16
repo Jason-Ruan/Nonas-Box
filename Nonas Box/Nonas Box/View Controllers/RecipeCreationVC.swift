@@ -1,0 +1,135 @@
+//
+//  ViewController.swift
+//  Nonas Box
+//
+//  Created by Jason Ruan on 11/20/19.
+//  Copyright © 2019 Jason Ruan. All rights reserved.
+//
+
+import UIKit
+import Speech
+import AVFoundation
+
+class RecipeCreationVC: UIViewController {
+    //MARK: - IBOutlets
+    @IBOutlet weak var instructionsTextView: UITextView!
+    @IBOutlet weak var microphoneButton: UIButton!
+    
+    //MARK: - IBAction
+    @IBAction func startButton(_ sender: UIButton) {
+        isRecording = !isRecording
+        if isRecording {
+            do {
+                try startRecording()
+            } catch {
+                print(error)
+            }
+        } else {
+            stopRecording()
+        }
+    }
+    
+    //MARK: - Properties
+    
+    // AVAudioEngine processes input audio signals from the microphone.
+    private var audioEngine = AVAudioEngine()
+    
+    // SFSpeechRecognizer is used for live transcriptions.
+    private var speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+    
+    // SFSpeechAudioBufferRecognitionRequest is used by recognizer to access audioEngine.
+    private var recognizerRequest = SFSpeechAudioBufferRecognitionRequest()
+    
+    // SFSpeechRecognitionTask is used to hold in reference when the transcription process begins.
+    private var recognizerTask: SFSpeechRecognitionTask?
+    
+    
+    //MARK: - LifeCycle Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        requestTranscribePermissions()
+    }
+    
+    var isRecording: Bool = false {
+        didSet {
+            self.isRecording ? microphoneButton.setImage(UIImage(systemName: "mic.fill"), for: .normal) : microphoneButton.setImage(UIImage(systemName: "mic"), for: .normal)
+        }
+    }
+    
+    
+    //MARK: - Private Functions
+    private func requestTranscribePermissions() {
+        SFSpeechRecognizer.requestAuthorization { (authStatus) in
+            switch authStatus {
+            case .authorized:
+                print("User has authorized speech recognizer.")
+            case .denied:
+                print("Permission for speech recognition authorization was denied.")
+            case .restricted:
+                print("Authorization status is restricted. Speech recognition is not available on this device.")
+            case .notDetermined:
+                print("Not determined")
+            default:
+                print("Authorization status was not authorized, denies, restricted, or notDetermined")
+            }
+        }
+    }
+    
+    private func startRecording() throws {
+        // Checks device's iOS version. Starting from iOS 13, offline live audio transcriptions are now possible and without 1 minute limitation.
+        if #available(iOS 13, *) {
+            if speechRecognizer?.supportsOnDeviceRecognition ?? false{
+                recognizerRequest.requiresOnDeviceRecognition = true
+            }
+        }
+        
+        recognizerRequest.shouldReportPartialResults = true
+        
+        // Gets input audio node associated with device's microphone and its output format.
+        let inputNode = audioEngine.inputNode
+        inputNode.removeTap(onBus: 0)
+        let inputNodeFormat = inputNode.outputFormat(forBus: 0)
+        
+        try prepareAudioSession()
+        
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: inputNodeFormat) { [unowned self] (buffer, _) in
+            self.recognizerRequest.append(buffer)
+        }
+        
+        audioEngine.prepare()
+        try audioEngine.start()
+        
+        recognizerTask = speechRecognizer?.recognitionTask(with: recognizerRequest) { result, error in
+            if let result = result {
+                DispatchQueue.main.async {
+                    self.instructionsTextView.text.append(result.bestTranscription.formattedString)
+                }
+            }
+            if error != nil {
+                self.stopRecording()
+            }
+        }
+        
+    }
+    
+    private func stopRecording() {
+        // Frees up resources associated with audio engine.
+        audioEngine.stop()
+        
+        // Tells request to stop listening for any more audio.
+        recognizerRequest.endAudio()
+        
+        // Lets recognition task know that the process is complete and to free up resources.
+        if let recognizerTask = recognizerTask {
+            recognizerTask.cancel()
+        }
+        recognizerTask = nil
+    }
+    
+    private func prepareAudioSession() throws {
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+        try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+    }
+    
+}

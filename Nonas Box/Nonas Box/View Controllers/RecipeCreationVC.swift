@@ -25,7 +25,7 @@ class RecipeCreationVC: UIViewController {
     
     
     //MARK: - IBAction
-    @IBAction func startButton(_ sender: UIButton) {
+    @IBAction func microphoneButtonPressed(_ sender: UIButton) {
         isRecording = !isRecording
         if isRecording {
             do {

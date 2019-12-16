@@ -225,6 +225,7 @@ extension RecipeCreationVC: UITextFieldDelegate {
 extension RecipeCreationVC: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool{
         if text == "\n" {
+            textView.text.append(text)
             textView.resignFirstResponder()
             return false
         } else {

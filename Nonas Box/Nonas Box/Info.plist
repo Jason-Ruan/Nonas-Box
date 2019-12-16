@@ -43,6 +43,10 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app uses speech recognition for some accessibility features, such as inputting text.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app uses the microphone for some accessibility features, such as inputting text.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

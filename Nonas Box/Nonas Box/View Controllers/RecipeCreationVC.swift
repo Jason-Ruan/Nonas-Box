@@ -108,7 +108,7 @@ class RecipeCreationVC: UIViewController {
         recognizerTask = speechRecognizer?.recognitionTask(with: recognizerRequest) { result, error in
             if let result = result {
                 DispatchQueue.main.async {
-                    self.instructionsTextView.text.append(result.bestTranscription.formattedString)
+                    self.inputTextField.text = result.bestTranscription.formattedString
                 }
             }
             if error != nil {
@@ -138,4 +138,14 @@ class RecipeCreationVC: UIViewController {
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
     }
     
+}
+
+
+extension RecipeCreationVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let text = textField.text {
+            instructionsTextView.text.append("\n\(text)")
+        }
+        return true
+    }
 }

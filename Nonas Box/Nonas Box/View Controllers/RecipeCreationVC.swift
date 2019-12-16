@@ -14,6 +14,7 @@ class RecipeCreationVC: UIViewController {
     //MARK: - IBOutlets
     @IBOutlet weak var instructionsTextView: UITextView!
     @IBOutlet weak var microphoneButton: UIButton!
+    @IBOutlet weak var inputTextField: UITextField!
     
     //MARK: - IBAction
     @IBAction func startButton(_ sender: UIButton) {
@@ -48,6 +49,7 @@ class RecipeCreationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         requestTranscribePermissions()
+        setDelegates()
     }
     
     var isRecording: Bool = false {
@@ -73,6 +75,10 @@ class RecipeCreationVC: UIViewController {
                 print("Authorization status was not authorized, denies, restricted, or notDetermined")
             }
         }
+    }
+    
+    private func setDelegates() {
+        inputTextField.delegate = self
     }
     
     private func startRecording() throws {

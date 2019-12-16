@@ -19,6 +19,10 @@ class RecipeCreationVC: UIViewController {
     @IBOutlet weak var instructionsTextView: UITextView!
     @IBOutlet weak var microphoneButton: UIButton!
     @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var nameOfDishTextField: UITextField!
+    @IBOutlet weak var photoButton: UIButton!
+    
     
     //MARK: - IBAction
     @IBAction func startButton(_ sender: UIButton) {

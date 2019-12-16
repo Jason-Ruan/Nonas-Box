@@ -53,6 +53,22 @@ class RecipeCreationVC: UIViewController {
     
     //MARK: - Properties
     
+    private var isRecording: Bool = false {
+        didSet {
+            self.isRecording ? microphoneButton.setImage(UIImage(systemName: "mic.fill"), for: .normal) : microphoneButton.setImage(UIImage(systemName: "mic"), for: .normal)
+        }
+    }
+    
+    private var currentDataEntryField: DataEntryField = .ingredients {
+        didSet {
+            switchTextForSegment(segment: self.currentDataEntryField)
+        }
+    }
+    
+    private var ingredientsText = ""
+    private var directionsText = ""
+    private var notesText = ""
+    
     // AVAudioEngine processes input audio signals from the microphone.
     private var audioEngine = AVAudioEngine()
     
@@ -71,12 +87,6 @@ class RecipeCreationVC: UIViewController {
         super.viewDidLoad()
         requestTranscribePermissions()
         setDelegates()
-    }
-    
-    var isRecording: Bool = false {
-        didSet {
-            self.isRecording ? microphoneButton.setImage(UIImage(systemName: "mic.fill"), for: .normal) : microphoneButton.setImage(UIImage(systemName: "mic"), for: .normal)
-        }
     }
     
     

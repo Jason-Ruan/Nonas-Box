@@ -38,6 +38,19 @@ class RecipeCreationVC: UIViewController {
         }
     }
     
+    @IBAction func tappedOnSegmentedControl(_ sender: UISegmentedControl) {
+        guard let switchedSegment = DataEntryField(rawValue: sender.selectedSegmentIndex) else {return}
+        currentDataEntryField = switchedSegment
+    }
+    
+    @IBAction func photoButtonPressed(_ sender: UIButton) {
+        openImagePicker()
+    }
+    
+    @IBAction func submitButtonPressed(_ sender: UIButton) {
+           
+    }
+    
     //MARK: - Properties
     
     // AVAudioEngine processes input audio signals from the microphone.

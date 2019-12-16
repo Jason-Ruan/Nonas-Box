@@ -109,6 +109,8 @@ class RecipeCreationVC: UIViewController {
     }
     
     private func setDelegates() {
+        nameOfDishTextField.delegate = self
+        instructionsTextView.delegate = self
         inputTextField.delegate = self
     }
     

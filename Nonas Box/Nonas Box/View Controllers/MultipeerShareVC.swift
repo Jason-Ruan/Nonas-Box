@@ -10,7 +10,13 @@ import UIKit
 import MultipeerConnectivity
 
 class MultipeerShareVC: UIViewController {
-
+    //MARK: - Properties
+    private var peerID: MCPeerID!
+    private var mcSession: MCSession!
+    private var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    
+    
+    //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 

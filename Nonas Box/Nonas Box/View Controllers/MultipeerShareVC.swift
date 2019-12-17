@@ -19,13 +19,19 @@ class MultipeerShareVC: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpMultiPeerSession()
     }
     
+    
+    //MARK: - Private Functions
+    private func setUpMultiPeerSession() {
+//        peerID = MCPeerID(displayName: displayName)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession.delegate = self
+    }
+    
+}
 
-    /*
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

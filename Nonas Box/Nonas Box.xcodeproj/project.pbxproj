@@ -18,6 +18,7 @@
 		0899D6342385F4120059D9CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0899D6322385F4120059D9CE /* LaunchScreen.storyboard */; };
 		0899D63F2385F4130059D9CE /* Nonas_BoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */; };
 		08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5E20F23A2AAB1007AABE9 /* Secrets.swift */; };
+		08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */; };
 		4E2233E9397E315372802D26 /* Pods_Nonas_Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C71C6CA5F5790FBDE3AF31 /* Pods_Nonas_Box.framework */; };
 		A8627457D506B64FEDAE4A95 /* Pods_Nonas_BoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5623B55D7F3F483C96EF9F6B /* Pods_Nonas_BoxTests.framework */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonas_BoxTests.swift; sourceTree = "<group>"; };
 		0899D6402385F4130059D9CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08E5E20F23A2AAB1007AABE9 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesOnlineVC.swift; sourceTree = "<group>"; };
 		12BAA1A5019748459BDFEE55 /* Pods-Nonas BoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas BoxTests.release.xcconfig"; path = "Target Support Files/Pods-Nonas BoxTests/Pods-Nonas BoxTests.release.xcconfig"; sourceTree = "<group>"; };
 		5623B55D7F3F483C96EF9F6B /* Pods_Nonas_BoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_BoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C71C6CA5F5790FBDE3AF31 /* Pods_Nonas_Box.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +134,7 @@
 		0899D64A2385F5840059D9CE /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */,
 				0899D62B2385F40C0059D9CE /* RecipeCreationVC.swift */,
 				0869070D23A830A600634F1B /* MultipeerShareVC.swift */,
 			);
@@ -348,6 +351,7 @@
 				0869070E23A830A600634F1B /* MultipeerShareVC.swift in Sources */,
 				0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */,
 				0899D62A2385F40C0059D9CE /* SceneDelegate.swift in Sources */,
+				08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

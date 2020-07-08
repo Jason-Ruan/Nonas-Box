@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum AppError: Error {
     case unauthenticated
     case invalidJSONResponse

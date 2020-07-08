@@ -21,6 +21,7 @@
 		08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */; };
 		08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */; };
 		08E9758224B4215800BF0DC3 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758124B4215800BF0DC3 /* AppError.swift */; };
+		08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758324B61C8400BF0DC3 /* ImageHelper.swift */; };
 		4E2233E9397E315372802D26 /* Pods_Nonas_Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C71C6CA5F5790FBDE3AF31 /* Pods_Nonas_Box.framework */; };
 		A8627457D506B64FEDAE4A95 /* Pods_Nonas_BoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5623B55D7F3F483C96EF9F6B /* Pods_Nonas_BoxTests.framework */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesOnlineVC.swift; sourceTree = "<group>"; };
 		08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		08E9758124B4215800BF0DC3 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		08E9758324B61C8400BF0DC3 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		12BAA1A5019748459BDFEE55 /* Pods-Nonas BoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas BoxTests.release.xcconfig"; path = "Target Support Files/Pods-Nonas BoxTests/Pods-Nonas BoxTests.release.xcconfig"; sourceTree = "<group>"; };
 		5623B55D7F3F483C96EF9F6B /* Pods_Nonas_BoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_BoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C71C6CA5F5790FBDE3AF31 /* Pods_Nonas_Box.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,7 @@
 			children = (
 				08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */,
 				08E9758124B4215800BF0DC3 /* AppError.swift */,
+				08E9758324B61C8400BF0DC3 /* ImageHelper.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			files = (
 				0899D62C2385F40C0059D9CE /* RecipeCreationVC.swift in Sources */,
 				08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */,
+				08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */,
 				0869070E23A830A600634F1B /* MultipeerShareVC.swift in Sources */,
 				08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */,
 				08E9758224B4215800BF0DC3 /* AppError.swift in Sources */,

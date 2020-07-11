@@ -24,6 +24,7 @@
 		08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758324B61C8400BF0DC3 /* ImageHelper.swift */; };
 		08E9758924B80E0B00BF0DC3 /* SpoonacularClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758824B80E0B00BF0DC3 /* SpoonacularClient.swift */; };
 		08E9758B24B80E4400BF0DC3 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758A24B80E4400BF0DC3 /* Recipe.swift */; };
+		08E9758D24B95E7A00BF0DC3 /* RecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758C24B95E7A00BF0DC3 /* RecipeCollectionViewCell.swift */; };
 		4E2233E9397E315372802D26 /* Pods_Nonas_Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C71C6CA5F5790FBDE3AF31 /* Pods_Nonas_Box.framework */; };
 		A8627457D506B64FEDAE4A95 /* Pods_Nonas_BoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5623B55D7F3F483C96EF9F6B /* Pods_Nonas_BoxTests.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		08E9758324B61C8400BF0DC3 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		08E9758824B80E0B00BF0DC3 /* SpoonacularClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularClient.swift; sourceTree = "<group>"; };
 		08E9758A24B80E4400BF0DC3 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		08E9758C24B95E7A00BF0DC3 /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 		12BAA1A5019748459BDFEE55 /* Pods-Nonas BoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas BoxTests.release.xcconfig"; path = "Target Support Files/Pods-Nonas BoxTests/Pods-Nonas BoxTests.release.xcconfig"; sourceTree = "<group>"; };
 		5623B55D7F3F483C96EF9F6B /* Pods_Nonas_BoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_BoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C71C6CA5F5790FBDE3AF31 /* Pods_Nonas_Box.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				0899D62D2385F40C0059D9CE /* Main.storyboard */,
+				08E9758C24B95E7A00BF0DC3 /* RecipeCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08E9758D24B95E7A00BF0DC3 /* RecipeCollectionViewCell.swift in Sources */,
 				0899D62C2385F40C0059D9CE /* RecipeCreationVC.swift in Sources */,
 				08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */,
 				08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */,

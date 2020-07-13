@@ -14,8 +14,8 @@ class SearchRecipesOnlineVC: UIViewController {
     lazy var screenTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "Azure Overall - Recipe Search"
-        label.font = .boldSystemFont(ofSize: 25)
+        label.text = "Discover new recipes!"
+        label.font = UIFont(name: "ChalkboardSE-Bold", size: 25)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()

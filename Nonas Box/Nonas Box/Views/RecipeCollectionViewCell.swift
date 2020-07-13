@@ -133,9 +133,8 @@ class RecipeCollectionViewCell: UICollectionViewCell {
                 switch result {
                     case .success(let image):
                         self.foodImage.image = image
-                    
-                    case .failure(let error):
-                        print(error)
+                    case .failure:
+                        self.foodImage.image = UIImage(systemName: "photo")
                 }
                 self.toggleSpinner(status: .off)
             }

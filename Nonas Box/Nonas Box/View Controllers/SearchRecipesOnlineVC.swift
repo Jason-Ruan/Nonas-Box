@@ -186,6 +186,22 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                             return
                         }
                         self.recipes = recipes
+                        self.screenTitleLabel.textAlignment = .left
+                        
+                        self.screenTitleLabelTopConstraint.isActive = false
+                        self.screenTitleLabelCenterXConstraint.isActive = false
+                        self.searchBarCenterXContraint.isActive = false
+                        
+                        self.searchBarTopConstraint.constant = self.searchBarTopConstraint.constant / 5
+                        self.searchBarWidthConstraint.constant = self.view.frame.width - 40
+                        
+                        self.screenTitleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+                        self.screenTitleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+                        self.searchBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+                        
+                        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+                            self.view.layoutIfNeeded()
+                        }, completion: nil)
                     case .failure(let error):
                         print(error)
                 }

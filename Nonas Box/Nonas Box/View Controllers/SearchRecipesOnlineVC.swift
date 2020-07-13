@@ -102,31 +102,27 @@ class SearchRecipesOnlineVC: UIViewController {
     //MARK: - Private Functions
     
     private func setUpViews() {
-        
         view.addSubview(screenTitleLabel)
         screenTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            screenTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            screenTitleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            screenTitleLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
-            screenTitleLabel.heightAnchor.constraint(equalToConstant: view.frame.height / 10)
+            screenTitleLabelTopConstraint,
+            screenTitleLabelCenterXConstraint
         ])
         
         view.addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: screenTitleLabel.bottomAnchor),
-            searchBar.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            searchBar.widthAnchor.constraint(equalToConstant: view.frame.width),
-            searchBar.heightAnchor.constraint(equalToConstant: 50)
+            searchBarCenterXContraint,
+            searchBarWidthConstraint,
+            searchBarTopConstraint
         ])
         
         view.addSubview(recipeCollectionView)
         recipeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             recipeCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-            recipeCollectionView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            recipeCollectionView.widthAnchor.constraint(equalToConstant: view.frame.width),
+            recipeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            recipeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             recipeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         

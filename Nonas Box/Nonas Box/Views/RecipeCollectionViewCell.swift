@@ -20,8 +20,12 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     lazy var foodImage: UIImageView = {
         let iv = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         iv.layer.masksToBounds = true
-        iv.layer.cornerRadius = iv.frame.width / 2
-        
+        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
+        iv.layer.cornerRadius = 25
+        iv.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        iv.layer.borderWidth = 3
+        iv.layer.borderColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         return iv
     }()
     
@@ -56,7 +60,8 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.borderWidth = 2
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        layer.cornerRadius = 25
         setUpCell()
     }
     

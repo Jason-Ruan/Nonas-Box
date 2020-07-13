@@ -40,7 +40,7 @@ class SearchRecipesOnlineVC: UIViewController {
         cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: "recipeCell")
         cv.dataSource = self
         cv.delegate = self
-        cv.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        cv.contentInset = UIEdgeInsets(top: 50, left: 20, bottom: 50, right: 20)
         return cv
     }()
     

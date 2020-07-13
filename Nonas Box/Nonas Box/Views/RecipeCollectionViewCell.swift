@@ -33,7 +33,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
-        
         return label
     }()
     
@@ -59,9 +58,15 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
         layer.borderWidth = 2
         layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         layer.cornerRadius = 25
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.2
+        layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        layer.shadowRadius = 3
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 25).cgPath
         setUpCell()
     }
     

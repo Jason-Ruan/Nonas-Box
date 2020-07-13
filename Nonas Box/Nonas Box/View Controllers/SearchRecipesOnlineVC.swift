@@ -24,13 +24,14 @@ class SearchRecipesOnlineVC: UIViewController {
         let sb = UISearchBar()
         sb.delegate = self
         sb.placeholder = "Search for recipes here"
+        sb.searchBarStyle = .minimal
         return sb
     }()
     
     lazy var recipeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.frame.width / 2.5, height: view.frame.width / 2.5)
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: view.frame.width / 2.5, height: view.frame.height / 5)
         layout.minimumInteritemSpacing = 5
         layout.minimumLineSpacing = 5
         

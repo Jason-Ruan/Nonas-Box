@@ -91,8 +91,8 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         foodInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             foodInfoLabel.topAnchor.constraint(equalTo: foodImage.bottomAnchor, constant: 5),
-            foodInfoLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            foodInfoLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -5),
+            foodInfoLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            foodInfoLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             foodInfoLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
         ])
         
@@ -101,11 +101,16 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     func configureCell(recipe: Recipe) {
         guard let title = recipe.title, let servings = recipe.servings, let prepTime = recipe.readyInMinutes else { return }
         
-        foodInfoLabel.text = """
-        \(title)
-        # of Servings: \(servings)
-        Ready in: \(prepTime) minutes
-        """
+        let foodInfoText = NSMutableAttributedString(string: title, attributes: [.font : UIFont.boldSystemFont(ofSize: 15)])
+        let prepInfo = NSAttributedString(string:
+            """
+            \nServes: \(servings)
+            Ready in: \(prepTime) minutes
+            """, attributes: [.font : UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .light)])
+        
+        foodInfoText.append(prepInfo)
+        
+        foodInfoLabel.attributedText = foodInfoText
         
         foodImage.image = nil
         toggleSpinner(status: .on)

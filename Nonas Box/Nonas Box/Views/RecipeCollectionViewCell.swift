@@ -101,6 +101,12 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             foodInfoLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
         ])
         
+        foodImage.addSubview(spinner)
+        NSLayoutConstraint.activate([
+            spinner.centerXAnchor.constraint(equalTo: foodImage.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: foodImage.centerYAnchor)
+        ])
+        
     }
     
     func configureCell(recipe: Recipe) {
@@ -112,9 +118,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             \nServes: \(servings)
             Ready in: \(prepTime) minutes
             """, attributes: [.font : UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .light)])
-        
         foodInfoText.append(prepInfo)
-        
         foodInfoLabel.attributedText = foodInfoText
         
         foodImage.image = nil
@@ -140,18 +144,12 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     private func toggleSpinner(status: SpinnerStatus) {
-        DispatchQueue.main.async {
-            switch status {
-                case .on:
-                    self.foodImage.addSubview(self.spinner)
-                    NSLayoutConstraint.activate([
-                        self.spinner.centerXAnchor.constraint(equalTo: self.foodImage.centerXAnchor),
-                        self.spinner.centerYAnchor.constraint(equalTo: self.foodImage.centerYAnchor)
-                    ])
-                case .off:
-                    self.spinner.stopAnimating()
-                
-            }
+        switch status {
+            case .on:
+                self.spinner.startAnimating()
+            case .off:
+                self.spinner.stopAnimating()
+            
         }
     }
     

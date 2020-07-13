@@ -120,32 +120,33 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         }
         
         ImageHelper.shared.getImage(url: recipeImageURL) { (result) in
-            switch result {
-                case .success(let image):
-                    DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                    case .success(let image):
                         self.foodImage.image = image
+                    
+                    case .failure(let error):
+                        print(error)
                 }
-                case .failure(let error):
-                    print(error)
+                self.toggleSpinner(status: .off)
             }
-            self.toggleSpinner(status: .off)
         }
         
     }
     
     private func toggleSpinner(status: SpinnerStatus) {
-        switch status {
-            case .on:
-                foodImage.addSubview(spinner)
-                NSLayoutConstraint.activate([
-                    spinner.centerXAnchor.constraint(equalTo: foodImage.centerXAnchor),
-                    spinner.centerYAnchor.constraint(equalTo: foodImage.centerYAnchor)
-                ])
-            case .off:
-                DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            switch status {
+                case .on:
+                    self.foodImage.addSubview(self.spinner)
+                    NSLayoutConstraint.activate([
+                        self.spinner.centerXAnchor.constraint(equalTo: self.foodImage.centerXAnchor),
+                        self.spinner.centerYAnchor.constraint(equalTo: self.foodImage.centerYAnchor)
+                    ])
+                case .off:
                     self.spinner.stopAnimating()
-                }
                 
+            }
         }
     }
     

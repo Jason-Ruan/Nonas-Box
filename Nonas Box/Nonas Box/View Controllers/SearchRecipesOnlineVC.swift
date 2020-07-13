@@ -176,11 +176,8 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         guard let query = searchBar.text else { return }
-        //        showLoadingAnimation()
         
         SpoonacularAPIClient.manager.getRecipes(query: query) { (result) in
-            
-            //            self.removeLoadingAnimation()
             DispatchQueue.main.async {
                 switch result {
                     case .success(let recipes):

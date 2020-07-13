@@ -18,7 +18,7 @@ class SpoonacularAPIClient {
             return
         }
         
-        NetworkHelper.manager.performDataTask(withUrl: url) { (result) in
+        NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
             switch result {
                 case .success(let data):
                     do {

@@ -250,6 +250,10 @@ extension RecipeCreationVC: UIImagePickerControllerDelegate, UINavigationControl
             return
         }
         self.photoButton.setBackgroundImage(image, for: .normal)
+        photoButton.layer.masksToBounds = true
+        photoButton.layer.cornerRadius = 25
+        photoButton.layer.borderWidth = 5
+        photoButton.layer.borderColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
         dismiss(animated: true, completion: nil)
     }
 }

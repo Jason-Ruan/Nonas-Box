@@ -17,6 +17,7 @@
 		0899D6312385F4120059D9CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0899D6302385F4120059D9CE /* Assets.xcassets */; };
 		0899D6342385F4120059D9CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0899D6322385F4120059D9CE /* LaunchScreen.storyboard */; };
 		0899D63F2385F4130059D9CE /* Nonas_BoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */; };
+		08A1560024C53A21000B7F81 /* RecipeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */; };
 		08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5E20F23A2AAB1007AABE9 /* Secrets.swift */; };
 		08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */; };
 		08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */; };
@@ -51,6 +52,7 @@
 		0899D63A2385F4130059D9CE /* Nonas BoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nonas BoxTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonas_BoxTests.swift; sourceTree = "<group>"; };
 		0899D6402385F4130059D9CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailVC.swift; sourceTree = "<group>"; };
 		08E5E20F23A2AAB1007AABE9 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesOnlineVC.swift; sourceTree = "<group>"; };
 		08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */,
 				0899D62B2385F40C0059D9CE /* RecipeCreationVC.swift */,
 				0869070D23A830A600634F1B /* MultipeerShareVC.swift */,
+				08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				08E9758924B80E0B00BF0DC3 /* SpoonacularClient.swift in Sources */,
 				08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */,
 				08E9758B24B80E4400BF0DC3 /* Recipe.swift in Sources */,
+				08A1560024C53A21000B7F81 /* RecipeDetailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

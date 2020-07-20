@@ -236,9 +236,9 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let detailVC = DetailVC()
-//        detailVC.recipe = recipes[indexPath.row]
-//        self.navigationController?.pushViewController(detailVC, animated: true)
+        let detailVC = RecipeDetailVC()
+        detailVC.recipe = recipes[indexPath.row]
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
 }

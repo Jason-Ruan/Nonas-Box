@@ -18,6 +18,7 @@
 		0899D6342385F4120059D9CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0899D6322385F4120059D9CE /* LaunchScreen.storyboard */; };
 		0899D63F2385F4130059D9CE /* Nonas_BoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */; };
 		08A1560024C53A21000B7F81 /* RecipeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */; };
+		08A1560224C5F902000B7F81 /* BarcodeScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */; };
 		08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5E20F23A2AAB1007AABE9 /* Secrets.swift */; };
 		08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */; };
 		08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */; };
@@ -53,6 +54,7 @@
 		0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonas_BoxTests.swift; sourceTree = "<group>"; };
 		0899D6402385F4130059D9CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailVC.swift; sourceTree = "<group>"; };
+		08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanVC.swift; sourceTree = "<group>"; };
 		08E5E20F23A2AAB1007AABE9 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesOnlineVC.swift; sourceTree = "<group>"; };
 		08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				0899D62B2385F40C0059D9CE /* RecipeCreationVC.swift */,
 				0869070D23A830A600634F1B /* MultipeerShareVC.swift */,
 				08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */,
+				08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */,
 				08E9758224B4215800BF0DC3 /* AppError.swift in Sources */,
 				0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */,
+				08A1560224C5F902000B7F81 /* BarcodeScanVC.swift in Sources */,
 				0899D62A2385F40C0059D9CE /* SceneDelegate.swift in Sources */,
 				08E9758924B80E0B00BF0DC3 /* SpoonacularClient.swift in Sources */,
 				08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */,
@@ -464,6 +468,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7Q76CBS9B;
 				INFOPLIST_FILE = "Nonas Box/Info.plist";
@@ -473,6 +478,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasonruan.nonasbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -482,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7Q76CBS9B;
 				INFOPLIST_FILE = "Nonas Box/Info.plist";
@@ -491,6 +498,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasonruan.nonasbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

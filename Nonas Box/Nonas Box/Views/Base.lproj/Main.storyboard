@@ -19,6 +19,7 @@
                     <connections>
                         <segue destination="Vqp-Kq-rWx" kind="relationship" relationship="viewControllers" id="Tjh-kL-uWf"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="qNH-qn-s0l"/>
+                        <segue destination="XuH-zc-tlX" kind="relationship" relationship="viewControllers" id="y4s-7A-oUk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ib-6e-bSS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -172,6 +173,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqc-1o-gpQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="115.94202898550725" y="-28.125"/>
+        </scene>
+        <!--Scan-->
+        <scene sceneID="VIj-lb-RCg">
+            <objects>
+                <viewController id="XuH-zc-tlX" customClass="BarcodeScanVC" customModule="Nonas_Box" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wio-iU-zng">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="MW2-fN-CPg"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Scan" id="Wpt-T9-bgw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MdB-Lo-4bD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="116" y="1359"/>
         </scene>
     </scenes>
     <resources>

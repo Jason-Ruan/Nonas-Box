@@ -110,20 +110,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(recipe: Recipe) {
-        guard let title = recipe.title, let servings = recipe.servings, let prepTime = recipe.readyInMinutes else { return }
-        
-        let foodInfoText = NSMutableAttributedString(string: title, attributes: [.font : UIFont.boldSystemFont(ofSize: 15)])
-        let prepInfo = NSAttributedString(string:
-            """
-            \nServes: \(servings)
-            Ready in: \(prepTime) minutes
-            """, attributes: [.font : UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .light)])
-        foodInfoText.append(prepInfo)
-        foodInfoLabel.attributedText = foodInfoText
-        
-        foodImage.image = nil
-        toggleSpinner(status: .on)
-        
         guard let recipeID = recipe.id, let recipeImageURL = URL(string: "https://spoonacular.com/recipeImages/\(recipeID)-636x393") else {
             return
         }
@@ -139,6 +125,20 @@ class RecipeCollectionViewCell: UICollectionViewCell {
                 self.toggleSpinner(status: .off)
             }
         }
+        
+        guard let title = recipe.title, let servings = recipe.servings, let prepTime = recipe.readyInMinutes else { return }
+        
+        let foodInfoText = NSMutableAttributedString(string: title, attributes: [.font : UIFont.boldSystemFont(ofSize: 15)])
+        let prepInfo = NSAttributedString(string:
+            """
+            \nServes: \(servings)
+            Ready in: \(prepTime) minutes
+            """, attributes: [.font : UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .light)])
+        foodInfoText.append(prepInfo)
+        foodInfoLabel.attributedText = foodInfoText
+        
+        foodImage.image = nil
+        toggleSpinner(status: .on)
         
     }
     

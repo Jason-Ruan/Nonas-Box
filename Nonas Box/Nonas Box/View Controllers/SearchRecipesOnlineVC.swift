@@ -31,7 +31,6 @@ class SearchRecipesOnlineVC: UIViewController {
     lazy var recipeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: view.frame.width / 2.5, height: view.frame.height / 5)
         layout.minimumInteritemSpacing = 5
         layout.minimumLineSpacing = 5
         
@@ -40,7 +39,7 @@ class SearchRecipesOnlineVC: UIViewController {
         cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: "recipeCell")
         cv.dataSource = self
         cv.delegate = self
-        cv.contentInset = UIEdgeInsets(top: 50, left: 20, bottom: 50, right: 20)
+        cv.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return cv
     }()
     
@@ -236,9 +235,11 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = RecipeDetailVC()
-        detailVC.recipe = recipes[indexPath.row]
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        self.navigationController?.pushViewController(RecipeDetailVC(recipe: recipes[indexPath.row]), animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: collectionView.frame.width / 2, height: collectionView.frame.height / 2 - 20)
     }
     
 }

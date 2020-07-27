@@ -9,11 +9,15 @@
 import UIKit
 
 class RecipeDetailVC: UIViewController {
-    //MARK: - Properties
-    var recipe: Recipe? {
-        didSet {
-            print(self.recipe?.title)
-        }
+    
+    //MARK: - VC Initializer
+    init(recipe: Recipe) {
+        super.init(nibName: nil, bundle: nil)
+        self.recipe = recipe
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - LifeCycle Methods

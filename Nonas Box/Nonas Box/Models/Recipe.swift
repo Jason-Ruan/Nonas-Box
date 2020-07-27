@@ -13,10 +13,16 @@ struct SpoonacularResults: Codable {
 }
 
 struct Recipe: Codable {
-    let id: Int?
+    let id: Int
     let title: String?
     let readyInMinutes: Int?
     let servings: Int?
+    let image: String?
+    
+    var imageURL: URL? {
+        return URL(string: "https://spoonacular.com/recipeImages/\(image ?? "\(id)-636x393")")
+    }
+
 }
 
 extension Recipe: Hashable {

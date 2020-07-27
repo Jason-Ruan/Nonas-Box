@@ -134,20 +134,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             """, attributes: [.font : UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .light)])
         foodInfoText.append(prepInfo)
         foodInfoLabel.attributedText = foodInfoText
-        
-        foodImage.image = nil
-        toggleSpinner(status: .on)
-        
-    }
-    
-    private func toggleSpinner(status: SpinnerStatus) {
-        switch status {
-            case .on:
-                self.spinner.startAnimating()
-            case .off:
-                self.spinner.stopAnimating()
-            
-        }
     }
     
 }

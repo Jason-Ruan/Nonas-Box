@@ -20,6 +20,24 @@ class RecipeDetailVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Properties
+    private var recipe: Recipe?
+    
+    lazy var recipeImageView: UIImageView = {
+        let iv = UIImageView(frame: view.bounds)
+        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
+        
+        return iv
+    }()
+    
+    lazy var blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .systemThinMaterialLight)
+        let blurEffectView = UIVisualEffectView(frame: view.bounds)
+        blurEffectView.effect = blurEffect
+        return blurEffectView
+    }()
+    
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = .systemYellow

@@ -103,21 +103,25 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func configureCell(recipe: Recipe) {
-        guard let recipeID = recipe.id, let recipeImageURL = URL(string: "https://spoonacular.com/recipeImages/\(recipeID)-636x393") else {
-            return
-        }
+    private func configureCell(recipe: Recipe) {
+        foodImage.image = nil
+        self.spinner.startAnimating()
         
-        ImageHelper.shared.getImage(url: recipeImageURL) { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                    case .success(let image):
-                        self.foodImage.image = image
-                    case .failure:
-                        self.foodImage.image = UIImage(systemName: "photo")
+        if let imageURL = recipe.imageURL {
+            ImageHelper.shared.getImage(url: imageURL) { (result) in
+                DispatchQueue.main.async {
+                    switch result {
+                        case .success(let image):
+                            self.foodImage.image = image
+                        case .failure:
+                            self.foodImage.image = UIImage(systemName: "photo")
+                    }
+                    self.spinner.stopAnimating()
                 }
-                self.toggleSpinner(status: .off)
             }
+        } else {
+            self.foodImage.image = UIImage(systemName: "photo")
+            self.spinner.stopAnimating()
         }
         
         guard let title = recipe.title, let servings = recipe.servings, let prepTime = recipe.readyInMinutes else { return }

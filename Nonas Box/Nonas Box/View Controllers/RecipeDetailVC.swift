@@ -40,7 +40,30 @@ class RecipeDetailVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
-        view.backgroundColor = .systemYellow
+        self.navigationController?.navigationBar.isHidden = false
+        addSubviews()
+    }
+    
+    //MARK: - Private Functions
+    private func addSubviews() {
+        view.addSubview(recipeImageView)
+        view.addSubview(blurEffectView)
+        if let imageURL = recipe?.imageURL {
+            loadImage(recipeURL: imageURL)
+        }
+    }
+    
+    private func loadImage(recipeURL: URL) {
+        ImageHelper.shared.getImage(url: (recipe?.imageURL!)!) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                    case .success(let image):
+                        self.recipeImageView.image = image
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
     }
     
 }

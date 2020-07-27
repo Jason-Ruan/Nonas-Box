@@ -8,11 +8,6 @@
 
 import UIKit
 
-private enum SpinnerStatus {
-    case on
-    case off
-}
-
 class RecipeCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI Objects
@@ -38,7 +33,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
-        spinner.startAnimating()
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.hidesWhenStopped = true
         return spinner

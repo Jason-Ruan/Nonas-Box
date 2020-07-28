@@ -33,7 +33,7 @@ class RecipeDetailVC: UIViewController {
     
     lazy var blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .systemThinMaterialLight)
-        let blurEffectView = UIVisualEffectView(frame: view.bounds)
+        let blurEffectView = UIVisualEffectView()
         blurEffectView.effect = blurEffect
         return blurEffectView
     }()
@@ -47,7 +47,8 @@ class RecipeDetailVC: UIViewController {
     //MARK: - Private Functions
     private func addSubviews() {
         view.addSubview(recipeImageView)
-        view.addSubview(blurEffectView)
+        recipeImageView.addSubview(blurEffectView)
+        blurEffectView.frame = recipeImageView.bounds
         if let imageURL = recipe?.imageURL {
             loadImage(recipeURL: imageURL)
         }

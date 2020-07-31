@@ -13,8 +13,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     //MARK: - UI Objects
     
     lazy var foodImage: UIImageView = {
-        let iv = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        iv.layer.masksToBounds = true
+        let iv = UIImageView()
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 25

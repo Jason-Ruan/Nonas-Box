@@ -23,11 +23,20 @@ class RecipeDetailVC: UIViewController {
     //MARK: - Properties
     private var recipe: Recipe?
     
-    lazy var recipeImageView: UIImageView = {
+    lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView(frame: view.bounds)
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
-        
+        return iv
+    }()
+    
+    lazy var recipeImageView: UIImageView = {
+        let iv = UIImageView(frame: CGRect(x: view.frame.midX / 2, y: view.frame.midY / 3, width: view.frame.width / 2, height: view.frame.width / 2))
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = iv.frame.height / 2
+        iv.layer.borderWidth = 5
+        iv.layer.borderColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+        iv.contentMode = .scaleAspectFill
         return iv
     }()
     

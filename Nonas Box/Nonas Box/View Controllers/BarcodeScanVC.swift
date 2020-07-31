@@ -130,3 +130,19 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         return .portrait
     }
 }
+
+
+//MARK - CollectionView DataSource and DelegateFlowLayout Methods
+extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return scannedBardCodes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "barcodeCell", for: indexPath) as? RecipeCollectionViewCell else { return UICollectionViewCell() }
+        cell.foodImage.image = UIImage(systemName: "barcode")!
+        cell.foodInfoLabel.text = scannedBardCodes[indexPath.row]
+        return cell
+    }
+}

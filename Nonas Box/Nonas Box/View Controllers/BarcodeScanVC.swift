@@ -83,31 +83,43 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             captureSession.startRunning()
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+           super.viewWillDisappear(animated)
 
-        if (captureSession?.isRunning == true) {
-            captureSession.stopRunning()
-        }
+           if (captureSession?.isRunning == true) {
+               captureSession.stopRunning()
+           }
+       }
+    
+    
+    //MARK: - Private Functions
+    private func failed() {
+        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+        captureSession = nil
     }
 
+    
+    //MARK: - AVCaptureSession methods
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        captureSession.stopRunning()
+//        captureSession.stopRunning()
 
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             
-            guard let stringValue = readableObject.stringValue else { return }
+            guard let stringValue = readableObject.stringValue, !scannedBardCodes.contains(stringValue) else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             found(code: stringValue)
         }
 
-        dismiss(animated: true)
+//        dismiss(animated: true)
     }
 
-    func found(code: String) {
-        print(code)
+    private func found(code: String) {
+        print("https://api.upcitemdb.com/prod/trial/lookup?upc=\(code)")
+        scannedBardCodes.append(code)
     }
 
     override var prefersStatusBarHidden: Bool {

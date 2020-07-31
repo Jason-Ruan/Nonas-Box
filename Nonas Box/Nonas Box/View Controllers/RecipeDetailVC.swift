@@ -51,16 +51,20 @@ class RecipeDetailVC: UIViewController {
     override func viewDidLoad() {
         self.navigationController?.navigationBar.isHidden = false
         addSubviews()
+//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.expandRecipeImage))
+//        recipeImageView.isUserInteractionEnabled = true
+//        recipeImageView.addGestureRecognizer(gestureRecognizer)
     }
     
     //MARK: - Private Functions
     private func addSubviews() {
-        view.addSubview(recipeImageView)
-        recipeImageView.addSubview(blurEffectView)
-        blurEffectView.frame = recipeImageView.bounds
+        view.addSubview(backgroundImageView)
+        backgroundImageView.addSubview(blurEffectView)
+        blurEffectView.frame = backgroundImageView.bounds
         if let imageURL = recipe?.imageURL {
             loadImage(recipeURL: imageURL)
         }
+        view.addSubview(recipeImageView)
     }
     
     private func loadImage(recipeURL: URL) {
@@ -68,6 +72,7 @@ class RecipeDetailVC: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                     case .success(let image):
+                        self.backgroundImageView.image = image
                         self.recipeImageView.image = image
                     case .failure(let error):
                         print(error)

@@ -19,6 +19,8 @@
 		0899D63F2385F4130059D9CE /* Nonas_BoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D63E2385F4130059D9CE /* Nonas_BoxTests.swift */; };
 		08A1560024C53A21000B7F81 /* RecipeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */; };
 		08A1560224C5F902000B7F81 /* BarcodeScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */; };
+		08D7D6D824CFD4FF00891E65 /* UPC_Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */; };
+		08D7D6DA24CFD6FF00891E65 /* UPC_ItemDB_Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D7D6D924CFD6FF00891E65 /* UPC_ItemDB_Client.swift */; };
 		08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5E20F23A2AAB1007AABE9 /* Secrets.swift */; };
 		08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */; };
 		08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */; };
@@ -55,6 +57,8 @@
 		0899D6402385F4130059D9CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailVC.swift; sourceTree = "<group>"; };
 		08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanVC.swift; sourceTree = "<group>"; };
+		08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPC_Item.swift; sourceTree = "<group>"; };
+		08D7D6D924CFD6FF00891E65 /* UPC_ItemDB_Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPC_ItemDB_Client.swift; sourceTree = "<group>"; };
 		08E5E20F23A2AAB1007AABE9 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesOnlineVC.swift; sourceTree = "<group>"; };
 		08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
@@ -162,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				08E9758A24B80E4400BF0DC3 /* Recipe.swift */,
+				08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				08E9758824B80E0B00BF0DC3 /* SpoonacularClient.swift */,
+				08D7D6D924CFD6FF00891E65 /* UPC_ItemDB_Client.swift */,
 			);
 			path = "API Clients";
 			sourceTree = "<group>";
@@ -300,12 +306,14 @@
 				08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */,
 				08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */,
 				0869070E23A830A600634F1B /* MultipeerShareVC.swift in Sources */,
+				08D7D6D824CFD4FF00891E65 /* UPC_Item.swift in Sources */,
 				08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */,
 				08E9758224B4215800BF0DC3 /* AppError.swift in Sources */,
 				0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */,
 				08A1560224C5F902000B7F81 /* BarcodeScanVC.swift in Sources */,
 				0899D62A2385F40C0059D9CE /* SceneDelegate.swift in Sources */,
 				08E9758924B80E0B00BF0DC3 /* SpoonacularClient.swift in Sources */,
+				08D7D6DA24CFD6FF00891E65 /* UPC_ItemDB_Client.swift in Sources */,
 				08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */,
 				08E9758B24B80E4400BF0DC3 /* Recipe.swift in Sources */,
 				08A1560024C53A21000B7F81 /* RecipeDetailVC.swift in Sources */,

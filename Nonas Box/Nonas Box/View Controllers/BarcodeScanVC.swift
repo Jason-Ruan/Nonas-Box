@@ -10,9 +10,28 @@ import AVFoundation
 import UIKit
 
 class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
-    var captureSession: AVCaptureSession!
-    var previewLayer: AVCaptureVideoPreviewLayer!
+    //MARK: - Properties
+    private var captureSession: AVCaptureSession!
+    private var previewLayer: AVCaptureVideoPreviewLayer!
+    private var scannedBardCodes: [String] = [] {
+        didSet {
+            barcodeCollectionView.reloadData()
+        }
+    }
+    
+    lazy var barcodeCollectionView: UICollectionView = {
+       let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: view.frame.height / 3)), collectionViewLayout: layout)
+        cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: "barcodeCell")
+        cv.dataSource = self
+        cv.delegate = self
+        layout.itemSize = CGSize(width: cv.frame.width / 5, height: cv.frame.height / 2)
+        return cv
+    }()
 
+    
+    //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         

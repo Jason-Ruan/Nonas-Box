@@ -59,27 +59,23 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             captureSession.addOutput(metadataOutput)
 
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417]
+            metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417, .upce]
         } else {
             failed()
             return
         }
 
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
+        previewLayer.frame = CGRect(origin: CGPoint(x: view.layer.frame.minX, y: view.layer.frame.midY / 2), size: CGSize(width: view.layer.frame.width, height: view.layer.frame.height / 3))
+        previewLayer.borderWidth = 5
+        previewLayer.borderColor = UIColor.black.cgColor
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
-
         captureSession.startRunning()
+        
+        view.addSubview(barcodeCollectionView)
     }
-
-    func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
-        captureSession = nil
-    }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 

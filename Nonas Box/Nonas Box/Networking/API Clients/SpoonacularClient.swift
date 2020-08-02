@@ -12,7 +12,7 @@ class SpoonacularAPIClient {
     
     func getRecipes(query: String, completionHandler: @escaping (Result<[Recipe], AppError>) -> () ) {
         let formattedQuery = query.replacingOccurrences(of: " ", with: "%20")
-        let urlString = "https://api.spoonacular.com/recipes/search?query=\(formattedQuery)&apiKey=\(Secrets.spoonacular_api_key)"
+        let urlString = "https://api.spoonacular.com/recipes/search?query=\(formattedQuery)&number=100&apiKey=\(Secrets.spoonacular_api_key)"
         guard let url = URL(string: urlString) else {
             completionHandler(.failure(AppError.badURL))
             return

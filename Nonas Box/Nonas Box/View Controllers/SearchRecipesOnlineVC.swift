@@ -28,6 +28,14 @@ class SearchRecipesOnlineVC: UIViewController {
         return sb
     }()
     
+    lazy var resultsNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Tamil Sangam MN", size: 12)
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
     lazy var recipeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -40,6 +48,7 @@ class SearchRecipesOnlineVC: UIViewController {
         cv.dataSource = self
         cv.delegate = self
         cv.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        cv.showsHorizontalScrollIndicator = false
         return cv
     }()
     
@@ -62,6 +71,7 @@ class SearchRecipesOnlineVC: UIViewController {
     private var recipes: [Recipe] = [] {
         didSet {
             recipeCollectionView.reloadData()
+            resultsNumberLabel.text = "We found \(self.recipes.count) recipes for '\(searchBar.text ?? "your search")'"
         }
     }
     
@@ -90,7 +100,6 @@ class SearchRecipesOnlineVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         setUpViews()
     }
     

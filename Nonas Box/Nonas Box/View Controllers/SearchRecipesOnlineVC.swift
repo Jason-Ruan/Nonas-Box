@@ -206,6 +206,12 @@ class SearchRecipesOnlineVC: UIViewController {
 extension SearchRecipesOnlineVC: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsCancelButton = true
+        searchBar.placeholder = nil
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.placeholder = "Search for recipes here"
         return true
     }
     
@@ -222,22 +228,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                             return
                         }
                         self.recipes = recipes
-                        self.screenTitleLabel.textAlignment = .left
-                        
-                        self.screenTitleLabelTopConstraint.isActive = false
-                        self.screenTitleLabelCenterXConstraint.isActive = false
-                        self.searchBarCenterXContraint.isActive = false
-                        
-                        self.searchBarTopConstraint.constant = self.searchBarTopConstraint.constant / 5
-                        self.searchBarWidthConstraint.constant = self.view.frame.width - 40
-                        
-                        self.screenTitleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-                        self.screenTitleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-                        self.searchBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-                        
-                        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                            self.view.layoutIfNeeded()
-                        }, completion: nil)
+                        self.animateRecipesRetrieved()
                     case .failure(let error):
                         print(error)
                 }
@@ -245,7 +236,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
         }
         
         if recipes.count > 0 {
-            recipeCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+            recipeCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: false)
         }
         searchBar.resignFirstResponder()
     }

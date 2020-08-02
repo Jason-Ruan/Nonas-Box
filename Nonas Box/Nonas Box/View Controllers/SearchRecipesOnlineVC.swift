@@ -125,13 +125,19 @@ class SearchRecipesOnlineVC: UIViewController {
             searchBarTopConstraint
         ])
         
+        view.addSubview(resultsNumberLabel)
+        NSLayoutConstraint.activate([
+            resultsNumberLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 3),
+            resultsNumberLabel.trailingAnchor.constraint(equalTo: searchBar.trailingAnchor)
+        ])
+        
         view.addSubview(recipeCollectionView)
         recipeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            recipeCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            recipeCollectionView.topAnchor.constraint(equalTo: resultsNumberLabel.bottomAnchor),
             recipeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             recipeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            recipeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            recipeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
         
     }
@@ -169,6 +175,28 @@ class SearchRecipesOnlineVC: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: waitTime, execute: {
             alert.dismiss(animated: true, completion: nil)
         })
+    }
+    
+    private func animateRecipesRetrieved() {
+        self.screenTitleLabel.textAlignment = .left
+        
+        self.screenTitleLabelTopConstraint.isActive = false
+        self.screenTitleLabelCenterXConstraint.isActive = false
+        self.searchBarCenterXContraint.isActive = false
+        
+        self.searchBarTopConstraint.constant = self.searchBarTopConstraint.constant / 5
+        self.searchBarWidthConstraint.constant = self.view.frame.width - 40
+        
+        NSLayoutConstraint.activate([
+        self.screenTitleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
+        self.screenTitleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+        self.searchBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+        self.resultsNumberLabel.leadingAnchor.constraint(equalTo: screenTitleLabel.leadingAnchor)
+        ])
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class SpoonacularAPIClient {
     
@@ -35,6 +35,21 @@ class SpoonacularAPIClient {
                 case .failure:
                     completionHandler(.failure(AppError.noDataReceived))
             }
+        }
+    }
+    
+    func getImage(recipe: Recipe, completionHandler: @escaping (Result<UIImage, AppError>) -> () ) {
+        if let imageURL = recipe.imageURL {
+            ImageHelper.shared.getImage(url: imageURL) { (result) in
+                switch result {
+                    case .success(let image):
+                        completionHandler(.success(image))
+                    case .failure:
+                        completionHandler(.failure(.notAnImage))
+                }
+            }
+        } else {
+            completionHandler(.failure(.badURL))
         }
     }
     

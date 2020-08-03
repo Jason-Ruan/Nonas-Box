@@ -29,27 +29,26 @@ class ImageHelper {
         } else {
             
             //Makes network call to attempt to return image via url if available
-            URLSession.shared.dataTask(with: url) { (data, _, error) in
-                guard error == nil else {
-                    completionHandler(.failure(.badURL))
-                    return
+            NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
+                DispatchQueue.main.async {
+                    switch result {
+                        case .failure(let error):
+                            completionHandler(.failure(error))
+                        case .success(let imageData):
+                            guard let image = UIImage(data: imageData) else {
+                                completionHandler(.failure(.notAnImage))
+                                return
+                            }
+                            //Cache image for future use and return it
+                            DispatchQueue.global().async {
+                                self.imageCache.setObject(image, forKey: url.absoluteString as NSString)
+                            }
+                            completionHandler(.success(image))
+                    }
                 }
-                
-                guard let data = data else {
-                    completionHandler(.failure(.noDataReceived))
-                    return
-                }
-                
-                guard let image = UIImage(data: data) else {
-                    completionHandler(.failure(.notAnImage))
-                    return
-                }
-                
-                //Cache image for future use and return it
-                self.imageCache.setObject(image, forKey: url.absoluteString as NSString)
-                completionHandler(.success(image))
-                
-            }.resume()
+            }
+            
+            
         }
     }
     

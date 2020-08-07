@@ -141,8 +141,25 @@ extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "barcodeCell", for: indexPath) as? RecipeCollectionViewCell else { return UICollectionViewCell() }
-        cell.foodImage.image = UIImage(systemName: "barcode")!
-        cell.foodInfoLabel.text = scannedBardCodes[indexPath.row]
+        
+        cell.foodImage.image = nil
+        cell.foodInfoLabel.text = scannedBarCodes[indexPath.row]
+        
+        if let imageURL = self.groceryItems[indexPath.row].images?.first {
+//        if !self.groceryItems[indexPath.row].images?.isEmpty {
+//
+//        }
+            ImageHelper.shared.getImage(url: imageURL) { (result) in
+                switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success(let image):
+                        cell.foodImage.image = image
+                }
+            }
+        }
+        
+        
         return cell
     }
 }

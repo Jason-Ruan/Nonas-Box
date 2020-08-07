@@ -10,7 +10,7 @@ import Foundation
 
 class UPC_ItemDB_Client {
     
-    func getItem(upc: String, completionHandler: @escaping (Result<UPC_Item_Results, AppError>) -> () ) {
+    func getItem(upc: String, completionHandler: @escaping (Result<UPC_Item, AppError>) -> () ) {
         guard let url = URL(string: "https://api.upcitemdb.com/prod/trial/lookup?upc=\(upc)") else {
             completionHandler(.failure(.badURL))
             return
@@ -24,7 +24,11 @@ class UPC_ItemDB_Client {
                 case .success(let data):
                     do {
                         let upc_item_results = try JSONDecoder().decode(UPC_Item_Results.self, from: data)
-                        completionHandler(.success(upc_item_results))
+                        guard let upc_item = upc_item_results.items.first else {
+                            completionHandler(.failure(.invalidJSONResponse))
+                            return
+                        }
+                        completionHandler(.success(upc_item))
                     } catch {
                         completionHandler(.failure(.invalidJSONResponse))
                     }

@@ -44,8 +44,28 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        captureSession = AVCaptureSession()
+        view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = true
+        requestAVCapturePermissions()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if (captureSession?.isRunning == false) {
+            captureSession.startRunning()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if (captureSession?.isRunning == true) {
+            captureSession.stopRunning()
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        previewLayer.frame = barcodeScanArea.bounds
+    }
 
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
         let videoInput: AVCaptureDeviceInput

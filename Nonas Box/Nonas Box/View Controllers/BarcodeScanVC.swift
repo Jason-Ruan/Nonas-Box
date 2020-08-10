@@ -218,29 +218,31 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return scannedBardCodes.count
+        return groceryItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "barcodeCell", for: indexPath) as? RecipeCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.foodImage.image = nil
-        cell.foodInfoLabel.text = scannedBarCodes[indexPath.row]
+        let groceryItem = groceryItems[indexPath.row]
         
-        if let imageURL = self.groceryItems[indexPath.row].images?.first {
-//        if !self.groceryItems[indexPath.row].images?.isEmpty {
-//
-//        }
-            ImageHelper.shared.getImage(url: imageURL) { (result) in
-                switch result {
-                    case .failure(let error):
-                        print(error)
-                    case .success(let image):
-                        cell.foodImage.image = image
-                }
-            }
+        cell.foodImage.image = nil
+        cell.foodInfoLabel.text = groceryItem.title
+        
+        guard let groceryItemsImages = groceryItem.images else {
+                showAlert(message: "Could not find images associated with the item")
+                return cell
         }
         
+        UPC_ItemDB_Client.manager.getItemImage(barcode: groceryItem.upc!, imageURLs: groceryItemsImages) { (result) in
+            switch result {
+                case .failure(let error):
+                    self.showAlert(message: "\(error.localizedDescription): \(error.rawValue)")
+                    cell.foodImage.image = UIImage(systemName: "photo")
+                case .success(let itemImage):
+                    cell.foodImage.image = itemImage
+            }
+        }
         
         return cell
     }

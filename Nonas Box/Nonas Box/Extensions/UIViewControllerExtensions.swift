@@ -6,4 +6,16 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+//MARK: - UIViewController Extensions
+
+public extension UIViewController {
+    
+    func showAlert(message: String) {
+        let ac = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
+        ac.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
+        present(ac, animated: true, completion: nil)
+    }
+    
+}

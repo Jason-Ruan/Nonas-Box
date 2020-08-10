@@ -6,11 +6,13 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class UPC_ItemDB_Client {
     
-    func getItem(upc: String, completionHandler: @escaping (Result<UPC_Item, AppError>) -> () ) {
+    func getItem(upc: String,
+                 completionHandler: @escaping (Result<UPC_Item, AppError>) -> () ) {
+        
         guard let url = URL(string: "https://api.upcitemdb.com/prod/trial/lookup?upc=\(upc)") else {
             completionHandler(.failure(.badURL))
             return
@@ -31,7 +33,33 @@ class UPC_ItemDB_Client {
                         completionHandler(.success(upc_item))
                     } catch {
                         completionHandler(.failure(.invalidJSONResponse))
+                }
+            }
+        }
+    }
+    
+    func getItemImage(barcode: String,
+                      imageURLs: [URL],
+                      completionHandler: @escaping (Result<UIImage?, AppError>) -> () ) {
+        
+        guard !imageURLs.isEmpty, let imageURL = imageURLs.first else {
+            completionHandler(.failure(.notAnImage))
+            return
+        }
+        
+        ImageHelper.shared.getImage(url: imageURL) { (result) in
+            switch result {
+                case .failure(let error):
+                    let remainingURLs: [URL] = Array(imageURLs.dropFirst())
+                    if !remainingURLs.isEmpty {
+                        self.getItemImage(barcode: barcode,
+                                          imageURLs: remainingURLs,
+                                          completionHandler: completionHandler)
+                    } else {
+                        completionHandler(.failure(error))
                     }
+                case .success(let itemImage):
+                    completionHandler(.success(itemImage))
             }
         }
     }

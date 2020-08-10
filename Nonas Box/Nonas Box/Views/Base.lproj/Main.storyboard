@@ -19,7 +19,7 @@
                     <connections>
                         <segue destination="Vqp-Kq-rWx" kind="relationship" relationship="viewControllers" id="Tjh-kL-uWf"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="qNH-qn-s0l"/>
-                        <segue destination="XuH-zc-tlX" kind="relationship" relationship="viewControllers" id="y4s-7A-oUk"/>
+                        <segue destination="GhF-Ta-dgb" kind="relationship" relationship="viewControllers" id="y4s-7A-oUk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ib-6e-bSS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -142,7 +142,6 @@
         <!--Search Recipes OnlineVC-->
         <scene sceneID="2nb-xU-SuU">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e88-P7-4W4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="bWI-Jr-AcR" customClass="SearchRecipesOnlineVC" customModule="Nonas_Box" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NoB-rK-lkc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -152,6 +151,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5fN-Ca-DQn"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e88-P7-4W4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1026.0869565217392" y="-28.125"/>
         </scene>
@@ -174,21 +174,40 @@
             </objects>
             <point key="canvasLocation" x="115.94202898550725" y="-28.125"/>
         </scene>
-        <!--Scan-->
+        <!--My StuffVC-->
         <scene sceneID="VIj-lb-RCg">
             <objects>
-                <viewController id="XuH-zc-tlX" customClass="BarcodeScanVC" customModule="Nonas_Box" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XuH-zc-tlX" customClass="MyStuffVC" customModule="Nonas_Box" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wio-iU-zng">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="MW2-fN-CPg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Scan" id="Wpt-T9-bgw"/>
+                    <navigationItem key="navigationItem" id="CBm-Qk-yTS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdB-Lo-4bD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116" y="1359"/>
+            <point key="canvasLocation" x="1026.0869565217392" y="1358.7053571428571"/>
+        </scene>
+        <!--My stuff-->
+        <scene sceneID="EnW-1O-c7E">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GhF-Ta-dgb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My stuff" image="square.grid.2x2.fill" catalog="system" id="Wpt-T9-bgw"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i2S-nb-f09">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XuH-zc-tlX" kind="relationship" relationship="rootViewController" id="f1h-3p-yXM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JuH-0z-7eY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="115.94202898550725" y="1358.7053571428571"/>
         </scene>
     </scenes>
     <resources>
@@ -197,5 +216,6 @@
         <image name="mic" catalog="system" width="108" height="128"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="square.and.pencil" catalog="system" width="128" height="118"/>
+        <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
     </resources>
 </document>

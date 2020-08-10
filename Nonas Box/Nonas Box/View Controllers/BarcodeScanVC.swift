@@ -33,7 +33,13 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
-
+    
+    lazy var barcodeScanArea: UIView = {
+        let uv = UIView()
+        uv.translatesAutoresizingMaskIntoConstraints = false
+        return uv
+    }()
+    
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
@@ -68,16 +74,28 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             failed()
             return
         }
-
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = CGRect(origin: CGPoint(x: view.layer.frame.minX, y: view.layer.frame.midY / 2), size: CGSize(width: view.layer.frame.width, height: view.layer.frame.height / 3))
-        previewLayer.borderWidth = 5
-        previewLayer.borderColor = UIColor.black.cgColor
-        previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
-        captureSession.startRunning()
         
-        view.addSubview(barcodeCollectionView)
+        setupBarcodeScanArea()
+        setupCollectionView()
+        captureSession.startRunning()
+    }
+    
+    private func setupBarcodeScanArea() {
+        view.addSubview(barcodeScanArea)
+        NSLayoutConstraint.activate([
+            barcodeScanArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            barcodeScanArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: view.safeAreaLayoutGuide.layoutFrame.width / 6),
+            barcodeScanArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width / 6)),
+            barcodeScanArea.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 4)
+        ])
+        
+        barcodeScanArea.layer.cornerRadius = 25
+        
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.videoGravity = .resizeAspectFill
+        previewLayer.cornerRadius = barcodeScanArea.layer.cornerRadius
+        
+        barcodeScanArea.layer.addSublayer(previewLayer)
     }
     
     override func viewWillAppear(_ animated: Bool) {

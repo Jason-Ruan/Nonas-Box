@@ -149,12 +149,14 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         barcodeScanArea.layer.addSublayer(previewLayer)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if (captureSession?.isRunning == false) {
-            captureSession.startRunning()
-        }
+    private func setupCollectionView() {
+        view.addSubview(barcodeCollectionView)
+        NSLayoutConstraint.activate([
+            barcodeCollectionView.topAnchor.constraint(equalTo: barcodeScanArea.bottomAnchor, constant: 10),
+            barcodeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            barcodeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            barcodeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        ])
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -47,7 +47,7 @@ class NetworkHelper {
                         completionHandler(.failure(.noInternetConnection))
                         return
                     } else {
-                        completionHandler(.failure(.other(rawError: error)))
+                        completionHandler(.failure(.other))
                         return
                     }
                 }

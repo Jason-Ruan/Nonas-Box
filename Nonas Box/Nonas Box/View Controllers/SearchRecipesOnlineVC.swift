@@ -300,7 +300,7 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.width / 2, height: collectionView.frame.height / 2 - 20)
+        CGSize(width: collectionView.frame.width / 2 - 20, height: collectionView.frame.height / 2 - 20)
     }
     
 }

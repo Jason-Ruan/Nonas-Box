@@ -13,7 +13,9 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     //MARK: - Properties
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
-    private var scannedBardCodes: [String] = [] {
+    
+    private var scannedBarCodes: [String] = []
+    public var groceryItems: [UPC_Item] = [] {
         didSet {
             barcodeCollectionView.reloadData()
         }

@@ -84,6 +84,7 @@ class SearchRecipesOnlineVC: UIViewController {
     }
     
     //MARK: - Private Constraints
+    
     private lazy var screenTitleLabelTopConstraint: NSLayoutConstraint = {
         self.screenTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -30)
     }()
@@ -123,6 +124,15 @@ class SearchRecipesOnlineVC: UIViewController {
         NSLayoutConstraint.activate([
             screenTitleLabelTopConstraint,
             screenTitleLabelCenterXConstraint
+        ])
+        
+        view.addSubview(gridLayoutButton)
+        gridLayoutButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            gridLayoutButton.topAnchor.constraint(equalTo: screenTitleLabel.topAnchor),
+            gridLayoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            gridLayoutButton.heightAnchor.constraint(equalToConstant: 30),
+            gridLayoutButton.widthAnchor.constraint(equalToConstant: 30)
         ])
         
         view.addSubview(searchBar)

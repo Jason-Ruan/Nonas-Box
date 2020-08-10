@@ -67,27 +67,58 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         previewLayer.frame = barcodeScanArea.bounds
     }
 
+    
+    //MARK: - Private Functions
+    private func requestAVCapturePermissions() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+            case .authorized: // The user has previously granted access to the camera.
+                self.setupCaptureSession()
+            
+            case .notDetermined: // The user has not yet been asked for camera access.
+                AVCaptureDevice.requestAccess(for: .video) { granted in
+                    if granted {
+                        self.setupCaptureSession()
+                    }
+            }
+            
+            case .denied: // The user has previously denied access.
+                showAlert(message: "Camera access has been denied.")
+                return
+            
+            
+            case .restricted: // The user can't grant access due to restrictions.
+                showAlert(message: "Camera access is restricted")
+                return
+            
+            default:
+                return
+        }
+    }
+    
+    private func setupCaptureSession() {
+        captureSession = AVCaptureSession()
+        
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
         let videoInput: AVCaptureDeviceInput
-
+        
         do {
             videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
         } catch {
             return
         }
-
+        
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
         } else {
             failed()
             return
         }
-
+        
         let metadataOutput = AVCaptureMetadataOutput()
-
+        
         if (captureSession.canAddOutput(metadataOutput)) {
             captureSession.addOutput(metadataOutput)
-
+            
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417, .upce]
         } else {

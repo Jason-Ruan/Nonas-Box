@@ -65,6 +65,14 @@ class SearchRecipesOnlineVC: UIViewController {
         return blurEffectView
     }()
     
+    lazy var gridLayoutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "square.grid.2x2")!, for: .normal)
+        button.addTarget(self, action: #selector(self.toggleCollectionViewLayout), for: .touchUpInside)
+        button.isHidden = true
+        return button
+    }()
+    
     
     //MARK: - Private Properties
     

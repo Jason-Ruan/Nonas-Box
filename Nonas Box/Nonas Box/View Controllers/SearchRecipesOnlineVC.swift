@@ -261,6 +261,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                         }
                         self.recipes = recipes
                         self.animateRecipesRetrieved()
+                        self.gridLayoutButton.isHidden = false
                     case .failure(let error):
                         print(error)
                 }

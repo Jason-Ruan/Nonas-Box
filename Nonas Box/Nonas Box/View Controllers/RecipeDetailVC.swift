@@ -51,11 +51,12 @@ class RecipeDetailVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
+        view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = false
         addSubviews()
-//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.expandRecipeImage))
-//        recipeImageView.isUserInteractionEnabled = true
-//        recipeImageView.addGestureRecognizer(gestureRecognizer)
+        //        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.expandRecipeImage))
+        //        recipeImageView.isUserInteractionEnabled = true
+        //        recipeImageView.addGestureRecognizer(gestureRecognizer)
     }
     
     //MARK: - Private Functions

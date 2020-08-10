@@ -20,6 +20,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses the camera in order to scan barcodes.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app uses the microphone for some accessibility features, such as inputting text.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
@@ -55,8 +57,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>This app uses the camera for some features, such as scanning barcodes.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

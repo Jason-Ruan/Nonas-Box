@@ -74,16 +74,16 @@ class RecipeDetailVC: UIViewController {
 //        ])
     }
     
-    private func loadImage(recipeURL: URL) {
-        ImageHelper.shared.getImage(url: (recipe?.imageURL!)!) { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                    case .success(let image):
-                        self.backgroundImageView.image = image
-                        self.recipeImageView.image = image
-                    case .failure(let error):
-                        print(error)
-                }
+    private func loadImage(recipe: Recipe) {
+        SpoonacularAPIClient.manager.getImage(recipe: recipe) { (result) in
+            switch result {
+                case .failure(let error):
+                    print(error)
+                    self.backgroundImageView.image = nil
+//                    self.recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")!
+                case .success(let image):
+                    self.backgroundImageView.image = image
+//                    self.recipeImageView.image = image
             }
         }
     }

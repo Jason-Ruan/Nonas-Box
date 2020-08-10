@@ -193,8 +193,15 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     }
 
     private func found(code: String) {
-        print("https://api.upcitemdb.com/prod/trial/lookup?upc=\(code)")
-        scannedBardCodes.append(code)
+        scannedBarCodes.append(code)
+        UPC_ItemDB_Client.manager.getItem(upc: code) { (result) in
+            switch result {
+                case .failure(let error):
+                    self.showAlert(message: "\(error.localizedDescription): \(error.rawValue)")
+                case .success(let upc_item):
+                    self.groceryItems.append(upc_item)
+            }
+        }
     }
 
     override var prefersStatusBarHidden: Bool {

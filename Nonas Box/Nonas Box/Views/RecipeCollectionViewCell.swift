@@ -27,8 +27,23 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.backgroundColor = #colorLiteral(red: 0.2295365632, green: 0.2428716421, blue: 0.2767262459, alpha: 0.2997913099)
+        label.layer.cornerRadius = 25
+        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    //    lazy var favoriteButton: UIButton = {
+    //       let button = UIButton()
+    //        button.imageView?.contentMode = .scaleAspectFill
+    //        button.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+    //        button.addTarget(self, action: #selector(self.favoriteButtonPressed), for: .touchUpInside)
+    //        button.translatesAutoresizingMaskIntoConstraints = false
+    //        return button
+    //    }()
     
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
@@ -39,7 +54,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    var recipe: Recipe? {
+    var recipe: Recipe! {
         didSet {
             guard let recipe = self.recipe else { return }
             configureCell(recipe: recipe)
@@ -57,7 +72,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 25
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.2
-        layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        layer.shadowOffset = CGSize(width: 5, height: 3.0)
         layer.shadowRadius = 3
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 25).cgPath
         setUpCell()
@@ -75,24 +90,29 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     //MARK: - Private Functions
     
     private func setUpCell() {
-        
         contentView.addSubview(foodImage)
-        foodImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             foodImage.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             foodImage.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
             foodImage.widthAnchor.constraint(equalToConstant: contentView.bounds.width),
-            foodImage.heightAnchor.constraint(equalToConstant: contentView.bounds.height / 1.5)
+            foodImage.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)
         ])
         
         contentView.addSubview(foodInfoLabel)
-        foodInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            foodInfoLabel.topAnchor.constraint(equalTo: foodImage.bottomAnchor, constant: 5),
-            foodInfoLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            foodInfoLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            foodInfoLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5)
+            foodInfoLabel.heightAnchor.constraint(equalToConstant: contentView.safeAreaLayoutGuide.layoutFrame.height / 3),
+            foodInfoLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            foodInfoLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant:  -10),
+            foodInfoLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
+        
+        //        contentView.addSubview(favoriteButton)
+        //        NSLayoutConstraint.activate([
+        //            favoriteButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 20),
+        //            favoriteButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+        //            favoriteButton.heightAnchor.constraint(equalToConstant: 30),
+        //            favoriteButton.widthAnchor.constraint(equalToConstant: 30)
+        //        ])
         
         foodImage.addSubview(spinner)
         NSLayoutConstraint.activate([
@@ -106,33 +126,46 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         foodImage.image = nil
         self.spinner.startAnimating()
         
-        if let imageURL = recipe.imageURL {
-            ImageHelper.shared.getImage(url: imageURL) { (result) in
-                DispatchQueue.main.async {
-                    switch result {
-                        case .success(let image):
-                            self.foodImage.image = image
-                        case .failure:
-                            self.foodImage.image = UIImage(systemName: "photo")
-                    }
-                    self.spinner.stopAnimating()
-                }
-            }
-        } else {
-            self.foodImage.image = UIImage(systemName: "photo")
-            self.spinner.stopAnimating()
-        }
+        loadImage(recipe: recipe)
         
         guard let title = recipe.title, let servings = recipe.servings, let prepTime = recipe.readyInMinutes else { return }
         
         let foodInfoText = NSMutableAttributedString(string: title, attributes: [.font : UIFont.boldSystemFont(ofSize: 15)])
-        let prepInfo = NSAttributedString(string:
-            """
-            \nServes: \(servings)
-            Ready in: \(prepTime) minutes
-            """, attributes: [.font : UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .light)])
+        
+        let image1TextAttachment = NSTextAttachment(image: UIImage(systemName: "person.2.fill")!)
+        let image2TextAttachment = NSTextAttachment(image: UIImage(systemName: "clock.fill")!)
+        let image1TextString = NSAttributedString(attachment: image1TextAttachment)
+        let image2TextString = NSAttributedString(attachment: image2TextAttachment)
+        
+        let prepInfo = NSMutableAttributedString(string: "\n\n")
+        prepInfo.append(image1TextString)
+        prepInfo.append(NSAttributedString(string: servings.description))
+        prepInfo.append(NSAttributedString(string: "  |  "))
+        prepInfo.append(image2TextString)
+        prepInfo.append(NSAttributedString(string: "\(prepTime.description) min"))
+        
         foodInfoText.append(prepInfo)
         foodInfoLabel.attributedText = foodInfoText
     }
+    
+    private func loadImage(recipe: Recipe) {
+        SpoonacularAPIClient.manager.getImage(recipe: recipe) { (result) in
+            switch result {
+                case .failure(let error):
+                    self.foodImage.image = UIImage(systemName: "xmark.rectangle.fill")!
+                    print(error)
+                case .success(let image):
+                    if recipe.imageURL == self.recipe?.imageURL {
+                        self.foodImage.image = image
+                    } else {
+                        self.loadImage(recipe: self.recipe)
+                }
+            }
+            self.spinner.stopAnimating()
+        }
+    }
+    
+    //    @objc private func favoriteButtonPressed() {}
+    
     
 }

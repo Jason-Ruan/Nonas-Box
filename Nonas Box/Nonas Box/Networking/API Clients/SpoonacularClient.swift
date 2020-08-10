@@ -24,16 +24,16 @@ class SpoonacularAPIClient {
                     do {
                         let recipeResults = try JSONDecoder().decode(SpoonacularResults.self, from: data)
                         guard let recipes = recipeResults.results else {
-                            completionHandler(.failure(AppError.invalidJSONResponse))
+                            completionHandler(.failure(.invalidJSONResponse))
                             return
                         }
                         completionHandler(.success(recipes))
                     } catch {
-                        completionHandler(.failure(AppError.couldNotParseJSON(rawError: error)))
+                        completionHandler(.failure(.couldNotParseJSON))
                 }
                 
                 case .failure:
-                    completionHandler(.failure(AppError.noDataReceived))
+                    completionHandler(.failure(.noDataReceived))
             }
         }
     }

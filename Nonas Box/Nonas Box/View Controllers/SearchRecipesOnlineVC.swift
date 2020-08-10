@@ -217,6 +217,20 @@ class SearchRecipesOnlineVC: UIViewController {
         }, completion: nil)
     }
     
+    @objc func toggleCollectionViewLayout() {
+        guard let cvFlowLayout = self.recipeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        switch cvFlowLayout.scrollDirection {
+            case .vertical:
+                cvFlowLayout.scrollDirection = .horizontal
+                self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.2x2")!, for: .normal)
+            case .horizontal:
+                cvFlowLayout.scrollDirection = .vertical
+                self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.3x2")!, for: .normal)
+            default:
+                return
+        }
+    }
+    
 }
 
 //MARK: - SearchBar Methods

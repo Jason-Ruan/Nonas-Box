@@ -28,7 +28,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: "barcodeCell")
         cv.dataSource = self
         cv.delegate = self
-        cv.backgroundColor = .systemGreen
+        cv.backgroundColor = .clear
         layout.itemSize = CGSize(width: cv.frame.width / 5, height: cv.frame.height / 2)
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv

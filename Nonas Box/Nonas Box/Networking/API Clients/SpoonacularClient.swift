@@ -38,6 +38,28 @@ class SpoonacularAPIClient {
         }
     }
     
+    func getRecipeDetails(recipeID: Int, completionHandler: @escaping (Result<RecipeDetails, AppError>) -> () ) {
+        guard let url = URL(string: "https://api.spoonacular.com/recipes/\(recipeID.description)/information?apiKey=\(Secrets.spoonacular_api_key)") else {
+            completionHandler(.failure(.badURL))
+            return
+        }
+        print(url)
+        
+        NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
+            switch result {
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                case .success(let data):
+                    do {
+                        let recipeDetails = try JSONDecoder().decode(RecipeDetails.self, from: data)
+                        completionHandler(.success(recipeDetails))
+                    } catch {
+                        completionHandler(.failure(.couldNotParseJSON))
+                }
+            }
+        }
+    }
+    
     func getImage(recipe: Recipe, completionHandler: @escaping (Result<UIImage, AppError>) -> () ) {
         if let imageURL = recipe.imageURL {
             ImageHelper.shared.getImage(url: imageURL) { (result) in

@@ -42,11 +42,11 @@ class RecipeDetailVC: UIViewController {
     }()
     
     lazy var recipeImageView: UIImageView = {
-//        let iv = UIImageView(frame: CGRect(x: view.frame.midX / 2, y: view.frame.midY / 3, width: view.frame.width / 2, height: view.frame.width / 2))
+        //        let iv = UIImageView(frame: CGRect(x: view.frame.midX / 2, y: view.frame.midY / 3, width: view.frame.width / 2, height: view.frame.width / 2))
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-//        iv.layer.cornerRadius = iv.frame.height / 2
+        iv.layer.cornerRadius = iv.frame.height / 2
         iv.layer.cornerRadius = 25
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -84,16 +84,25 @@ class RecipeDetailVC: UIViewController {
     //MARK: - Private Functions
     private func addSubviews() {
         view.addSubview(backgroundImageView)
-//        backgroundImageView.addSubview(blurEffectView)
-//        blurEffectView.frame = backgroundImageView.bounds
+        backgroundImageView.addSubview(blurEffectView)
+        blurEffectView.frame = backgroundImageView.bounds
         loadImage(recipe: self.recipe)
-//        view.addSubview(recipeImageView)
-//        NSLayoutConstraint.activate([
-//            recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            recipeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            recipeImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 3)
-//        ])
+        
+        view.addSubview(recipeImageView)
+        NSLayoutConstraint.activate([
+            recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            recipeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            recipeImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 3)
+        ])
+        
+        view.addSubview(stepByStepInstructionsTableView)
+        NSLayoutConstraint.activate([
+            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 20),
+            stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
     }
     
     private func loadImage(recipe: Recipe) {
@@ -102,10 +111,10 @@ class RecipeDetailVC: UIViewController {
                 case .failure(let error):
                     print(error)
                     self.backgroundImageView.image = nil
-//                    self.recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")!
+                    self.recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")!
                 case .success(let image):
                     self.backgroundImageView.image = image
-//                    self.recipeImageView.image = image
+                    self.recipeImageView.image = image
             }
         }
     }

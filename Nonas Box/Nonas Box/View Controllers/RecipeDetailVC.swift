@@ -22,6 +22,17 @@ class RecipeDetailVC: UIViewController {
     
     //MARK: - Properties
     private var recipe: Recipe!
+    private var stepByStepInstructions: [Step]? {
+        didSet {
+            stepByStepInstructionsTableView.reloadData()
+        }
+    }
+    
+    private var ingredients: [Ingredient]? {
+        didSet {
+            stepByStepInstructionsTableView.reloadData()
+        }
+    }
     
     lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView(frame: view.bounds)

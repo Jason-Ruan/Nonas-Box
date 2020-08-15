@@ -53,6 +53,16 @@ class RecipeDetailVC: UIViewController {
         return iv
     }()
     
+    lazy var stepByStepInstructionsTableView: UITableView = {
+        let tv = UITableView(frame: .zero, style: .grouped)
+        tv.layer.cornerRadius = 15
+        tv.dataSource = self
+        tv.delegate = self
+        tv.register(UITableViewCell.self, forCellReuseIdentifier: "stepByStepInstructionsCell")
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        return tv
+    }()
+    
     lazy var blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .systemThinMaterialLight)
         let blurEffectView = UIVisualEffectView()

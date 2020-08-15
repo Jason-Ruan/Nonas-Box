@@ -75,6 +75,7 @@ class RecipeDetailVC: UIViewController {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = false
         addSubviews()
+        loadRecipeDetails(recipe: self.recipe)
         //        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.expandRecipeImage))
         //        recipeImageView.isUserInteractionEnabled = true
         //        recipeImageView.addGestureRecognizer(gestureRecognizer)
@@ -107,6 +108,72 @@ class RecipeDetailVC: UIViewController {
 //                    self.recipeImageView.image = image
             }
         }
+    }
+    
+    private func loadRecipeDetails(recipe: Recipe) {
+        SpoonacularAPIClient.manager.getRecipeDetails(recipeID: recipe.id) { (result) in
+            switch result {
+                case .failure(let error):
+                    self.showAlert(message: "Could not get step by step instructions for \(recipe.title?.description ?? "this recipe").\nError:\(error.localizedDescription)")
+                case .success(let recipeDetails):
+                    self.stepByStepInstructions = recipeDetails.analyzedInstructions?.first?.steps
+                    self.ingredients = recipeDetails.extendedIngredients
+            }
+        }
+    }
+    
+}
+
+//MARK: - TableView Methods
+extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+            case 0:
+                return ingredients?.count ?? 0
+            case 1:
+                return stepByStepInstructions?.count ?? 0
+            default:
+                return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "stepByStepInstructionsCell", for: indexPath)
+
+        cell.textLabel?.numberOfLines = 0
+        
+        switch indexPath.section {
+            case 0:
+                guard let ingredient = ingredients?[indexPath.row],
+                      let ingredientName = ingredient.name?.capitalized,
+                      let ingredientMeasurements = ingredient.measures.us.shortHandMeasurement
+                    else { return cell }
+                cell.textLabel?.text = "\(ingredientMeasurements) \(ingredientName)"
+            case 1:
+                guard let stepInstruction = stepByStepInstructions?[indexPath.row] else { return cell }
+                cell.textLabel?.text = stepInstruction.step
+            default :
+                print()
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+            case 0:
+                return "Ingredients"
+            case 1:
+                return "Directions"
+            default:
+                return nil
+        }
+        
     }
     
 }

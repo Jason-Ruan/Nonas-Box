@@ -19,8 +19,17 @@ struct Recipe: Codable {
     let servings: Int?
     let image: String?
     
+    let missedIngredientCount: Int?
+    let missedIngredients: [IngredientUsedInRecipe]?
+    let usedIngredients: [IngredientUsedInRecipe]?
+    
     var imageURL: URL? {
-        return URL(string: "https://spoonacular.com/recipeImages/\(image ?? "\(id)-636x393")")
+        if let imageString = image, let imageURL = URL(string: imageString) {
+            return imageURL
+        }
+        else {
+            return URL(string: "https://spoonacular.com/recipeImages/\(image ?? "\(id)-636x393")")
+        }
     }
 
 }

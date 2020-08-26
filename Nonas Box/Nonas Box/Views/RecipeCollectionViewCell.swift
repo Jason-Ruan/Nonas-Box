@@ -128,7 +128,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         
         loadImage(recipe: recipe)
         
-        guard let title = recipe.title, let servings = recipe.servings, let prepTime = recipe.readyInMinutes else { return }
+        guard let title = recipe.title else { return }
         
         let foodInfoText = NSMutableAttributedString(string: title, attributes: [.font : UIFont.boldSystemFont(ofSize: 15)])
         
@@ -138,11 +138,14 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         let image2TextString = NSAttributedString(attachment: image2TextAttachment)
         
         let prepInfo = NSMutableAttributedString(string: "\n\n")
-        prepInfo.append(image1TextString)
-        prepInfo.append(NSAttributedString(string: servings.description))
-        prepInfo.append(NSAttributedString(string: "  |  "))
-        prepInfo.append(image2TextString)
-        prepInfo.append(NSAttributedString(string: "\(prepTime.description) min"))
+        
+        if let servings = recipe.servings, let prepTime = recipe.readyInMinutes  {
+            prepInfo.append(image1TextString)
+            prepInfo.append(NSAttributedString(string: servings.description))
+            prepInfo.append(NSAttributedString(string: "  |  "))
+            prepInfo.append(image2TextString)
+            prepInfo.append(NSAttributedString(string: "\(prepTime.description) min"))
+        }
         
         foodInfoText.append(prepInfo)
         foodInfoLabel.attributedText = foodInfoText

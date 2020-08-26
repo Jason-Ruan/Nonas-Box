@@ -84,3 +84,19 @@ struct Measurement: Codable {
     }
 }
 
+struct IngredientUsedInRecipe: Codable {
+    let aisle: String?
+    let amount: Double?
+    let unitLong: String?
+    let unitShort: String?
+    let extendedName: String?
+    let id: Int?
+    let imageURL: URL?
+    let original: String?
+    let name: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case aisle, amount, unitLong, unitShort, extendedName, id, original, name
+        case imageURL = "image"
+    }
+}

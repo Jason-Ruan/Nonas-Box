@@ -18,4 +18,11 @@ public extension UIViewController {
         present(ac, animated: true, completion: nil)
     }
     
+    func showAlertWithAction(title: String, message: String, withAction: UIAlertAction) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(withAction)
+        present(ac, animated: true, completion: nil)
+    }
+    
 }

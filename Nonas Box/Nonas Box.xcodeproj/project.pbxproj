@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083FEB6624FDDF1000B4DEE0 /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083FEB6524FDDF1000B4DEE0 /* TimerVC.swift */; };
 		0868904823A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */; };
 		0868904923A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */; };
 		0869070E23A830A600634F1B /* MultipeerShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869070D23A830A600634F1B /* MultipeerShareVC.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		083FEB6524FDDF1000B4DEE0 /* TimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
 		0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0869070D23A830A600634F1B /* MultipeerShareVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerShareVC.swift; sourceTree = "<group>"; };
 		0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStuffVC.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */,
 				08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */,
 				0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */,
+				083FEB6524FDDF1000B4DEE0 /* TimerVC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				0878071A24D490F800B9F5B2 /* MyStuffOptionCell.swift in Sources */,
 				0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */,
 				08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */,
+				083FEB6624FDDF1000B4DEE0 /* TimerVC.swift in Sources */,
 				0869070E23A830A600634F1B /* MultipeerShareVC.swift in Sources */,
 				08B4D53124DF7C71006C30EA /* UIViewControllerExtensions.swift in Sources */,
 				08D7D6D824CFD4FF00891E65 /* UPC_Item.swift in Sources */,

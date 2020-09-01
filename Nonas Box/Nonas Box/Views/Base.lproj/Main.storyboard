@@ -19,6 +19,7 @@
                     <connections>
                         <segue destination="Vqp-Kq-rWx" kind="relationship" relationship="viewControllers" id="Tjh-kL-uWf"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="qNH-qn-s0l"/>
+                        <segue destination="U4V-rh-lnJ" kind="relationship" relationship="viewControllers" id="9wp-Ls-SEA"/>
                         <segue destination="GhF-Ta-dgb" kind="relationship" relationship="viewControllers" id="y4s-7A-oUk"/>
                     </connections>
                 </tabBarController>
@@ -209,6 +210,22 @@
             </objects>
             <point key="canvasLocation" x="115.94202898550725" y="1358.7053571428571"/>
         </scene>
+        <!--Timer-->
+        <scene sceneID="OSy-gd-ppQ">
+            <objects>
+                <viewController id="U4V-rh-lnJ" customClass="TimerVC" customModule="Nonas_Box" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="K0y-wh-axZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="7ro-DM-cT4"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Timer" image="timer" catalog="system" id="Ttr-Tj-teT"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5rH-Xj-cSk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="122" y="2129"/>
+        </scene>
     </scenes>
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>
@@ -217,5 +234,6 @@
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="square.and.pencil" catalog="system" width="128" height="118"/>
         <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
+        <image name="timer" catalog="system" width="128" height="121"/>
     </resources>
 </document>

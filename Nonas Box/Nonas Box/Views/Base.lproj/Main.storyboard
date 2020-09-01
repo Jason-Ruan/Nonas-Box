@@ -19,13 +19,14 @@
                     <connections>
                         <segue destination="Vqp-Kq-rWx" kind="relationship" relationship="viewControllers" id="Tjh-kL-uWf"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="qNH-qn-s0l"/>
+                        <segue destination="efu-hd-NWE" kind="relationship" relationship="viewControllers" id="3eS-yJ-m0j"/>
                         <segue destination="U4V-rh-lnJ" kind="relationship" relationship="viewControllers" id="9wp-Ls-SEA"/>
                         <segue destination="GhF-Ta-dgb" kind="relationship" relationship="viewControllers" id="y4s-7A-oUk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ib-6e-bSS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-767" y="277"/>
+            <point key="canvasLocation" x="-1865" y="1538"/>
         </scene>
         <!--Create-->
         <scene sceneID="tne-QT-ifu">
@@ -189,7 +190,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdB-Lo-4bD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1026.0869565217392" y="1358.7053571428571"/>
+            <point key="canvasLocation" x="1025" y="2888"/>
+        </scene>
+        <!--Cook-->
+        <scene sceneID="Baf-ez-FfX">
+            <objects>
+                <viewController id="efu-hd-NWE" customClass="CookVC" customModule="Nonas_Box" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k2c-ic-gjl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="62o-7m-dl8"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Cook" image="dial.fill" catalog="system" id="khr-2Z-tO6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XZe-hM-GSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="116" y="1366"/>
         </scene>
         <!--My stuff-->
         <scene sceneID="EnW-1O-c7E">
@@ -208,7 +225,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JuH-0z-7eY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="115.94202898550725" y="1358.7053571428571"/>
+            <point key="canvasLocation" x="116" y="2888"/>
         </scene>
         <!--Timer-->
         <scene sceneID="OSy-gd-ppQ">
@@ -224,11 +241,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rH-Xj-cSk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="122" y="2129"/>
+            <point key="canvasLocation" x="116" y="2079"/>
         </scene>
     </scenes>
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="dial.fill" catalog="system" width="128" height="106"/>
         <image name="doc.text.magnifyingglass" catalog="system" width="116" height="128"/>
         <image name="mic" catalog="system" width="108" height="128"/>
         <image name="photo" catalog="system" width="128" height="93"/>

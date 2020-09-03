@@ -13,7 +13,8 @@ class TimerVC: UIViewController {
     
     
     //MARK: - Properties
-    
+    var timer = Timer()
+    var timerDisplayCount = 0
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {

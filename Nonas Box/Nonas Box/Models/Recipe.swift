@@ -24,14 +24,14 @@ struct Recipe: Codable {
     let usedIngredients: [IngredientUsedInRecipe]?
     
     var imageURL: URL? {
-        if let imageString = image, let imageURL = URL(string: imageString) {
+        if let imageString = image, imageString.contains("http"), let imageURL = URL(string: imageString) {
             return imageURL
         }
         else {
             return URL(string: "https://spoonacular.com/recipeImages/\(image ?? "\(id)-636x393")")
         }
     }
-
+    
 }
 
 struct RecipeDetails: Codable {

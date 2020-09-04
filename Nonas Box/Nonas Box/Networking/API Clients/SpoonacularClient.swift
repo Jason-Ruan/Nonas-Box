@@ -65,7 +65,6 @@ class SpoonacularAPIClient {
             completionHandler(.failure(.badURL))
             return
         }
-        print(url)
         
         NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
             switch result {

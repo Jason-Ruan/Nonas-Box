@@ -59,10 +59,11 @@ class SearchRecipesOnlineVC: UIViewController {
         return spinner
     }()
     
-    lazy var blurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        return blurEffectView
+    lazy var loadingScreenOverlay: UIView = {
+        let uv = UIView(frame: view.safeAreaLayoutGuide.layoutFrame)
+        uv.translatesAutoresizingMaskIntoConstraints = false
+        uv.backgroundColor = #colorLiteral(red: 0.2056548595, green: 0.2066133618, blue: 0.2089324594, alpha: 0.7473512414)
+        return uv
     }()
     
     lazy var gridLayoutButton: UIButton = {
@@ -160,32 +161,6 @@ class SearchRecipesOnlineVC: UIViewController {
         
     }
     
-    private func showLoadingAnimation() {
-        view.addSubview(blurEffectView)
-        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            blurEffectView.topAnchor.constraint(equalTo: recipeCollectionView.topAnchor),
-            blurEffectView.centerXAnchor.constraint(equalTo: recipeCollectionView.centerXAnchor),
-            blurEffectView.widthAnchor.constraint(equalToConstant: recipeCollectionView.frame.width),
-            blurEffectView.bottomAnchor.constraint(equalTo: recipeCollectionView.bottomAnchor)
-        ])
-        
-        view.addSubview(spinner)
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            spinner.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            spinner.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
-        ])
-        
-        spinner.startAnimating()
-        
-    }
-    
-    private func removeLoadingAnimation() {
-        self.spinner.removeFromSuperview()
-        self.blurEffectView.removeFromSuperview()
-    }
-    
     private func showNoResultsAlert() {
         let alert = UIAlertController(title: "Oops", message: "Sorry, that search had no results in our database.", preferredStyle: .alert)
         present(alert, animated: true, completion: nil)
@@ -194,43 +169,7 @@ class SearchRecipesOnlineVC: UIViewController {
             alert.dismiss(animated: true, completion: nil)
         })
     }
-    
-    private func animateRecipesRetrieved() {
-        self.screenTitleLabel.textAlignment = .left
-        
-        self.screenTitleLabelTopConstraint.isActive = false
-        self.screenTitleLabelCenterXConstraint.isActive = false
-        self.searchBarCenterXContraint.isActive = false
-        
-        self.searchBarTopConstraint.constant = self.searchBarTopConstraint.constant / 5
-        self.searchBarWidthConstraint.constant = self.view.frame.width - 40
-        
-        NSLayoutConstraint.activate([
-            self.screenTitleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            self.screenTitleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            self.searchBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            self.resultsNumberLabel.leadingAnchor.constraint(equalTo: screenTitleLabel.leadingAnchor)
-        ])
-        
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    @objc func toggleCollectionViewLayout() {
-        guard let cvFlowLayout = self.recipeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        switch cvFlowLayout.scrollDirection {
-            case .vertical:
-                cvFlowLayout.scrollDirection = .horizontal
-                self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.2x2")!, for: .normal)
-            case .horizontal:
-                cvFlowLayout.scrollDirection = .vertical
-                self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.3x2")!, for: .normal)
-            default:
-                return
-        }
-    }
-    
+
 }
 
 //MARK: - SearchBar Methods
@@ -306,3 +245,63 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
 }
 
 
+//MARK: - Animation & Visual Methods
+
+extension SearchRecipesOnlineVC {
+    
+    private func showLoadingAnimation() {
+        view.addSubview(loadingScreenOverlay)
+        view.addSubview(spinner)
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            spinner.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            spinner.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+        ])
+        
+        spinner.startAnimating()
+        
+    }
+    
+    private func removeLoadingAnimation() {
+        self.loadingScreenOverlay.removeFromSuperview()
+        self.spinner.removeFromSuperview()
+    }
+    
+    // This func is to animate the title and searchbar constraints to move from the initial center to the top to make room for recipeCollectionView to show results of query
+    private func animateRecipesRetrieved() {
+        self.screenTitleLabel.textAlignment = .left
+        
+        self.screenTitleLabelTopConstraint.isActive = false
+        self.screenTitleLabelCenterXConstraint.isActive = false
+        self.searchBarCenterXContraint.isActive = false
+        
+        self.searchBarTopConstraint.constant = self.searchBarTopConstraint.constant / 5
+        self.searchBarWidthConstraint.constant = self.view.frame.width - 40
+        
+        NSLayoutConstraint.activate([
+            self.screenTitleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            self.screenTitleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            self.searchBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            self.resultsNumberLabel.leadingAnchor.constraint(equalTo: screenTitleLabel.leadingAnchor)
+        ])
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @objc func toggleCollectionViewLayout() {
+        guard let cvFlowLayout = self.recipeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        switch cvFlowLayout.scrollDirection {
+            case .vertical:
+                cvFlowLayout.scrollDirection = .horizontal
+                self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.2x2")!, for: .normal)
+            case .horizontal:
+                cvFlowLayout.scrollDirection = .vertical
+                self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.3x2")!, for: .normal)
+            default:
+                return
+        }
+    }
+}

@@ -49,8 +49,55 @@ class TimerVC: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        addSubviews()
     }
     
     //MARK: - Methods
+    @objc func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(incrementTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc func incrementTimer() {
+        timerDisplayCount += 1
+        timerLabel.text = timerDisplayCount.description
+    }
+    
+    @objc func pauseTimer() {
+        timer.invalidate()
+        toggleTimerButton.removeTarget(self, action: #selector(startTimer), for: .touchUpInside)
+    }
+    
+    @objc func resetTimer() {
+        timer.invalidate()
+        timerDisplayCount = 0
+        timerLabel.text = timerDisplayCount.description
+    }
+    
+    
+    //MARK: - Private Constraints
+    private func addSubviews() {
+        view.addSubview(timerLabel)
+        NSLayoutConstraint.activate([
+            timerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            timerLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            timerLabel.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 5)
+        ])
+        
+        view.addSubview(resetTimerButton)
+        NSLayoutConstraint.activate([
+            resetTimerButton.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 30),
+            resetTimerButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -50),
+            resetTimerButton.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 5)
+        ])
+        
+        view.addSubview(toggleTimerButton)
+        NSLayoutConstraint.activate([
+            toggleTimerButton.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 30),
+            toggleTimerButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 50),
+            toggleTimerButton.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 5)
+        ])
+   
+    }
+    
     
 }

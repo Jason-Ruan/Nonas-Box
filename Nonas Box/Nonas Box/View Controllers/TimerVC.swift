@@ -32,6 +32,8 @@ class TimerVC: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Pause", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        button.addTarget(self, action: #selector(pauseTimer), for: .touchUpInside)
         return button
     }()
     
@@ -39,6 +41,8 @@ class TimerVC: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Reset", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        button.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
         return button
     }()
     

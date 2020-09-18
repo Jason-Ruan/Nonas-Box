@@ -68,6 +68,8 @@ class TimerVC: UIViewController {
     //MARK: - Methods
     @objc func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(incrementTimer), userInfo: nil, repeats: true)
+        timePickerView.isHidden = true
+        timerLabel.isHidden = false
     }
     
     @objc func incrementTimer() {
@@ -84,6 +86,8 @@ class TimerVC: UIViewController {
         timer.invalidate()
         timerDisplayCount = 0
         timerLabel.text = timerDisplayCount.description
+        timerLabel.isHidden = true
+        timePickerView.isHidden = false
     }
     
     

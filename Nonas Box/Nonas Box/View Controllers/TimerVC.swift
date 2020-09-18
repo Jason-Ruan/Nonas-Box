@@ -93,6 +93,13 @@ class TimerVC: UIViewController {
     
     //MARK: - Private Constraints
     private func addSubviews() {
+        view.addSubview(timePickerView)
+        NSLayoutConstraint.activate([
+            timePickerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            timePickerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            timePickerView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 3)
+        ])
+        
         view.addSubview(timerLabel)
         NSLayoutConstraint.activate([
             timerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),

@@ -10,12 +10,21 @@ import UIKit
 
 class TimerVC: UIViewController {
     //MARK: - UI Objects
+    lazy var timePickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        return pickerView
+    }()
+    
     lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = self.timerDisplayCount.description
         label.textAlignment = .center
         label.font = UIFont(name: "Arial", size: 20)
+        label.isHidden = true
         return label
     }()
     

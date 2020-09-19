@@ -29,28 +29,31 @@ class TimerVC: UIViewController {
     }()
     
     lazy var toggleTimerButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(frame: CGRect(x: 0, y: 0,
+                                            width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
+                                            height: view.safeAreaLayoutGuide.layoutFrame.width / 4))
+        button.layer.cornerRadius = button.frame.height / 2
+        button.layer.borderWidth = 5
+        button.layer.borderColor = #colorLiteral(red: 0, green: 0.8449820876, blue: 0.3828604817, alpha: 0.7905072774)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Start", for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        button.setTitleColor(UIColor.systemBlue, for: .highlighted)
         button.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
         return button
     }()
     
-    lazy var pauseTimerButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Pause", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        button.addTarget(self, action: #selector(pauseTimer), for: .touchUpInside)
-        return button
-    }()
-    
     lazy var resetTimerButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(frame: CGRect(x: 0, y: 0,
+                                            width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
+                                            height: view.safeAreaLayoutGuide.layoutFrame.width / 4))
+        button.layer.cornerRadius = button.frame.height / 2
+        button.layer.borderWidth = 5
+        button.layer.borderColor = #colorLiteral(red: 0.6281864643, green: 0, blue: 0.2587452531, alpha: 0.6612799658)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Reset", for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        button.setTitleColor(UIColor.systemBlue, for: .highlighted)
         button.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
         return button
     }()

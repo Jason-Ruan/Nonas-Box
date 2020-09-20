@@ -257,15 +257,18 @@ extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlo
         cell.foodInfoLabel.text = groceryItem.title
         
         guard let groceryItemsImages = groceryItem.images else {
-                showAlert(message: "Could not find images associated with the item")
-                return cell
+            showAlert(message: "Could not find images associated with the item")
+            return cell
         }
         
         UPC_ItemDB_Client.manager.getItemImage(barcode: groceryItem.upc!, imageURLs: groceryItemsImages) { (result) in
             switch result {
-                case .failure(let error):
-                    self.showAlert(message: "\(error.localizedDescription): \(error.rawValue)")
-                    cell.foodImage.image = UIImage(systemName: "photo")
+                case .failure:
+                    //                    self.showAlert(message: "\(error.localizedDescription): \(error.rawValue)")
+                    //                    cell.foodImage.image = UIImage(systemName: "photo")
+                    
+                    self.showCameraPrompt()
+                
                 case .success(let itemImage):
                     cell.foodImage.image = itemImage
             }
@@ -273,4 +276,5 @@ extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlo
         
         return cell
     }
+    
 }

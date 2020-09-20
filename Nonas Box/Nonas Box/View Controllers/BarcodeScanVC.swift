@@ -13,12 +13,19 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     //MARK: - Properties
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
-    
     private var scannedBarCodes: [String] = []
-    public var groceryItems: [UPC_Item] = [] {
+    private var groceryItems: [UPC_Item] = [] {
         didSet {
             barcodeCollectionView.reloadData()
         }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
     
     lazy var barcodeCollectionView: UICollectionView = {
@@ -66,7 +73,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     override func viewDidLayoutSubviews() {
         previewLayer.frame = barcodeScanArea.bounds
     }
-
+    
     
     //MARK: - Private Functions
     private func requestAVCapturePermissions() {
@@ -194,13 +201,43 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    private func showCameraPrompt() {
+        let action = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+            let cameraCaptureSession = AVCaptureSession()
+            guard let cameraCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+            let cameraInput: AVCaptureDeviceInput
+            
+            do {
+                cameraInput = try AVCaptureDeviceInput(device: cameraCaptureDevice)
+                
+                if (cameraCaptureSession.canAddInput(cameraInput)) {
+                    cameraCaptureSession.addInput(cameraInput)
+                } else {
+                    self.failed()
+                    return
+                }
+                
+            } catch {
+                print(error)
+            }
+            
+            let metadataOutput = AVCaptureMetadataOutput()
+            
+            if (cameraCaptureSession.canAddOutput(metadataOutput)) {
+                cameraCaptureSession.addOutput(metadataOutput)
+                
+                metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+                metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417, .upce]
+            } else {
+                self.failed()
+                return
+            }
+            
+        })
+        self.showAlertWithAction(title: "Uh-oh", message: "We could not find an image for that item in our database. Would you like to take a photo of this item?", withAction: action)
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
+    
 }
 
 

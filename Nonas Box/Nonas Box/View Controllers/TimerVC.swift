@@ -28,6 +28,30 @@ class TimerVC: UIViewController {
         return label
     }()
     
+    lazy var hourLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .right
+        label.text = "hrs"
+        return label
+    }()
+    
+    lazy var minLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .right
+        label.text = "min"
+        return label
+    }()
+    
+    lazy var secLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .right
+        label.text = "sec"
+        return label
+    }()
+    
     lazy var toggleTimerButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0,
                                             width: view.safeAreaLayoutGuide.layoutFrame.width / 4,

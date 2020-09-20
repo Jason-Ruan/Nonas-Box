@@ -91,12 +91,19 @@ class TimerVC: UIViewController {
             let minsRemaining = (timerDisplayCount - hrsRemaining * 3600) / 60
             let secsRemaining = timerDisplayCount - hrsRemaining * 3600 - minsRemaining * 60
             timerLabel.text = "\(hrsRemaining) \(hrsRemaining != 1 ? "hrs" : "hr") : \(minsRemaining) min : \(secsRemaining) sec"
+            
+            if timerDisplayCount == 0 {
+                tabBarItem.badgeValue = nil
+            } else if timerDisplayCount < 60 {
+                tabBarItem.badgeValue = "\(timerDisplayCount)s"
+            }
         }
     }
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        tabBarItem.badgeColor = .systemRed
         addSubviews()
     }
     

@@ -101,14 +101,23 @@ class TimerVC: UIViewController {
     
     //MARK: - Methods
     @objc func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(incrementTimer), userInfo: nil, repeats: true)
+        let hoursToSec = timePickerView.selectedRow(inComponent: 0) * 3600
+        let minsToSec = timePickerView.selectedRow(inComponent: 1) * 60
+        let sec = timePickerView.selectedRow(inComponent: 2)
+        timerDisplayCount = hoursToSec + minsToSec + sec
+            
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(decrementTimer), userInfo: nil, repeats: true)
+
         timePickerView.isHidden = true
         timerLabel.isHidden = false
     }
     
-    @objc func incrementTimer() {
-        timerDisplayCount += 1
-        timerLabel.text = timerDisplayCount.description
+    @objc func decrementTimer() {
+        guard timerDisplayCount > 0 else {
+            timer.invalidate()
+            return
+        }
+        timerDisplayCount -= 1
     }
     
     @objc func pauseTimer() {
@@ -119,7 +128,6 @@ class TimerVC: UIViewController {
     @objc func resetTimer() {
         timer.invalidate()
         timerDisplayCount = 0
-        timerLabel.text = timerDisplayCount.description
         timerLabel.isHidden = true
         timePickerView.isHidden = false
     }

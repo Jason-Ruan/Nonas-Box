@@ -207,36 +207,14 @@ extension TimerVC: UIPickerViewDataSource, UIPickerViewDelegate {
                 return 0
         }
     }
-    
-    
-    
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        switch component {
-            
-            case 0:
-                if row == pickerView.selectedRow(inComponent: 0) {
-                    return "\(row) hours"
-                } else {
-                    return row.description
-                }
-            
-            case 1:
-                if row == pickerView.selectedRow(inComponent: 1) {
-                    return "\(row) min"
-                } else {
-                    return row.description
-                }
-            
-            case 2:
-                if row == pickerView.selectedRow(inComponent: 2) {
-                    return "\(row) sec"
-                } else {
-                    return row.description
-                }
-            
-            default:
-                return ""
+        return row.description
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            hourLabel.text = row == 1 ? "hr" : "hrs"
         }
     }
     

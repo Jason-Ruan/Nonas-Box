@@ -145,9 +145,10 @@ class TimerVC: UIViewController {
         
         view.addSubview(timerLabel)
         NSLayoutConstraint.activate([
-            timerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            timerLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            timerLabel.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 5)
+            timerLabel.centerXAnchor.constraint(equalTo: timePickerView.centerXAnchor),
+            timerLabel.centerYAnchor.constraint(equalTo: timePickerView.centerYAnchor),
+            timerLabel.heightAnchor.constraint(equalTo: timePickerView.heightAnchor),
+            timerLabel.widthAnchor.constraint(equalTo: timePickerView.widthAnchor)
         ])
         
         view.addSubview(resetTimerButton)

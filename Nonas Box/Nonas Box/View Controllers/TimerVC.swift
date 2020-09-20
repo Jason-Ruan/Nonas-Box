@@ -84,7 +84,14 @@ class TimerVC: UIViewController {
     
     //MARK: - Properties
     var timer = Timer()
-    var timerDisplayCount = 0
+    var timerDisplayCount = 0 {
+        didSet {
+            let hrsRemaining = timerDisplayCount / 3600
+            let minsRemaining = (timerDisplayCount - hrsRemaining * 3600) / 60
+            let secsRemaining = timerDisplayCount - hrsRemaining * 3600 - minsRemaining * 60
+            timerLabel.text = "\(hrsRemaining) \(hrsRemaining != 1 ? "hrs" : "hr") : \(minsRemaining) min : \(secsRemaining) sec"
+        }
+    }
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {

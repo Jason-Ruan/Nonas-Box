@@ -114,7 +114,10 @@ class TimerVC: UIViewController {
         let sec = timePickerView.selectedRow(inComponent: 2)
         timerDisplayCount = hoursToSec + minsToSec + sec
             
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(decrementTimer), userInfo: nil, repeats: true)
+        timer = Timer(timeInterval: 1, target: self, selector: #selector(decrementTimer), userInfo: nil, repeats: true)
+        
+        // RunLoop allows the timer to continue running while scrolling through scrollViews
+        RunLoop.main.add(timer, forMode: .common)
 
         timePickerView.isHidden = true
         timerLabel.isHidden = false

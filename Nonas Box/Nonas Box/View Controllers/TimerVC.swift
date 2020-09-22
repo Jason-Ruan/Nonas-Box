@@ -109,7 +109,6 @@ class TimerVC: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        tabBarItem.badgeColor = .systemRed
         addSubviews()
     }
     

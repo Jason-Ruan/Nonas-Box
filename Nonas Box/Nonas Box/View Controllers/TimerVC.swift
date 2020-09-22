@@ -92,9 +92,15 @@ class TimerVC: UIViewController {
             let secsRemaining = timerDisplayCount - hrsRemaining * 3600 - minsRemaining * 60
             timerLabel.text = "\(hrsRemaining) \(hrsRemaining != 1 ? "hrs" : "hr") : \(minsRemaining) min : \(secsRemaining) sec"
             
-            if timerDisplayCount == 0 {
+            guard timerDisplayCount != 0 else {
                 tabBarItem.badgeValue = nil
+                return
+            }
+            
+            if timerDisplayCount >= 60 {
+                tabBarItem.badgeValue = "\u{231B}"
             } else if timerDisplayCount < 60 {
+                tabBarItem.badgeColor = .systemRed
                 tabBarItem.badgeValue = "\(timerDisplayCount)s"
             }
         }

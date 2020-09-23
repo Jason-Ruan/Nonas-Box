@@ -42,8 +42,7 @@ class RecipeDetailVC: UIViewController {
     }()
     
     lazy var recipeImageView: UIImageView = {
-        //        let iv = UIImageView(frame: CGRect(x: view.frame.midX / 2, y: view.frame.midY / 3, width: view.frame.width / 2, height: view.frame.width / 2))
-        let iv = UIImageView()
+        let iv = UIImageView(frame: view.bounds)
         iv.clipsToBounds = true
         iv.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         iv.layer.cornerRadius = iv.frame.height / 2

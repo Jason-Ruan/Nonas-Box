@@ -191,7 +191,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     private func found(code: String) {
         scannedBarCodes.append(code)
-        UPC_ItemDB_Client.manager.getItem(upc: code) { (result) in
+        UPC_ItemDB_Client.manager.getItem(barcode: code) { (result) in
             switch result {
                 case .failure(let error):
                     self.showAlert(message: "\(error.localizedDescription): \(error.rawValue)")
@@ -261,7 +261,8 @@ extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlo
             return cell
         }
         
-        UPC_ItemDB_Client.manager.getItemImage(barcode: groceryItem.upc!, imageURLs: groceryItemsImages) { (result) in
+        guard let barcode = groceryItem.upc else { return cell }
+        UPC_ItemDB_Client.manager.getItemImage(barcode: barcode, imageURLs: groceryItemsImages) { (result) in
             switch result {
                 case .failure:
                     //                    self.showAlert(message: "\(error.localizedDescription): \(error.rawValue)")

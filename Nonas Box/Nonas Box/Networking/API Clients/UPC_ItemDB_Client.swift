@@ -10,10 +10,23 @@ import UIKit
 
 class UPC_ItemDB_Client {
     
-    func getItem(upc: String,
+    func getItem(barcode: String,
                  completionHandler: @escaping (Result<UPC_Item, AppError>) -> () ) {
         
-        guard let url = URL(string: "https://api.upcitemdb.com/prod/trial/lookup?upc=\(upc)") else {
+        // Find if item was already saved with PersistenceHelper
+        do {
+            let upcItems = try UPC_Item_PersistenceHelper.manager.getSavedItems()
+            if let item = upcItems[barcode] {
+                completionHandler(.success(item))
+                return
+            }
+        } catch {
+            print("Item not found locally; Error: \(error)")
+        }
+        
+        
+        // If item is not saved locally, proceed to look up the item using UPC_ItemDB_Client
+        guard let url = URL(string: "https://api.upcitemdb.com/prod/trial/lookup?upc=\(barcode)") else {
             completionHandler(.failure(.badURL))
             return
         }
@@ -30,6 +43,12 @@ class UPC_ItemDB_Client {
                             completionHandler(.failure(.invalidJSONResponse))
                             return
                         }
+                        
+                        // Persist item locally on device
+                        DispatchQueue.global(qos: .utility).async {
+                            try? UPC_Item_PersistenceHelper.manager.save(key: barcode, item: upc_item)
+                        }
+                        
                         completionHandler(.success(upc_item))
                     } catch {
                         completionHandler(.failure(.invalidJSONResponse))

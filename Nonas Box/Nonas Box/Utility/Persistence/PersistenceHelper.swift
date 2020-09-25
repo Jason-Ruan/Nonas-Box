@@ -9,32 +9,35 @@
 import Foundation
 
 struct PersistenceHelper<T: Codable> {
-    func getObjects() throws -> [T] {
+    //MARK: - Persistence Methods
+    func getObjects() throws -> [String : T] {
         guard let data = FileManager.default.contents(atPath: url.path) else {
-            return []
+            return [:]
         }
-        return try PropertyListDecoder().decode([T].self, from: data)
+        return try PropertyListDecoder().decode([String : T].self, from: data)
     }
     
-    func save(newElement: T) throws {
+    func save(key: String, newElement: T) throws {
         var elements = try getObjects()
-        elements.append(newElement)
+        elements[key] = newElement
         let serializedData = try PropertyListEncoder().encode(elements)
         try serializedData.write(to: url, options: Data.WritingOptions.atomic)
     }
     
-    func delete(indexOfElementTBDeleted: Int) throws {
+    func delete(key: String) throws {
         var elements = try getObjects()
         guard !elements.isEmpty else { return }
-        elements.remove(at: indexOfElementTBDeleted)
+        elements.removeValue(forKey: key)
         let serializedData = try PropertyListEncoder().encode(elements)
         try serializedData.write(to: url, options: Data.WritingOptions.atomic)
     }
     
+    //MARK: - Initializer
     init(fileName: String){
         self.fileName = fileName
     }
     
+    //MARK: - Private Properties
     private let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     private func filePathFromDocumentsDirectory(name: String) -> URL {

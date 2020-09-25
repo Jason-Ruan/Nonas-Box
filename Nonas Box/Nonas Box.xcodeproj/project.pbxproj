@@ -25,6 +25,7 @@
 		08A1560224C5F902000B7F81 /* BarcodeScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */; };
 		08B4D53124DF7C71006C30EA /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4D53024DF7C71006C30EA /* UIViewControllerExtensions.swift */; };
 		08B7449A251AE1160005161D /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B74499251AE1160005161D /* PersistenceHelper.swift */; };
+		08B744C3251E80680005161D /* UPC_Item_PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B744C2251E80680005161D /* UPC_Item_PersistenceHelper.swift */; };
 		08D7D6D824CFD4FF00891E65 /* UPC_Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */; };
 		08D7D6DA24CFD6FF00891E65 /* UPC_ItemDB_Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D7D6D924CFD6FF00891E65 /* UPC_ItemDB_Client.swift */; };
 		08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5E20F23A2AAB1007AABE9 /* Secrets.swift */; };
@@ -69,6 +70,7 @@
 		08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanVC.swift; sourceTree = "<group>"; };
 		08B4D53024DF7C71006C30EA /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		08B74499251AE1160005161D /* PersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
+		08B744C2251E80680005161D /* UPC_Item_PersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPC_Item_PersistenceHelper.swift; sourceTree = "<group>"; };
 		08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPC_Item.swift; sourceTree = "<group>"; };
 		08D7D6D924CFD6FF00891E65 /* UPC_ItemDB_Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPC_ItemDB_Client.swift; sourceTree = "<group>"; };
 		08E5E20F23A2AAB1007AABE9 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				08B74499251AE1160005161D /* PersistenceHelper.swift */,
+				08B744C2251E80680005161D /* UPC_Item_PersistenceHelper.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */,
 				0878071A24D490F800B9F5B2 /* MyStuffOptionCell.swift in Sources */,
 				0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */,
+				08B744C3251E80680005161D /* UPC_Item_PersistenceHelper.swift in Sources */,
 				08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */,
 				08B7449A251AE1160005161D /* PersistenceHelper.swift in Sources */,
 				083FEB6624FDDF1000B4DEE0 /* TimerVC.swift in Sources */,

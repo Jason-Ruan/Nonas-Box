@@ -52,7 +52,6 @@ class MyStuffVC: UIViewController {
 extension MyStuffVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     //MARK: - CollectionView DataSource and Delegate Methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(MyStuffButtonOptions.allCases.count)
         return MyStuffButtonOptions.allCases.count
     }
     

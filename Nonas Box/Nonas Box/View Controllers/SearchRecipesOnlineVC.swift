@@ -300,10 +300,16 @@ extension SearchRecipesOnlineVC {
         guard let cvFlowLayout = self.recipeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         switch cvFlowLayout.scrollDirection {
             case .vertical:
-                cvFlowLayout.scrollDirection = .horizontal
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    cvFlowLayout.scrollDirection = .horizontal
+                }, completion: nil)
+                
                 self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.2x2")!, for: .normal)
             case .horizontal:
-                cvFlowLayout.scrollDirection = .vertical
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    cvFlowLayout.scrollDirection = .vertical
+                }, completion: nil)
+                
                 self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.3x2")!, for: .normal)
             default:
                 return

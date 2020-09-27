@@ -49,7 +49,7 @@ class TimerVC: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
-        label.text = "sec"
+        label.text = "s"
         return label
     }()
     
@@ -211,7 +211,7 @@ class TimerVC: UIViewController {
             
             secLabel.widthAnchor.constraint(equalToConstant: secRowSizeForTimePickerView.width),
             secLabel.heightAnchor.constraint(equalToConstant: secRowSizeForTimePickerView.height),
-            secLabel.trailingAnchor.constraint(equalTo: timePickerView.trailingAnchor)
+            secLabel.trailingAnchor.constraint(equalTo: timePickerView.trailingAnchor, constant: -20)
             
         ])
         

@@ -98,6 +98,7 @@ class TimerVC: UIViewController {
             }
             
             if timerDisplayCount >= 60 {
+                tabBarItem.badgeColor = .clear
                 tabBarItem.badgeValue = "\u{231B}"
             } else if timerDisplayCount < 60 {
                 tabBarItem.badgeColor = .systemRed
@@ -118,8 +119,6 @@ class TimerVC: UIViewController {
         let minsToSec = timePickerView.selectedRow(inComponent: 1) * 60
         let sec = timePickerView.selectedRow(inComponent: 2)
         timerDisplayCount = hoursToSec + minsToSec + sec
-        
-        tabBarItem.badgeColor = .clear
             
         timer = Timer(timeInterval: 1, target: self, selector: #selector(decrementTimer), userInfo: nil, repeats: true)
         

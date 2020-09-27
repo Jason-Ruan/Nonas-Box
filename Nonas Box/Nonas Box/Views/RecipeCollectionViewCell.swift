@@ -145,7 +145,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             prepInfo.append(NSAttributedString(string: servings.description))
             prepInfo.append(NSAttributedString(string: "  |  "))
             prepInfo.append(image2TextString)
-            prepInfo.append(NSAttributedString(string: "\(prepTime.description) min"))
+            prepInfo.append(NSAttributedString(string: convertMinutesToString(time: prepTime)))
         }
         
         foodInfoText.append(prepInfo)
@@ -167,6 +167,14 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             }
             self.spinner.stopAnimating()
         }
+    }
+    
+    private func convertMinutesToString(time: Int) -> String {
+        guard time > 60 else { return "\(time.description) min" }
+        let hours = time / 60
+        let minutes = time % 60
+        guard minutes > 0 else { return "\(hours) \(hours > 1 ? "hrs" : "hr")" }
+        return "\(hours) \(hours > 1 ? "hrs" : "hr") \(minutes) min"
     }
     
     //    @objc private func favoriteButtonPressed() {}

@@ -124,7 +124,9 @@ class RecipeDetailVC: UIViewController {
                 case .failure(let error):
                     self.showAlert(message: "Could not get step by step instructions for \(recipe.title?.description ?? "this recipe").\nError:\(error.localizedDescription)")
                 case .success(let recipeDetails):
-                    self.stepByStepInstructions = recipeDetails.analyzedInstructions?.first?.steps
+                    self.stepByStepInstructions = recipeDetails.analyzedInstructions?.reduce(into: [], { (totalSteps, step) in
+                        totalSteps += step.steps ?? []
+                    })
                     self.ingredients = recipeDetails.extendedIngredients
             }
         }

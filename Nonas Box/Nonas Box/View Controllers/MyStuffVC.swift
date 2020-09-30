@@ -71,6 +71,8 @@ extension MyStuffVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             return
         }
         switch cell.myStuffButtonOption {
+            case .checkInventory:
+                self.navigationController?.pushViewController(InventoryVC(), animated: true)
             case .addToInventory:
                 self.navigationController?.pushViewController(BarcodeScanVC(), animated: true)
             default:

@@ -42,7 +42,7 @@ class InventoryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBlue
-        view.addSubview(itemCollectionView)
+        constrainItemCollectionView()
         loadInventory()
     }
     
@@ -60,9 +60,22 @@ class InventoryVC: UIViewController {
     }
     
     
+    //MARK: - Constraints
+    private func constrainItemCollectionView() {
+        view.addSubview(itemCollectionView)
+        NSLayoutConstraint.activate([
+            itemCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            itemCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            itemCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            itemCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
+    
+    
 }
 
 
+//MARK: - CollectionView Methods
 extension InventoryVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return inventory.count

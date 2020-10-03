@@ -37,6 +37,10 @@ class ItemCollectionViewCell: UICollectionViewCell {
     //MARK: - Initializerss
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        contentView.layer.borderWidth = 5
+        contentView.layer.borderColor = UIColor.systemBlue.cgColor
+        
         constrainItemImageView()
         constrainItemNameLabel()
     }

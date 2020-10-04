@@ -40,6 +40,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         
         contentView.layer.borderWidth = 5
         contentView.layer.borderColor = UIColor.systemBlue.cgColor
+        contentView.backgroundColor = .white
         
         constrainItemImageView()
         constrainItemNameLabel()

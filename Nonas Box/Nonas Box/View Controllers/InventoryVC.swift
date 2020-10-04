@@ -13,16 +13,15 @@ class InventoryVC: UIViewController {
     //MARK: - UI Objects
     lazy var itemCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width / 3,
-                                 height: view.safeAreaLayoutGuide.layoutFrame.height / 5)
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width / 2.5,
+                                 height: view.safeAreaLayoutGuide.layoutFrame.height / 4)
         layout.minimumLineSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
         let cv = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         cv.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: "itemCell")
         cv.backgroundColor = .clear
-        cv.layer.borderWidth = 5
-        cv.layer.borderColor = UIColor.black.cgColor
         cv.dataSource = self
         cv.delegate = self
         cv.translatesAutoresizingMaskIntoConstraints = false

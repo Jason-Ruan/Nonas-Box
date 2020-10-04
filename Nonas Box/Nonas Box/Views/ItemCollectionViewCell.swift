@@ -21,6 +21,9 @@ class ItemCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.textAlignment = .center
+        label.backgroundColor = .black
+        label.textColor = .white
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -39,7 +42,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         contentView.layer.borderWidth = 5
-        contentView.layer.borderColor = UIColor.systemBlue.cgColor
+        contentView.layer.borderColor = UIColor.systemYellow.cgColor
         contentView.backgroundColor = .white
         
         constrainItemImageView()
@@ -72,9 +75,9 @@ class ItemCollectionViewCell: UICollectionViewCell {
     private func constrainItemImageView() {
         contentView.addSubview(itemImageView)
         NSLayoutConstraint.activate([
-            itemImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            itemImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
-            itemImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+            itemImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 10),
+            itemImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            itemImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             itemImageView.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.75)
         ])
     }
@@ -82,10 +85,10 @@ class ItemCollectionViewCell: UICollectionViewCell {
     private func constrainItemNameLabel() {
         contentView.addSubview(itemNameLabel)
         NSLayoutConstraint.activate([
-            itemNameLabel.topAnchor.constraint(equalTo: itemImageView.bottomAnchor),
-            itemNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
-            itemNameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
-            itemNameLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
+            itemNameLabel.topAnchor.constraint(equalTo: itemImageView.bottomAnchor, constant: 5),
+            itemNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            itemNameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -5),
+            itemNameLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5),
         ])
     }
     

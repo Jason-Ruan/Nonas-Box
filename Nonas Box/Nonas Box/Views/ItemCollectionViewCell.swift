@@ -56,7 +56,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Functions
     private func configureCell(forItem item: UPC_Item) {
-        itemNameLabel.text = item.title
+        itemNameLabel.text = item.title?.capitalized
         
         guard let barcode = item.barcode, let imageURLs = item.images else { return }
         

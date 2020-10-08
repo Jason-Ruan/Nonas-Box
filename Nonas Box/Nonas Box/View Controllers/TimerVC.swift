@@ -53,32 +53,20 @@ class TimerVC: UIViewController {
         return label
     }()
     
-    lazy var toggleTimerButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0,
-                                            width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
-                                            height: view.safeAreaLayoutGuide.layoutFrame.width / 4))
-        button.layer.cornerRadius = button.frame.height / 2
-        button.layer.borderWidth = 5
-        button.layer.borderColor = #colorLiteral(red: 0, green: 0.8449820876, blue: 0.3828604817, alpha: 0.7905072774)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Start", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
-        button.setTitleColor(UIColor.systemGreen, for: .highlighted)
+    lazy var toggleTimerButton: TimerButton = {
+        let button = TimerButton(frame: CGRect(x: 0, y: 0,
+                                         width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
+                                         height: view.safeAreaLayoutGuide.layoutFrame.width / 4),
+                                 purpose: .start)
         button.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
         return button
     }()
     
-    lazy var resetTimerButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0,
-                                            width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
-                                            height: view.safeAreaLayoutGuide.layoutFrame.width / 4))
-        button.layer.cornerRadius = button.frame.height / 2
-        button.layer.borderWidth = 5
-        button.layer.borderColor = #colorLiteral(red: 0.6281864643, green: 0, blue: 0.2587452531, alpha: 0.6612799658)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Reset", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
-        button.setTitleColor(UIColor.systemRed, for: .highlighted)
+    lazy var resetTimerButton: TimerButton = {
+        let button = TimerButton(frame: CGRect(x: 0, y: 0,
+                                         width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
+                                         height: view.safeAreaLayoutGuide.layoutFrame.width / 4),
+                                 purpose: .reset)
         button.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
         return button
     }()
@@ -116,40 +104,58 @@ class TimerVC: UIViewController {
         addSubviews()
     }
     
-    //MARK: - Methods
+    
+    //MARK: - Objective-C Methods
     @objc func startTimer() {
+        // Converts timePickerView selections into total number of seconds
         let hoursToSec = timePickerView.selectedRow(inComponent: 0) * 3600
         let minsToSec = timePickerView.selectedRow(inComponent: 1) * 60
         let sec = timePickerView.selectedRow(inComponent: 2)
         timerDisplayCount = hoursToSec + minsToSec + sec
-            
-        timer = Timer(timeInterval: 1, target: self, selector: #selector(decrementTimer), userInfo: nil, repeats: true)
         
-        // RunLoop allows the timer to continue running while scrolling through scrollViews
-        RunLoop.main.add(timer, forMode: .common)
+        resumeTimer()
         
         timePickerView.isHidden = true
         timerLabel.isHidden = false
+        
+        // Change toggleTimerButton to have pause functionality after toggled on
+        toggleTimerButton.removeTarget(self, action: #selector(startTimer), for: .touchUpInside)
+        toggleTimerButton.addTarget(self, action: #selector(pauseTimer), for: .touchUpInside)
+        
     }
     
     @objc func decrementTimer() {
-        guard timerDisplayCount > 0 else {
-            timer.invalidate()
-            return
-        }
+        guard timerDisplayCount > 0 else { timer.invalidate(); return }
         timerDisplayCount -= 1
+    }
+    
+    @objc func resumeTimer() {
+        // RunLoop allows the timer to continue running while scrolling through scrollViews
+        timer = Timer(timeInterval: 1, target: self, selector: #selector(decrementTimer), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer, forMode: .common)
+        
+        // Change toggleTimerButton to have pause functionality
+        toggleTimerButton.purpose = .pause
+        toggleTimerButton.addTarget(self, action: #selector(pauseTimer), for: .touchUpInside)
     }
     
     @objc func pauseTimer() {
         timer.invalidate()
-        toggleTimerButton.removeTarget(self, action: #selector(startTimer), for: .touchUpInside)
+        
+        // Change toggleTimerButton to have resume functionality
+        toggleTimerButton.purpose = .resume
+        toggleTimerButton.addTarget(self, action: #selector(resumeTimer), for: .touchUpInside)
     }
     
     @objc func resetTimer() {
         timer.invalidate()
         timerDisplayCount = 0
+        
         timerLabel.isHidden = true
         timePickerView.isHidden = false
+        
+        toggleTimerButton.purpose = .start
+        toggleTimerButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
     }
     
     

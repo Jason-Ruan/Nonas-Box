@@ -80,7 +80,6 @@ class SearchRecipesOnlineVC: UIViewController {
     private var recipes: [Recipe] = [] {
         didSet {
             recipeCollectionView.reloadData()
-            resultsNumberLabel.text = "We found \(self.recipes.count) recipes for '\(searchBar.text ?? "your search")'"
         }
     }
     
@@ -198,12 +197,13 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                 self.removeLoadingAnimation()
                 
                 switch result {
-                    case .success(let recipes):
-                        guard !recipes.isEmpty else {
+                    case .success(let spoonacularResults):
+                        guard let recipes = spoonacularResults.results, !recipes.isEmpty else {
                             self.showNoResultsAlert()
                             return
                         }
                         self.recipes = recipes
+                        self.resultsNumberLabel.text = "We found \(spoonacularResults.totalResults?.description ?? "some") recipes for '\(searchBar.text ?? "your search")'"
                         self.animateRecipesRetrieved()
                         self.gridLayoutButton.isHidden = false
                     case .failure(let error):

@@ -10,6 +10,7 @@ import Foundation
 
 struct SpoonacularResults: Codable {
     let results: [Recipe]?
+    let totalResults: Int?
 }
 
 struct Recipe: Codable {

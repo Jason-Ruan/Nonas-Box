@@ -28,6 +28,7 @@
 		08B744C3251E80680005161D /* UPC_Item_PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B744C2251E80680005161D /* UPC_Item_PersistenceHelper.swift */; };
 		08C4F2972523ED2C008E9964 /* InventoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C4F2962523ED2B008E9964 /* InventoryVC.swift */; };
 		08C4F2B6252546F9008E9964 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C4F2B5252546F9008E9964 /* ItemCollectionViewCell.swift */; };
+		08C4F2D5252E8F90008E9964 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C4F2D4252E8F8F008E9964 /* TimerButton.swift */; };
 		08D7D6D824CFD4FF00891E65 /* UPC_Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */; };
 		08D7D6DA24CFD6FF00891E65 /* UPC_ItemDB_Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D7D6D924CFD6FF00891E65 /* UPC_ItemDB_Client.swift */; };
 		08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5E20F23A2AAB1007AABE9 /* Secrets.swift */; };
@@ -75,6 +76,7 @@
 		08B744C2251E80680005161D /* UPC_Item_PersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPC_Item_PersistenceHelper.swift; sourceTree = "<group>"; };
 		08C4F2962523ED2B008E9964 /* InventoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryVC.swift; sourceTree = "<group>"; };
 		08C4F2B5252546F9008E9964 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		08C4F2D4252E8F8F008E9964 /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPC_Item.swift; sourceTree = "<group>"; };
 		08D7D6D924CFD6FF00891E65 /* UPC_ItemDB_Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPC_ItemDB_Client.swift; sourceTree = "<group>"; };
 		08E5E20F23A2AAB1007AABE9 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				08E9758C24B95E7A00BF0DC3 /* RecipeCollectionViewCell.swift */,
 				0878071924D490F800B9F5B2 /* MyStuffOptionCell.swift */,
 				08C4F2B5252546F9008E9964 /* ItemCollectionViewCell.swift */,
+				08C4F2D4252E8F8F008E9964 /* TimerButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				0878071A24D490F800B9F5B2 /* MyStuffOptionCell.swift in Sources */,
 				0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */,
 				08B744C3251E80680005161D /* UPC_Item_PersistenceHelper.swift in Sources */,
+				08C4F2D5252E8F90008E9964 /* TimerButton.swift in Sources */,
 				08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */,
 				08B7449A251AE1160005161D /* PersistenceHelper.swift in Sources */,
 				083FEB6624FDDF1000B4DEE0 /* TimerVC.swift in Sources */,

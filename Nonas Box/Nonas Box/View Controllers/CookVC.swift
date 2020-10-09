@@ -23,3 +23,18 @@ class CookVC: UIViewController {
     //MARK: - Methods
     
 }
+
+
+// MARK: - CollectionView Methods
+extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return recipesInProgress.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cookingCell", for: indexPath)
+        return cell
+    }
+    
+    
+}

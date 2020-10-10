@@ -36,6 +36,8 @@ struct Recipe: Codable {
 }
 
 struct RecipeDetails: Codable {
+    let title: String?
+    let image: URL?
     let summary: String?
     let extendedIngredients: [Ingredient]
     let analyzedInstructions: [StepByStepInstructions]?

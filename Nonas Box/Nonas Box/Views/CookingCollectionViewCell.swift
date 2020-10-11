@@ -46,9 +46,11 @@ class CookingCollectionViewCell: UICollectionViewCell {
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.layer.cornerRadius = 15
+        contentView.layer.cornerRadius = 5
         layer.shadowRadius = 10
         layer.shadowOffset = CGSize(width: 10, height: 10)
+        addSubviews()
+        constrainSubviews()
     }
     
     required init?(coder: NSCoder) {
@@ -57,6 +59,33 @@ class CookingCollectionViewCell: UICollectionViewCell {
     
     
     // MARK: - Private Methods
+    private func addSubviews() {
+        contentView.addSubview(recipeImageView)
+        contentView.addSubview(recipeNameLabel)
+        contentView.addSubview(instructionCollectionView)
+    }
+    
+    private func constrainSubviews() {
+        NSLayoutConstraint.activate([
+            recipeImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            recipeImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
+            recipeImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            recipeNameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            recipeNameLabel.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor),
+            recipeNameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            recipeImageView.topAnchor.constraint(equalTo: recipeNameLabel.bottomAnchor),
+            recipeImageView.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor),
+            recipeImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
+    }
+    
     private func configureCell(forRecipe recipe: RecipeDetails) {
         if let imageURL = recipe.image {
             ImageHelper.shared.getImage(url: imageURL) { (result) in

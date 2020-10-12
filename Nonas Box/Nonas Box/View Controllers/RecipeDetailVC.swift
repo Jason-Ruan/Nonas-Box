@@ -54,6 +54,7 @@ class RecipeDetailVC: UIViewController {
     
     lazy var stepByStepInstructionsTableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .grouped)
+        tv.backgroundColor = .clear
         tv.layer.cornerRadius = 15
         tv.dataSource = self
         tv.delegate = self
@@ -154,7 +155,8 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stepByStepInstructionsCell", for: indexPath)
-
+        
+        cell.backgroundColor = .clear
         cell.textLabel?.numberOfLines = 0
         
         switch indexPath.section {

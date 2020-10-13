@@ -32,7 +32,8 @@ extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cookingCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cookingCell", for: indexPath) as? CookingCollectionViewCell else { return UICollectionViewCell() }
+        cell.recipe = recipesInProgress[indexPath.row]
         return cell
     }
     

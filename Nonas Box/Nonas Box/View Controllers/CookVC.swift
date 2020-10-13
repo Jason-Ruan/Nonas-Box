@@ -13,7 +13,7 @@ class CookVC: UIViewController {
     
     
     //MARK: - Properties
-    var recipesInProgress: [Recipe] = []
+    var recipesInProgress: [RecipeDetails] = []
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {

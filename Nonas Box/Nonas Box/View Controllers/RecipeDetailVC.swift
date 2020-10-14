@@ -37,6 +37,8 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
+    
+    // MARK: - UI Objects
     lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView(frame: view.bounds)
         iv.clipsToBounds = true
@@ -79,35 +81,13 @@ class RecipeDetailVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         addSubviews()
         loadRecipeDetails(recipe: self.recipe)
+        configureAVAudioSession()
         //        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.expandRecipeImage))
         //        recipeImageView.isUserInteractionEnabled = true
         //        recipeImageView.addGestureRecognizer(gestureRecognizer)
     }
     
     //MARK: - Private Functions
-    private func addSubviews() {
-        view.addSubview(backgroundImageView)
-        backgroundImageView.addSubview(blurEffectView)
-        blurEffectView.frame = backgroundImageView.bounds
-        loadImage(recipe: self.recipe)
-        
-        view.addSubview(recipeImageView)
-        NSLayoutConstraint.activate([
-            recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            recipeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            recipeImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 3)
-        ])
-        
-        view.addSubview(stepByStepInstructionsTableView)
-        NSLayoutConstraint.activate([
-            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 20),
-            stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-        ])
-    }
-    
     private func loadImage(recipe: Recipe) {
         SpoonacularAPIClient.manager.getImage(recipe: recipe) { (result) in
             switch result {
@@ -136,6 +116,42 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
+    private func configureAVAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
+            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("audioSession properties weren't set because of an error.")
+        }
+    }
+    
+}
+
+
+// MARK: - Private Constraints
+extension RecipeDetailVC {
+    private func addSubviews() {
+        view.addSubview(backgroundImageView)
+        backgroundImageView.addSubview(blurEffectView)
+        blurEffectView.frame = backgroundImageView.bounds
+        loadImage(recipe: self.recipe)
+        
+        view.addSubview(recipeImageView)
+        NSLayoutConstraint.activate([
+            recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            recipeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            recipeImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 3)
+        ])
+        
+        view.addSubview(stepByStepInstructionsTableView)
+        NSLayoutConstraint.activate([
+            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 20),
+            stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
+    }
 }
 
 //MARK: - TableView Methods

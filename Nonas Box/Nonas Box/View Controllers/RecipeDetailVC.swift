@@ -6,6 +6,7 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 class RecipeDetailVC: UIViewController {
@@ -21,6 +22,8 @@ class RecipeDetailVC: UIViewController {
     }
     
     //MARK: - Properties
+    private let synthesizer = AVSpeechSynthesizer()
+    
     private var recipe: Recipe!
     private var stepByStepInstructions: [Step]? {
         didSet {
@@ -185,7 +188,20 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
             default:
                 return nil
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == 1 else { return }
         
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+        }
+        
+        if let stepInstructionString = stepByStepInstructions?[indexPath.row].step {
+            let utterance = AVSpeechUtterance(string: stepInstructionString)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            synthesizer.speak(utterance)
+        }
     }
     
 }

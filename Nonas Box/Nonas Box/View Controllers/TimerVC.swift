@@ -132,6 +132,8 @@ class TimerVC: UIViewController {
         let sec = timePickerView.selectedRow(inComponent: 2)
         timerDisplayCount = hoursToSec + minsToSec + sec
         
+        guard timerDisplayCount > 0 else { return }
+        
         resumeTimer()
         
         timePickerView.isHidden = true

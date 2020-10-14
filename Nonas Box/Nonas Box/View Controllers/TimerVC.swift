@@ -75,28 +75,23 @@ class TimerVC: UIViewController {
     //MARK: - Properties
     var timer = Timer()
     var timerDisplayCount = 0 {
-        didSet {
-            let hrsRemaining = timerDisplayCount / 3600
-            let minsRemaining = (timerDisplayCount - hrsRemaining * 3600) / 60
-            let secsRemaining = timerDisplayCount - hrsRemaining * 3600 - minsRemaining * 60
-            timerLabel.text = "\(hrsRemaining) \(hrsRemaining != 1 ? "hrs" : "hr") : \(minsRemaining) min : \(secsRemaining) sec"
-            
-            guard timerDisplayCount != 0 else {
-                tabBarItem.badgeValue = nil
+        willSet {
+            if timerDisplayCount != 0 && newValue == 0 {
                 AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            }
+        }
+        
+        didSet {
+            adjustTimerLabelText(timerDisplayCount: timerDisplayCount)
+            
+            guard timerDisplayCount > 0 else {
+                tabBarItem.badgeValue = nil
+                toggleTimerButton.purpose = .start
+                toggleTimerButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
                 return
             }
             
-            if timerDisplayCount >= 3600 {
-                tabBarItem.badgeColor = .systemGreen
-                tabBarItem.badgeValue = "\(timerDisplayCount / 3600)h"
-            } else if timerDisplayCount >= 60 {
-                tabBarItem.badgeColor = .systemBlue
-                tabBarItem.badgeValue = "\(timerDisplayCount / 60)m"
-            } else if timerDisplayCount < 60 {
-                tabBarItem.badgeColor = .systemRed
-                tabBarItem.badgeValue = "\(timerDisplayCount)s"
-            }
+            adjustTabBarBadge(timerDisplayCount: timerDisplayCount)
         }
     }
     
@@ -104,6 +99,28 @@ class TimerVC: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         addSubviews()
+    }
+    
+    
+    // MARK: - Private Functions
+    private func adjustTimerLabelText(timerDisplayCount: Int) {
+        let hrsRemaining = timerDisplayCount / 3600
+        let minsRemaining = (timerDisplayCount - hrsRemaining * 3600) / 60
+        let secsRemaining = timerDisplayCount - hrsRemaining * 3600 - minsRemaining * 60
+        timerLabel.text = "\(hrsRemaining) \(hrsRemaining != 1 ? "hrs" : "hr") : \(minsRemaining) min : \(secsRemaining) sec"
+    }
+    
+    private func adjustTabBarBadge(timerDisplayCount: Int) {
+        if timerDisplayCount >= 3600 {
+            tabBarItem.badgeColor = .systemGreen
+            tabBarItem.badgeValue = "\(timerDisplayCount / 3600)h"
+        } else if timerDisplayCount >= 60 {
+            tabBarItem.badgeColor = .systemBlue
+            tabBarItem.badgeValue = "\(timerDisplayCount / 60)m"
+        } else if timerDisplayCount < 60 {
+            tabBarItem.badgeColor = .systemRed
+            tabBarItem.badgeValue = "\(timerDisplayCount)s"
+        }
     }
     
     

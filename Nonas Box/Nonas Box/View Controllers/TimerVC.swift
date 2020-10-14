@@ -6,6 +6,7 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 class TimerVC: UIViewController {
@@ -82,6 +83,7 @@ class TimerVC: UIViewController {
             
             guard timerDisplayCount != 0 else {
                 tabBarItem.badgeValue = nil
+                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
                 return
             }
             

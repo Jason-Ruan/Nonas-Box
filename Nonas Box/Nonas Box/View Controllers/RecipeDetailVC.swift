@@ -176,6 +176,7 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stepByStepInstructionsCell", for: indexPath)
         
         cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         cell.textLabel?.numberOfLines = 0
         
         switch indexPath.section {
@@ -183,7 +184,7 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
                 guard let ingredient = ingredients?[indexPath.row],
                       let ingredientName = ingredient.name?.capitalized,
                       let ingredientMeasurements = ingredient.measures.us.shortHandMeasurement
-                    else { return cell }
+                else { return cell }
                 cell.textLabel?.text = "\(ingredientMeasurements) \(ingredientName)"
             case 1:
                 guard let stepInstruction = stepByStepInstructions?[indexPath.row] else { return cell }

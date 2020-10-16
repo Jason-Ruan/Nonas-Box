@@ -94,15 +94,15 @@ class TimerVC: UIViewController {
         }
         
         didSet {
-            adjustTimerLabelText(timerDisplayCount: timerDisplayCount)
-            
-            guard timerDisplayCount > 0 else {
+            guard timerDisplayCount >= 0 else {
+                
                 tabBarItem.badgeValue = nil
-                toggleTimerButton.purpose = .start
-                toggleTimerButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
+                overdueTimerCountLabel.text = "\(timerDisplayCount.description) \(timerDisplayCount == -1 ? "second" : "seconds") overdue"
+                
+                
                 return
             }
-            
+            adjustTimerLabelText(timerDisplayCount: timerDisplayCount)
             adjustTabBarBadge(timerDisplayCount: timerDisplayCount)
         }
     }

@@ -150,6 +150,7 @@ class TimerVC: UIViewController {
         
         timePickerView.isHidden = true
         timerLabel.isHidden = false
+        overdueTimerCountLabel.isHidden = false
         
         // Change toggleTimerButton to have pause functionality after toggled on
         toggleTimerButton.removeTarget(self, action: #selector(startTimer), for: .touchUpInside)
@@ -158,7 +159,6 @@ class TimerVC: UIViewController {
     }
     
     @objc func decrementTimer() {
-        guard timerDisplayCount > 0 else { timer.invalidate(); return }
         timerDisplayCount -= 1
     }
     
@@ -186,6 +186,9 @@ class TimerVC: UIViewController {
         
         timerLabel.isHidden = true
         timePickerView.isHidden = false
+        overdueTimerCountLabel.isHidden = true
+        overdueTimerCountLabel.text = nil
+        tabBarItem.badgeValue = nil
         
         toggleTimerButton.purpose = .start
         toggleTimerButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)

@@ -208,7 +208,6 @@ class TimerVC: UIViewController {
         NSLayoutConstraint.activate([
             timerLabel.centerXAnchor.constraint(equalTo: timePickerView.centerXAnchor),
             timerLabel.centerYAnchor.constraint(equalTo: timePickerView.centerYAnchor),
-            timerLabel.heightAnchor.constraint(equalTo: timePickerView.heightAnchor),
             timerLabel.widthAnchor.constraint(equalTo: timePickerView.widthAnchor)
         ])
         

@@ -56,8 +56,8 @@ class TimerVC: UIViewController {
     
     lazy var toggleTimerButton: TimerButton = {
         let button = TimerButton(frame: CGRect(x: 0, y: 0,
-                                         width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
-                                         height: view.safeAreaLayoutGuide.layoutFrame.width / 4),
+                                               width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
+                                               height: view.safeAreaLayoutGuide.layoutFrame.width / 4),
                                  purpose: .start)
         button.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
         return button
@@ -65,8 +65,8 @@ class TimerVC: UIViewController {
     
     lazy var resetTimerButton: TimerButton = {
         let button = TimerButton(frame: CGRect(x: 0, y: 0,
-                                         width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
-                                         height: view.safeAreaLayoutGuide.layoutFrame.width / 4),
+                                               width: view.safeAreaLayoutGuide.layoutFrame.width / 4,
+                                               height: view.safeAreaLayoutGuide.layoutFrame.width / 4),
                                  purpose: .reset)
         button.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
         return button

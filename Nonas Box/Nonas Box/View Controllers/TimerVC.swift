@@ -291,11 +291,11 @@ extension TimerVC: UIPickerViewDataSource, UIPickerViewDelegate {
                 return 0
         }
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return row.description
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             hourLabel.text = row == 1 ? "hr" : "hrs"

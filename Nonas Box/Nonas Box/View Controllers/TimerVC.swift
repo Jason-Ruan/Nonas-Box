@@ -72,6 +72,18 @@ class TimerVC: UIViewController {
         return button
     }()
     
+    lazy var overdueTimerCountLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        label.numberOfLines = 0
+        label.textColor = .red
+        label.adjustsFontSizeToFitWidth = true
+        label.layer.cornerRadius = 20
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
     //MARK: - Properties
     var timer = Timer()
     var timerDisplayCount = 0 {
@@ -211,6 +223,13 @@ class TimerVC: UIViewController {
             toggleTimerButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: view.safeAreaLayoutGuide.layoutFrame.width / 4),
             toggleTimerButton.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width / 4),
             toggleTimerButton.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width / 4)
+        ])
+        
+        view.addSubview(overdueTimerCountLabel)
+        NSLayoutConstraint.activate([
+            overdueTimerCountLabel.leadingAnchor.constraint(equalTo: timerLabel.leadingAnchor),
+            overdueTimerCountLabel.trailingAnchor.constraint(equalTo: timerLabel.trailingAnchor),
+            overdueTimerCountLabel.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 25)
         ])
         
         addUnitsLabelsToTimePickerView()

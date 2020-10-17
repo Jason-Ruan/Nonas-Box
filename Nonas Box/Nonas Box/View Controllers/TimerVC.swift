@@ -77,10 +77,22 @@ class TimerVC: UIViewController {
         label.numberOfLines = 0
         label.textColor = .red
         label.adjustsFontSizeToFitWidth = true
-        label.layer.cornerRadius = 20
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    lazy var timerValueLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.layer.cornerRadius = 15
+        label.layer.borderWidth = 2
+        label.layer.borderColor = UIColor.lightGray.cgColor
+        label.font = UIFont(name: "Arial", size: 12)
+        label.textAlignment = .center
+        label.isHidden = true
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -135,6 +147,26 @@ class TimerVC: UIViewController {
         }
     }
     
+    private func adjustTimerValueLabelText() {
+        var timeValues: [String] = []
+        
+        let numHours = timePickerView.selectedRow(inComponent: 0)
+        let numMin = timePickerView.selectedRow(inComponent: 1)
+        let numSec = timePickerView.selectedRow(inComponent: 2)
+        
+        if numHours > 0 {
+            timeValues.append("\(numHours) hr")
+        }
+        if numMin > 0 {
+            timeValues.append("\(numMin) min")
+        }
+        if numSec > 0 {
+            timeValues.append("\(numSec) sec")
+        }
+        
+        timerValueLabel.text = "Running timer for: \(timeValues.joined(separator: ", "))"
+    }
+    
     
     //MARK: - Objective-C Methods
     @objc func startTimer() {
@@ -151,6 +183,9 @@ class TimerVC: UIViewController {
         timePickerView.isHidden = true
         timerLabel.isHidden = false
         overdueTimerCountLabel.isHidden = false
+        timerValueLabel.isHidden = false
+        
+        adjustTimerValueLabelText()
         
         // Change toggleTimerButton to have pause functionality after toggled on
         toggleTimerButton.removeTarget(self, action: #selector(startTimer), for: .touchUpInside)
@@ -188,7 +223,10 @@ class TimerVC: UIViewController {
         timePickerView.isHidden = false
         overdueTimerCountLabel.isHidden = true
         overdueTimerCountLabel.text = nil
+        timerValueLabel.isHidden = true
         tabBarItem.badgeValue = nil
+        
+        timerValueLabel.text = nil
         
         toggleTimerButton.purpose = .start
         toggleTimerButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
@@ -232,6 +270,14 @@ class TimerVC: UIViewController {
             overdueTimerCountLabel.leadingAnchor.constraint(equalTo: timerLabel.leadingAnchor),
             overdueTimerCountLabel.trailingAnchor.constraint(equalTo: timerLabel.trailingAnchor),
             overdueTimerCountLabel.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 25)
+        ])
+        
+        view.addSubview(timerValueLabel)
+        NSLayoutConstraint.activate([
+            timerValueLabel.bottomAnchor.constraint(equalTo: timerLabel.topAnchor, constant: -30),
+            timerValueLabel.centerXAnchor.constraint(equalTo: timerLabel.centerXAnchor),
+            timerValueLabel.heightAnchor.constraint(equalTo: timerLabel.heightAnchor),
+            timerValueLabel.widthAnchor.constraint(equalTo: timerLabel.widthAnchor, multiplier: 0.8)
         ])
         
         addUnitsLabelsToTimePickerView()

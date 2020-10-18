@@ -111,6 +111,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		081C0F6A253BCF020032F8FC /* SearchTab */ = {
+			isa = PBXGroup;
+			children = (
+				08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */,
+				08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */,
+			);
+			path = SearchTab;
+			sourceTree = "<group>";
+		};
+		081C0F6B253BCF110032F8FC /* CreateTab */ = {
+			isa = PBXGroup;
+			children = (
+				0899D62B2385F40C0059D9CE /* RecipeCreationVC.swift */,
+			);
+			path = CreateTab;
+			sourceTree = "<group>";
+		};
+		081C0F70253BCF2C0032F8FC /* MyStuffTab */ = {
+			isa = PBXGroup;
+			children = (
+				0869070D23A830A600634F1B /* MultipeerShareVC.swift */,
+				08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */,
+				0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */,
+				08C4F2962523ED2B008E9964 /* InventoryVC.swift */,
+			);
+			path = MyStuffTab;
+			sourceTree = "<group>";
+		};
+		081C0F71253BCF340032F8FC /* TimerTab */ = {
+			isa = PBXGroup;
+			children = (
+				083FEB6524FDDF1000B4DEE0 /* TimerVC.swift */,
+			);
+			path = TimerTab;
+			sourceTree = "<group>";
+		};
+		081C0F74253BCF3A0032F8FC /* CookTab */ = {
+			isa = PBXGroup;
+			children = (
+				083FEB6724FDEB4900B4DEE0 /* CookVC.swift */,
+			);
+			path = CookTab;
+			sourceTree = "<group>";
+		};
 		0899D61B2385F40C0059D9CE = {
 			isa = PBXGroup;
 			children = (
@@ -170,15 +214,11 @@
 		0899D64A2385F5840059D9CE /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */,
-				0899D62B2385F40C0059D9CE /* RecipeCreationVC.swift */,
-				0869070D23A830A600634F1B /* MultipeerShareVC.swift */,
-				08A155FF24C53A20000B7F81 /* RecipeDetailVC.swift */,
-				08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */,
-				0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */,
-				083FEB6524FDDF1000B4DEE0 /* TimerVC.swift */,
-				083FEB6724FDEB4900B4DEE0 /* CookVC.swift */,
-				08C4F2962523ED2B008E9964 /* InventoryVC.swift */,
+				081C0F6A253BCF020032F8FC /* SearchTab */,
+				081C0F6B253BCF110032F8FC /* CreateTab */,
+				081C0F74253BCF3A0032F8FC /* CookTab */,
+				081C0F71253BCF340032F8FC /* TimerTab */,
+				081C0F70253BCF2C0032F8FC /* MyStuffTab */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

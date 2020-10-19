@@ -38,7 +38,7 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .orange
         label.textAlignment = .center
-        //        label.font = UIFont(name: "Chalkduster-Bold", size: 30)
+        label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

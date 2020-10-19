@@ -60,7 +60,6 @@ class RecipeDetailVC: UIViewController {
     lazy var stepByStepInstructionsTableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .grouped)
         tv.backgroundColor = .clear
-        tv.layer.cornerRadius = 15
         tv.dataSource = self
         tv.delegate = self
         tv.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: "stepByStepInstructionCell")

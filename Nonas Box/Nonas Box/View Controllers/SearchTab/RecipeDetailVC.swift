@@ -63,7 +63,8 @@ class RecipeDetailVC: UIViewController {
         tv.layer.cornerRadius = 15
         tv.dataSource = self
         tv.delegate = self
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "stepByStepInstructionsCell")
+        tv.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: "stepByStepInstructionCell")
+        tv.register(UITableViewCell.self, forCellReuseIdentifier: "ingredientCell")
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()

@@ -64,9 +64,9 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
         
         contentView.addSubview(stepInstructionLabel)
         NSLayoutConstraint.activate([
-            stepInstructionLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 10),
-            stepInstructionLabel.leadingAnchor.constraint(equalTo: stepNumberLabel.trailingAnchor),
-            stepInstructionLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+            stepInstructionLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 15),
+            stepInstructionLabel.leadingAnchor.constraint(equalTo: stepNumberLabel.trailingAnchor, constant: 10),
+            stepInstructionLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             stepInstructionLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }

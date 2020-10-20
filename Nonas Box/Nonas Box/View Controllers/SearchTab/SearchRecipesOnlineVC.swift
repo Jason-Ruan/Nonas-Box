@@ -11,6 +11,16 @@ import UIKit
 class SearchRecipesOnlineVC: UIViewController {
     //MARK: - UI Objects
     
+    lazy var appNameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont(name: "Chalkduster", size: 60)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Nona's\n\u{1F5C3} Box \u{1F371}"
+        return label
+    }()
+    
     lazy var screenTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -126,6 +136,13 @@ class SearchRecipesOnlineVC: UIViewController {
             screenTitleLabelCenterXConstraint
         ])
         
+        view.addSubview(appNameLabel)
+        NSLayoutConstraint.activate([
+            appNameLabel.bottomAnchor.constraint(equalTo: screenTitleLabel.topAnchor, constant: -60),
+            appNameLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            
+        ])
+        
         view.addSubview(gridLayoutButton)
         gridLayoutButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -205,6 +222,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                         self.recipes = recipes
                         self.resultsNumberLabel.text = "We found \(spoonacularResults.totalResults?.description ?? "some") recipes for '\(searchBar.text ?? "your search")'"
                         self.animateRecipesRetrieved()
+                        self.appNameLabel.removeFromSuperview()
                         self.gridLayoutButton.isHidden = false
                     case .failure(let error):
                         print(error)

@@ -25,7 +25,7 @@ class TimerVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = self.timerDisplayCount.description
         label.textAlignment = .center
-        label.font = UIFont(name: "Arial", size: 30)
+        label.font = UIFont(name: "Arial", size: 45)
         label.adjustsFontSizeToFitWidth = true
         label.isHidden = true
         return label

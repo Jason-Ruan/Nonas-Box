@@ -36,8 +36,16 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
     // MARK: - UI Objects
     lazy var stepNumberLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .orange
+        switch self.traitCollection.userInterfaceStyle {
+            case .light:
+                label.textColor = .systemBlue
+            case .dark:
+                label.textColor = .orange
+            default:
+                label.textColor = .systemBlue
+        }
         label.textAlignment = .center
+        label.font = UIFont(name: "Courier-Bold", size: 60)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

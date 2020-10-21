@@ -189,3 +189,18 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     
 }
+
+
+// MARK: - TraitCollection Methods
+extension RecipeCollectionViewCell {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        switch traitCollection.userInterfaceStyle {
+            case .light:
+                layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+            case .dark:
+                layer.borderColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+            default:
+                layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        }
+    }
+}

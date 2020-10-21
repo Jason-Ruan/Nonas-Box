@@ -36,6 +36,7 @@ class TimerVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
         label.text = "hrs"
+        label.textColor = .systemBlue
         return label
     }()
     
@@ -44,6 +45,7 @@ class TimerVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
         label.text = "min"
+        label.textColor = .systemBlue
         return label
     }()
     
@@ -52,6 +54,7 @@ class TimerVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
         label.text = "s"
+        label.textColor = .systemBlue
         return label
     }()
     

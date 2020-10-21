@@ -167,7 +167,7 @@ class TimerVC: UIViewController {
             timeValues.append("\(numSec) sec")
         }
         
-        timerValueLabel.text = "Running timer for: \(timeValues.joined(separator: ", "))"
+        timerValueLabel.text = " Running timer for: \(timeValues.joined(separator: ", ")) "
     }
     
     

@@ -16,6 +16,7 @@ class TimerVC: UIViewController {
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.dataSource = self
         pickerView.delegate = self
+        pickerView.tintColor = .systemGray4
         return pickerView
     }()
     

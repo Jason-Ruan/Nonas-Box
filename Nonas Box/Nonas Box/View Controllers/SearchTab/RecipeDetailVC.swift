@@ -232,3 +232,18 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+
+// MARK: - TraitCollection Methods
+extension RecipeDetailVC {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        switch traitCollection.userInterfaceStyle {
+            case .light:
+                blurEffectView.effect = UIBlurEffect(style: .systemThinMaterialLight)
+            case .dark:
+                blurEffectView.effect = UIBlurEffect(style: .dark)
+            default:
+                return
+        }
+    }
+}

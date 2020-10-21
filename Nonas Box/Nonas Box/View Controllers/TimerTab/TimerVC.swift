@@ -92,7 +92,7 @@ class TimerVC: UIViewController {
         label.layer.cornerRadius = 15
         label.layer.borderWidth = 2
         label.layer.borderColor = UIColor.lightGray.cgColor
-        label.font = UIFont(name: "Arial", size: 12)
+        label.font = UIFont(name: "Arial", size: 16)
         label.textAlignment = .center
         label.isHidden = true
         label.adjustsFontSizeToFitWidth = true

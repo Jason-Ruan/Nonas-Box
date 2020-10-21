@@ -69,9 +69,15 @@ class RecipeDetailVC: UIViewController {
     }()
     
     lazy var blurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .systemThinMaterialLight)
         let blurEffectView = UIVisualEffectView()
-        blurEffectView.effect = blurEffect
+        switch traitCollection.userInterfaceStyle {
+            case .light:
+                blurEffectView.effect = UIBlurEffect(style: .systemThinMaterialLight)
+            case .dark:
+                blurEffectView.effect = UIBlurEffect(style: .dark)
+            default:
+                return blurEffectView
+        }
         return blurEffectView
     }()
     

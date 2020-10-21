@@ -69,13 +69,13 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         self.backgroundColor = .white
         layer.borderWidth = 2
-        layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         layer.cornerRadius = 25
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.2
         layer.shadowOffset = CGSize(width: 5, height: 3.0)
         layer.shadowRadius = 3
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 25).cgPath
+        adjustBorderColor()
         setUpCell()
     }
     

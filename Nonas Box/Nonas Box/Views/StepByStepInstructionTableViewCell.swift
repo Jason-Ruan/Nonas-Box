@@ -85,3 +85,18 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
     }
     
 }
+
+
+// MARK: - TraitCollection Methods
+extension StepByStepInstructionTableViewCell {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        switch traitCollection.userInterfaceStyle {
+            case .light:
+                stepNumberLabel.textColor = .systemBlue
+            case .dark:
+                stepNumberLabel.textColor = .orange
+            default:
+                stepNumberLabel.textColor = .systemBlue
+        }
+    }
+}

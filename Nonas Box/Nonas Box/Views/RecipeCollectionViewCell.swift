@@ -123,6 +123,14 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         
     }
     
+    private func adjustBorderColor() {
+        if self.traitCollection.userInterfaceStyle == .dark {
+            layer.borderColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        } else {
+            layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        }
+    }
+    
     private func configureCell(recipe: Recipe) {
         foodImage.image = nil
         self.spinner.startAnimating()

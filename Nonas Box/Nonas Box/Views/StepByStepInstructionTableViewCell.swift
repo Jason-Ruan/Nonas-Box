@@ -80,17 +80,7 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
     }
     
     private func configureCell(step: Step) {
-        if let stepNumber = step.number?.description {
-            let num = NSAttributedString(string: stepNumber, attributes:
-                [   NSAttributedString.Key.foregroundColor : UIColor.orange,
-                    NSAttributedString.Key.strokeColor : UIColor.white,
-                    NSAttributedString.Key.strokeWidth : -0.5,
-                    NSAttributedString.Key.font : UIFont(name: "Courier", size: 60)!
-                ])
-        
-            stepNumberLabel.attributedText = num
-        }
-        
+        stepNumberLabel.text = step.number?.description
         stepInstructionLabel.text = step.step?.description
     }
     

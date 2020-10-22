@@ -92,6 +92,7 @@ class TimerVC: UIViewController {
         label.layer.cornerRadius = 15
         label.layer.borderWidth = 2
         label.layer.borderColor = UIColor.lightGray.cgColor
+        label.numberOfLines = 0
         label.font = UIFont(name: "Arial", size: 16)
         label.textAlignment = .center
         label.isHidden = true
@@ -167,7 +168,7 @@ class TimerVC: UIViewController {
             timeValues.append("\(numSec) sec")
         }
         
-        timerValueLabel.text = " Running timer for: \(timeValues.joined(separator: ", ")) "
+        timerValueLabel.text = " Running timer for:\n\(timeValues.joined(separator: ", ")) "
     }
     
     

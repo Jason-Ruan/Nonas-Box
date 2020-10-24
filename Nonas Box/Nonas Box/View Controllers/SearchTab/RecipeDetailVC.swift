@@ -104,6 +104,13 @@ class RecipeDetailVC: UIViewController {
         //        recipeImageView.addGestureRecognizer(gestureRecognizer)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+        }
+    }
+    
+    
     //MARK: - Private Functions
     private func loadImage(recipe: Recipe) {
         SpoonacularAPIClient.manager.getImage(recipe: recipe) { (result) in

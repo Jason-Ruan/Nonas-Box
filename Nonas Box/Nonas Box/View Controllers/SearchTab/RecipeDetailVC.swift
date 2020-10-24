@@ -239,7 +239,9 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         }
         
         if let stepInstructionString = stepByStepInstructions?[indexPath.row].step {
-            let utterance = AVSpeechUtterance(string: "Step \(indexPath.row + 1), \(stepInstructionString)")
+            selectedCellIndexPath = indexPath
+            let utterance = AVSpeechUtterance(string: stepInstructionString)
+            utterance.rate = 0.45
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
             synthesizer.speak(utterance)
         }

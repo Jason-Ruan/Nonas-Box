@@ -24,6 +24,15 @@ class RecipeDetailVC: UIViewController {
     //MARK: - Properties
     private let synthesizer = AVSpeechSynthesizer()
     
+    private var selectedCellIndexPath: IndexPath? {
+        willSet {
+            guard let selectedCellIndexPath = selectedCellIndexPath else { return }
+            guard let cell = stepByStepInstructionsTableView.cellForRow(at: selectedCellIndexPath) as? StepByStepInstructionTableViewCell else { return }
+            guard let stepByStepInstructions = stepByStepInstructions else { return }
+            cell.stepInstructionLabel.attributedText = NSAttributedString(string: stepByStepInstructions[selectedCellIndexPath.row].step ?? "")
+        }
+    }
+    
     private var recipe: Recipe!
     private var stepByStepInstructions: [Step]? {
         didSet {

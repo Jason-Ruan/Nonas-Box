@@ -26,10 +26,12 @@ class RecipeDetailVC: UIViewController {
     
     private var selectedCellIndexPath: IndexPath? {
         willSet {
-            guard let selectedCellIndexPath = selectedCellIndexPath else { return }
-            guard let cell = stepByStepInstructionsTableView.cellForRow(at: selectedCellIndexPath) as? StepByStepInstructionTableViewCell else { return }
-            guard let stepByStepInstructions = stepByStepInstructions else { return }
-            cell.stepInstructionLabel.attributedText = NSAttributedString(string: stepByStepInstructions[selectedCellIndexPath.row].step ?? "")
+            // Purpose is to reset the color of text in previous selected cell being read by voice over.
+            guard let selectedCellIndexPath = selectedCellIndexPath,
+                  let cell = stepByStepInstructionsTableView.cellForRow(at: selectedCellIndexPath) as? StepByStepInstructionTableViewCell,
+                  let stepByStepInstructions = stepByStepInstructions else { return }
+            
+            cell.stepInstructionLabel.attributedText = NSAttributedString(string: stepByStepInstructions[selectedCellIndexPath.row].instruction ?? "")
         }
     }
     

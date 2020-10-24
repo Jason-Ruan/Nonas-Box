@@ -81,10 +81,12 @@ class RecipeDetailVC: UIViewController {
         return blurEffectView
     }()
     
+    
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = false
+        synthesizer.delegate = self
         addSubviews()
         loadRecipeDetails(recipe: self.recipe)
         configureAVAudioSession()
@@ -246,4 +248,28 @@ extension RecipeDetailVC {
                 return
         }
     }
+}
+
+
+// MARK: - AVSpeechSynthesizer Delegate Methods
+extension RecipeDetailVC: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        guard let indexPath = selectedCellIndexPath,
+              let selectedCell = stepByStepInstructionsTableView.cellForRow(at: indexPath) as? StepByStepInstructionTableViewCell else { return }
+        
+        let mutableAttributeString = NSMutableAttributedString(string: utterance.speechString)
+        mutableAttributeString.addAttribute(.foregroundColor,
+                                            value: traitCollection.userInterfaceStyle == .light ? UIColor.systemBlue : UIColor.systemOrange,
+                                            range: characterRange)
+        selectedCell.stepInstructionLabel.attributedText = mutableAttributeString
+        
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        guard let indexPath = selectedCellIndexPath,
+              let selectedCell = stepByStepInstructionsTableView.cellForRow(at: indexPath) as? StepByStepInstructionTableViewCell else { return }
+        
+        selectedCell.stepInstructionLabel.attributedText = NSAttributedString(string: utterance.speechString)
+    }
+    
 }

@@ -81,7 +81,7 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
     
     private func configureCell(step: Step) {
         stepNumberLabel.text = step.number?.description
-        stepInstructionLabel.text = step.step?.description
+        stepInstructionLabel.text = step.instruction?.description
     }
     
 }

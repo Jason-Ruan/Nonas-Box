@@ -240,7 +240,7 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
             synthesizer.stopSpeaking(at: .immediate)
         }
         
-        if let stepInstructionString = stepByStepInstructions?[indexPath.row].step {
+        if let stepInstructionString = stepByStepInstructions?[indexPath.row].instruction {
             selectedCellIndexPath = indexPath
             let utterance = AVSpeechUtterance(string: stepInstructionString)
             utterance.rate = 0.45

@@ -65,7 +65,7 @@ class InstructionCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureCell(forStep step: Step) {
-        guard let stepInstruction = step.step, let stepNumber = step.number else { return }
+        guard let stepInstruction = step.instruction, let stepNumber = step.number else { return }
         stepNumberLabel.text = "STEP \(stepNumber)"
         stepInstructionLabel.text = stepInstruction
     }

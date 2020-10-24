@@ -49,7 +49,7 @@ struct StepByStepInstructions: Codable {
 
 struct Step: Codable {
     let number: Int?
-    let step: String?
+    private let step: String?
     
     // To fix formatting for sentences that begin right after a period.
     // before: This sentence stops here.And this sentence starts here.

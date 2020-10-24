@@ -12,7 +12,7 @@ import UIKit
 class RecipeDetailVC: UIViewController {
     
     //MARK: - VC Initializer
-    init(recipe: Recipe) {
+    required init(recipe: Recipe) {
         super.init(nibName: nil, bundle: nil)
         self.recipe = recipe
     }

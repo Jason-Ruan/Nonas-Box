@@ -50,6 +50,22 @@ struct StepByStepInstructions: Codable {
 struct Step: Codable {
     let number: Int?
     let step: String?
+    
+    // To fix formatting for sentences that begin right after a period.
+    // before: This sentence stops here.And this sentence starts here.
+    // after: This sentence stops here. And this sentence starts here.
+    var instruction: String? {
+        guard let step = step else { return nil }
+        return step.components(separatedBy: ".")
+            .map {
+                if $0.first == " " {
+                    return String($0.dropFirst())
+                } else {
+                    return $0
+                }
+            }
+            .joined(separator: ". ")
+    }
 }
 
 

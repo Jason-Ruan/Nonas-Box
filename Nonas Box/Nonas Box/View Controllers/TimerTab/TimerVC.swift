@@ -112,11 +112,8 @@ class TimerVC: UIViewController {
         
         didSet {
             guard timerDisplayCount >= 0 else {
-                
                 tabBarItem.badgeValue = nil
                 overdueTimerCountLabel.text = "\(timerDisplayCount.description) \(timerDisplayCount == -1 ? "second" : "seconds") overdue"
-                
-                
                 return
             }
             adjustTimerLabelText(timerDisplayCount: timerDisplayCount)

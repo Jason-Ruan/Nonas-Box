@@ -178,11 +178,11 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     private func convertMinutesToString(time: Int) -> String {
-        guard time > 60 else { return "\(time.description) min" }
+        guard time > 60 else { return "\(time.description)m" }
         let hours = time / 60
         let minutes = time % 60
-        guard minutes > 0 else { return "\(hours) \(hours > 1 ? "hrs" : "hr")" }
-        return "\(hours) \(hours > 1 ? "hrs" : "hr") \(minutes) min"
+        guard minutes > 0 else { return "\(hours)h" }
+        return "\(hours)h \(minutes)m"
     }
     
     //    @objc private func favoriteButtonPressed() {}

@@ -93,6 +93,8 @@ class SearchRecipesOnlineVC: UIViewController {
         }
     }
     
+    private var currentSearchQuery: String?
+    
     //MARK: - Private Constraints
     
     private lazy var screenTitleLabelTopConstraint: NSLayoutConstraint = {
@@ -204,7 +206,9 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
-        guard let query = searchBar.text else { return }
+        guard let query = searchBar.text, query != currentSearchQuery else { return }
+        
+        currentSearchQuery = query
         
         showLoadingAnimation()
         

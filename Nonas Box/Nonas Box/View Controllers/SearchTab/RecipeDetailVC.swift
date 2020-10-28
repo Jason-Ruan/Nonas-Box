@@ -151,6 +151,20 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
+    
+    // MARK: - Obj-C Functions
+    @objc private func updateBookmarkStatus() {
+        if var bookmarkedRecipes = UserDefaults.standard.value(forKey: "bookmarkedRecipes") as? [String : String] {
+            bookmarkedRecipes[recipe.id.description] = recipe.title
+            UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
+        } else {
+            var bookmarkedRecipes = [String : String]()
+            bookmarkedRecipes[recipe.id.description] = recipe.title ?? "place_holder_title"
+            UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
+        }
+    }
+    
+    
 }
 
 

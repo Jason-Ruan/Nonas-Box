@@ -131,19 +131,19 @@ class TimerVC: UIViewController {
         let hrsRemaining = timerDisplayCount / 3600
         let minsRemaining = (timerDisplayCount - hrsRemaining * 3600) / 60
         let secsRemaining = timerDisplayCount - hrsRemaining * 3600 - minsRemaining * 60
-        timerLabel.text = "\(hrsRemaining) \(hrsRemaining != 1 ? "hrs" : "hr") : \(minsRemaining) min : \(secsRemaining) sec"
+        timerLabel.text = "\(hrsRemaining)h : \(minsRemaining)m : \(secsRemaining)s"
     }
     
     private func adjustTabBarBadge(timerDisplayCount: Int) {
         if timerDisplayCount >= 3600 {
             tabBarItem.badgeColor = .systemGreen
-            tabBarItem.badgeValue = "\(timerDisplayCount / 3600)h"
+            tabBarItem.badgeValue = "\(timerDisplayCount / 3600) h"
         } else if timerDisplayCount >= 60 {
             tabBarItem.badgeColor = .systemBlue
-            tabBarItem.badgeValue = "\(timerDisplayCount / 60)m"
+            tabBarItem.badgeValue = "\(timerDisplayCount / 60) m"
         } else if timerDisplayCount < 60 {
             tabBarItem.badgeColor = .systemRed
-            tabBarItem.badgeValue = "\(timerDisplayCount)s"
+            tabBarItem.badgeValue = "\(timerDisplayCount) s"
         }
     }
     
@@ -155,13 +155,13 @@ class TimerVC: UIViewController {
         let numSec = timePickerView.selectedRow(inComponent: 2)
         
         if numHours > 0 {
-            timeValues.append("\(numHours) hr")
+            timeValues.append("\(numHours)h")
         }
         if numMin > 0 {
-            timeValues.append("\(numMin) min")
+            timeValues.append("\(numMin)m")
         }
         if numSec > 0 {
-            timeValues.append("\(numSec) sec")
+            timeValues.append("\(numSec)s")
         }
         
         timerValueLabel.text = " Running timer for:\n\(timeValues.joined(separator: ", ")) "

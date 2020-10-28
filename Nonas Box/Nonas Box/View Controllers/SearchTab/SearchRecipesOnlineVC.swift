@@ -126,6 +126,7 @@ class SearchRecipesOnlineVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        recipeCollectionView.reloadData()
     }
     
     //MARK: - Private Functions

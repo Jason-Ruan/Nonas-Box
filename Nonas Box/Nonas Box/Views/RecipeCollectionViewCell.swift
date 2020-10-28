@@ -37,14 +37,14 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    //    lazy var favoriteButton: UIButton = {
-    //       let button = UIButton()
-    //        button.imageView?.contentMode = .scaleAspectFill
-    //        button.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-    //        button.addTarget(self, action: #selector(self.favoriteButtonPressed), for: .touchUpInside)
-    //        button.translatesAutoresizingMaskIntoConstraints = false
-    //        return button
-    //    }()
+    lazy var bookmarkedImageView: UIImageView = {
+        let iv = UIImageView(image: UIImage(systemName: "bookmark.fill"))
+        iv.isHidden = true
+        iv.tintColor = .red
+        iv.contentMode = .scaleAspectFill
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
     
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
@@ -59,6 +59,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         didSet {
             guard let recipe = self.recipe else { return }
             configureCell(recipe: recipe)
+            bookmarkedImageView.isHidden = checkIfRecipeIsBookmarked(id: recipe.id)
         }
     }
     
@@ -107,18 +108,18 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             foodInfoLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
         
-        //        contentView.addSubview(favoriteButton)
-        //        NSLayoutConstraint.activate([
-        //            favoriteButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 20),
-        //            favoriteButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-        //            favoriteButton.heightAnchor.constraint(equalToConstant: 30),
-        //            favoriteButton.widthAnchor.constraint(equalToConstant: 30)
-        //        ])
-        
         foodImage.addSubview(spinner)
         NSLayoutConstraint.activate([
             spinner.centerXAnchor.constraint(equalTo: foodImage.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: foodImage.centerYAnchor)
+        ])
+        
+        
+        contentView.addSubview(bookmarkedImageView)
+        NSLayoutConstraint.activate([
+            bookmarkedImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            bookmarkedImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -(contentView.safeAreaLayoutGuide.layoutFrame.width / 7)),
+            bookmarkedImageView.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15)
         ])
         
     }
@@ -171,7 +172,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
                         self.foodImage.image = image
                     } else {
                         self.loadImage(recipe: self.recipe)
-                }
+                    }
             }
             self.spinner.stopAnimating()
         }
@@ -185,8 +186,14 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         return "\(hours)h \(minutes)m"
     }
     
-    //    @objc private func favoriteButtonPressed() {}
-    
+    private func checkIfRecipeIsBookmarked(id: Int) -> Bool {
+        // For bookmarkedImageView.isHidden
+        if let bookmarkedRecipes = UserDefaults.standard.object(forKey: "bookmarkedRecipes") as? [String : String] {
+            return bookmarkedRecipes[id.description] == nil
+        } else {
+            return true
+        }
+    }
     
 }
 

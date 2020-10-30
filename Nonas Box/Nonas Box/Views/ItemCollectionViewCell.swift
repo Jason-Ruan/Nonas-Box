@@ -22,8 +22,6 @@ class ItemCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.backgroundColor = .black
-        label.textColor = .white
         label.adjustsFontSizeToFitWidth = true
         return label
     }()

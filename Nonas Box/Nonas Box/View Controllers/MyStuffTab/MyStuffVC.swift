@@ -62,7 +62,7 @@ extension MyStuffVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height / CGFloat(MyStuffButtonOptions.allCases.count) - 20)
+        return CGSize(width: collectionView.bounds.width * 0.9, height: collectionView.bounds.height / 6)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -11,9 +11,9 @@ import UIKit
 public enum MyStuffButtonOptions: String, CaseIterable {
     case checkInventory = "Check Inventory"
     case addToInventory = "Add to Inventory"
-    case refillInventory = "Refill Inventory"
-    case sendMessage = "Send Message"
-    case connectWithOthers = "Connect with Others"
+//    case refillInventory = "Refill Inventory"
+//    case sendMessage = "Send Message"
+//    case connectWithOthers = "Connect with Others"
 }
 
 class MyStuffVC: UIViewController {

@@ -293,7 +293,7 @@ extension RecipeDetailVC: AVSpeechSynthesizerDelegate {
         
         let mutableAttributeString = NSMutableAttributedString(string: utterance.speechString)
         mutableAttributeString.addAttribute(.foregroundColor,
-                                            value: traitCollection.userInterfaceStyle == .light ? UIColor.systemBlue : UIColor.systemOrange,
+                                            value: selectedCell.stepNumberLabel.textColor ?? UIColor.yellow,
                                             range: characterRange)
         selectedCell.stepInstructionLabel.attributedText = mutableAttributeString
         

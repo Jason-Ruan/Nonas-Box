@@ -33,9 +33,19 @@ class CookVC: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        addSubviews()
     }
     
-    //MARK: - Methods
+    //MARK: - Private Methods
+    private func addSubviews() {
+        view.addSubview(recipesInProgressCollectionView)
+        NSLayoutConstraint.activate([
+            recipesInProgressCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            recipesInProgressCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            recipesInProgressCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            recipesInProgressCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
     
 }
 

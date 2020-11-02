@@ -24,7 +24,11 @@ class CookVC: UIViewController {
     
     
     //MARK: - Properties
-    var recipesInProgress: [RecipeDetails] = []
+    var recipesInProgress: [RecipeDetails] = [] {
+        didSet {
+            recipesInProgressCollectionView.reloadData()
+        }
+    }
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {

@@ -17,7 +17,7 @@ class SearchRecipesOnlineVC: UIViewController {
         label.font = UIFont(name: "Chalkduster", size: 60)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Nona's\n\u{1F5C3} Box \u{1F371}"
+        label.text = "Nona's\nBox"
         return label
     }()
     

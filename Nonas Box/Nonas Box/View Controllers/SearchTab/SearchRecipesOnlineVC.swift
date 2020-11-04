@@ -225,7 +225,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                             return
                         }
                         self.recipes = recipes
-                        self.resultsNumberLabel.text = "We found \(spoonacularResults.totalResults?.description ?? "some") recipes for '\(searchBar.text ?? "your search")'"
+                        self.resultsNumberLabel.text = "Here are some recipes we found for '\(searchBar.text ?? "")'"
                         self.animateRecipesRetrieved()
                         self.appNameLabel.removeFromSuperview()
                         self.gridLayoutButton.isHidden = false

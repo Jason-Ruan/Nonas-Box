@@ -93,7 +93,7 @@ class SearchRecipesOnlineVC: UIViewController {
         }
     }
     
-    private var currentSearchQuery: String?
+//    private var currentSearchQuery: String?
     
     //MARK: - Private Constraints
     
@@ -207,9 +207,9 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
-        guard let query = searchBar.text, query != currentSearchQuery else { return }
+        guard let query = searchBar.text else { return }
         
-        currentSearchQuery = query
+//        currentSearchQuery = query
         
         showLoadingAnimation()
         

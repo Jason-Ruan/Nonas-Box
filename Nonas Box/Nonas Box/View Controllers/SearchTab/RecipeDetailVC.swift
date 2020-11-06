@@ -73,6 +73,7 @@ class RecipeDetailVC: UIViewController {
         tv.backgroundColor = .clear
         tv.dataSource = self
         tv.delegate = self
+        tv.bounces = false
         tv.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: "stepByStepInstructionCell")
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "ingredientCell")
         tv.translatesAutoresizingMaskIntoConstraints = false

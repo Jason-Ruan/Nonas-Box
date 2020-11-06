@@ -93,7 +93,8 @@ class SearchRecipesOnlineVC: UIViewController {
         }
     }
     
-//    private var currentSearchQuery: String?
+    private var searchedQueryResults: [String : [Recipe] ] = [:]
+    
     
     //MARK: - Private Constraints
     

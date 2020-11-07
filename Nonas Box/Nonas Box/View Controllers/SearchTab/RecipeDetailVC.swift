@@ -280,6 +280,23 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         return 100
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (0...20).contains(scrollView.contentOffset.y) {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                self.recipeImageViewCollapsedHeightAnchor.isActive = false
+                self.recipeImageViewExpandedHeightAnchor.isActive = true
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            
+        } else {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                self.recipeImageViewExpandedHeightAnchor.isActive = false
+                self.recipeImageViewCollapsedHeightAnchor.isActive = true
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
+    
 }
 
 

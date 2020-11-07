@@ -108,6 +108,7 @@ class RecipeDetailVC: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
+        title = recipe.title
         self.navigationController?.navigationBar.isHidden = false
         synthesizer.delegate = self
         addSubviews()

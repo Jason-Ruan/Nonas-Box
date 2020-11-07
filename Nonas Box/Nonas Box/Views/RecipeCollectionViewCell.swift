@@ -43,6 +43,12 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         iv.tintColor = .red
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.yellow.cgColor,  UIColor.red.cgColor]
+        gradientLayer.frame = iv.bounds
+        iv.layer.insertSublayer(gradientLayer, at: 0)
+        
         return iv
     }()
     

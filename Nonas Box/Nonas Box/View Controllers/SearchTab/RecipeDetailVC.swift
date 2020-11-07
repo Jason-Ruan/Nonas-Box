@@ -194,7 +194,7 @@ extension RecipeDetailVC {
             recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             recipeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            recipeImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 3)
+            recipeImageViewExpandedHeightAnchor
         ])
         
         view.addSubview(stepByStepInstructionsTableView)

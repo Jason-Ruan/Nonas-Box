@@ -282,16 +282,18 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (0...20).contains(scrollView.contentOffset.y) {
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 self.recipeImageViewCollapsedHeightAnchor.isActive = false
                 self.recipeImageViewExpandedHeightAnchor.isActive = true
+                self.recipeImageView.contentMode = .scaleAspectFill
                 self.view.layoutIfNeeded()
             }, completion: nil)
             
         } else {
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 self.recipeImageViewExpandedHeightAnchor.isActive = false
                 self.recipeImageViewCollapsedHeightAnchor.isActive = true
+                self.recipeImageView.contentMode = .scaleAspectFit
                 self.view.layoutIfNeeded()
             }, completion: nil)
         }

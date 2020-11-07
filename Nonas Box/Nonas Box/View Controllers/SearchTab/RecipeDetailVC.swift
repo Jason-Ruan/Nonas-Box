@@ -49,6 +49,17 @@ class RecipeDetailVC: UIViewController {
     }
     
     
+    // MARK: - Private Constraint Variables
+    
+    private lazy var recipeImageViewExpandedHeightAnchor: NSLayoutConstraint = {
+        self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4)
+    }()
+    
+    private lazy var recipeImageViewCollapsedHeightAnchor: NSLayoutConstraint = {
+        self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2)
+    }()
+    
+    
     // MARK: - UI Objects
     lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView(frame: view.bounds)

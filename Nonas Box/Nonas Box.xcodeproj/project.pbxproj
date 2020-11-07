@@ -230,15 +230,10 @@
 		0899D64B2385F5900059D9CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0899D62D2385F40C0059D9CE /* Main.storyboard */,
-				08E9758C24B95E7A00BF0DC3 /* RecipeCollectionViewCell.swift */,
-				0878071924D490F800B9F5B2 /* MyStuffOptionCell.swift */,
-				08C4F2B5252546F9008E9964 /* ItemCollectionViewCell.swift */,
-				08C4F2D4252E8F8F008E9964 /* TimerButton.swift */,
-				08C4F329253161FA008E9964 /* CookingCollectionViewCell.swift */,
-				08C4F32D253167CA008E9964 /* InstructionCollectionViewCell.swift */,
-				081C0F79253CF4C50032F8FC /* StepByStepInstructionTableViewCell.swift */,
-				083B05912550FB4B00ABC48D /* MenuButton.swift */,
+				083B059C2557210D00ABC48D /* Storyboards */,
+				083B0595255720BF00ABC48D /* CollectionViewCells */,
+				083B0598255720CF00ABC48D /* TableViewCells */,
+				083B059B255720DD00ABC48D /* Buttons */,
 			);
 			path = Views;
 			sourceTree = "<group>";

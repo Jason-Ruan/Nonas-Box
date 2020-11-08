@@ -41,6 +41,7 @@ struct RecipeDetails: Codable {
     let summary: String?
     let extendedIngredients: [Ingredient]
     let analyzedInstructions: [StepByStepInstructions]?
+    let sourceUrl: URL?
 }
 
 struct StepByStepInstructions: Codable {

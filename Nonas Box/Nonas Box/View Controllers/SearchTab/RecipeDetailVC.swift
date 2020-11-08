@@ -37,6 +37,8 @@ class RecipeDetailVC: UIViewController {
     }
     
     private var recipe: Recipe!
+    private var recipeDetails: RecipeDetails?
+    
     private var stepByStepInstructions: [Step]? {
         didSet {
             stepByStepInstructionsTableView.reloadData()

@@ -94,10 +94,9 @@ class RecipeDetailVC: UIViewController {
        let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label
-            .adjustsFontSizeToFitWidth = true
+        label.adjustsFontSizeToFitWidth = true
         
-        let recipeTitle = NSAttributedString(string: "\(recipe.title ?? "placeholder title")\n", attributes: [.font : UIFont.systemFont(ofSize: 25, weight: .bold)])
+        let recipeTitle = NSAttributedString(string: "\(recipe.title ?? "placeholder title")\n", attributes: [.font : UIFont.systemFont(ofSize: 21, weight: .bold)])
         let recipeServings = NSAttributedString(string: "\nServings: \(recipe.servings ?? 1)", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .light)])
         let recipeTime = NSAttributedString(string: "\nTime: \(recipe.readyInMinutes ?? 1) minutes", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .medium)])
 

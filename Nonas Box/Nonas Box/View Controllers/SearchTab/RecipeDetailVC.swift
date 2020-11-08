@@ -218,16 +218,37 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
+    private func checkIfRecipeIsBookmarked(id: Int) -> Bool {
+        // For bookmarkedImageView.isHidden
+        if let bookmarkedRecipes = UserDefaults.standard.object(forKey: "bookmarkedRecipes") as? [String : String] {
+            return bookmarkedRecipes[id.description] != nil
+        } else {
+            return false
+        }
+    }
+    
     
     // MARK: - Obj-C Functions
     @objc private func updateBookmarkStatus() {
+        guard let bookmarkButton = buttonStackView.arrangedSubviews.first as? UIButton else { return }
         if var bookmarkedRecipes = UserDefaults.standard.value(forKey: "bookmarkedRecipes") as? [String : String] {
-            bookmarkedRecipes[recipe.id.description] = recipe.title
-            UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
+            // Adds recipe to bookmarkedRecipes
+            if bookmarkedRecipes[recipe.id.description] == nil {
+                bookmarkedRecipes[recipe.id.description] = recipe.title
+                UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
+                bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            // Removes recipe from bookmarkedRecipes
+            } else {
+                bookmarkedRecipes.removeValue(forKey: recipe.id.description)
+                UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
+                bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+            }
         } else {
+            // Initializes bookmarkedRecipes and adds recipe to it
             var bookmarkedRecipes = [String : String]()
             bookmarkedRecipes[recipe.id.description] = recipe.title ?? "place_holder_title"
             UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
+            bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         }
     }
     

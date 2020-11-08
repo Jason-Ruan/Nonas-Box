@@ -273,14 +273,29 @@ extension RecipeDetailVC {
         view.addSubview(recipeImageView)
         NSLayoutConstraint.activate([
             recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             recipeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            recipeImageViewExpandedHeightAnchor
+            recipeImageViewExpandedHeightAnchor,
+            recipeImageViewExpandedLeadingAnchor
+        ])
+        
+        view.addSubview(recipeSummaryInfo)
+        NSLayoutConstraint.activate([
+            recipeSummaryInfo.topAnchor.constraint(equalTo: recipeImageView.topAnchor, constant: 5),
+            recipeSummaryInfo.bottomAnchor.constraint(equalTo: recipeImageView.bottomAnchor),
+            recipeSummaryInfo.trailingAnchor.constraint(equalTo: recipeImageView.leadingAnchor),
+            recipeSummaryInfo.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+        ])
+        
+        view.addSubview(buttonStackView)
+        NSLayoutConstraint.activate([
+            buttonStackView.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 5),
+            buttonStackView.centerXAnchor.constraint(equalTo: recipeImageView.centerXAnchor),
+            buttonStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.05)
         ])
         
         view.addSubview(stepByStepInstructionsTableView)
         NSLayoutConstraint.activate([
-            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 20),
+            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 20),
             stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
@@ -365,16 +380,18 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         if (0...20).contains(scrollView.contentOffset.y) {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 self.recipeImageViewCollapsedHeightAnchor.isActive = false
+                self.recipeImageViewCollapsedLeadingAnchor.isActive = false
                 self.recipeImageViewExpandedHeightAnchor.isActive = true
-                self.recipeImageView.contentMode = .scaleAspectFill
+                self.recipeImageViewExpandedLeadingAnchor.isActive = true
                 self.view.layoutIfNeeded()
             }, completion: nil)
             
         } else {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 self.recipeImageViewExpandedHeightAnchor.isActive = false
+                self.recipeImageViewExpandedLeadingAnchor.isActive = false
                 self.recipeImageViewCollapsedHeightAnchor.isActive = true
-                self.recipeImageView.contentMode = .scaleAspectFit
+                self.recipeImageViewCollapsedLeadingAnchor.isActive = true
                 self.view.layoutIfNeeded()
             }, completion: nil)
         }

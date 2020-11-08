@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import SafariServices
 import UIKit
 
 class RecipeDetailVC: UIViewController {

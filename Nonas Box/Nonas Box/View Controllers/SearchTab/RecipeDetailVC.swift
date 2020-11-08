@@ -90,6 +90,49 @@ class RecipeDetailVC: UIViewController {
         return iv
     }()
     
+    lazy var recipeSummaryInfo: UILabel = {
+       let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label
+            .adjustsFontSizeToFitWidth = true
+        
+        let recipeTitle = NSAttributedString(string: "\(recipe.title ?? "placeholder title")\n", attributes: [.font : UIFont.systemFont(ofSize: 25, weight: .bold)])
+        let recipeServings = NSAttributedString(string: "\nServings: \(recipe.servings ?? 1)", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .light)])
+        let recipeTime = NSAttributedString(string: "\nTime: \(recipe.readyInMinutes ?? 1) minutes", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .medium)])
+
+        let summaryAttributedString = NSMutableAttributedString()
+        summaryAttributedString.append(recipeTitle)
+        summaryAttributedString.append(recipeServings)
+        summaryAttributedString.append(recipeTime)
+        
+        label.attributedText = summaryAttributedString
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var buttonStackView: UIStackView = {
+        let bookmarkButton = UIButton(type: .system)
+        bookmarkButton.setImage(checkIfRecipeIsBookmarked(id: recipe.id) ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
+        bookmarkButton.tintColor = .systemRed
+        bookmarkButton.setTitle("Bookmark", for: .normal)
+        bookmarkButton.addTarget(self, action: #selector(updateBookmarkStatus), for: .touchUpInside)
+        
+        let webLinkButton = UIButton(type: .system)
+        webLinkButton.setImage(UIImage(systemName: "safari.fill"), for: .normal)
+        webLinkButton.setTitle("Source", for: .normal)
+        webLinkButton.addTarget(self, action: #selector(openSourceLink), for: .touchUpInside)
+        
+        let sv = UIStackView(arrangedSubviews: [bookmarkButton, webLinkButton])
+        sv.axis = .horizontal
+        sv.alignment = .fill
+        sv.distribution = .fillEqually
+        sv.spacing = 25
+        
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    
     lazy var stepByStepInstructionsTableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .grouped)
         tv.backgroundColor = .clear

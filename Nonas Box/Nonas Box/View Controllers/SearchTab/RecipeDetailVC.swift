@@ -252,6 +252,12 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
+    @objc private func openSourceLink() {
+        guard let recipeSourceURL = recipeDetails?.sourceUrl else { return }
+        let safariViewController = SFSafariViewController(url: recipeSourceURL)
+        present(safariViewController, animated: true)
+    }
+    
     
 }
 

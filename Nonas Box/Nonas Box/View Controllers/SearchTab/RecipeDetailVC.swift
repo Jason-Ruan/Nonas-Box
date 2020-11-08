@@ -58,8 +58,16 @@ class RecipeDetailVC: UIViewController {
         self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4)
     }()
     
+    private lazy var recipeImageViewExpandedLeadingAnchor: NSLayoutConstraint = {
+        self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+    }()
+    
     private lazy var recipeImageViewCollapsedHeightAnchor: NSLayoutConstraint = {
         self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2)
+    }()
+    
+    private lazy var recipeImageViewCollapsedLeadingAnchor: NSLayoutConstraint = {
+        self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
     }()
     
     

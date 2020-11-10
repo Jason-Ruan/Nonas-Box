@@ -203,6 +203,7 @@ class RecipeDetailVC: UIViewController {
                     self.stepByStepInstructions = recipeDetails.analyzedInstructions?.reduce(into: [], { (totalSteps, step) in
                         totalSteps += step.steps ?? []
                     })
+                    self.recipeDetails = recipeDetails
                     self.ingredients = recipeDetails.extendedIngredients
             }
         }

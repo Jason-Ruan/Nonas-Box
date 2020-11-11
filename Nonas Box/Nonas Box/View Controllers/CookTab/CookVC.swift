@@ -18,6 +18,8 @@ class CookVC: UIViewController {
                                           height: view.safeAreaLayoutGuide.layoutFrame.height / CGFloat(recipesInProgress.count))
         let cv = UICollectionView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), collectionViewLayout: layout)
         cv.backgroundColor = .clear
+        cv.dataSource = self
+        cv.delegate = self
         cv.register(CookingCollectionViewCell.self, forCellWithReuseIdentifier: "cookingCell")
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv

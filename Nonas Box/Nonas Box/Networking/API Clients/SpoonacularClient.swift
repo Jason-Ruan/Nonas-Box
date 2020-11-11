@@ -99,6 +99,34 @@ class SpoonacularAPIClient {
         }
     }
     
+    func getBookmarkedRecipes(completionHandler: @escaping (Result<[RecipeDetails], AppError>) -> () ) {
+        if let bookmarkedRecipeIDsString = (UserDefaults.standard.dictionary(forKey: "bookmarkedRecipes") as? [String : String])?.keys.joined(separator: ",") {
+            
+            guard let url = URL(string: "https://api.spoonacular.com/recipes/informationBulk?ids=\(bookmarkedRecipeIDsString)&apiKey=\(Secrets.spoonacular_api_key)") else {
+                completionHandler(.failure(.badURL))
+                return
+            }
+            
+            NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
+                switch result {
+                    case .failure(let error):
+                        completionHandler(.failure(error))
+                    case .success(let data):
+                        do {
+                            let detailedRecipes = try JSONDecoder().decode([RecipeDetails].self, from: data)
+                            completionHandler(.success(detailedRecipes))
+                        } catch {
+                            completionHandler(.failure(.couldNotParseJSON))
+                        }
+                }
+            }
+            
+        } else {
+            print("No bookmarked recipes found")
+            completionHandler(.failure(.other))
+        }
+    }
+    
     private init() {}
     static let manager = SpoonacularAPIClient()
     

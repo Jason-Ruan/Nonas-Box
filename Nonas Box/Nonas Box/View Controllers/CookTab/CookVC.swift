@@ -37,6 +37,7 @@ class CookVC: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         addSubviews()
+        loadBookmarkedRecipes()
     }
     
     //MARK: - Private Methods
@@ -48,6 +49,17 @@ class CookVC: UIViewController {
             recipesInProgressCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             recipesInProgressCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func loadBookmarkedRecipes() {
+        SpoonacularAPIClient.manager.getBookmarkedRecipes { (result) in
+            switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let detailedRecipes):
+                    self.recipesInProgress = detailedRecipes
+            }
+        }
     }
     
 }

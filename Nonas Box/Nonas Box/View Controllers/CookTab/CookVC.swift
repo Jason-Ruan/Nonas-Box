@@ -14,9 +14,7 @@ class CookVC: UIViewController {
     lazy var recipesInProgressCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.estimatedItemSize = CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width * 0.9,
-                                          height: view.safeAreaLayoutGuide.layoutFrame.height / CGFloat(recipesInProgress.count))
-        let cv = UICollectionView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), collectionViewLayout: layout)
+        let cv = UICollectionView(frame: CGRect(x: 0, y: 0, width: 250, height: 250), collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.dataSource = self
         cv.delegate = self

@@ -90,7 +90,7 @@ class RecipeDetailVC: UIViewController {
         return iv
     }()
     
-    lazy var recipeSummaryInfoLabel: UILabel = {
+    lazy var recipeBlurbInfoLabel: UILabel = {
        let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -278,12 +278,12 @@ extension RecipeDetailVC {
             recipeImageViewExpandedLeadingAnchor
         ])
         
-        view.addSubview(recipeSummaryInfoLabel)
+        view.addSubview(recipeBlurbInfoLabel)
         NSLayoutConstraint.activate([
-            recipeSummaryInfoLabel.topAnchor.constraint(equalTo: recipeImageView.topAnchor, constant: 5),
-            recipeSummaryInfoLabel.bottomAnchor.constraint(equalTo: recipeImageView.bottomAnchor),
-            recipeSummaryInfoLabel.trailingAnchor.constraint(equalTo: recipeImageView.leadingAnchor),
-            recipeSummaryInfoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+            recipeBlurbInfoLabel.topAnchor.constraint(equalTo: recipeImageView.topAnchor, constant: 5),
+            recipeBlurbInfoLabel.bottomAnchor.constraint(equalTo: recipeImageView.bottomAnchor),
+            recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: recipeImageView.leadingAnchor),
+            recipeBlurbInfoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
         
         view.addSubview(buttonStackView)

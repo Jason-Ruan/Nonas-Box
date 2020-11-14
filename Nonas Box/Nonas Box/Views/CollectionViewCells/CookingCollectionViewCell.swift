@@ -14,6 +14,7 @@ class CookingCollectionViewCell: UICollectionViewCell {
     lazy var recipeImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()

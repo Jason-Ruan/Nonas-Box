@@ -47,9 +47,14 @@ class CookingCollectionViewCell: UICollectionViewCell {
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.layer.cornerRadius = 5
-        layer.shadowRadius = 10
-        layer.shadowOffset = CGSize(width: 10, height: 10)
+        clipsToBounds = true
+        layer.cornerRadius = 5
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.shadowRadius = 5
+        layer.shadowColor = UIColor.darkGray.cgColor
+        layer.shadowOpacity = 1
+        layer.shadowOffset = CGSize(width: 5, height: 5)
         addSubviews()
         constrainSubviews()
     }

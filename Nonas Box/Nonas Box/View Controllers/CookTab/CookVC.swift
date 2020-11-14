@@ -46,8 +46,8 @@ class CookVC: UIViewController {
         view.addSubview(recipesInProgressCollectionView)
         NSLayoutConstraint.activate([
             recipesInProgressCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            recipesInProgressCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            recipesInProgressCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            recipesInProgressCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            recipesInProgressCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             recipesInProgressCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }

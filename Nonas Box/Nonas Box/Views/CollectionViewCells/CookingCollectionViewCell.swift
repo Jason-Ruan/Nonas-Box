@@ -68,26 +68,28 @@ class CookingCollectionViewCell: UICollectionViewCell {
     private func addSubviews() {
         contentView.addSubview(recipeImageView)
         contentView.addSubview(recipeNameLabel)
-        contentView.addSubview(instructionCollectionView)
+        contentView.addSubview(instructionTableView)
     }
     
     private func constrainSubviews() {
         NSLayoutConstraint.activate([
-            recipeImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            recipeImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
-            recipeImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor)
+            recipeImageView.topAnchor.constraint(equalTo: topAnchor),
+            recipeImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            recipeImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
+            recipeImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            recipeNameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            recipeNameLabel.topAnchor.constraint(equalTo: topAnchor),
             recipeNameLabel.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor),
-            recipeNameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor)
+            recipeNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
         
         NSLayoutConstraint.activate([
-            recipeImageView.topAnchor.constraint(equalTo: recipeNameLabel.bottomAnchor),
-            recipeImageView.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor),
-            recipeImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor)
+            instructionTableView.topAnchor.constraint(equalTo: recipeNameLabel.bottomAnchor),
+            instructionTableView.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor),
+            instructionTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            instructionTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
     }

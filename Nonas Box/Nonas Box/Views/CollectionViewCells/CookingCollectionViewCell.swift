@@ -22,6 +22,9 @@ class CookingCollectionViewCell: UICollectionViewCell {
     lazy var recipeNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.numberOfLines = 0
+        label.layer.borderWidth = 2
+        label.layer.borderColor = UIColor.lightGray.cgColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

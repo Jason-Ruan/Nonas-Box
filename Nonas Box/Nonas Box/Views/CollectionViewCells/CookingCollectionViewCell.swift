@@ -78,13 +78,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
             recipeNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
         
-        NSLayoutConstraint.activate([
-            instructionTableView.topAnchor.constraint(equalTo: recipeNameLabel.bottomAnchor),
-            instructionTableView.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor),
-            instructionTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            instructionTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-        
     }
     
     private func configureCell(forRecipe recipe: RecipeDetails) {

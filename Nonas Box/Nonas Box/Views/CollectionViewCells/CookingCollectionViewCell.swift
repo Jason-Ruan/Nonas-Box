@@ -29,14 +29,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var instructionCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: contentView.frame, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
-    }()
-    
     
     // MARK: - Properties
     var recipe: RecipeDetails! {
@@ -44,7 +36,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
             configureCell(forRecipe: recipe)
         }
     }
-    
     
     
     // MARK: - Initializers
@@ -71,7 +62,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
     private func addSubviews() {
         contentView.addSubview(recipeImageView)
         contentView.addSubview(recipeNameLabel)
-        contentView.addSubview(instructionTableView)
     }
     
     private func constrainSubviews() {
@@ -108,24 +98,7 @@ class CookingCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
-        
-        self.recipeNameLabel.text = recipe.title
     }
     
 }
 
-
-// MARK: - CollectionView Methods
-extension CookingCollectionViewCell: UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return recipe.analyzedInstructions?.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "instructionCell", for: indexPath) as? InstructionCollectionViewCell else { return UICollectionViewCell() }
-        
-        return cell
-    }
-    
-    
-}

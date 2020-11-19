@@ -39,9 +39,8 @@ class ItemCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.layer.borderWidth = 5
-        contentView.layer.borderColor = UIColor.systemYellow.cgColor
-        contentView.backgroundColor = .white
+        contentView.layer.borderWidth = 2
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
         
         constrainItemImageView()
         constrainItemNameLabel()

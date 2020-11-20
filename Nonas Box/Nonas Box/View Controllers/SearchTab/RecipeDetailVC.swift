@@ -377,7 +377,7 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (0...20).contains(scrollView.contentOffset.y) {
+        if scrollView.contentOffset.y == 0 {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 self.recipeImageViewCollapsedHeightAnchor.isActive = false
                 self.recipeImageViewCollapsedLeadingAnchor.isActive = false

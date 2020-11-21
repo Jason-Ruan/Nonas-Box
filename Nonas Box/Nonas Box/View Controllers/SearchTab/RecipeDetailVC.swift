@@ -13,9 +13,16 @@ import UIKit
 class RecipeDetailVC: UIViewController {
     
     //MARK: - VC Initializer
-    required init(recipe: Recipe) {
+    init(recipeID: Int) {
         super.init(nibName: nil, bundle: nil)
-        self.recipe = recipe
+        loadRecipeDetails(recipeID: recipeID)
+    }
+    
+    init(recipeDetails: RecipeDetails) {
+        super.init(nibName: nil, bundle: nil)
+        self.recipeDetails = recipeDetails
+        addSubviews()
+        loadImage(recipeDetails: recipeDetails)
     }
     
     required init?(coder: NSCoder) {

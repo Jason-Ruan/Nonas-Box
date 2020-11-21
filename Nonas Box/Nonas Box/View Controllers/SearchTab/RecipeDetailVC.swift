@@ -37,44 +37,28 @@ class RecipeDetailVC: UIViewController {
             // Purpose is to reset the color of text in previous selected cell being read by voice over.
             guard let selectedCellIndexPath = selectedCellIndexPath,
                   let cell = stepByStepInstructionsTableView.cellForRow(at: selectedCellIndexPath) as? StepByStepInstructionTableViewCell,
-                  let stepByStepInstructions = stepByStepInstructions else { return }
-            
-            cell.stepInstructionLabel.attributedText = NSAttributedString(string: stepByStepInstructions[selectedCellIndexPath.row].instruction ?? "")
+                  let steps = recipeDetails?.analyzedInstructions?[selectedCellIndexPath.section - 1].steps else {
+                return
+                
+            }
+        
+            cell.stepInstructionLabel.attributedText = NSAttributedString(string: steps[selectedCellIndexPath.row].instruction ?? "")
         }
     }
     
-    private var recipe: Recipe!
     private var recipeDetails: RecipeDetails?
-    
-    private var stepByStepInstructions: [Step]? {
-        didSet {
-            stepByStepInstructionsTableView.reloadData()
-        }
-    }
-    
-    private var ingredients: [Ingredient]? {
-        didSet {
-            stepByStepInstructionsTableView.reloadData()
-        }
-    }
     
     
     // MARK: - Private Constraint Variables
     
-    private lazy var recipeImageViewExpandedHeightAnchor: NSLayoutConstraint = {
-        self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4)
+    private lazy var recipeImageViewExpandedConstraints: [NSLayoutConstraint] = {
+        [self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
+        self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)]
     }()
     
-    private lazy var recipeImageViewExpandedLeadingAnchor: NSLayoutConstraint = {
-        self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
-    }()
-    
-    private lazy var recipeImageViewCollapsedHeightAnchor: NSLayoutConstraint = {
-        self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2)
-    }()
-    
-    private lazy var recipeImageViewCollapsedLeadingAnchor: NSLayoutConstraint = {
-        self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+    private lazy var recipeImageViewCollapsedConstraints: [NSLayoutConstraint] = {
+        [self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
+        self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)]
     }()
     
     

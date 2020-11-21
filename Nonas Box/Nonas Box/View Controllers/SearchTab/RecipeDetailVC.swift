@@ -220,23 +220,24 @@ class RecipeDetailVC: UIViewController {
     
     // MARK: - Obj-C Functions
     @objc private func updateBookmarkStatus() {
-        guard let bookmarkButton = buttonStackView.arrangedSubviews.first as? UIButton else { return }
+        guard let bookmarkButton = buttonStackView.arrangedSubviews.first as? UIButton, let recipeID = recipeDetails?.id, let recipeTitle = recipeDetails?.title else { return }
+        
         if var bookmarkedRecipes = UserDefaults.standard.value(forKey: "bookmarkedRecipes") as? [String : String] {
             // Adds recipe to bookmarkedRecipes
-            if bookmarkedRecipes[recipe.id.description] == nil {
-                bookmarkedRecipes[recipe.id.description] = recipe.title
+            if bookmarkedRecipes[recipeID.description] == nil {
+                bookmarkedRecipes[recipeID.description] = recipeTitle
                 UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
                 bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-            // Removes recipe from bookmarkedRecipes
+                // Removes recipe from bookmarkedRecipes
             } else {
-                bookmarkedRecipes.removeValue(forKey: recipe.id.description)
+                bookmarkedRecipes.removeValue(forKey: recipeID.description)
                 UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
                 bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             }
         } else {
             // Initializes bookmarkedRecipes and adds recipe to it
             var bookmarkedRecipes = [String : String]()
-            bookmarkedRecipes[recipe.id.description] = recipe.title ?? "place_holder_title"
+            bookmarkedRecipes[recipeID.description] = recipeTitle
             UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
             bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         }

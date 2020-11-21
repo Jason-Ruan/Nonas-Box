@@ -10,19 +10,21 @@ import Foundation
 
 struct SpoonacularResults: Codable {
     let results: [Recipe]?
-//    let totalResults: Int?
 }
 
 struct Recipe: Codable {
+    // For recipe blurb info
     let id: Int
     let title: String?
     let readyInMinutes: Int?
     let servings: Int?
-    let image: String?
     
+    // For searching recipes based on ingredients
     let missedIngredientCount: Int?
     let missedIngredients: [IngredientUsedInRecipe]?
     let usedIngredients: [IngredientUsedInRecipe]?
+    
+    private let image: String?
     
     var imageURL: URL? {
         if let imageString = image, imageString.contains("http"), let imageURL = URL(string: imageString) {
@@ -36,7 +38,10 @@ struct Recipe: Codable {
 }
 
 struct RecipeDetails: Codable {
+    let id: Int
     let title: String?
+    let readyInMinutes: Int?
+    let servings: Int?
     let image: URL?
     let summary: String?
     let extendedIngredients: [Ingredient]
@@ -45,6 +50,7 @@ struct RecipeDetails: Codable {
 }
 
 struct StepByStepInstructions: Codable {
+    let name: String?
     let steps: [Step]?
 }
 
@@ -74,8 +80,9 @@ struct Ingredient: Codable {
     let id: Int?
     let name: String?
     let originalString: String?
-    let image: String?
     let measures: IngredientMeasurements
+    
+    private let image: String?
     
     var imageURL: URL? {
         guard let image = image else { return nil }
@@ -89,9 +96,9 @@ struct IngredientMeasurements: Codable {
 }
 
 struct Measurement: Codable {
-    let amount: Double?
-    let unitShort: String?
-    let unitLong: String?
+    var amount: Double?
+    private let unitShort: String?
+    private let unitLong: String?
     
     var shortHandMeasurement: String? {
         guard let amount = amount, let unitShort = unitShort else { return nil }

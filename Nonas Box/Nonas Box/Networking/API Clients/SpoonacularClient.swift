@@ -84,21 +84,6 @@ class SpoonacularAPIClient {
         }
     }
     
-    func getImage(recipe: Recipe, completionHandler: @escaping (Result<UIImage, AppError>) -> () ) {
-        if let imageURL = recipe.imageURL {
-            ImageHelper.shared.getImage(url: imageURL) { (result) in
-                switch result {
-                    case .success(let image):
-                        completionHandler(.success(image))
-                    case .failure:
-                        completionHandler(.failure(.notAnImage))
-                }
-            }
-        } else {
-            completionHandler(.failure(.badURL))
-        }
-    }
-    
     func getBookmarkedRecipes(completionHandler: @escaping (Result<[RecipeDetails], AppError>) -> () ) {
         if let bookmarkedRecipeIDsString = (UserDefaults.standard.dictionary(forKey: "bookmarkedRecipes") as? [String : String])?.keys.joined(separator: ",") {
             

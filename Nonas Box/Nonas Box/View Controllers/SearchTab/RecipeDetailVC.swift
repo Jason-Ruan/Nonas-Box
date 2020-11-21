@@ -152,11 +152,9 @@ class RecipeDetailVC: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
-        title = recipe.title
         self.navigationController?.navigationBar.isHidden = false
         synthesizer.delegate = self
-        addSubviews()
-        loadRecipeDetails(recipe: self.recipe)
+        
         configureAVAudioSession()
         //        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.expandRecipeImage))
         //        recipeImageView.isUserInteractionEnabled = true

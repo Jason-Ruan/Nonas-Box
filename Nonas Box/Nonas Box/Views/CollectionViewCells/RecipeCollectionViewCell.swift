@@ -168,7 +168,8 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     private func loadImage(recipe: Recipe) {
-        SpoonacularAPIClient.manager.getImage(recipe: recipe) { (result) in
+        guard let imageURL = recipe.imageURL else { return }
+        ImageHelper.shared.getImage(url: imageURL) { (result) in
             switch result {
                 case .failure(let error):
                     self.foodImage.image = UIImage(systemName: "xmark.rectangle.fill")!

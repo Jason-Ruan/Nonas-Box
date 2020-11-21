@@ -282,7 +282,7 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(RecipeDetailVC(recipe: recipes[indexPath.row]), animated: true)
+        self.navigationController?.pushViewController(RecipeDetailVC(recipeID: recipes[indexPath.row].id), animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

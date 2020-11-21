@@ -295,37 +295,38 @@ extension RecipeDetailVC {
 extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1 + (recipeDetails?.analyzedInstructions?.count ?? 1)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let ingredients = recipeDetails?.extendedIngredients, let analyzedInstructions = recipeDetails?.analyzedInstructions else { return 0 }
         switch section {
             case 0:
-                return ingredients?.count ?? 0
-            case 1:
-                return stepByStepInstructions?.count ?? 0
+                return ingredients.count
+            case 1...analyzedInstructions.count:
+                return analyzedInstructions[section - 1].steps?.count ?? 0
             default:
                 return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "stepByStepInstructionCell", for: indexPath) as? StepByStepInstructionTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "stepByStepInstructionCell", for: indexPath) as? StepByStepInstructionTableViewCell, let ingredients = recipeDetails?.extendedIngredients, let analyzedInstructions = recipeDetails?.analyzedInstructions else {
+            fatalError("Could not make appropriate tableview cell")
+        }
         
         switch indexPath.section {
             case 0:
-                guard let ingredient = ingredients?[indexPath.row],
-                      let ingredientName = ingredient.name?.capitalized,
-                      let ingredientMeasurements = ingredient.measures.us.shortHandMeasurement
+                guard let ingredientName = ingredients[indexPath.row].name?.capitalized,
+                      let ingredientMeasurements = ingredients[indexPath.row].measures.us.shortHandMeasurement
                 else { return cell }
                 let ingredientCell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
                 ingredientCell.backgroundColor = .clear
                 ingredientCell.selectionStyle = .none
                 ingredientCell.textLabel?.text = "\(ingredientMeasurements) \(ingredientName)"
                 return ingredientCell
-            case 1:
-                guard let step = stepByStepInstructions?[indexPath.row] else { return cell }
-                cell.step = step
+            case 1...analyzedInstructions.count:
+                cell.step = analyzedInstructions[indexPath.section - 1].steps![indexPath.row]
             default :
                 print()
         }
@@ -334,25 +335,27 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let analyzedInstructions = recipeDetails?.analyzedInstructions else { return "placeholder_header"}
         switch section {
             case 0:
                 return "Ingredients"
-            case 1:
-                return "Directions"
+            case 1...analyzedInstructions.count:
+                guard let instructionSectionName = analyzedInstructions[section - 1].name else { return "Directions"}
+                return instructionSectionName.count > 0 ? instructionSectionName : "Directions"
             default:
                 return nil
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section == 1 else { return }
+        guard indexPath.section > 0 else { return }
         
         if synthesizer.isSpeaking {
             synthesizer.stopSpeaking(at: .immediate)
         }
         
-        if let stepInstructionString = stepByStepInstructions?[indexPath.row].instruction {
-            selectedCellIndexPath = indexPath
+        if let stepInstructionString = recipeDetails?.analyzedInstructions?[indexPath.section - 1].steps?[indexPath.row].instruction {
+            selectedCellIndexPath = IndexPath(row: indexPath.row, section: indexPath.section)
             let utterance = AVSpeechUtterance(string: stepInstructionString)
             utterance.rate = 0.45
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
@@ -367,19 +370,15 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y == 0 {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
-                self.recipeImageViewCollapsedHeightAnchor.isActive = false
-                self.recipeImageViewCollapsedLeadingAnchor.isActive = false
-                self.recipeImageViewExpandedHeightAnchor.isActive = true
-                self.recipeImageViewExpandedLeadingAnchor.isActive = true
+                NSLayoutConstraint.deactivate(self.recipeImageViewCollapsedConstraints)
+                NSLayoutConstraint.activate(self.recipeImageViewExpandedConstraints)
                 self.view.layoutIfNeeded()
             }, completion: nil)
             
         } else {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
-                self.recipeImageViewExpandedHeightAnchor.isActive = false
-                self.recipeImageViewExpandedLeadingAnchor.isActive = false
-                self.recipeImageViewCollapsedHeightAnchor.isActive = true
-                self.recipeImageViewCollapsedLeadingAnchor.isActive = true
+                NSLayoutConstraint.deactivate(self.recipeImageViewExpandedConstraints)
+                NSLayoutConstraint.activate(self.recipeImageViewCollapsedConstraints)
                 self.view.layoutIfNeeded()
             }, completion: nil)
         }

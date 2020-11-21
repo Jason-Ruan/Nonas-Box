@@ -169,33 +169,34 @@ class RecipeDetailVC: UIViewController {
     
     
     //MARK: - Private Functions
-    private func loadImage(recipe: Recipe) {
-        SpoonacularAPIClient.manager.getImage(recipe: recipe) { (result) in
+    private func loadRecipeDetails(recipeID: Int) {
+        SpoonacularAPIClient.manager.getRecipeDetails(recipeID: recipeID) { (result) in
             switch result {
                 case .failure(let error):
-                    print(error)
-                    self.backgroundImageView.image = nil
-                    self.recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")!
-                case .success(let image):
-                    self.backgroundImageView.image = image
-                    self.recipeImageView.image = image
+                    self.showAlert(message: "Could not get step by step instructions for the selected recipe.\nError:\(error.localizedDescription)")
+                case .success(let recipeDetails):
+                    self.recipeDetails = recipeDetails
+                    self.addSubviews()
+                    self.loadImage(recipeDetails: recipeDetails)
             }
         }
     }
     
-    private func loadRecipeDetails(recipe: Recipe) {
-        SpoonacularAPIClient.manager.getRecipeDetails(recipeID: recipe.id) { (result) in
-            switch result {
-                case .failure(let error):
-                    self.showAlert(message: "Could not get step by step instructions for \(recipe.title?.description ?? "this recipe").\nError:\(error.localizedDescription)")
-                case .success(let recipeDetails):
-                    self.stepByStepInstructions = recipeDetails.analyzedInstructions?.reduce(into: [], { (totalSteps, step) in
-                        totalSteps += step.steps ?? []
-                    })
-                    self.recipeDetails = recipeDetails
-                    self.ingredients = recipeDetails.extendedIngredients
+    private func loadImage(recipeDetails: RecipeDetails) {
+        if let imageURL = recipeDetails.image {
+            ImageHelper.shared.getImage(url: imageURL) { (result) in
+                switch result {
+                    case .failure(let error):
+                        print(error)
+                        self.backgroundImageView.image = nil
+                        self.recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")!
+                    case .success(let image):
+                        self.backgroundImageView.image = image
+                        self.recipeImageView.image = image
+                }
             }
         }
+        
     }
     
     private func configureAVAudioSession() {

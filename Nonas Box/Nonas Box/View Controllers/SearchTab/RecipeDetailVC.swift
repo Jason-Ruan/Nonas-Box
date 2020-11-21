@@ -103,7 +103,7 @@ class RecipeDetailVC: UIViewController {
     
     lazy var buttonStackView: UIStackView = {
         let bookmarkButton = UIButton(type: .system)
-        bookmarkButton.setImage(checkIfRecipeIsBookmarked(id: recipe.id) ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
+        bookmarkButton.setImage(checkIfRecipeIsBookmarked(id: recipeDetails?.id ?? 0) ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
         bookmarkButton.tintColor = .systemRed
         bookmarkButton.setTitle("Bookmark", for: .normal)
         bookmarkButton.addTarget(self, action: #selector(updateBookmarkStatus), for: .touchUpInside)

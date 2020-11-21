@@ -259,15 +259,12 @@ extension RecipeDetailVC {
         view.addSubview(backgroundImageView)
         backgroundImageView.addSubview(blurEffectView)
         blurEffectView.frame = backgroundImageView.bounds
-        loadImage(recipe: self.recipe)
         
         view.addSubview(recipeImageView)
         NSLayoutConstraint.activate([
             recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             recipeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            recipeImageViewExpandedHeightAnchor,
-            recipeImageViewExpandedLeadingAnchor
-        ])
+        ] + recipeImageViewExpandedConstraints)
         
         view.addSubview(recipeBlurbInfoLabel)
         NSLayoutConstraint.activate([

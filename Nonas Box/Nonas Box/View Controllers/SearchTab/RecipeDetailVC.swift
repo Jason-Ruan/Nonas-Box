@@ -154,11 +154,7 @@ class RecipeDetailVC: UIViewController {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = false
         synthesizer.delegate = self
-        
         configureAVAudioSession()
-        //        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.expandRecipeImage))
-        //        recipeImageView.isUserInteractionEnabled = true
-        //        recipeImageView.addGestureRecognizer(gestureRecognizer)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

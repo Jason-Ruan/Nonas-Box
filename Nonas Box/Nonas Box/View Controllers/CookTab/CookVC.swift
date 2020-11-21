@@ -80,5 +80,8 @@ extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        present(RecipeDetailVC(recipeDetails: recipesInProgress[indexPath.row]), animated: true, completion: nil)
+    }
     
 }

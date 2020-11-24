@@ -176,7 +176,7 @@ class RecipeDetailVC: UIViewController {
     }
     
     private func loadImage(recipeDetails: RecipeDetails) {
-        if let imageURL = recipeDetails.image {
+        if let imageURL = recipeDetails.imageURL {
             ImageHelper.shared.getImage(url: imageURL) { (result) in
                 switch result {
                     case .failure(let error):

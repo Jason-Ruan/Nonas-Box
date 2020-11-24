@@ -83,7 +83,7 @@ class CookingCollectionViewCell: UICollectionViewCell {
     private func configureCell(forRecipe recipe: RecipeDetails) {
         self.recipeNameLabel.text = recipe.title
         
-        if let imageURL = recipe.image {
+        if let imageURL = recipe.imageURL {
             ImageHelper.shared.getImage(url: imageURL) { (result) in
                 switch result {
                     case .success(let image):

@@ -42,11 +42,16 @@ struct RecipeDetails: Codable {
     let title: String?
     let readyInMinutes: Int?
     let servings: Int?
-    let image: URL?
+    let imageURL: URL?
     let summary: String?
     let extendedIngredients: [Ingredient]
     let analyzedInstructions: [StepByStepInstructions]?
     let sourceUrl: URL?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, title, readyInMinutes, servings, summary, extendedIngredients, analyzedInstructions, sourceUrl
+        case imageURL = "image"
+    }
 }
 
 struct StepByStepInstructions: Codable {

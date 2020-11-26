@@ -95,33 +95,12 @@ class SearchRecipesOnlineVC: UIViewController {
     
     private var searchedQueryResults: [String : [Recipe] ] = [:]
     
-    
-    //MARK: - Private Constraints
-    
-    private lazy var screenTitleLabelTopConstraint: NSLayoutConstraint = {
-        self.screenTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -30)
-    }()
-    
-    private lazy var screenTitleLabelCenterXConstraint: NSLayoutConstraint = {
-        self.screenTitleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
-    }()
-    
-    private lazy var searchBarCenterXContraint: NSLayoutConstraint = {
-        self.searchBar.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
-    }()
-    
-    private lazy var searchBarWidthConstraint: NSLayoutConstraint = {
-        self.searchBar.widthAnchor.constraint(equalToConstant: view.frame.width / 1.5)
-    }()
-    
-    private lazy var searchBarTopConstraint: NSLayoutConstraint = {
-        self.searchBar.topAnchor.constraint(equalTo: screenTitleLabel.bottomAnchor, constant: 20)
-    }()
-    
+
     //MARK: - LifeCycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         setUpViews()
     }
     
@@ -188,6 +167,29 @@ class SearchRecipesOnlineVC: UIViewController {
             alert.dismiss(animated: true, completion: nil)
         })
     }
+    
+    
+    //MARK: - Private Constraints
+    
+    private lazy var screenTitleLabelTopConstraint: NSLayoutConstraint = {
+        self.screenTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -30)
+    }()
+    
+    private lazy var screenTitleLabelCenterXConstraint: NSLayoutConstraint = {
+        self.screenTitleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+    }()
+    
+    private lazy var searchBarCenterXContraint: NSLayoutConstraint = {
+        self.searchBar.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+    }()
+    
+    private lazy var searchBarWidthConstraint: NSLayoutConstraint = {
+        self.searchBar.widthAnchor.constraint(equalToConstant: view.frame.width / 1.5)
+    }()
+    
+    private lazy var searchBarTopConstraint: NSLayoutConstraint = {
+        self.searchBar.topAnchor.constraint(equalTo: screenTitleLabel.bottomAnchor, constant: 20)
+    }()
 
 }
 

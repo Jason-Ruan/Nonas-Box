@@ -36,14 +36,16 @@ class MyStuffVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
-        title = "My Stuff"
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.systemBlue.cgColor]
         gradientLayer.frame = self.view.bounds
         view.layer.insertSublayer(gradientLayer, at: 0)
-        
         view.addSubview(myStuffButtonsCollectionView)
         constrainMyStuffButtonsCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
     }
     
 }

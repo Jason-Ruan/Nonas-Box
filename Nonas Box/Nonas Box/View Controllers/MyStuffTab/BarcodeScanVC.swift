@@ -52,7 +52,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
         requestAVCapturePermissions()
     }
     

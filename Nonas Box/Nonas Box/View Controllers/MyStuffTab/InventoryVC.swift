@@ -40,7 +40,7 @@ class InventoryVC: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = false
         constrainItemCollectionView()
         loadInventory()

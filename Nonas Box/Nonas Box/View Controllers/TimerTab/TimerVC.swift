@@ -122,6 +122,7 @@ class TimerVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
+        view.backgroundColor = .systemBackground
         addSubviews()
     }
     

@@ -21,8 +21,6 @@ class RecipeDetailVC: UIViewController {
     init(recipeDetails: RecipeDetails) {
         super.init(nibName: nil, bundle: nil)
         self.recipeDetails = recipeDetails
-        addSubviews()
-        loadImage(recipeDetails: recipeDetails)
     }
     
     required init?(coder: NSCoder) {
@@ -46,7 +44,13 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
-    private var recipeDetails: RecipeDetails?
+    private var recipeDetails: RecipeDetails? {
+        didSet {
+            guard let recipeDetails = recipeDetails else { return }
+            addSubviews()
+            loadImage(recipeDetails: recipeDetails)
+        }
+    }
     
     
     // MARK: - Private Constraint Variables

@@ -32,15 +32,8 @@ class RecipeDetailVC: UIViewController {
     
     private var selectedCellIndexPath: IndexPath? {
         willSet {
-            // Purpose is to reset the color of text in previous selected cell being read by voice over.
-            guard let selectedCellIndexPath = selectedCellIndexPath,
-                  let cell = stepByStepInstructionsTableView.cellForRow(at: selectedCellIndexPath) as? StepByStepInstructionTableViewCell,
-                  let steps = recipeDetails?.analyzedInstructions?[selectedCellIndexPath.section - 1].steps else {
-                return
-                
-            }
-        
-            cell.stepInstructionLabel.attributedText = NSAttributedString(string: steps[selectedCellIndexPath.row].instruction ?? "")
+            guard let selectedCellIndexPath = selectedCellIndexPath else { return }
+            resetColorOfReadText(selectedCellIndexPath: selectedCellIndexPath)
         }
     }
     
@@ -212,6 +205,15 @@ class RecipeDetailVC: UIViewController {
         } else {
             return false
         }
+    }
+    
+    private func resetColorOfReadText(selectedCellIndexPath: IndexPath) {
+        // Purpose is to reset the color of text in previous selected cell being read by voice over.
+        guard let cell = stepByStepInstructionsTableView.cellForRow(at: selectedCellIndexPath) as? StepByStepInstructionTableViewCell,
+              let steps = recipeDetails?.analyzedInstructions?[selectedCellIndexPath.section - 1].steps
+        else { return }
+        
+        cell.stepInstructionLabel.attributedText = NSAttributedString(string: steps[selectedCellIndexPath.row].instruction ?? "")
     }
     
     

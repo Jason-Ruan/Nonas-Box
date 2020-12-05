@@ -228,31 +228,28 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
             // Make an API call if query has not been searched before during current session
         } else {
             SpoonacularAPIClient.manager.getRecipes(query: query) { (result) in
-                DispatchQueue.main.async {
-                    
-                    self.removeLoadingAnimation()
-                    
-                    switch result {
-                        case .success(let spoonacularResults):
-                            guard let recipes = spoonacularResults.results, !recipes.isEmpty else {
-                                // Actions when API call is successful but found no results for query
-                                self.showNoResultsAlert()
-                                self.searchedQueryResults[query] = []
-                                return
-                            }
-                            
-                            // Actions when API call is successful and query has results
-                            self.recipes = recipes
-                            self.searchedQueryResults[query] = recipes
-                            
-                            self.resultsNumberLabel.text = "Here are some recipes we found for '\(query)'"
-                            self.animateRecipesRetrieved()
-                            self.appNameLabel.removeFromSuperview()
-                            self.gridLayoutButton.isHidden = false
-                            
-                        case .failure(let error):
-                            print(error)
-                    }
+                self.removeLoadingAnimation()
+                
+                switch result {
+                    case .success(let spoonacularResults):
+                        guard let recipes = spoonacularResults.results, !recipes.isEmpty else {
+                            // Actions when API call is successful but found no results for query
+                            self.showNoResultsAlert()
+                            self.searchedQueryResults[query] = []
+                            return
+                        }
+                        
+                        // Actions when API call is successful and query has results
+                        self.recipes = recipes
+                        self.searchedQueryResults[query] = recipes
+                        
+                        self.resultsNumberLabel.text = "Here are some recipes we found for '\(query)'"
+                        self.animateRecipesRetrieved()
+                        self.appNameLabel.removeFromSuperview()
+                        self.gridLayoutButton.isHidden = false
+                        
+                    case .failure(let error):
+                        print(error)
                 }
             }
         }

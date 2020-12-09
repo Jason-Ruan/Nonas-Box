@@ -234,6 +234,9 @@
 		0899D64B2385F5900059D9CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				082F189225807AEA00035E65 /* CustomViews */,
+				082F189E25808E7000035E65 /* PickerViews */,
+				0895E4492569E52C00895753 /* SegmentedControls */,
 				08CC3767255725C600EEC9BC /* Buttons */,
 				08CC376A255725C600EEC9BC /* CollectionViewCells */,
 				08CC3765255725C600EEC9BC /* TableViewCells */,
@@ -465,6 +468,7 @@
 				08E9758924B80E0B00BF0DC3 /* SpoonacularClient.swift in Sources */,
 				08C4F2972523ED2C008E9964 /* InventoryVC.swift in Sources */,
 				08D7D6DA24CFD6FF00891E65 /* UPC_ItemDB_Client.swift in Sources */,
+				082F189425807B1600035E65 /* TimerPickerView.swift in Sources */,
 				08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */,
 				08AA2965257455DF00862B14 /* UICollectionViewExtensions.swift in Sources */,
 				08E9758B24B80E4400BF0DC3 /* Recipe.swift in Sources */,

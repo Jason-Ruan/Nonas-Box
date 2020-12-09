@@ -11,12 +11,11 @@ import UIKit
 
 class TimerVC: UIViewController {
     //MARK: - UI Objects
-    lazy var timePickerView: UIPickerView = {
-        let pickerView = UIPickerView()
+    lazy var timerPickerView: UIPickerView = {
+        let pickerView = TimerPickerView(frame: .zero)
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.dataSource = self
         pickerView.delegate = self
-        pickerView.tintColor = .systemGray4
         return pickerView
     }()
     
@@ -28,33 +27,6 @@ class TimerVC: UIViewController {
         label.font = UIFont(name: "Arial", size: 45)
         label.adjustsFontSizeToFitWidth = true
         label.isHidden = true
-        return label
-    }()
-    
-    lazy var hourLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .right
-        label.text = "hrs"
-        label.textColor = .systemBlue
-        return label
-    }()
-    
-    lazy var minLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .right
-        label.text = "min"
-        label.textColor = .systemBlue
-        return label
-    }()
-    
-    lazy var secLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .right
-        label.text = "s"
-        label.textColor = .systemBlue
         return label
     }()
     
@@ -151,9 +123,9 @@ class TimerVC: UIViewController {
     private func adjustTimerValueLabelText() {
         var timeValues: [String] = []
         
-        let numHours = timePickerView.selectedRow(inComponent: 0)
-        let numMin = timePickerView.selectedRow(inComponent: 1)
-        let numSec = timePickerView.selectedRow(inComponent: 2)
+        let numHours = timerPickerView.selectedRow(inComponent: 0)
+        let numMin = timerPickerView.selectedRow(inComponent: 1)
+        let numSec = timerPickerView.selectedRow(inComponent: 2)
         
         if numHours > 0 {
             timeValues.append("\(numHours)h")
@@ -171,17 +143,17 @@ class TimerVC: UIViewController {
     
     //MARK: - Objective-C Methods
     @objc func startTimer() {
-        // Converts timePickerView selections into total number of seconds
-        let hoursToSec = timePickerView.selectedRow(inComponent: 0) * 3600
-        let minsToSec = timePickerView.selectedRow(inComponent: 1) * 60
-        let sec = timePickerView.selectedRow(inComponent: 2)
+        // Converts timerPickerView selections into total number of seconds
+        let hoursToSec = timerPickerView.selectedRow(inComponent: 0) * 3600
+        let minsToSec = timerPickerView.selectedRow(inComponent: 1) * 60
+        let sec = timerPickerView.selectedRow(inComponent: 2)
         timerDisplayCount = hoursToSec + minsToSec + sec
         
         guard timerDisplayCount > 0 else { return }
         
         resumeTimer()
         
-        timePickerView.isHidden = true
+        timerPickerView.isHidden = true
         timerLabel.isHidden = false
         overdueTimerCountLabel.isHidden = false
         timerValueLabel.isHidden = false
@@ -221,7 +193,7 @@ class TimerVC: UIViewController {
         timerDisplayCount = 0
         
         timerLabel.isHidden = true
-        timePickerView.isHidden = false
+        timerPickerView.isHidden = false
         overdueTimerCountLabel.isHidden = true
         overdueTimerCountLabel.text = nil
         timerValueLabel.isHidden = true
@@ -236,23 +208,23 @@ class TimerVC: UIViewController {
     
     //MARK: - Private Constraints
     private func addSubviews() {
-        view.addSubview(timePickerView)
+        view.addSubview(timerPickerView)
         NSLayoutConstraint.activate([
-            timePickerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            timePickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            timePickerView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.33)
+            timerPickerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            timerPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            timerPickerView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.33)
         ])
         
         view.addSubview(timerLabel)
         NSLayoutConstraint.activate([
-            timerLabel.centerXAnchor.constraint(equalTo: timePickerView.centerXAnchor),
-            timerLabel.centerYAnchor.constraint(equalTo: timePickerView.centerYAnchor),
-            timerLabel.widthAnchor.constraint(equalTo: timePickerView.widthAnchor)
+            timerLabel.centerXAnchor.constraint(equalTo: timerPickerView.centerXAnchor),
+            timerLabel.centerYAnchor.constraint(equalTo: timerPickerView.centerYAnchor),
+            timerLabel.widthAnchor.constraint(equalTo: timerPickerView.widthAnchor)
         ])
         
         view.addSubview(resetTimerButton)
         NSLayoutConstraint.activate([
-            resetTimerButton.topAnchor.constraint(equalTo: timePickerView.bottomAnchor, constant: 30),
+            resetTimerButton.topAnchor.constraint(equalTo: timerPickerView.bottomAnchor, constant: 30),
             resetTimerButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width / 4) ),
             resetTimerButton.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width / 4),
             resetTimerButton.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width / 4)
@@ -260,7 +232,7 @@ class TimerVC: UIViewController {
         
         view.addSubview(toggleTimerButton)
         NSLayoutConstraint.activate([
-            toggleTimerButton.topAnchor.constraint(equalTo: timePickerView.bottomAnchor, constant: 30),
+            toggleTimerButton.topAnchor.constraint(equalTo: timerPickerView.bottomAnchor, constant: 30),
             toggleTimerButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: view.safeAreaLayoutGuide.layoutFrame.width / 4),
             toggleTimerButton.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width / 4),
             toggleTimerButton.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width / 4)
@@ -280,39 +252,7 @@ class TimerVC: UIViewController {
             timerValueLabel.heightAnchor.constraint(equalTo: timerLabel.heightAnchor),
             timerValueLabel.widthAnchor.constraint(equalTo: timerLabel.widthAnchor, multiplier: 0.8)
         ])
-        
-        addUnitsLabelsToTimePickerView()
-        
-    }
-    
-    private func addUnitsLabelsToTimePickerView() {
-        timePickerView.insertSubview(hourLabel, at: 0)
-        timePickerView.insertSubview(minLabel, at: 0)
-        timePickerView.insertSubview(secLabel, at: 0)
-        
-        let hourRowSizeForTimePickerView = timePickerView.rowSize(forComponent: 0)
-        let minRowSizeForTimePickerView = timePickerView.rowSize(forComponent: 1)
-        let secRowSizeForTimePickerView = timePickerView.rowSize(forComponent: 2)
-        
-        NSLayoutConstraint.activate([
-            hourLabel.centerYAnchor.constraint(equalTo: timePickerView.centerYAnchor),
-            minLabel.centerYAnchor.constraint(equalTo: timePickerView.centerYAnchor),
-            secLabel.centerYAnchor.constraint(equalTo: timePickerView.centerYAnchor),
-            
-            hourLabel.widthAnchor.constraint(equalToConstant: hourRowSizeForTimePickerView.width),
-            hourLabel.heightAnchor.constraint(equalToConstant: hourRowSizeForTimePickerView.height),
-            hourLabel.leadingAnchor.constraint(equalTo: timePickerView.leadingAnchor),
-            
-            minLabel.widthAnchor.constraint(equalToConstant: minRowSizeForTimePickerView.width),
-            minLabel.heightAnchor.constraint(equalToConstant: minRowSizeForTimePickerView.height),
-            minLabel.centerXAnchor.constraint(equalTo: timePickerView.centerXAnchor),
-            
-            secLabel.widthAnchor.constraint(equalToConstant: secRowSizeForTimePickerView.width),
-            secLabel.heightAnchor.constraint(equalToConstant: secRowSizeForTimePickerView.height),
-            secLabel.trailingAnchor.constraint(equalTo: timePickerView.trailingAnchor, constant: -20)
-            
-        ])
-        
+                
     }
     
     
@@ -341,13 +281,6 @@ extension TimerVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return row.description
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if component == 0 {
-            hourLabel.text = row == 1 ? "hr" : "hrs"
-        }
-    }
-    
+    }    
     
 }

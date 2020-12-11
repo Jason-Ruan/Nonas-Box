@@ -62,18 +62,8 @@ class SearchRecipesOnlineVC: UIViewController {
         return cv
     }()
     
-    lazy var spinner: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-        spinner.color = .lightGray
-        spinner.hidesWhenStopped = true
-        return spinner
-    }()
-    
-    lazy var loadingScreenOverlay: UIView = {
-        let uv = UIView(frame: view.safeAreaLayoutGuide.layoutFrame)
-        uv.translatesAutoresizingMaskIntoConstraints = false
-        uv.backgroundColor = #colorLiteral(red: 0.2056548595, green: 0.2066133618, blue: 0.2089324594, alpha: 0.7473512414)
-        return uv
+    lazy var loadingScreenView: LoadingScreenView = {
+        return LoadingScreenView(frame: view.bounds)
     }()
     
     lazy var gridLayoutButton: UIButton = {
@@ -95,7 +85,7 @@ class SearchRecipesOnlineVC: UIViewController {
     
     private var searchedQueryResults: [String : [Recipe] ] = [:]
     
-
+    
     //MARK: - LifeCycle Methods
     
     override func viewDidLoad() {
@@ -212,11 +202,11 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         guard let query = searchBar.text else { return }
         
-        showLoadingAnimation()
+        view.addSubview(loadingScreenView)
         
         // Check if the query has been searched before and show relevant results/alert
         if let searchedResults = searchedQueryResults[query] {
-            removeLoadingAnimation()
+            loadingScreenView.removeFromSuperview()
             
             if !searchedResults.isEmpty {
                 recipes = searchedResults
@@ -227,26 +217,27 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
             
             // Make an API call if query has not been searched before during current session
         } else {
-            SpoonacularAPIClient.manager.getRecipes(query: query) { (result) in
-                self.removeLoadingAnimation()
+            SpoonacularAPIClient.manager.getRecipes(query: query) { [weak self] (result) in
+                
+                self?.loadingScreenView.removeFromSuperview()
                 
                 switch result {
                     case .success(let spoonacularResults):
                         guard let recipes = spoonacularResults.results, !recipes.isEmpty else {
                             // Actions when API call is successful but found no results for query
-                            self.showNoResultsAlert()
-                            self.searchedQueryResults[query] = []
+                            self?.showNoResultsAlert()
+                            self?.searchedQueryResults[query] = []
                             return
                         }
                         
                         // Actions when API call is successful and query has results
-                        self.recipes = recipes
-                        self.searchedQueryResults[query] = recipes
+                        self?.recipes = recipes
+                        self?.searchedQueryResults[query] = recipes
                         
-                        self.resultsNumberLabel.text = "Here are some recipes we found for '\(query)'"
-                        self.animateRecipesRetrieved()
-                        self.appNameLabel.removeFromSuperview()
-                        self.gridLayoutButton.isHidden = false
+                        self?.resultsNumberLabel.text = "Here are some recipes we found for '\(query)'"
+                        self?.animateRecipesRetrieved()
+                        self?.appNameLabel.removeFromSuperview()
+                        self?.gridLayoutButton.isHidden = false
                         
                     case .failure(let error):
                         print(error)

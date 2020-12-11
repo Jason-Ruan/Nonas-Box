@@ -45,6 +45,7 @@
 		08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758324B61C8400BF0DC3 /* ImageHelper.swift */; };
 		08E9758924B80E0B00BF0DC3 /* SpoonacularClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758824B80E0B00BF0DC3 /* SpoonacularClient.swift */; };
 		08E9758B24B80E4400BF0DC3 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758A24B80E4400BF0DC3 /* Recipe.swift */; };
+		08EF5C362582E27F00B40E75 /* LoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF5C352582E27F00B40E75 /* LoadingScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		08E9758324B61C8400BF0DC3 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		08E9758824B80E0B00BF0DC3 /* SpoonacularClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularClient.swift; sourceTree = "<group>"; };
 		08E9758A24B80E4400BF0DC3 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		08EF5C352582E27F00B40E75 /* LoadingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -444,6 +446,7 @@
 				0899D62C2385F40C0059D9CE /* RecipeCreationVC.swift in Sources */,
 				08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */,
 				0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */,
+				08EF5C362582E27F00B40E75 /* LoadingScreenView.swift in Sources */,
 				08B744C3251E80680005161D /* UPC_Item_PersistenceHelper.swift in Sources */,
 				08CC3772255725C600EEC9BC /* TimerButton.swift in Sources */,
 				08CC3778255725C600EEC9BC /* RecipeCollectionViewCell.swift in Sources */,

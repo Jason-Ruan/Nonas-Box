@@ -1,9 +1,19 @@
-//
-//  UIImage.swift
-//  Nonas Box
-//
-//  Created by Jason Ruan on 12/12/20.
-//  Copyright © 2020 Jason Ruan. All rights reserved.
-//
 
-import Foundation
+
+import UIKit
+
+public extension UIImage {
+    
+    // Third-party code
+    convenience init(color: UIColor, size: CGSize) {
+        UIGraphicsBeginImageContextWithOptions(size, false, 1)
+        color.set()
+        let ctx = UIGraphicsGetCurrentContext()!
+        ctx.fill(CGRect(origin: .zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        self.init(data: image.pngData()!)!
+    }
+    
+}

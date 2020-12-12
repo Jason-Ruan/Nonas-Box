@@ -381,6 +381,8 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         return 100
     }
     
+    
+    // MARK: - ScrollView Methods
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y == 0 {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
@@ -398,6 +400,21 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let visiblerows = stepByStepInstructionsTableView.tableView.indexPathsForVisibleRows
+        if let lastIndex = visiblerows?.last {
+            stepByStepInstructionsTableView.underlinedSegmentedControl.segmentedControl.selectedSegmentIndex = lastIndex.section
+            stepByStepInstructionsTableView.underlinedSegmentedControl.index = lastIndex.section
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let visiblerows = stepByStepInstructionsTableView.tableView.indexPathsForVisibleRows
+        if let lastIndex = visiblerows?.last {
+            stepByStepInstructionsTableView.underlinedSegmentedControl.segmentedControl.selectedSegmentIndex = lastIndex.section
+            stepByStepInstructionsTableView.underlinedSegmentedControl.index = lastIndex.section
+        }
+    }
 }
 
 

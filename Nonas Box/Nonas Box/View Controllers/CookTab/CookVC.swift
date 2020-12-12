@@ -11,26 +11,19 @@ import UIKit
 class CookVC: UIViewController {
     
     //MARK: - UI Objects
-    lazy var recipesInProgressCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width * 0.9, height: view.safeAreaLayoutGuide.layoutFrame.height * 0.2)
-        layout.minimumLineSpacing = 30
-        layout.minimumInteritemSpacing = 30
-        let cv = UICollectionView(frame: CGRect(x: 0, y: 0, width: 250, height: 250), collectionViewLayout: layout)
-        cv.backgroundColor = .clear
+    private lazy var recipesCollectionView: UICollectionView = {
+        let cv = UICollectionView(scrollDirection: .vertical, scrollIndicatorsIsVisible: true)
         cv.dataSource = self
         cv.delegate = self
-        cv.register(CookingCollectionViewCell.self, forCellWithReuseIdentifier: "cookingCell")
-        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(CookingCollectionViewCell.self, forCellWithReuseIdentifier: CookingCollectionViewCell.identifier)
         return cv
     }()
     
     
     //MARK: - Properties
-    var recipesInProgress: [RecipeDetails] = [] {
+    var recipes: [RecipeDetails] = [] {
         didSet {
-            recipesInProgressCollectionView.reloadData()
+            recipesCollectionView.reloadData()
         }
     }
     
@@ -42,14 +35,16 @@ class CookVC: UIViewController {
         loadBookmarkedRecipes()
     }
     
+    
     //MARK: - Private Methods
     private func addSubviews() {
-        view.addSubview(recipesInProgressCollectionView)
+        view.addSubview(recipesCollectionView)
+        recipesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            recipesInProgressCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            recipesInProgressCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            recipesInProgressCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            recipesInProgressCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            recipesCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            recipesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            recipesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            recipesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -59,7 +54,7 @@ class CookVC: UIViewController {
                 case .failure(let error):
                     print(error)
                 case .success(let detailedRecipes):
-                    self.recipesInProgress = detailedRecipes
+                    self.recipes = detailedRecipes
             }
         }
     }
@@ -70,19 +65,24 @@ class CookVC: UIViewController {
 // MARK: - CollectionView Methods
 extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return recipesInProgress.count
+        return recipes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cookingCell", for: indexPath) as? CookingCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CookingCollectionViewCell.identifier, for: indexPath) as? CookingCollectionViewCell else {
             fatalError("Could not make CookingCollectionViewCell")
         }
-        cell.recipe = recipesInProgress[indexPath.row]
+        cell.recipe = recipes[indexPath.row]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        present(RecipeDetailVC(recipeDetails: recipesInProgress[indexPath.row]), animated: true, completion: nil)
+        let recipeDetailVC = RecipeDetailVC(recipeDetails: recipes[indexPath.row])
+        present(recipeDetailVC, animated: true, completion: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width * 0.9, height: view.frame.height / 5)
     }
     
 }

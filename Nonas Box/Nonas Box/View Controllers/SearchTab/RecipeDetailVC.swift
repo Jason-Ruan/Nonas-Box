@@ -54,19 +54,18 @@ class RecipeDetailVC: UIViewController {
     
     private lazy var recipeImageViewExpandedConstraints: [NSLayoutConstraint] = {
         [self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
-        self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)]
+         self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)]
     }()
     
     private lazy var recipeImageViewCollapsedConstraints: [NSLayoutConstraint] = {
         [self.recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
-        self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)]
+         self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)]
     }()
     
     
     // MARK: - UI Objects
     lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView(frame: view.bounds)
-        iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
         return iv
     }()
@@ -74,28 +73,14 @@ class RecipeDetailVC: UIViewController {
     lazy var recipeImageView: UIImageView = {
         let iv = UIImageView(frame: view.bounds)
         iv.clipsToBounds = true
+        iv.layer.borderWidth = 1
+        iv.layer.borderColor = UIColor.lightGray.cgColor
         iv.contentMode = .scaleAspectFill
-        iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
-    lazy var recipeBlurbInfoLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        
-        let recipeTitle = NSAttributedString(string: "\(recipeDetails?.title ?? "placeholder title")\n", attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .bold)])
-        let recipeServings = NSAttributedString(string: "\nServings: \(recipeDetails?.servings ?? 1)", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .light)])
-        let recipeTime = NSAttributedString(string: "\nTime: \(recipeDetails?.readyInMinutes ?? 1) minutes", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .medium)])
-        
-        let summaryAttributedString = NSMutableAttributedString()
-        summaryAttributedString.append(recipeTitle)
-        summaryAttributedString.append(recipeServings)
-        summaryAttributedString.append(recipeTime)
-        
-        label.attributedText = summaryAttributedString
-        label.translatesAutoresizingMaskIntoConstraints = false
+    lazy var recipeBlurbInfoLabel: RecipeBlurbLabel = {
+        let label = RecipeBlurbLabel()
         return label
     }()
     
@@ -117,20 +102,14 @@ class RecipeDetailVC: UIViewController {
         sv.distribution = .fillEqually
         sv.spacing = 25
         
-        sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
     }()
     
-    lazy var stepByStepInstructionsTableView: UITableView = {
-        let tv = UITableView(frame: .zero, style: .grouped)
-        tv.backgroundColor = .clear
-        tv.dataSource = self
-        tv.delegate = self
-        tv.bounces = false
-        tv.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: "stepByStepInstructionCell")
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "ingredientCell")
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        return tv
+    lazy var stepByStepInstructionsTableView: StepByStepInstructionsTableView = {
+        let steptv = StepByStepInstructionsTableView(frame: .zero)
+        steptv.tableView.dataSource = self
+        steptv.tableView.delegate = self
+        return steptv
     }()
     
     lazy var blurEffectView: UIVisualEffectView = {
@@ -146,11 +125,18 @@ class RecipeDetailVC: UIViewController {
         return blurEffectView
     }()
     
+    lazy var closeVCButton: UIButton = {
+        let button = UIButton(type: .close)
+        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        return button
+    }()
+    
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = false
+        setUpViews()
         synthesizer.delegate = self
         configureAVAudioSession()
     }

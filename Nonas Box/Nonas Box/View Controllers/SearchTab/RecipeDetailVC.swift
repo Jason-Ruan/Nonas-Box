@@ -274,18 +274,38 @@ extension RecipeDetailVC {
         ])
         
         view.addSubview(buttonStackView)
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             buttonStackView.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 5),
             buttonStackView.centerXAnchor.constraint(equalTo: recipeImageView.centerXAnchor),
             buttonStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.05)
         ])
         
-        view.addSubview(stepByStepInstructionsTableView)
+        view.addSubview(segmentedControlForTableview)
+        segmentedControlForTableview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 20),
+            segmentedControlForTableview.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor),
+            segmentedControlForTableview.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        view.addSubview(stepByStepInstructionsTableView)
+        stepByStepInstructionsTableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: segmentedControlForTableview.bottomAnchor, constant: 20),
             stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
+    }
+    
+    public func addCloseButton() {
+        view.addSubview(closeVCButton)
+        closeVCButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            closeVCButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            closeVCButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            closeVCButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
+            closeVCButton.widthAnchor.constraint(equalTo: closeVCButton.heightAnchor)
         ])
     }
 }

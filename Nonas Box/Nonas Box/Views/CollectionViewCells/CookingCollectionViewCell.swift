@@ -15,18 +15,11 @@ class CookingCollectionViewCell: UICollectionViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
-    lazy var recipeNameLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.layer.borderWidth = 2
-        label.layer.borderColor = UIColor.lightGray.cgColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    lazy var recipeNameLabel: RecipeBlurbLabel = {
+        return RecipeBlurbLabel()
     }()
     
     

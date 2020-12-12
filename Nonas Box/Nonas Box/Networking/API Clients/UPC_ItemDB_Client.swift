@@ -57,33 +57,6 @@ class UPC_ItemDB_Client {
         }
     }
     
-    func getItemImage(barcode: String,
-                      imageURLs: [URL],
-                      completionHandler: @escaping (Result<UIImage?, AppError>) -> () ) {
-        
-        guard !imageURLs.isEmpty, let imageURL = imageURLs.first else {
-            completionHandler(.failure(.notAnImage))
-            return
-        }
-        
-        ImageHelper.shared.getImage(url: imageURL) { (result) in
-            switch result {
-                case .failure(let error):
-                    let remainingURLs: [URL] = Array(imageURLs.dropFirst())
-                    if !remainingURLs.isEmpty {
-                        self.getItemImage(barcode: barcode,
-                                          imageURLs: remainingURLs,
-                                          completionHandler: completionHandler)
-                    } else {
-                        completionHandler(.failure(error))
-                    }
-                case .success(let itemImage):
-                    completionHandler(.success(itemImage))
-            }
-        }
-    }
-    
-    
     private init() {}
     static let manager = UPC_ItemDB_Client()
 }

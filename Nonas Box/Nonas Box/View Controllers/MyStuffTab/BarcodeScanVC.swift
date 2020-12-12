@@ -32,7 +32,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: view.frame.height / 3)), collectionViewLayout: layout)
-        cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: "barcodeCell")
+        cv.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
         cv.dataSource = self
         cv.delegate = self
         cv.backgroundColor = .clear
@@ -51,13 +51,13 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        navigationController?.navigationBar.isHidden = false
+        view.backgroundColor = .systemBackground
         requestAVCapturePermissions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
         if (captureSession?.isRunning == false) {
             captureSession.startRunning()
         }
@@ -249,32 +249,8 @@ extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "barcodeCell", for: indexPath) as? RecipeCollectionViewCell else { return UICollectionViewCell() }
-        
-        let groceryItem = groceryItems[indexPath.row]
-        
-        cell.foodImage.image = nil
-        cell.foodInfoLabel.text = groceryItem.title
-        
-        guard let groceryItemsImages = groceryItem.images else {
-            showAlert(message: "Could not find images associated with the item")
-            return cell
-        }
-        
-        guard let barcode = groceryItem.upc else { return cell }
-        UPC_ItemDB_Client.manager.getItemImage(barcode: barcode, imageURLs: groceryItemsImages) { (result) in
-            switch result {
-                case .failure:
-                    //                    self.showAlert(message: "\(error.localizedDescription): \(error.rawValue)")
-                    //                    cell.foodImage.image = UIImage(systemName: "photo")
-                    
-                    self.showCameraPrompt()
-                
-                case .success(let itemImage):
-                    cell.foodImage.image = itemImage
-            }
-        }
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewCell.identifier, for: indexPath) as? ItemCollectionViewCell else { return UICollectionViewCell() }
+        cell.item = groceryItems[indexPath.row]
         return cell
     }
     

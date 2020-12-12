@@ -43,8 +43,9 @@ class RecipeDetailVC: UIViewController {
     private var recipeDetails: RecipeDetails? {
         didSet {
             guard let recipeDetails = recipeDetails else { return }
-            addSubviews()
             loadImage(recipeDetails: recipeDetails)
+            recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
+            stepByStepInstructionsTableView.tableView.reloadData()
         }
     }
     

@@ -12,6 +12,13 @@ import UIKit
 
 public extension UIViewController {
     
+    // MARK: - Properties
+    private var loadingScreen: LoadingScreenView {
+        return LoadingScreenView(frame: view.bounds)
+    }
+    
+    
+    // MARK: - Functions
     func showAlert(message: String) {
         let ac = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
         ac.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
@@ -23,6 +30,18 @@ public extension UIViewController {
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(withAction)
         present(ac, animated: true, completion: nil)
+    }
+    
+    func showLoadingScreen() {
+        view.addSubview(loadingScreen)
+    }
+    
+    func removeLoadingScreen() {
+        for subview in view.subviews {
+            if subview is LoadingScreenView {
+                subview.removeFromSuperview()
+            }
+        }
     }
     
 }

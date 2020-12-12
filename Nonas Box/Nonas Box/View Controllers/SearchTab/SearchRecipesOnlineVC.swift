@@ -11,83 +11,43 @@ import UIKit
 class SearchRecipesOnlineVC: UIViewController {
     //MARK: - UI Objects
     
-    lazy var appNameLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont(name: "Chalkduster", size: 60)
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Nona's\nBox"
-        return label
+    private lazy var appNameLabel: UILabel = {
+        return UILabel(text: "Nona's\nBox", fontName: "Chalkduster", fontSize: 60, alignment: .center)
     }()
     
-    lazy var screenTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.text = "Discover new recipes!"
-        label.font = UIFont(name: "ChalkboardSE-Bold", size: 25)
-        label.adjustsFontSizeToFitWidth = true
-        return label
+    private lazy var screenTitleLabel: UILabel = {
+        return UILabel(text: "Discover new recipes!", fontName: "ChalkboardSE-Bold", fontSize: 25)
     }()
     
-    lazy var searchBar: UISearchBar = {
-        let sb = UISearchBar()
+    private lazy var searchBar: UISearchBar = {
+        let sb = UISearchBar(placeHolderText: "Search for recipes here")
         sb.delegate = self
-        sb.placeholder = "Search for recipes here"
-        sb.searchBarStyle = .minimal
         return sb
     }()
     
-    lazy var resultsNumberLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Tamil Sangam MN", size: 12)
-        label.adjustsFontSizeToFitWidth = true
-        return label
+    private lazy var resultsNumberLabel: UILabel = {
+        return UILabel(fontName: "Tamil Sangam MN", fontSize: 12)
     }()
     
-    lazy var recipeCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 5
-        layout.minimumLineSpacing = 5
-        
-        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = .clear
-        cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: "recipeCell")
+    private lazy var recipeCollectionView: UICollectionView = {
+        let cv = UICollectionView(scrollDirection: .horizontal, scrollIndicatorsIsVisible: false)
+        cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: RecipeCollectionViewCell.identifier)
         cv.dataSource = self
         cv.delegate = self
-        cv.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        cv.showsHorizontalScrollIndicator = false
         return cv
-    }()
-    
-    lazy var loadingScreenView: LoadingScreenView = {
-        return LoadingScreenView(frame: view.bounds)
-    }()
-    
-    lazy var gridLayoutButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "square.grid.2x2")!, for: .normal)
-        button.addTarget(self, action: #selector(self.toggleCollectionViewLayout), for: .touchUpInside)
-        button.isHidden = true
-        return button
     }()
     
     
     //MARK: - Private Properties
-    
+    private var searchedQueryResults: [String : [Recipe] ] = [:]
     private var recipes: [Recipe] = [] {
         didSet {
             recipeCollectionView.reloadData()
         }
     }
     
-    private var searchedQueryResults: [String : [Recipe] ] = [:]
-    
     
     //MARK: - LifeCycle Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground

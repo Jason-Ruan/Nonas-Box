@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class UPC_ItemDB_Client {
     

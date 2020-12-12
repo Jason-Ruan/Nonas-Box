@@ -219,7 +219,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
         } else {
             SpoonacularAPIClient.manager.getRecipes(query: query) { [weak self] (result) in
                 
-                self?.loadingScreenView.removeFromSuperview()
+                self?.removeLoadingScreen()
                 
                 switch result {
                     case .success(let spoonacularResults):

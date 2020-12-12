@@ -12,7 +12,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI Objects
     
-    lazy var foodImage: UIImageView = {
+    private lazy var foodImage: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
@@ -24,7 +24,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    lazy var foodInfoLabel: UILabel = {
+    private lazy var foodInfoLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
@@ -37,7 +37,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var bookmarkedImageView: UIImageView = {
+    private lazy var bookmarkedImageView: UIImageView = {
         let iv = UIImageView(image: UIImage(systemName: "bookmark.fill"))
         iv.isHidden = true
         iv.tintColor = .red
@@ -52,7 +52,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    lazy var spinner: UIActivityIndicatorView = {
+    private lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.hidesWhenStopped = true
@@ -61,12 +61,16 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    var recipe: Recipe! {
+    public var recipe: Recipe! {
         didSet {
             guard let recipe = self.recipe else { return }
             configureCell(recipe: recipe)
             bookmarkedImageView.isHidden = checkIfRecipeIsBookmarked(id: recipe.id)
         }
+    }
+    
+    public static var identifier: String {
+        return String(describing: self)
     }
     
     
@@ -140,7 +144,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     private func configureCell(recipe: Recipe) {
         foodImage.image = nil
-        self.spinner.startAnimating()
+        spinner.startAnimating()
         
         loadImage(recipe: recipe)
         
@@ -169,19 +173,16 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     private func loadImage(recipe: Recipe) {
         guard let imageURL = recipe.imageURL else { return }
-        ImageHelper.shared.getImage(url: imageURL) { (result) in
+        ImageHelper.shared.getImage(urls: [imageURL]) { [weak self] (result) in
             switch result {
                 case .failure(let error):
-                    self.foodImage.image = UIImage(systemName: "xmark.rectangle.fill")!
+                    self?.foodImage.image = UIImage(systemName: "xmark.rectangle.fill")!
                     print(error)
                 case .success(let image):
-                    if recipe.imageURL == self.recipe?.imageURL {
-                        self.foodImage.image = image
-                    } else {
-                        self.loadImage(recipe: self.recipe)
-                    }
+                    self?.foodImage.image = image
+                    self?.setNeedsLayout()
             }
-            self.spinner.stopAnimating()
+            self?.spinner.stopAnimating()
         }
     }
     

@@ -150,30 +150,29 @@ class RecipeDetailVC: UIViewController {
     
     //MARK: - Private Functions
     private func loadRecipeDetails(recipeID: Int) {
-        SpoonacularAPIClient.manager.getRecipeDetails(recipeID: recipeID) { (result) in
+        SpoonacularAPIClient.manager.getRecipeDetails(recipeID: recipeID) { [weak self] (result) in
             switch result {
                 case .failure(let error):
-                    self.showAlert(message: "Could not get step by step instructions for the selected recipe.\nError:\(error.localizedDescription)")
+                    self?.showAlert(message: "Could not get step by step instructions for the selected recipe.\nError:\(error.localizedDescription)")
                 case .success(let recipeDetails):
-                    self.recipeDetails = recipeDetails
-                    self.addSubviews()
-                    self.loadImage(recipeDetails: recipeDetails)
+                    self?.recipeDetails = recipeDetails
+                    self?.loadImage(recipeDetails: recipeDetails)
+                    self?.recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
             }
         }
     }
     
     private func loadImage(recipeDetails: RecipeDetails) {
-        if let imageURL = recipeDetails.imageURL {
-            ImageHelper.shared.getImage(url: imageURL) { (result) in
-                switch result {
-                    case .failure(let error):
-                        print(error)
-                        self.backgroundImageView.image = nil
-                        self.recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")!
-                    case .success(let image):
-                        self.backgroundImageView.image = image
-                        self.recipeImageView.image = image
-                }
+        guard let imageURL = recipeDetails.imageURL  else { return }
+        ImageHelper.shared.getImage(urls: [imageURL]) { [weak self] (result) in
+            switch result {
+                case .failure(let error):
+                    print(error)
+                    self?.backgroundImageView.image = nil
+                    self?.recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")!
+                case .success(let image):
+                    self?.backgroundImageView.image = image
+                    self?.recipeImageView.image = image
             }
         }
         

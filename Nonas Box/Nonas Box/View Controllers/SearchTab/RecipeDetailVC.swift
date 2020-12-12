@@ -318,27 +318,34 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "stepByStepInstructionCell", for: indexPath) as? StepByStepInstructionTableViewCell, let ingredients = recipeDetails?.extendedIngredients, let analyzedInstructions = recipeDetails?.analyzedInstructions else {
-            fatalError("Could not make appropriate tableview cell")
-        }
+        guard let ingredients = recipeDetails?.extendedIngredients,
+              let analyzedInstructions = recipeDetails?.analyzedInstructions
+        else { return UITableViewCell() }
         
         switch indexPath.section {
             case 0:
                 guard let ingredientName = ingredients[indexPath.row].name?.capitalized,
                       let ingredientMeasurements = ingredients[indexPath.row].measures.us.shortHandMeasurement
-                else { return cell }
+                else { return UITableViewCell() }
+                
                 let ingredientCell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
                 ingredientCell.backgroundColor = .clear
                 ingredientCell.selectionStyle = .none
                 ingredientCell.textLabel?.text = "\(ingredientMeasurements) \(ingredientName)"
                 return ingredientCell
+                
             case 1...analyzedInstructions.count:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: StepByStepInstructionTableViewCell.identifier, for: indexPath) as? StepByStepInstructionTableViewCell
+                else { return UITableViewCell() }
+                
                 cell.step = analyzedInstructions[indexPath.section - 1].steps![indexPath.row]
+                return cell
+                
             default :
                 print()
         }
         
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

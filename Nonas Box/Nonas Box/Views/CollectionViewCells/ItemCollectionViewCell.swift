@@ -34,13 +34,17 @@ class ItemCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    static var identifier: String {
+        return String(describing: self)
+    }
     
     //MARK: - Initializerss
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.layer.borderWidth = 2
-        contentView.layer.borderColor = UIColor.lightGray.cgColor
+        layer.cornerRadius = 15
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.lightGray.cgColor
         
         constrainItemImageView()
         constrainItemNameLabel()

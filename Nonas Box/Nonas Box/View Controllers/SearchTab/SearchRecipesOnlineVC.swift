@@ -61,16 +61,48 @@ class SearchRecipesOnlineVC: UIViewController {
     }
     
     //MARK: - Private Functions
+    private func showNoResultsAlert() {
+        let alert = UIAlertController(title: "Oops", message: "Sorry, that search had no results in our database.", preferredStyle: .alert)
+        present(alert, animated: true, completion: nil)
+        let waitTime = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: waitTime, execute: {
+            alert.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    
+    //MARK: - Private Constraints
+    
+    private lazy var screenTitleLabelDefaultConstraints: [NSLayoutConstraint] = {
+        [self.screenTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -30),
+         self.screenTitleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+        ]
+    }()
+    
+    private lazy var searchBarDefaultContraints: [NSLayoutConstraint] = {
+        [self.searchBar.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+         self.searchBar.widthAnchor.constraint(equalToConstant: view.frame.width / 1.5),
+         self.searchBar.topAnchor.constraint(equalTo: screenTitleLabel.bottomAnchor, constant: 20)]
+    }()
+    
+    private lazy var constraintsWhenRecipesFound: [NSLayoutConstraint] = {
+        [self.screenTitleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
+         self.screenTitleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+         self.searchBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+         self.searchBar.topAnchor.constraint(equalTo: screenTitleLabel.bottomAnchor, constant: 5),
+         self.searchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+         self.resultsNumberLabel.leadingAnchor.constraint(equalTo: screenTitleLabel.leadingAnchor)]
+    }()
     
     private func setUpViews() {
         view.addSubview(screenTitleLabel)
         screenTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            screenTitleLabelTopConstraint,
-            screenTitleLabelCenterXConstraint
-        ])
+        NSLayoutConstraint.activate(
+            screenTitleLabelDefaultConstraints
+        )
         
         view.addSubview(appNameLabel)
+        appNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             appNameLabel.bottomAnchor.constraint(equalTo: screenTitleLabel.topAnchor, constant: -60),
             appNameLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),

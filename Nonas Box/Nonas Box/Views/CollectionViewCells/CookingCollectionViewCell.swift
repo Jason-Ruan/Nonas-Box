@@ -30,20 +30,24 @@ class CookingCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    static var identifier: String {
+        return String(describing: self)
+    }
+    
     
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         clipsToBounds = true
-        layer.cornerRadius = 5
+        backgroundColor = .systemBackground
+        layer.cornerRadius = 10
         layer.borderWidth = 2
         layer.borderColor = UIColor.lightGray.cgColor
         layer.shadowRadius = 5
         layer.shadowColor = UIColor.darkGray.cgColor
         layer.shadowOpacity = 1
         layer.shadowOffset = CGSize(width: 5, height: 5)
-        addSubviews()
-        constrainSubviews()
+        setUpViews()
     }
     
     required init?(coder: NSCoder) {
@@ -52,12 +56,9 @@ class CookingCollectionViewCell: UICollectionViewCell {
     
     
     // MARK: - Private Methods
-    private func addSubviews() {
+    private func setUpViews() {
         contentView.addSubview(recipeImageView)
-        contentView.addSubview(recipeNameLabel)
-    }
-    
-    private func constrainSubviews() {
+        recipeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             recipeImageView.topAnchor.constraint(equalTo: topAnchor),
             recipeImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -65,19 +66,22 @@ class CookingCollectionViewCell: UICollectionViewCell {
             recipeImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
+        contentView.addSubview(recipeNameLabel)
+        recipeNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             recipeNameLabel.topAnchor.constraint(equalTo: topAnchor),
             recipeNameLabel.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor),
             recipeNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            recipeNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
     }
     
     private func configureCell(forRecipe recipe: RecipeDetails) {
-        self.recipeNameLabel.text = recipe.title
+        recipeNameLabel.configureAttributedText(title: recipe.title, servings: recipe.servings, readyInMinutes: recipe.readyInMinutes)
         
         if let imageURL = recipe.imageURL {
-            ImageHelper.shared.getImage(url: imageURL) { (result) in
+            ImageHelper.shared.getImage(urls: [imageURL]) { (result) in
                 switch result {
                     case .success(let image):
                         self.recipeImageView.image = image
@@ -86,6 +90,7 @@ class CookingCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
+        
     }
     
 }

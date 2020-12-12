@@ -109,14 +109,6 @@ class SearchRecipesOnlineVC: UIViewController {
             
         ])
         
-        view.addSubview(gridLayoutButton)
-        gridLayoutButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            gridLayoutButton.topAnchor.constraint(equalTo: screenTitleLabel.topAnchor),
-            gridLayoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
-            gridLayoutButton.bottomAnchor.constraint(equalTo: screenTitleLabel.bottomAnchor)
-        ])
-        
         view.addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -229,7 +221,6 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                         self?.resultsNumberLabel.text = "Here are some recipes we found for '\(query)'"
                         self?.animateRecipesRetrieved()
                         self?.appNameLabel.removeFromSuperview()
-                        self?.gridLayoutButton.isHidden = false
                         
                     case .failure(let error):
                         print(error)
@@ -321,23 +312,4 @@ extension SearchRecipesOnlineVC {
         }, completion: nil)
     }
     
-    @objc func toggleCollectionViewLayout() {
-        guard let cvFlowLayout = self.recipeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        switch cvFlowLayout.scrollDirection {
-            case .vertical:
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-                    cvFlowLayout.scrollDirection = .horizontal
-                }, completion: nil)
-                
-                self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.2x2")!, for: .normal)
-            case .horizontal:
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-                    cvFlowLayout.scrollDirection = .vertical
-                }, completion: nil)
-                
-                self.gridLayoutButton.setImage(UIImage(systemName: "square.grid.3x2")!, for: .normal)
-            default:
-                return
-        }
-    }
 }

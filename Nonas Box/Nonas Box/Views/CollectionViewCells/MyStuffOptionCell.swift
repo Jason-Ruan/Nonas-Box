@@ -44,6 +44,10 @@ class MyStuffOptionCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    static var identifier: String {
+        return String(describing: self)
+    }
+    
     //MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)

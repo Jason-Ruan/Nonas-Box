@@ -6,4 +6,13 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UISearchBar {
+    
+    convenience init(placeHolderText: String) {
+        self.init()
+        placeholder = placeHolderText
+        searchBarStyle = .minimal
+    }
+}

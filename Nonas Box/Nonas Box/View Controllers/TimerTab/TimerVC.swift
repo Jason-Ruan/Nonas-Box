@@ -110,13 +110,13 @@ class TimerVC: UIViewController {
     private func adjustTabBarBadge(timerDisplayCount: Int) {
         if timerDisplayCount >= 3600 {
             tabBarItem.badgeColor = .systemGreen
-            tabBarItem.badgeValue = "\(timerDisplayCount / 3600) h"
+            tabBarItem.badgeValue = "\(timerDisplayCount / 3600)h"
         } else if timerDisplayCount >= 60 {
             tabBarItem.badgeColor = .systemBlue
-            tabBarItem.badgeValue = "\(timerDisplayCount / 60) m"
+            tabBarItem.badgeValue = "\(timerDisplayCount / 60)m"
         } else if timerDisplayCount < 60 {
             tabBarItem.badgeColor = .systemRed
-            tabBarItem.badgeValue = "\(timerDisplayCount) s"
+            tabBarItem.badgeValue = "\(timerDisplayCount)s"
         }
     }
     

@@ -234,44 +234,11 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
 //MARK: - Animation & Visual Methods
 
 extension SearchRecipesOnlineVC {
-    
-    private func showLoadingAnimation() {
-        view.addSubview(loadingScreenOverlay)
-        view.addSubview(spinner)
-        
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            spinner.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            spinner.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
-        ])
-        
-        spinner.startAnimating()
-        
-    }
-    
-    private func removeLoadingAnimation() {
-        self.loadingScreenOverlay.removeFromSuperview()
-        self.spinner.removeFromSuperview()
-    }
-    
     // This func is to animate the title and searchbar constraints to move from the initial center to the top to make room for recipeCollectionView to show results of query
     private func animateRecipesRetrieved() {
-        self.screenTitleLabel.textAlignment = .left
-        
-        self.screenTitleLabelTopConstraint.isActive = false
-        self.screenTitleLabelCenterXConstraint.isActive = false
-        self.searchBarCenterXContraint.isActive = false
-        
-        self.searchBarTopConstraint.constant = self.searchBarTopConstraint.constant / 5
-        self.searchBarWidthConstraint.constant = self.view.frame.width - 40
-        
-        NSLayoutConstraint.activate([
-            self.screenTitleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            self.screenTitleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            self.searchBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            self.resultsNumberLabel.leadingAnchor.constraint(equalTo: screenTitleLabel.leadingAnchor)
-        ])
-        
+        screenTitleLabel.textAlignment = .left
+        NSLayoutConstraint.deactivate(screenTitleLabelDefaultConstraints + searchBarDefaultContraints)
+        NSLayoutConstraint.activate(constraintsWhenRecipesFound)
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)

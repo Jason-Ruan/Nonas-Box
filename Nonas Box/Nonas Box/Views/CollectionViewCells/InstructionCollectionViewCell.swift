@@ -43,6 +43,10 @@ class InstructionCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    static var identifier: String {
+        return String(describing: self)
+    }
+    
     // MARK: - Private Methods
     private func addSubviews() {
         contentView.addSubview(stepNumberLabel)

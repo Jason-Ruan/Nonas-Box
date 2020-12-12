@@ -198,7 +198,7 @@ class RecipeDetailVC: UIViewController {
     
     private func resetColorOfReadText(selectedCellIndexPath: IndexPath) {
         // Purpose is to reset the color of text in previous selected cell being read by voice over.
-        guard let cell = stepByStepInstructionsTableView.cellForRow(at: selectedCellIndexPath) as? StepByStepInstructionTableViewCell,
+        guard let cell = stepByStepInstructionsTableView.tableView.cellForRow(at: selectedCellIndexPath) as? StepByStepInstructionTableViewCell,
               let steps = recipeDetails?.analyzedInstructions?[selectedCellIndexPath.section - 1].steps
         else { return }
         
@@ -237,24 +237,30 @@ class RecipeDetailVC: UIViewController {
         present(safariViewController, animated: true)
     }
     
+    @objc private func dismissVC() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
 }
 
 
 // MARK: - Private Constraints
 extension RecipeDetailVC {
-    private func addSubviews() {
+    private func setUpViews() {
         view.addSubview(backgroundImageView)
         backgroundImageView.addSubview(blurEffectView)
         blurEffectView.frame = backgroundImageView.bounds
         
         view.addSubview(recipeImageView)
+        recipeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             recipeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ] + recipeImageViewExpandedConstraints)
         
         view.addSubview(recipeBlurbInfoLabel)
+        recipeBlurbInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             recipeBlurbInfoLabel.topAnchor.constraint(equalTo: recipeImageView.topAnchor, constant: 5),
             recipeBlurbInfoLabel.bottomAnchor.constraint(equalTo: recipeImageView.bottomAnchor),
@@ -270,24 +276,17 @@ extension RecipeDetailVC {
             buttonStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.05)
         ])
         
-        view.addSubview(segmentedControlForTableview)
-        segmentedControlForTableview.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            segmentedControlForTableview.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor),
-            segmentedControlForTableview.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
         view.addSubview(stepByStepInstructionsTableView)
         stepByStepInstructionsTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: segmentedControlForTableview.bottomAnchor, constant: 20),
+            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 20),
             stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
     
-    public func addCloseButton() {
+    private func addCloseButton() {
         view.addSubview(closeVCButton)
         closeVCButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

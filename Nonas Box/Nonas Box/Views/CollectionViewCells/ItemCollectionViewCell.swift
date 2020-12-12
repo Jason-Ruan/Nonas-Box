@@ -11,43 +11,28 @@ import UIKit
 class ItemCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI Objects
-    lazy var itemImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
-    }()
-    
-    lazy var itemNameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        return label
-    }()
+    private lazy var itemImageView: UIImageView = { return UIImageView() }()
+    private lazy var itemNameLabel: UILabel = { return UILabel(alignment: .center) }()
     
     
     //MARK: - Properties
-    var item: UPC_Item! {
+    public var item: UPC_Item! {
         didSet {
             configureCell(forItem: item)
         }
     }
     
-    static var identifier: String {
+    public static var identifier: String {
         return String(describing: self)
     }
     
     //MARK: - Initializerss
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         layer.cornerRadius = 15
         layer.borderWidth = 1
         layer.borderColor = UIColor.lightGray.cgColor
-        
-        constrainItemImageView()
-        constrainItemNameLabel()
+        setUpViews()
     }
     
     required init?(coder: NSCoder) {
@@ -61,30 +46,38 @@ class ItemCollectionViewCell: UICollectionViewCell {
         
         guard let barcode = item.barcode, let imageURLs = item.images else { return }
         
-        UPC_ItemDB_Client.manager.getItemImage(barcode: barcode, imageURLs: imageURLs) { (result) in
+//        UPC_ItemDB_Client.manager.getItemImage(barcode: barcode, imageURLs: imageURLs) { (result) in
+//            switch result {
+//                case .failure(let error):
+//                    print(error)
+//                case .success(let image):
+//                    self.itemImageView.image = image
+//            }
+//        }
+        ImageHelper.shared.getImage(cacheKey: barcode, urls: imageURLs) { [weak self] (result) in
             switch result {
                 case .failure(let error):
                     print(error)
                 case .success(let image):
-                    self.itemImageView.image = image
+                    self?.itemImageView.image = image
             }
         }
     }
     
     
     //MARK: - Constraints
-    private func constrainItemImageView() {
-        contentView.addSubview(itemImageView)
+    private func setUpViews() {
+        addSubview(itemImageView)
+        itemImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             itemImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 10),
             itemImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             itemImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             itemImageView.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.75)
         ])
-    }
     
-    private func constrainItemNameLabel() {
-        contentView.addSubview(itemNameLabel)
+        addSubview(itemNameLabel)
+        itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             itemNameLabel.topAnchor.constraint(equalTo: itemImageView.bottomAnchor, constant: 5),
             itemNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 5),

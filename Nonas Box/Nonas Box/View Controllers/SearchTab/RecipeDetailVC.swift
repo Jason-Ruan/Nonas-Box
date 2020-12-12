@@ -21,6 +21,9 @@ class RecipeDetailVC: UIViewController {
     init(recipeDetails: RecipeDetails) {
         super.init(nibName: nil, bundle: nil)
         self.recipeDetails = recipeDetails
+        addCloseButton()
+        loadImage(recipeDetails: recipeDetails)
+        recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
     }
     
     required init?(coder: NSCoder) {

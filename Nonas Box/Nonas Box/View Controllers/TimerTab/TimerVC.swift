@@ -147,9 +147,10 @@ class TimerVC: UIViewController {
         let hoursToSec = timerPickerView.selectedRow(inComponent: 0) * 3600
         let minsToSec = timerPickerView.selectedRow(inComponent: 1) * 60
         let sec = timerPickerView.selectedRow(inComponent: 2)
-        timerDisplayCount = hoursToSec + minsToSec + sec
+        let totalTime = hoursToSec + minsToSec + sec
+        guard totalTime > 0 else { return }
         
-        guard timerDisplayCount > 0 else { return }
+        timerDisplayCount = totalTime
         
         resumeTimer()
         

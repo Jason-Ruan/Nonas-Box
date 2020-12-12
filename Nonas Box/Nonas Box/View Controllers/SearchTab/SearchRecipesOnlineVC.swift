@@ -202,11 +202,11 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         guard let query = searchBar.text else { return }
         
-        view.addSubview(loadingScreenView)
+        showLoadingScreen()
         
         // Check if the query has been searched before and show relevant results/alert
         if let searchedResults = searchedQueryResults[query] {
-            loadingScreenView.removeFromSuperview()
+            removeLoadingScreen()
             
             if !searchedResults.isEmpty {
                 recipes = searchedResults

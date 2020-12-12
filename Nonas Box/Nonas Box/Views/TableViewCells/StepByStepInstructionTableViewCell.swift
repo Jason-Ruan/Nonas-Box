@@ -32,6 +32,9 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
         }
     }
     
+    static var identifier: String {
+        return String(describing: self)
+    }
     
     // MARK: - UI Objects
     lazy var stepNumberLabel: UILabel = {

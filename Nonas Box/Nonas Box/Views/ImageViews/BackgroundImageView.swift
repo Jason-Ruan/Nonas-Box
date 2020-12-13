@@ -9,13 +9,28 @@
 import UIKit
 
 class BackgroundImageView: UIImageView {
+    
+    // MARK: - Private Properties
+    private let visualEffectView: UIVisualEffectView
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    // MARK: - Initializers
+    override init(frame: CGRect) {
+        self.visualEffectView = UIVisualEffectView(frame: frame)
+        super.init(frame: frame)
+        contentMode = .scaleAspectFill
+        setUpVisualEffects()
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setUpVisualEffects() {
+        addSubview(visualEffectView)
+        let blurEffect = traitCollection.userInterfaceStyle == .dark ?
+            UIBlurEffect(style: .dark) : UIBlurEffect(style: .systemThinMaterialLight)
+        visualEffectView.effect = blurEffect
+    }
+    
 }

@@ -11,14 +11,14 @@ import UIKit
 class CookingCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI Objects
-    lazy var recipeImageView: UIImageView = {
+    private lazy var recipeImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
     
-    lazy var recipeNameLabel: RecipeBlurbLabel = {
+    private lazy var recipeNameLabel: RecipeBlurbLabel = {
         return RecipeBlurbLabel()
     }()
     
@@ -54,6 +54,10 @@ class CookingCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        recipeImageView.image = nil
+        super.prepareForReuse()
+    }
     
     // MARK: - Private Methods
     private func setUpViews() {

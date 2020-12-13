@@ -11,20 +11,11 @@ import UIKit
 class InventoryVC: UIViewController {
     
     //MARK: - UI Objects
-    lazy var itemCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width / 2.5,
-                                 height: view.safeAreaLayoutGuide.layoutFrame.height / 4)
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        
-        let cv = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+    private lazy var itemCollectionView: UICollectionView = {
+        let cv = UICollectionView(scrollDirection: .horizontal, scrollIndicatorsIsVisible: true)
         cv.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: "itemCell")
-        cv.backgroundColor = .clear
         cv.dataSource = self
         cv.delegate = self
-        cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
     
@@ -63,11 +54,12 @@ class InventoryVC: UIViewController {
     //MARK: - Constraints
     private func constrainItemCollectionView() {
         view.addSubview(itemCollectionView)
+        itemCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             itemCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             itemCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            itemCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            itemCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            itemCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            itemCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
@@ -87,5 +79,8 @@ extension InventoryVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width / 3, height: view.safeAreaLayoutGuide.layoutFrame.height / 4)
+    }
     
 }

@@ -63,6 +63,9 @@ class StepByStepInstructionsTableView: UIView {
     // MARK: - Private ObjC Functions
     @objc
     private func jumpToSection() {
+        guard tableView.numberOfSections > underlinedSegmentedControl.segmentedControl.selectedSegmentIndex,
+              tableView.numberOfRows(inSection: underlinedSegmentedControl.segmentedControl.selectedSegmentIndex) > 0 else { return }
+        
         tableView.scrollToRow(at: IndexPath(row: 0, section: underlinedSegmentedControl.segmentedControl.selectedSegmentIndex), at: .top, animated: true)
     }
 

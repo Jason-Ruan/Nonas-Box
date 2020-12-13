@@ -95,6 +95,8 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        foodImage.image = nil
+        bookmarkedImageView.image = nil
         super.prepareForReuse()
     }
     
@@ -176,11 +178,10 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         ImageHelper.shared.getImage(urls: [imageURL]) { [weak self] (result) in
             switch result {
                 case .failure(let error):
-                    self?.foodImage.image = UIImage(systemName: "xmark.rectangle.fill")!
                     print(error)
+                    self?.foodImage.image = UIImage(systemName: "xmark.rectangle.fill")!
                 case .success(let image):
                     self?.foodImage.image = image
-                    self?.setNeedsLayout()
             }
             self?.spinner.stopAnimating()
         }

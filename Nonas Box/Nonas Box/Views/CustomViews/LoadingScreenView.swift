@@ -13,8 +13,10 @@ class LoadingScreenView: UIView {
     // MARK: - UI Objects
     private lazy var loadingBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = #colorLiteral(red: 0.09753478318, green: 0.0969626084, blue: 0.09797952324, alpha: 0.75)
         view.layer.cornerRadius = 25
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.systemGray3.cgColor
         return view
     }()
     

@@ -39,21 +39,17 @@ class ItemCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        itemImageView.image = nil
+        super.prepareForReuse()
+    }
+    
     
     //MARK: - Functions
     private func configureCell(forItem item: UPC_Item) {
         itemNameLabel.text = item.title?.capitalized
         
         guard let barcode = item.barcode, let imageURLs = item.images else { return }
-        
-//        UPC_ItemDB_Client.manager.getItemImage(barcode: barcode, imageURLs: imageURLs) { (result) in
-//            switch result {
-//                case .failure(let error):
-//                    print(error)
-//                case .success(let image):
-//                    self.itemImageView.image = image
-//            }
-//        }
         ImageHelper.shared.getImage(cacheKey: barcode, urls: imageURLs) { [weak self] (result) in
             switch result {
                 case .failure(let error):

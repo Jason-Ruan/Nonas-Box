@@ -18,6 +18,7 @@
 		0868904823A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */; };
 		0868904923A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */; };
 		0869070E23A830A600634F1B /* MultipeerShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869070D23A830A600634F1B /* MultipeerShareVC.swift */; };
+		086AE0D42586B75900928DEA /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086AE0D32586B75900928DEA /* BackgroundImageView.swift */; };
 		0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */; };
 		0895E44B2569E58400895753 /* UnderlinedSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */; };
 		0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6272385F40C0059D9CE /* AppDelegate.swift */; };
@@ -76,6 +77,7 @@
 		083FEB6724FDEB4900B4DEE0 /* CookVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookVC.swift; sourceTree = "<group>"; };
 		0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0869070D23A830A600634F1B /* MultipeerShareVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerShareVC.swift; sourceTree = "<group>"; };
+		086AE0D32586B75900928DEA /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
 		0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStuffVC.swift; sourceTree = "<group>"; };
 		0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedSegmentedControl.swift; sourceTree = "<group>"; };
 		0899D6242385F40C0059D9CE /* Nonas Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nonas Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +207,14 @@
 			path = PickerViews;
 			sourceTree = "<group>";
 		};
+		086AE0D22586B71800928DEA /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				086AE0D32586B75900928DEA /* BackgroundImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
 		0895E4492569E52C00895753 /* SegmentedControls */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,12 +294,13 @@
 		0899D64B2385F5900059D9CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				08CC3767255725C600EEC9BC /* Buttons */,
+				08CC376A255725C600EEC9BC /* CollectionViewCells */,
 				082F189225807AEA00035E65 /* CustomViews */,
+				086AE0D22586B71800928DEA /* ImageViews */,
+				082781C12577600200F008E4 /* Labels */,
 				082F189E25808E7000035E65 /* PickerViews */,
 				0895E4492569E52C00895753 /* SegmentedControls */,
-				08CC3767255725C600EEC9BC /* Buttons */,
-				082781C12577600200F008E4 /* Labels */,
-				08CC376A255725C600EEC9BC /* CollectionViewCells */,
 				08CC3765255725C600EEC9BC /* TableViewCells */,
 			);
 			path = Views;
@@ -529,6 +540,7 @@
 				082F189425807B1600035E65 /* TimerPickerView.swift in Sources */,
 				08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */,
 				08AA2965257455DF00862B14 /* UICollectionViewExtensions.swift in Sources */,
+				086AE0D42586B75900928DEA /* BackgroundImageView.swift in Sources */,
 				08E9758B24B80E4400BF0DC3 /* Recipe.swift in Sources */,
 				08343B3F25853E460067D562 /* UIImageExtension.swift in Sources */,
 				08A1560024C53A21000B7F81 /* RecipeDetailVC.swift in Sources */,

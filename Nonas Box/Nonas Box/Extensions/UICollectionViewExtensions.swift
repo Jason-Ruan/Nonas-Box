@@ -17,6 +17,7 @@ public extension UICollectionView {
         layout.scrollDirection = scrollDirection
         layout.minimumInteritemSpacing = 5
         layout.minimumLineSpacing = 5
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         
         self.init(frame: .zero, collectionViewLayout: layout)
         

@@ -14,5 +14,6 @@ extension UISearchBar {
         self.init()
         placeholder = placeHolderText
         searchBarStyle = .minimal
+        searchTextField.adjustsFontSizeToFitWidth = true
     }
 }

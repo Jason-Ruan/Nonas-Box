@@ -15,7 +15,7 @@ class UPC_ItemDB_Client {
         
         // Find if item was already saved with PersistenceHelper
         do {
-            let upcItems = try UPC_Item_PersistenceHelper.manager.getSavedItems()
+            let upcItems = try UPC_Item_PersistenceHelper.manager.getSavedItemsDictionary()
             if let item = upcItems[barcode] {
                 completionHandler(.success(item))
                 return

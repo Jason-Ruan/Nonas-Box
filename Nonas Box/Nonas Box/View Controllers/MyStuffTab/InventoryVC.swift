@@ -41,10 +41,7 @@ class InventoryVC: UIViewController {
     //MARK: - Private Functions
     private func loadInventory() {
         do {
-            inventory = try Array( UPC_Item_PersistenceHelper.manager.getSavedItems().values).sorted(by: { (item1, item2) -> Bool in
-                guard let item1Title = item1.title, let item2Title = item2.title else { return false }
-                return item1Title < item2Title
-            })
+            inventory = try UPC_Item_PersistenceHelper.manager.getSavedItems()
         } catch {
             print("Unable to load save items")
         }

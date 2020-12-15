@@ -18,8 +18,15 @@ class UPC_Item_PersistenceHelper {
         try persistenceHelper.delete(key: barcode)
     }
     
-    func getSavedItems() throws -> [String : UPC_Item] {
+    func getSavedItemsDictionary() throws -> [String : UPC_Item] {
         return try persistenceHelper.getObjects()
+    }
+    
+    func getSavedItems() throws -> [UPC_Item] {
+        return try persistenceHelper.getObjects().values.sorted(by: { (item1, item2) -> Bool in
+            guard let title1 = item1.title, let title2 = item2.title else { return false }
+            return title1 < title2
+        })
     }
     
     //MARK: - Singleton Properties

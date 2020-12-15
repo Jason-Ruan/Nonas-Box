@@ -25,7 +25,7 @@ class MyStuffVC: UIViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.contentMode = .center
         cv.backgroundColor = .clear
-        cv.register(MyStuffOptionCollectionViewCell.self, forCellWithReuseIdentifier: "myStuffOptionCell")
+        cv.register(MyStuffOptionCollectionViewCell.self, forCellWithReuseIdentifier: MyStuffOptionCollectionViewCell.identifier)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.dataSource = self
         cv.delegate = self
@@ -59,7 +59,7 @@ extension MyStuffVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myStuffOptionCell", for: indexPath) as? MyStuffOptionCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyStuffOptionCollectionViewCell.identifier, for: indexPath) as? MyStuffOptionCollectionViewCell else { return UICollectionViewCell() }
         cell.myStuffButtonOption = MyStuffButtonOptions.allCases[indexPath.row]
         return cell
     }

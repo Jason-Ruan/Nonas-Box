@@ -37,22 +37,24 @@ class MenuButton: UIButton {
     
     
     // MARK: - Private Properties
-    private var symbol: SymbolUnicodeScalar?
-    private var title: String?
+    private let symbol: SymbolUnicodeScalar
+    private let title: String
     
     // MARK: - Initializers
     init(symbol: SymbolUnicodeScalar, title: String, color: UIColor ) {
+        self.symbol = symbol
+        self.title = title
+        
         super.init(frame: .zero)
         
         showsTouchWhenHighlighted = true
         backgroundColor = color
         layer.cornerRadius = 20
         layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
+        layer.borderColor = titleLabel?.textColor?.cgColor
         translatesAutoresizingMaskIntoConstraints = false
         
-        self.symbol = symbol
-        self.title = title
+        
         setUpViews()
         configureViews()
     }
@@ -82,7 +84,7 @@ class MenuButton: UIButton {
     }
     
     private func configureViews() {
-        unicodeScalarSymbolLabel.text = symbol?.rawValue
+        unicodeScalarSymbolLabel.text = symbol.rawValue
         menuTitleLabel.text = title
     }
     

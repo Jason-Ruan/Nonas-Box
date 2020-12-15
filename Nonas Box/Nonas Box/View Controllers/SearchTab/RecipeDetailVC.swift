@@ -70,6 +70,8 @@ class RecipeDetailVC: UIViewController {
     
     private lazy var recipeImageView: UIImageView = {
         let iv = UIImageView(frame: view.bounds)
+        iv.layer.cornerRadius = 15
+        iv.layer.maskedCorners = []
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
         return iv
@@ -100,10 +102,10 @@ class RecipeDetailVC: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.isHidden = false
         setUpViews()
         synthesizer.delegate = self
         configureAVAudioSession()
+        configureNavigationBarForTranslucence()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -347,6 +349,7 @@ extension RecipeDetailVC {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 NSLayoutConstraint.deactivate(self.collapsedViewConstraints)
                 NSLayoutConstraint.activate(self.expandedViewConstraints)
+                self.recipeImageView.layer.maskedCorners = []
                 self.view.layoutIfNeeded()
             }, completion: nil)
             
@@ -354,6 +357,7 @@ extension RecipeDetailVC {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 NSLayoutConstraint.deactivate(self.expandedViewConstraints)
                 NSLayoutConstraint.activate(self.collapsedViewConstraints)
+                self.recipeImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
                 self.view.layoutIfNeeded()
             }, completion: nil)
         }

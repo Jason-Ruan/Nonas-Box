@@ -57,7 +57,6 @@ class RecipeDetailVC: UIViewController {
     
     private lazy var collapsedViewConstraints: [NSLayoutConstraint] = {
         [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
-//         self.buttonStackView.centerXAnchor.constraint(equalTo: recipeBlurbInfoLabel.centerXAnchor),
          self.buttonStackView.leadingAnchor.constraint(equalTo: recipeBlurbInfoLabel.leadingAnchor),
          self.buttonStackView.trailingAnchor.constraint(equalTo: recipeBlurbInfoLabel.trailingAnchor),
          self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),

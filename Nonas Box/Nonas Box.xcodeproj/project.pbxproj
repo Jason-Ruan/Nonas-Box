@@ -160,9 +160,9 @@
 			isa = PBXGroup;
 			children = (
 				0869070D23A830A600634F1B /* MultipeerShareVC.swift */,
-				08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */,
 				0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */,
 				08C4F2962523ED2B008E9964 /* InventoryVC.swift */,
+				08A1560124C5F902000B7F81 /* BarcodeScanVC.swift */,
 			);
 			path = MyStuffTab;
 			sourceTree = "<group>";

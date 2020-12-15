@@ -271,9 +271,7 @@ extension TimerVC: UIPickerViewDataSource, UIPickerViewDelegate {
         switch component {
             case 0:
                 return 24
-            case 1:
-                return 60
-            case 2:
+            case 1, 2:
                 return 60
             default:
                 return 0

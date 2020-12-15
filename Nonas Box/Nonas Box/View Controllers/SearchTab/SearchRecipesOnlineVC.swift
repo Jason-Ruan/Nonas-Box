@@ -137,7 +137,7 @@ class SearchRecipesOnlineVC: UIViewController {
 
 extension SearchRecipesOnlineVC: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.showsCancelButton = true
+        searchBar.enablesReturnKeyAutomatically = false
         searchBar.placeholder = nil
         return true
     }
@@ -148,8 +148,8 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        guard let query = searchBar.text else { return }
+        searchBar.resignFirstResponder()
+        guard let query = searchBar.text, !query.isEmpty else { return }
         
         showLoadingScreen()
         
@@ -196,7 +196,6 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
         if recipes.count > 0 {
             recipeCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: false)
         }
-        searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

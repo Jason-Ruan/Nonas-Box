@@ -38,7 +38,7 @@ class MyStuffVC: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.systemBlue.cgColor, UIColor.clear.cgColor]
+        gradientLayer.colors = [UIColor.systemBlue.cgColor, UIColor.white.cgColor]
         gradientLayer.frame = self.view.bounds
         view.layer.insertSublayer(gradientLayer, at: 0)
         view.addSubview(myStuffButtonsCollectionView)

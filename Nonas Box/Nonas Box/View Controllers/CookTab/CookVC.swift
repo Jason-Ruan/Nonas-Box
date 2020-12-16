@@ -32,6 +32,9 @@ class CookVC: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         navigationController?.navigationBar.isHidden = true
         addSubviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadBookmarkedRecipes()
     }
     
@@ -49,13 +52,10 @@ class CookVC: UIViewController {
     }
     
     private func loadBookmarkedRecipes() {
-        SpoonacularAPIClient.manager.getBookmarkedRecipes { (result) in
-            switch result {
-                case .failure(let error):
-                    print(error)
-                case .success(let detailedRecipes):
-                    self.recipes = detailedRecipes
-            }
+        do {
+            recipes = try Spoonacular_PersistenceHelper.manager.getSavedRecipes()
+        } catch {
+            print(error)
         }
     }
     

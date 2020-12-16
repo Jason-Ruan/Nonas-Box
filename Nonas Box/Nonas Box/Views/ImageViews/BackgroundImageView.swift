@@ -19,6 +19,7 @@ class BackgroundImageView: UIImageView {
         self.visualEffectView = UIVisualEffectView(frame: frame)
         super.init(frame: frame)
         contentMode = .scaleAspectFill
+        clipsToBounds = true
         setUpVisualEffects()
     }
     

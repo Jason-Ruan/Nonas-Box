@@ -65,7 +65,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         didSet {
             guard let recipe = self.recipe else { return }
             configureCell(recipe: recipe)
-            bookmarkedImageView.isHidden = checkIfRecipeIsBookmarked(id: recipe.id)
+            bookmarkedImageView.isHidden = !checkIfRecipeIsBookmarked(id: recipe.id)
         }
     }
     
@@ -96,7 +96,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         foodImage.image = nil
-        bookmarkedImageView.image = nil
         super.prepareForReuse()
     }
     
@@ -196,11 +195,11 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     private func checkIfRecipeIsBookmarked(id: Int) -> Bool {
-        // For bookmarkedImageView.isHidden
-        if let bookmarkedRecipes = UserDefaults.standard.object(forKey: "bookmarkedRecipes") as? [String : String] {
-            return bookmarkedRecipes[id.description] == nil
-        } else {
-            return true
+        do {
+            return try Spoonacular_PersistenceHelper.manager.checkIsSaved(forRecipeID: id)
+        } catch {
+            print(error)
+            return false
         }
     }
     

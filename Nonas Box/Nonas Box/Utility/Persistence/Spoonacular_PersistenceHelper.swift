@@ -10,16 +10,27 @@ import Foundation
 
 class Spoonacular_PersistenceHelper {
     //MARK: - Persistence Methods
-    func save(key: String, item: RecipeDetails) throws {
-        try persistenceHelper.save(key: key, newElement: item)
+    func save(recipeID: Int, recipeDetails: RecipeDetails) throws {
+        try persistenceHelper.save(key: recipeID.description, newElement: recipeDetails)
     }
     
-    func delete(barcode: String) throws {
-        try persistenceHelper.delete(key: barcode)
+    func delete(recipeID: Int) throws {
+        try persistenceHelper.delete(key: recipeID.description)
     }
     
-    func getSavedItems() throws -> [String : RecipeDetails] {
+    func getSavedRecipesDictionary() throws -> [String : RecipeDetails] {
         return try persistenceHelper.getObjects()
+    }
+    
+    func getSavedRecipes() throws -> [RecipeDetails] {
+        return try persistenceHelper.getObjects().values.sorted(by: { (recipe1, recipe2) -> Bool in
+            guard let title1 = recipe1.title, let title2 = recipe2.title else { return false }
+            return title1 < title2
+        })
+    }
+    
+    func checkIsSaved(forRecipeID recipeID: Int) throws -> Bool {
+        return try persistenceHelper.getObjects()[recipeID.description] != nil
     }
     
     //MARK: - Singleton Properties

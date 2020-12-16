@@ -77,7 +77,7 @@ class RecipeDetailVC: UIViewController {
         return iv
     }()
     
-    private lazy var buttonStackView: UIStackView = {
+    private lazy var buttonStackView: ButtonStackView = {
         let sv = ButtonStackView(frame: .zero)
         sv.bookmarkButton.setImage(checkIfRecipeIsBookmarked(id: recipeDetails?.id ?? 0) ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
         sv.bookmarkButton.addTarget(self, action: #selector(updateBookmarkStatus), for: .touchUpInside)
@@ -101,7 +101,7 @@ class RecipeDetailVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setUpViews()
         synthesizer.delegate = self
         configureAVAudioSession()
@@ -155,10 +155,10 @@ class RecipeDetailVC: UIViewController {
     }
     
     private func checkIfRecipeIsBookmarked(id: Int) -> Bool {
-        // For bookmarkedImageView.isHidden
-        if let bookmarkedRecipes = UserDefaults.standard.object(forKey: "bookmarkedRecipes") as? [String : String] {
-            return bookmarkedRecipes[id.description] != nil
-        } else {
+        do {
+            return try Spoonacular_PersistenceHelper.manager.checkIsSaved(forRecipeID: id)
+        } catch {
+            print(error)
             return false
         }
     }
@@ -175,26 +175,17 @@ class RecipeDetailVC: UIViewController {
     
     // MARK: - Obj-C Functions
     @objc private func updateBookmarkStatus() {
-        guard let bookmarkButton = buttonStackView.arrangedSubviews.first as? UIButton, let recipeID = recipeDetails?.id, let recipeTitle = recipeDetails?.title else { return }
-        
-        if var bookmarkedRecipes = UserDefaults.standard.value(forKey: "bookmarkedRecipes") as? [String : String] {
-            // Adds recipe to bookmarkedRecipes
-            if bookmarkedRecipes[recipeID.description] == nil {
-                bookmarkedRecipes[recipeID.description] = recipeTitle
-                UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
-                bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-                // Removes recipe from bookmarkedRecipes
+        guard let recipeDetails = recipeDetails else { return }
+        do {
+            if try Spoonacular_PersistenceHelper.manager.getSavedRecipesDictionary()[recipeDetails.id.description] != nil {
+                try Spoonacular_PersistenceHelper.manager.delete(recipeID: recipeDetails.id)
+                buttonStackView.bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             } else {
-                bookmarkedRecipes.removeValue(forKey: recipeID.description)
-                UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
-                bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+                try Spoonacular_PersistenceHelper.manager.save(recipeID: recipeDetails.id, recipeDetails: recipeDetails)
+                buttonStackView.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             }
-        } else {
-            // Initializes bookmarkedRecipes and adds recipe to it
-            var bookmarkedRecipes = [String : String]()
-            bookmarkedRecipes[recipeID.description] = recipeTitle
-            UserDefaults.standard.set(bookmarkedRecipes, forKey: "bookmarkedRecipes")
-            bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } catch {
+            print(error)
         }
     }
     
@@ -357,7 +348,7 @@ extension RecipeDetailVC {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 NSLayoutConstraint.deactivate(self.expandedViewConstraints)
                 NSLayoutConstraint.activate(self.collapsedViewConstraints)
-                self.recipeImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
+                self.recipeImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
                 self.view.layoutIfNeeded()
             }, completion: nil)
         }

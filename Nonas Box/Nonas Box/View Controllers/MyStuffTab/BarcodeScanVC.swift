@@ -181,8 +181,8 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         scannedBarCodes.append(code)
         UPC_ItemDB_Client.manager.getItem(barcode: code) { (result) in
             switch result {
-                case .failure(let error):
-                    self.showAlert(message: "\(error.localizedDescription): \(error.rawValue)")
+                case .failure:
+                    self.showAlert(message: "Oops, looks like we don't have this item in our database")
                 case .success(let upc_item):
                     self.groceryItems.append(upc_item)
             }

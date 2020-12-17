@@ -13,8 +13,6 @@ struct UPC_Item_Results: Codable {
 }
 
 struct UPC_Item: Codable {
-    let ean: String?
-    let upc: String?
     let title: String?
     let description: String?
     let brand: String?
@@ -23,5 +21,8 @@ struct UPC_Item: Codable {
     var barcode: String? {
         return upc ?? ean
     }
+    
+    private let ean: String?
+    private let upc: String?
     
 }

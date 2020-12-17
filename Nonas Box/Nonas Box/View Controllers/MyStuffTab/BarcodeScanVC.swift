@@ -57,21 +57,6 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         requestAVCapturePermissions()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = false
-        if (captureSession?.isRunning == false) {
-            captureSession.startRunning()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if (captureSession?.isRunning == true) {
-            captureSession.stopRunning()
-        }
-    }
-    
     override func viewDidLayoutSubviews() {
         previewLayer.frame = barcodeScanArea.bounds
     }

@@ -119,7 +119,9 @@ extension InventoryVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width / 3, height: view.safeAreaLayoutGuide.layoutFrame.height / 4)
+        return CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width / 3.5, height: view.safeAreaLayoutGuide.layoutFrame.height / 4)
     }
+    
+    
     
 }

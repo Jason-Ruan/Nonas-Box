@@ -365,8 +365,8 @@ extension RecipeDetailVC {
     private func updateSegmentedControlIndexWithSection() {
         let visiblerows = stepByStepInstructionsTableView.tableView.indexPathsForVisibleRows
         if let lastIndex = visiblerows?.last {
-            stepByStepInstructionsTableView.underlinedSegmentedControl.segmentedControl.selectedSegmentIndex = lastIndex.section
-            stepByStepInstructionsTableView.underlinedSegmentedControl.index = lastIndex.section
+            stepByStepInstructionsTableView.underlinedSegmentedControl.segmentedControl.selectedSegmentIndex = lastIndex.section > 0 ? 1 : 0
+            stepByStepInstructionsTableView.underlinedSegmentedControl.index = lastIndex.section > 0 ? 1 : 0
         }
     }
 }

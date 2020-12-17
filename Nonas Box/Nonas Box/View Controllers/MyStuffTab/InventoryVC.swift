@@ -33,7 +33,12 @@ class InventoryVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureNavigationBarForTranslucence()
+        configureNavigationBarItems()
+        configureCollectionViewLongPress()
         constrainItemCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadInventory()
     }
     
@@ -45,6 +50,43 @@ class InventoryVC: UIViewController {
         } catch {
             print("Unable to load save items")
         }
+    }
+    
+    private func configureNavigationBarItems() {
+        let addItemButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentBarcodeScanVC))
+        navigationItem.rightBarButtonItem = addItemButton
+    }
+    
+    private func configureCollectionViewLongPress() {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(showActionSheet(gesture:)))
+        itemCollectionView.addGestureRecognizer(longPress)
+    }
+    
+    
+    // MARK: - ObjC Functions
+    @objc
+    private func presentBarcodeScanVC() {
+        present(BarcodeScanVC(), animated: true, completion: nil)
+    }
+    
+    @objc
+    private func showActionSheet(gesture: UILongPressGestureRecognizer) {
+        let point = gesture.location(in: self.itemCollectionView)
+        guard let indexPath = self.itemCollectionView.indexPathForItem(at: point) else { return }
+        
+        let actionSheet = UIAlertController(title: "What would you like to do with this item?", message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] (action) in
+            let item = self?.inventory[indexPath.row]
+            do {
+                try UPC_Item_PersistenceHelper.manager.delete(barcode: item?.barcode, title: item?.title)
+                self?.loadInventory()
+            } catch {
+                print(error)
+            }
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Edit", style: .default, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(actionSheet, animated: true, completion: nil)
     }
     
     

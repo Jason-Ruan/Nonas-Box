@@ -58,6 +58,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     }
     
     override func viewDidLayoutSubviews() {
+        guard previewLayer != nil else { return }
         previewLayer.frame = barcodeScanArea.bounds
     }
     

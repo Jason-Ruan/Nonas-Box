@@ -14,8 +14,8 @@ class UPC_Item_PersistenceHelper {
         try persistenceHelper.save(key: key, newElement: item)
     }
     
-    func delete(barcode: String) throws {
-        try persistenceHelper.delete(key: barcode)
+    func delete(barcode: String? = nil, title: String? = nil) throws {
+        try persistenceHelper.delete(key: barcode ?? title ?? "")
     }
     
     func getSavedItemsDictionary() throws -> [String : UPC_Item] {

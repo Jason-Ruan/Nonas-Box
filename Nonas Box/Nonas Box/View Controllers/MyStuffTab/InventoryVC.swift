@@ -71,8 +71,8 @@ class InventoryVC: UIViewController {
     
     @objc
     private func showActionSheet(gesture: UILongPressGestureRecognizer) {
-        let point = gesture.location(in: self.itemCollectionView)
-        guard let indexPath = self.itemCollectionView.indexPathForItem(at: point) else { return }
+        let point = gesture.location(in: itemCollectionView)
+        guard let indexPath = itemCollectionView.indexPathForItem(at: point) else { return }
         
         let actionSheet = UIAlertController(title: "What would you like to do with this item?", message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] (action) in

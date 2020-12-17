@@ -46,7 +46,9 @@ class UPC_ItemDB_Client {
                         
                         // Persist item locally on device
                         DispatchQueue.global(qos: .utility).async {
-                            try? UPC_Item_PersistenceHelper.manager.save(key: barcode, item: upc_item)
+                            if let itemBarcode = upc_item.barcode {
+                                try? UPC_Item_PersistenceHelper.manager.save(key: itemBarcode, item: upc_item)
+                            }
                         }
                         
                         completionHandler(.success(upc_item))

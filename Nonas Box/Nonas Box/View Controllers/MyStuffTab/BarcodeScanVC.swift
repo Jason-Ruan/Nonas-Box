@@ -242,4 +242,8 @@ extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlo
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width / 4, height: collectionView.frame.height / 2.5)
+    }
+    
 }

@@ -54,6 +54,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     private lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        spinner.color = .darkGray
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.hidesWhenStopped = true
         return spinner

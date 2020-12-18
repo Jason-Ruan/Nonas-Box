@@ -10,9 +10,23 @@ import AVFoundation
 import UIKit
 
 class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    // MARK: - UI Objects
+    private lazy var barcodeCollectionView: UICollectionView = {
+        let cv = UICollectionView(scrollDirection: .horizontal, scrollIndicatorsIsVisible: true)
+        cv.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
+        cv.dataSource = self
+        cv.delegate = self
+        cv.backgroundColor = .clear
+        return cv
+    }()
+    
+    private lazy var barcodeScanArea: BarcodeScanView = { return BarcodeScanView() }()
+    
+    
     //MARK: - Properties
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
+    
     private var scannedBarCodes: [String] = []
     private var groceryItems: [UPC_Item] = [] {
         didSet {
@@ -23,29 +37,6 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     override var prefersStatusBarHidden: Bool {
         return false
     }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
-    lazy var barcodeCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: view.frame.height / 3)), collectionViewLayout: layout)
-        cv.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
-        cv.dataSource = self
-        cv.delegate = self
-        cv.backgroundColor = .clear
-        layout.itemSize = CGSize(width: cv.frame.width / 4, height: cv.frame.height / 2)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
-    }()
-    
-    lazy var barcodeScanArea: UIView = {
-        let uv = UIView()
-        uv.translatesAutoresizingMaskIntoConstraints = false
-        return uv
-    }()
     
     
     //MARK: - LifeCycle Methods
@@ -82,24 +73,24 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     private func requestAVCapturePermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized: // The user has previously granted access to the camera.
-                self.setupCaptureSession()
-            
+                setupCaptureSession()
+                
             case .notDetermined: // The user has not yet been asked for camera access.
                 AVCaptureDevice.requestAccess(for: .video) { granted in
                     if granted {
-                        self.setupCaptureSession()
+                        DispatchQueue.main.async {
+                            self.setupCaptureSession()
+                        }
                     }
-            }
-            
+                }
+                
             case .denied: // The user has previously denied access.
                 showAlert(message: "Camera access has been denied.")
-                return
-            
-            
+                
+                
             case .restricted: // The user can't grant access due to restrictions.
                 showAlert(message: "Camera access is restricted")
-                return
-            
+                
             default:
                 return
         }
@@ -143,24 +134,23 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     private func setupBarcodeScanArea() {
         view.addSubview(barcodeScanArea)
+        barcodeScanArea.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            barcodeScanArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            barcodeScanArea.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: view.safeAreaLayoutGuide.layoutFrame.width / 6),
-            barcodeScanArea.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width / 6)),
-            barcodeScanArea.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 4)
+            barcodeScanArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            barcodeScanArea.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            barcodeScanArea.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            barcodeScanArea.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.height / 3.5)
         ])
-        
-        barcodeScanArea.layer.cornerRadius = 25
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.videoGravity = .resizeAspectFill
         previewLayer.cornerRadius = barcodeScanArea.layer.cornerRadius
-        
-        barcodeScanArea.layer.addSublayer(previewLayer)
+        barcodeScanArea.layer.insertSublayer(previewLayer, at: 0)
     }
     
     private func setupCollectionView() {
         view.addSubview(barcodeCollectionView)
+        barcodeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             barcodeCollectionView.topAnchor.constraint(equalTo: barcodeScanArea.bottomAnchor, constant: 10),
             barcodeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
@@ -175,12 +165,10 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
-        captureSession = nil
+        captureSession.stopRunning()
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        //        captureSession.stopRunning()
-        
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             
@@ -188,8 +176,6 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             found(code: stringValue)
         }
-        
-        //        dismiss(animated: true)
     }
     
     private func found(code: String) {
@@ -258,7 +244,7 @@ extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 4, height: collectionView.frame.height / 2.5)
+        return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height / 2.5)
     }
     
 }

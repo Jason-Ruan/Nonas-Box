@@ -20,6 +20,7 @@
 		0869070E23A830A600634F1B /* MultipeerShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869070D23A830A600634F1B /* MultipeerShareVC.swift */; };
 		086AE0D42586B75900928DEA /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086AE0D32586B75900928DEA /* BackgroundImageView.swift */; };
 		086AE0DB2586C8BE00928DEA /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086AE0DA2586C8BE00928DEA /* ButtonStackView.swift */; };
+		086AE0FB258C213300928DEA /* BarcodeScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086AE0FA258C213200928DEA /* BarcodeScanView.swift */; };
 		0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */; };
 		0895E44B2569E58400895753 /* UnderlinedSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */; };
 		0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6272385F40C0059D9CE /* AppDelegate.swift */; };
@@ -80,6 +81,7 @@
 		0869070D23A830A600634F1B /* MultipeerShareVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerShareVC.swift; sourceTree = "<group>"; };
 		086AE0D32586B75900928DEA /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
 		086AE0DA2586C8BE00928DEA /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
+		086AE0FA258C213200928DEA /* BarcodeScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanView.swift; sourceTree = "<group>"; };
 		0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStuffVC.swift; sourceTree = "<group>"; };
 		0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedSegmentedControl.swift; sourceTree = "<group>"; };
 		0899D6242385F40C0059D9CE /* Nonas Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nonas Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,6 +199,7 @@
 			children = (
 				08EF5C352582E27F00B40E75 /* LoadingScreenView.swift */,
 				08343B4A25854DD30067D562 /* StepByStepInstructionsTableView.swift */,
+				086AE0FA258C213200928DEA /* BarcodeScanView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				086AE0FB258C213300928DEA /* BarcodeScanView.swift in Sources */,
 				083FEB6824FDEB4900B4DEE0 /* CookVC.swift in Sources */,
 				08AA292F256F421100862B14 /* TabBarController.swift in Sources */,
 				0899D62C2385F40C0059D9CE /* RecipeCreationVC.swift in Sources */,

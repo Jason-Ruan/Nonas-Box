@@ -9,13 +9,34 @@
 import UIKit
 
 class BarcodeScanView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    // MARK: - Initializers
+    init() {
+        super.init(frame: .zero)
+        layer.cornerRadius = 25
+        configureInnerViews()
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Private Functions
+    private func configureInnerViews() {
+        let windowView = UIView()
+        windowView.layer.borderWidth = 2
+        windowView.layer.borderColor = UIColor.white.cgColor
+        windowView.backgroundColor = .clear
+        windowView.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(windowView)
+        NSLayoutConstraint.activate([
+            windowView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            windowView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            windowView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8),
+            windowView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+        ])
+    }
+    
 }

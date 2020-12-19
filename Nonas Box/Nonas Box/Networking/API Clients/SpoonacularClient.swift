@@ -10,12 +10,12 @@ import Foundation
 
 class SpoonacularAPIClient {
     
-    func getRecipes(query: String, completionHandler: @escaping (Result<SpoonacularResults, AppError>) -> () ) {
+    func getRecipes(query: String, offset: Int? = nil, completionHandler: @escaping (Result<[Recipe], AppError>) -> () ) {
         let formattedQuery = query.replacingOccurrences(of: " ", with: "%20")
         
         //TODO: Adjust url to fetch offset by x amount when user scrolls to end of results
         
-        let urlString = "https://api.spoonacular.com/recipes/search?query=\(formattedQuery)&number=10&instructionsRequired=true&apiKey=\(Secrets.spoonacular_api_key)"
+        let urlString = "https://api.spoonacular.com/recipes/search?query=\(formattedQuery)&number=10&offset=\(offset ?? 0)&instructionsRequired=true&apiKey=\(Secrets.spoonacular_api_key)"
         guard let url = URL(string: urlString) else {
             completionHandler(.failure(AppError.badURL))
             return
@@ -26,11 +26,11 @@ class SpoonacularAPIClient {
                 case .success(let data):
                     do {
                         let spoonacularResults = try JSONDecoder().decode(SpoonacularResults.self, from: data)
-                        guard let _ = spoonacularResults.results else {
+                        guard let recipeResults = spoonacularResults.results else {
                             completionHandler(.failure(.invalidJSONResponse))
                             return
                         }
-                        completionHandler(.success(spoonacularResults))
+                        completionHandler(.success(recipeResults))
                     } catch {
                         completionHandler(.failure(.couldNotParseJSON))
                 }

@@ -28,9 +28,7 @@ class TabBarController: UITabBarController {
         cookVC.tabBarItem = UITabBarItem(title: "Cook", image: UIImage(systemName: "dial.min.fill"), tag: 1)
         timerVC.tabBarItem = UITabBarItem(title: "Timer", image: UIImage(systemName: "timer"), tag: 2)
         myStuffVC.tabBarItem = UITabBarItem(title: "Pantry", image: UIImage(systemName: "tray.2.fill"), tag: 3)
-        
-        tabBar.tintColor = traitCollection.userInterfaceStyle == .dark ? .systemOrange : .systemBlue
-                
+                        
         viewControllers = [searchVC, cookVC, timerVC, myStuffVC]
     }
 

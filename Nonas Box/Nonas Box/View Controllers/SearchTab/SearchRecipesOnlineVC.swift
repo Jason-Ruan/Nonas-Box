@@ -172,8 +172,8 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                 self?.removeLoadingScreen()
                 
                 switch result {
-                    case .success(let spoonacularResults):
-                        guard let recipes = spoonacularResults.results, !recipes.isEmpty else {
+                    case .success(let recipeResults):
+                        guard !recipeResults.isEmpty else {
                             // Actions when API call is successful but found no results for query
                             self?.showNoResultsAlert()
                             self?.searchedQueryResults[query] = []
@@ -181,8 +181,9 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                         }
                         
                         // Actions when API call is successful and query has results
-                        self?.recipes = recipes
-                        self?.searchedQueryResults[query] = recipes
+                        self?.recipes = recipeResults
+                        self?.searchedQueryResults[query] = self?.recipes
+                        self?.lastSearchedQuery = query
                         
                         self?.resultsNumberLabel.text = "Here are some recipes we found for '\(query)'"
                         self?.animateRecipesRetrieved()

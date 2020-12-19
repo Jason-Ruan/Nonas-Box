@@ -39,6 +39,7 @@ class SearchRecipesOnlineVC: UIViewController {
     
     
     //MARK: - Private Properties
+    private var lastSearchedQuery: String?
     private var searchedQueryResults: [String : [Recipe] ] = [:]
     private var recipes: [Recipe] = [] {
         didSet {

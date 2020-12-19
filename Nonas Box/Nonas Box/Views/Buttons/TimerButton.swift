@@ -21,7 +21,7 @@ class TimerButton: UIButton {
     // MARK: - Properties
     var purpose: TimerButtonPurpose! {
         didSet {
-            setTitle(purpose.rawValue, for: .normal)
+            setAttributedTitle(getAttributedString(string: purpose.rawValue), for: .normal)
             removeTarget(nil, action: nil, for: .allEvents)
             changeButtonColor(purpose: purpose)
         }
@@ -69,5 +69,11 @@ class TimerButton: UIButton {
         }
     }
     
+    private func getAttributedString(string: String) -> NSAttributedString {
+        return NSAttributedString(string: string,
+                                  attributes: [.foregroundColor : UIColor.white,
+                                               .strokeWidth : -0.1,
+                                               .strokeColor : UIColor.darkGray])
+    }
     
 }

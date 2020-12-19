@@ -229,6 +229,20 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
         CGSize(width: collectionView.frame.width / 2 - 20, height: collectionView.frame.height / 2 - 20)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard (indexPath.row == recipes.count - 1) && recipes.count % 10 == 0 else { return }
+        guard let lastSearchedQuery = lastSearchedQuery else { return }
+        SpoonacularAPIClient.manager.getRecipes(query: lastSearchedQuery, offset: recipes.count) { [weak self] (result) in
+            switch result {
+                case .failure(let error):
+                    print(error)
+                    self?.showAlert(message: "Oops, looks like there was an error when trying to load more recipes for this search.")
+                case .success(let recipes):
+                    self?.recipes.append(contentsOf: recipes)
+            }
+        }
+    }
+    
 }
 
 

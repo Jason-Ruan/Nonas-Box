@@ -16,7 +16,6 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         cv.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
         cv.dataSource = self
         cv.delegate = self
-        cv.backgroundColor = .clear
         return cv
     }()
     

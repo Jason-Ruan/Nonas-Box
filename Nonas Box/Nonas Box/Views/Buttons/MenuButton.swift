@@ -11,6 +11,10 @@ import UIKit
 enum SymbolUnicodeScalar: String {
     case cardFileBox = "\u{1F5C3}"
     case bentoBox = "\u{1F371}"
+    case iceCube = "\u{1F9CA}"
+    case fryPan = "\u{1F373}"
+    case fire = "\u{1F525}"
+    case forkPlateKnife = "\u{1F37D}"
 }
 
 class MenuButton: UIButton {

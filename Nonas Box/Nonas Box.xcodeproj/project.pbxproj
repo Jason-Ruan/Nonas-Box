@@ -228,6 +228,15 @@
 			path = StackViews;
 			sourceTree = "<group>";
 		};
+		086AE0FE259007E400928DEA /* JSON Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				08E9758A24B80E4400BF0DC3 /* Recipe.swift */,
+				08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */,
+			);
+			path = "JSON Parsers";
+			sourceTree = "<group>";
+		};
 		0895E4492569E52C00895753 /* SegmentedControls */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,10 +269,7 @@
 				0899D64C2385F5950059D9CE /* Models */,
 				0899D64A2385F5840059D9CE /* View Controllers */,
 				0899D64B2385F5900059D9CE /* Views */,
-				08B74497251AE0EE0005161D /* Utility */,
-				08E9757E24B420FE00BF0DC3 /* Networking */,
 				0899D6492385F4220059D9CE /* Supporting Files */,
-				08B4D52F24DF7C53006C30EA /* Extensions */,
 				0899D6302385F4120059D9CE /* Assets.xcassets */,
 				0899D6352385F4120059D9CE /* Info.plist */,
 				0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */,
@@ -323,8 +329,10 @@
 		0899D64C2385F5950059D9CE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				08E9758A24B80E4400BF0DC3 /* Recipe.swift */,
-				08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */,
+				086AE0FE259007E400928DEA /* JSON Parsers */,
+				08B4D52F24DF7C53006C30EA /* Extensions */,
+				08E9757E24B420FE00BF0DC3 /* Networking */,
+				08B74497251AE0EE0005161D /* Utility */,
 			);
 			path = Models;
 			sourceTree = "<group>";

@@ -45,6 +45,12 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
+    private var preferredMeasurementSystem: MeasurementSystem = .usa {
+        didSet {
+            stepByStepInstructionsTableView.tableView.reloadData()
+        }
+    }
+    
     
     // MARK: - Private Constraint Variables
     
@@ -278,7 +284,7 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.section {
             case 0:
                 guard let ingredientName = ingredients[indexPath.row].name?.capitalized,
-                      let ingredientMeasurements = ingredients[indexPath.row].measures.us.shortHandMeasurement
+                      let ingredientMeasurements = preferredMeasurementSystem == .usa ? ingredients[indexPath.row].measures.us.shortHandMeasurement : ingredients[indexPath.row].measures.metric.shortHandMeasurement
                 else { return UITableViewCell() }
                 
                 let ingredientCell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
@@ -315,18 +321,21 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section > 0 else { return }
-        
-        if synthesizer.isSpeaking {
-            synthesizer.stopSpeaking(at: .immediate)
-        }
-        
-        if let stepInstructionString = recipeDetails?.analyzedInstructions?[indexPath.section - 1].steps?[indexPath.row].instruction {
-            selectedCellIndexPath = IndexPath(row: indexPath.row, section: indexPath.section)
-            let utterance = AVSpeechUtterance(string: stepInstructionString)
-            utterance.rate = 0.45
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            synthesizer.speak(utterance)
+        if indexPath.section == 0 {
+            preferredMeasurementSystem = preferredMeasurementSystem == .usa ? .metric : .usa
+            
+        } else {
+            if synthesizer.isSpeaking {
+                synthesizer.stopSpeaking(at: .immediate)
+            }
+            
+            if let stepInstructionString = recipeDetails?.analyzedInstructions?[indexPath.section - 1].steps?[indexPath.row].instruction {
+                selectedCellIndexPath = IndexPath(row: indexPath.row, section: indexPath.section)
+                let utterance = AVSpeechUtterance(string: stepInstructionString)
+                utterance.rate = 0.45
+                utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+                synthesizer.speak(utterance)
+            }
         }
     }
     
@@ -397,4 +406,10 @@ extension RecipeDetailVC: AVSpeechSynthesizerDelegate {
         return selectedCell
     }
     
+}
+
+
+fileprivate enum MeasurementSystem {
+    case usa
+    case metric
 }

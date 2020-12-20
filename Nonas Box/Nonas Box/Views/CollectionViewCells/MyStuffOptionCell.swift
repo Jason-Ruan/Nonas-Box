@@ -11,22 +11,6 @@ import UIKit
 class MyStuffOptionCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI Objects
-//    private lazy var button: UIButton = {
-//        let button = UIButton(type: .roundedRect)
-//        button.titleLabel?.adjustsFontForContentSizeCategory = true
-//        button.titleLabel?.adjustsFontSizeToFitWidth = true
-//        button.titleLabel?.font = UIFont(name: "Thonburi", size: 30)
-//        layer.borderWidth = 3
-//        layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        layer.shadowColor = UIColor.black.cgColor
-//        layer.shadowOpacity = 0.5
-//        layer.shadowOffset = CGSize(width: 0, height: 1.0)
-//        layer.shadowRadius = 5
-//        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 25).cgPath
-//        button.addTarget(self, action: #selector(self.navigateToCorrespondingFeatureVC), for: .touchUpInside)
-//        return button
-//    }()
-    
     private lazy var buttonLabel: UILabel = {
         let label = UILabel(frame: self.bounds)
         label.adjustsFontSizeToFitWidth = true
@@ -69,7 +53,6 @@ class MyStuffOptionCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureCell(myStuffButtonOption: String) {
-//        button.setTitle(myStuffButtonOption.description, for: .normal)
         buttonLabel.text = self.myStuffButtonOption.rawValue
     }
     

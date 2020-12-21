@@ -32,10 +32,10 @@ class BarcodeScanView: UIView {
         
         addSubview(windowView)
         NSLayoutConstraint.activate([
-            windowView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            windowView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            windowView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8),
-            windowView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+            windowView.topAnchor.constraint(equalTo: topAnchor, constant: 30),
+            windowView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
+            windowView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            windowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
     }
     

@@ -33,10 +33,6 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return false
-    }
-    
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {

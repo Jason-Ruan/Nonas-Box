@@ -11,7 +11,12 @@ import UIKit
 class ItemCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI Objects
-    private lazy var itemImageView: UIImageView = { return UIImageView() }()
+    private lazy var itemImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
+        return iv
+    }()
+    
     private lazy var itemNameLabel: UILabel = { return UILabel(alignment: .center) }()
     
     
@@ -32,6 +37,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 15
         layer.borderWidth = 1
         layer.borderColor = UIColor.lightGray.cgColor
+        clipsToBounds = true
         setUpViews()
     }
     
@@ -66,9 +72,9 @@ class ItemCollectionViewCell: UICollectionViewCell {
         addSubview(itemImageView)
         itemImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            itemImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 10),
-            itemImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            itemImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            itemImageView.topAnchor.constraint(equalTo: topAnchor),
+            itemImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            itemImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             itemImageView.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.75)
         ])
     

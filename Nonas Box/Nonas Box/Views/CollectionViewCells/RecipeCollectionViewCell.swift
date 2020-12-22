@@ -30,7 +30,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         label.backgroundColor = #colorLiteral(red: 0.2295365632, green: 0.2428716421, blue: 0.2767262459, alpha: 0.5)
-        label.layer.cornerRadius = 25
+        label.layer.cornerRadius = 15
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false

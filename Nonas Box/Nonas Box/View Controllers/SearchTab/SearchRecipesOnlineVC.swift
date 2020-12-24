@@ -160,6 +160,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
             
             if !searchedResults.isEmpty {
                 recipes = searchedResults
+                lastSearchedQuery = query
                 resultsNumberLabel.text = "Here are some recipes we found for '\(query)'"
             } else {
                 showNoResultsAlert()
@@ -239,6 +240,9 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
                     self?.showAlert(message: "Oops, looks like there was an error when trying to load more recipes for this search.")
                 case .success(let recipes):
                     self?.recipes.append(contentsOf: recipes)
+                    if self?.searchedQueryResults[lastSearchedQuery] != nil {
+                        self?.searchedQueryResults[lastSearchedQuery] = self?.recipes
+                    }
             }
         }
     }

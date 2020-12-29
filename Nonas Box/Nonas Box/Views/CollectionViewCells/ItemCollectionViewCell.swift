@@ -13,7 +13,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
     //MARK: - UI Objects
     private lazy var itemImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         return iv
     }()
     

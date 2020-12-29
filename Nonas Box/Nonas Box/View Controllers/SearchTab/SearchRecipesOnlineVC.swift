@@ -53,11 +53,13 @@ class SearchRecipesOnlineVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
+        configureTapGesture()
         setUpViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        // Reload to update cells, in case recipe(s) favorite status is changed
         recipeCollectionView.reloadData()
     }
     
@@ -69,6 +71,18 @@ class SearchRecipesOnlineVC: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: waitTime, execute: {
             alert.dismiss(animated: true, completion: nil)
         })
+    }
+    
+    private func configureTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - ObjC Functions
+    @objc
+    private func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     

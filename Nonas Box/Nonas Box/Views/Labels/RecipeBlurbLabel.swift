@@ -28,7 +28,7 @@ class RecipeBlurbLabel: UILabel {
     public func configureAttributedText(title: String?, servings: Int?, readyInMinutes: Int?) {
         let recipeTitle = NSAttributedString(string: "\(title ?? "placeholder title")\n", attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .bold)])
         let recipeServings = NSAttributedString(string: "\nServings: \(servings ?? 1)", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .light)])
-        let recipeTime = NSAttributedString(string: "\nTime: \(readyInMinutes ?? 1) minutes", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .medium)])
+        let recipeTime = NSAttributedString(string: "\nTime: \(formatMinutesToString(minutes: readyInMinutes ?? 1))", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .medium)])
         
         let summaryAttributedString = NSMutableAttributedString()
         summaryAttributedString.append(recipeTitle)
@@ -36,6 +36,19 @@ class RecipeBlurbLabel: UILabel {
         summaryAttributedString.append(recipeTime)
         
         attributedText = summaryAttributedString
+    }
+    
+    private func formatMinutesToString(minutes: Int) -> String {
+        let numHours = minutes / 60
+        let numMinutes = minutes % 60
+        
+        if numHours == 1 {
+            return "1 hour\(numMinutes > 0 ? ", \(numMinutes) minutes" : "")"
+        } else if numHours > 1 {
+            return "\(numHours) hours\(numMinutes > 0 ? ", \(numMinutes) minutes" : "")"
+        } else {
+            return minutes.description
+        }
     }
     
 }

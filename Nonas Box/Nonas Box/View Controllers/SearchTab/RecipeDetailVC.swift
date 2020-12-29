@@ -62,10 +62,10 @@ class RecipeDetailVC: UIViewController {
     }()
     
     private lazy var collapsedViewConstraints: [NSLayoutConstraint] = {
-        [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
+        [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.1),
          self.buttonStackView.leadingAnchor.constraint(equalTo: recipeBlurbInfoLabel.leadingAnchor),
          self.buttonStackView.trailingAnchor.constraint(equalTo: recipeBlurbInfoLabel.trailingAnchor),
-         self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+         self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 25),
          self.recipeImageView.bottomAnchor.constraint(equalTo: buttonStackView.bottomAnchor)]
     }()
     
@@ -111,7 +111,6 @@ class RecipeDetailVC: UIViewController {
         setUpViews()
         synthesizer.delegate = self
         configureAVAudioSession()
-        configureNavigationBarForTranslucence()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -120,14 +119,20 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     
     //MARK: - Private Functions
     private func loadRecipeDetails(recipeID: Int) {
+        showLoadingScreen()
         SpoonacularAPIClient.manager.getRecipeDetails(recipeID: recipeID) { [weak self] (result) in
             switch result {
                 case .failure(let error):
                     self?.showAlert(message: "Could not get step by step instructions for the selected recipe.\nError:\(error.localizedDescription)")
                 case .success(let recipeDetails):
+                    self?.title = recipeDetails.title
                     self?.recipeDetails = recipeDetails
                     self?.loadImage(recipeDetails: recipeDetails)
                     self?.recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
@@ -146,6 +151,8 @@ class RecipeDetailVC: UIViewController {
                 case .success(let image):
                     self?.backgroundImageView.image = image
                     self?.recipeImageView.image = image
+                    self?.removeLoadingScreen()
+                    self?.configureNavigationBarForTranslucence()
             }
         }
         
@@ -349,6 +356,7 @@ extension RecipeDetailVC {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 NSLayoutConstraint.deactivate(self.collapsedViewConstraints)
                 NSLayoutConstraint.activate(self.expandedViewConstraints)
+                self.title = self.recipeDetails?.title
                 self.recipeImageView.layer.maskedCorners = []
                 self.view.layoutIfNeeded()
             }, completion: nil)
@@ -357,6 +365,7 @@ extension RecipeDetailVC {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 NSLayoutConstraint.deactivate(self.expandedViewConstraints)
                 NSLayoutConstraint.activate(self.collapsedViewConstraints)
+                self.title = nil
                 self.recipeImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
                 self.view.layoutIfNeeded()
             }, completion: nil)

@@ -13,9 +13,6 @@ import UIKit
 public extension UIViewController {
     
     // MARK: - Properties
-    private var loadingScreen: LoadingScreenView {
-        return LoadingScreenView(frame: view.bounds)
-    }
     
     
     // MARK: - Functions
@@ -33,7 +30,7 @@ public extension UIViewController {
     }
     
     func showLoadingScreen() {
-        view.addSubview(loadingScreen)
+        view.addSubview(LoadingScreenView(frame: view.bounds))
     }
     
     func removeLoadingScreen() {

@@ -47,7 +47,7 @@ class RecipeBlurbLabel: UILabel {
         } else if numHours > 1 {
             return "\(numHours) hours\(numMinutes > 0 ? ", \(numMinutes) minutes" : "")"
         } else {
-            return minutes.description
+            return "\(minutes) minutes"
         }
     }
     

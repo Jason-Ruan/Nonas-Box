@@ -11,19 +11,15 @@ import UIKit
 public enum MyStuffButtonOptions: String, CaseIterable {
     case checkInventory = "Check Inventory"
     case addToInventory = "Add to Inventory"
+    case recipesFromPantry = "Recipes from Pantry"
 }
 
 class MyStuffVC: UIViewController {
     
     //MARK: - UI Objects
     private lazy var myStuffButtonsCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.contentMode = .center
-        cv.backgroundColor = .clear
+        let cv = UICollectionView(scrollDirection: .vertical, scrollIndicatorsIsVisible: true)
         cv.register(MyStuffOptionCollectionViewCell.self, forCellWithReuseIdentifier: MyStuffOptionCollectionViewCell.identifier)
-        cv.translatesAutoresizingMaskIntoConstraints = false
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -33,17 +29,28 @@ class MyStuffVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.systemBlue.cgColor, UIColor.white.cgColor]
-        gradientLayer.frame = self.view.bounds
-        view.layer.insertSublayer(gradientLayer, at: 0)
-        view.addSubview(myStuffButtonsCollectionView)
-        constrainMyStuffButtonsCollectionView()
+        setBackgroundColor()
+        setUpViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    
+    // MARK: - Private Functions
+    private func setBackgroundColor() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.systemBlue.cgColor, UIColor.white.cgColor]
+        gradientLayer.frame = self.view.bounds
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    private func setUpViews() {
+        view.addSubview(myStuffButtonsCollectionView)
+        
+        myStuffButtonsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        myStuffButtonsCollectionView.frame = view.bounds
     }
     
 }
@@ -66,15 +73,12 @@ extension MyStuffVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? MyStuffOptionCollectionViewCell else {
-            print("Not a mystuffcell")
-            return
-        }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MyStuffOptionCollectionViewCell else { return }
         switch cell.myStuffButtonOption {
             case .checkInventory:
-                self.navigationController?.pushViewController(InventoryVC(), animated: true)
+                navigationController?.pushViewController(InventoryVC(), animated: true)
             case .addToInventory:
-                self.navigationController?.pushViewController(BarcodeScanVC(), animated: true)
+                navigationController?.pushViewController(BarcodeScanVC(), animated: true)
             default:
                 print("Not a valid option")
         }
@@ -82,17 +86,4 @@ extension MyStuffVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     
-}
-
-
-//MARK: Constraints
-extension MyStuffVC {
-    private func constrainMyStuffButtonsCollectionView() {
-        NSLayoutConstraint.activate([
-            myStuffButtonsCollectionView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            myStuffButtonsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.safeAreaLayoutGuide.layoutFrame.height / 20),
-            myStuffButtonsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.height / 20)),
-            myStuffButtonsCollectionView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width * 3 / 4)
-        ])
-    }
 }

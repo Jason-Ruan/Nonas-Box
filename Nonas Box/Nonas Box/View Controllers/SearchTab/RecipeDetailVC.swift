@@ -23,6 +23,7 @@ class RecipeDetailVC: UIViewController {
         self.recipeDetails = recipeDetails
         addCloseButton()
         loadImage(recipeDetails: recipeDetails)
+        checkIfRecipeIsBookmarked(id: recipeDetails.id)
         recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
     }
     
@@ -85,7 +86,6 @@ class RecipeDetailVC: UIViewController {
     
     private lazy var buttonStackView: ButtonStackView = {
         let sv = ButtonStackView(frame: .zero)
-        sv.bookmarkButton.setImage(checkIfRecipeIsBookmarked(id: recipeDetails?.id ?? 0) ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
         sv.bookmarkButton.addTarget(self, action: #selector(updateBookmarkStatus), for: .touchUpInside)
         sv.weblinkButton.addTarget(self, action: #selector(openSourceLink), for: .touchUpInside)
         return sv
@@ -134,6 +134,7 @@ class RecipeDetailVC: UIViewController {
                 case .success(let recipeDetails):
                     self?.title = recipeDetails.title
                     self?.recipeDetails = recipeDetails
+                    self?.checkIfRecipeIsBookmarked(id: recipeDetails.id)
                     self?.loadImage(recipeDetails: recipeDetails)
                     self?.recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
             }
@@ -167,12 +168,12 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
-    private func checkIfRecipeIsBookmarked(id: Int) -> Bool {
+    private func checkIfRecipeIsBookmarked(id: Int) {
         do {
-            return try Spoonacular_PersistenceHelper.manager.checkIsSaved(forRecipeID: id)
+            let isBookmarked = try Spoonacular_PersistenceHelper.manager.checkIsSaved(forRecipeID: id)
+            buttonStackView.bookmarkButton.setImage(isBookmarked ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
         } catch {
             print(error)
-            return false
         }
     }
     

@@ -39,9 +39,18 @@ class UPC_ItemDB_Client {
                 case .success(let data):
                     do {
                         let upc_item_results = try JSONDecoder().decode(UPC_Item_Results.self, from: data)
-                        guard let upc_item = upc_item_results.items.first else {
+                        guard var upc_item = upc_item_results.items.first else {
                             completionHandler(.failure(.invalidJSONResponse))
                             return
+                        }
+                        
+                        upc_item.images = upc_item.images?.map { url in
+                            if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) {
+                                urlComponents.scheme = "https"
+                                return urlComponents.url ?? url
+                            } else {
+                                return url
+                            }
                         }
                         
                         // Persist item locally on device

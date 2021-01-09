@@ -29,9 +29,7 @@ class BackgroundImageView: UIImageView {
     
     private func setUpVisualEffects() {
         addSubview(visualEffectView)
-        let blurEffect = traitCollection.userInterfaceStyle == .dark ?
-            UIBlurEffect(style: .dark) : UIBlurEffect(style: .systemThinMaterialLight)
-        visualEffectView.effect = blurEffect
+        visualEffectView.effect = UIBlurEffect(style: .dark)
     }
     
 }

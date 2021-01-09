@@ -30,7 +30,7 @@ public extension UIViewController {
     }
     
     func showLoadingScreen() {
-        view.addSubview(LoadingScreenView(frame: view.bounds))
+        view.addSubview(LoadingScreenView(frame: view.safeAreaLayoutGuide.layoutFrame))
     }
     
     func removeLoadingScreen() {

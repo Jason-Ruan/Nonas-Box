@@ -116,11 +116,18 @@ class SearchRecipesOnlineVC: UIViewController {
             screenTitleLabelDefaultConstraints
         )
         
+        let appNameLayoutGuide = UILayoutGuide()
+        view.addLayoutGuide(appNameLayoutGuide)
+        NSLayoutConstraint.activate([
+            appNameLayoutGuide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            appNameLayoutGuide.bottomAnchor.constraint(equalTo: screenTitleLabel.topAnchor)
+        ])
+        
         view.addSubview(appNameLabel)
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            appNameLabel.bottomAnchor.constraint(equalTo: screenTitleLabel.topAnchor, constant: -60),
             appNameLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            appNameLabel.centerYAnchor.constraint(equalTo: appNameLayoutGuide.centerYAnchor)
             
         ])
         

@@ -46,8 +46,7 @@ class ImageHelper {
                             
                         case .success(let imageData):
                             guard let image = UIImage(data: imageData) else {
-                                completionHandler(.failure(.notAnImage))
-                                return
+                                return completionHandler(.failure(.notAnImage))
                             }
                             //Cache image for future use and return it
                             DispatchQueue.global().async { [weak self] in

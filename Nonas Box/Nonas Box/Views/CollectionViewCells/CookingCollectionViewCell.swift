@@ -39,12 +39,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
         clipsToBounds = true
         backgroundColor = .systemBackground
         layer.cornerRadius = 10
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.lightGray.cgColor
-        layer.shadowRadius = 5
-        layer.shadowColor = UIColor.darkGray.cgColor
-        layer.shadowOpacity = 1
-        layer.shadowOffset = CGSize(width: 5, height: 5)
         setUpViews()
     }
     

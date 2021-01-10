@@ -29,8 +29,9 @@ class CookVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
-        view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         navigationController?.navigationBar.isHidden = true
+        overrideUserInterfaceStyle = .dark
+        configureBackgroundColor()
         addSubviews()
     }
     
@@ -40,6 +41,13 @@ class CookVC: UIViewController {
     
     
     //MARK: - Private Methods
+    private func configureBackgroundColor() {
+        let gradientBackgroundLayer = CAGradientLayer()
+        gradientBackgroundLayer.colors = [#colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1).cgColor, UIColor.white.cgColor]
+        gradientBackgroundLayer.frame = view.bounds
+        view.layer.insertSublayer(gradientBackgroundLayer, at: 0)
+    }
+    
     private func addSubviews() {
         view.addSubview(recipesCollectionView)
         recipesCollectionView.translatesAutoresizingMaskIntoConstraints = false

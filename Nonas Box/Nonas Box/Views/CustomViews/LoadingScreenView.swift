@@ -47,7 +47,7 @@ class LoadingScreenView: UIView {
         loadingBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             loadingBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            loadingBackgroundView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            loadingBackgroundView.centerYAnchor.constraint(equalTo: centerYAnchor),
             loadingBackgroundView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
             loadingBackgroundView.heightAnchor.constraint(equalTo: loadingBackgroundView.widthAnchor)
         ])

@@ -14,7 +14,9 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewControllers()
-        tabBar.isTranslucent = false
+        tabBar.backgroundImage = UIImage()
+        tabBar.barTintColor = .clear
+        tabBar.shadowImage = UIImage()
     }
     
 

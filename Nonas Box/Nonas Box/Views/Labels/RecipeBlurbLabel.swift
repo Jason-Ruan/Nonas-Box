@@ -26,9 +26,9 @@ class RecipeBlurbLabel: UILabel {
     
     // MARK: - Public Functions
     public func configureAttributedText(title: String?, servings: Int?, readyInMinutes: Int?) {
-        let recipeTitle = NSAttributedString(string: "\(title ?? "placeholder title")\n", attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .bold)])
-        let recipeServings = NSAttributedString(string: "\nServings: \(servings ?? 1)", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .light)])
-        let recipeTime = NSAttributedString(string: "\nTime: \(formatMinutesToString(minutes: readyInMinutes ?? 1))", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .medium)])
+        let recipeTitle = NSAttributedString(string: "\n\(title ?? "placeholder title")\n", attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .bold)])
+        let recipeServings = NSAttributedString(string: "\nServings: \(servings ?? 1)", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .medium)])
+        let recipeTime = NSAttributedString(string: "\nTime: \(formatMinutesToString(minutes: readyInMinutes ?? 1))\n", attributes: [.font : UIFont.systemFont(ofSize: 14, weight: .semibold)])
         
         let summaryAttributedString = NSMutableAttributedString()
         summaryAttributedString.append(recipeTitle)

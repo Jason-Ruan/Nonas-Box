@@ -174,7 +174,11 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     private func loadImage(recipe: Recipe) {
-        guard let imageURL = recipe.imageURL else { return }
+        guard let imageURL = recipe.imageURL else {
+            foodImage.image = UIImage(systemName: "xmark.rectangle.fill")!
+            spinner.stopAnimating()
+            return
+        }
         ImageHelper.shared.getImage(urls: [imageURL]) { [weak self] (result) in
             switch result {
                 case .failure(let error):

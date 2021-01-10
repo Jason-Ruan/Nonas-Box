@@ -12,11 +12,11 @@ class SearchRecipesOnlineVC: UIViewController {
     //MARK: - UI Objects
     
     private lazy var appNameLabel: UILabel = {
-        return UILabel(text: "Nona's\nBox", fontName: "Chalkduster", fontSize: 60, alignment: .center)
+        return UILabel(text: "Nona's\nBox", fontName: .chalkduster, fontSize: 60, alignment: .center)
     }()
     
     private lazy var screenTitleLabel: UILabel = {
-        return UILabel(text: "Discover new recipes!", fontName: "ChalkboardSE-Bold", fontSize: 25)
+        return UILabel(text: "Discover new recipes!", fontName: .chalkboard, fontSize: 25)
     }()
     
     private lazy var searchBar: UISearchBar = {
@@ -26,7 +26,7 @@ class SearchRecipesOnlineVC: UIViewController {
     }()
     
     private lazy var resultsNumberLabel: UILabel = {
-        return UILabel(fontName: "Tamil Sangam MN", fontSize: 12)
+        return UILabel(fontName: .tamil, fontSize: 12)
     }()
     
     private lazy var recipeCollectionView: UICollectionView = {

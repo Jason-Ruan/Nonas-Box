@@ -18,9 +18,7 @@ class CookingCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    private lazy var recipeNameLabel: RecipeBlurbLabel = {
-        return RecipeBlurbLabel()
-    }()
+    private lazy var recipeNameLabel:  UILabel = { return UILabel(numLines: 1, fontName: .handwriting, fontSize: 20, alignment: .center )}()
     
     
     // MARK: - Properties

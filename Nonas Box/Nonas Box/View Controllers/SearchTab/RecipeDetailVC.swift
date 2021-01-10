@@ -148,7 +148,12 @@ class RecipeDetailVC: UIViewController {
     }
     
     private func loadImage(recipeDetails: RecipeDetails) {
-        guard let imageURL = recipeDetails.imageURL  else { return }
+        guard let imageURL = recipeDetails.imageURL  else {
+            backgroundImageView.image = nil
+            recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")
+            removeLoadingScreen()
+            return
+        }
         ImageHelper.shared.getImage(urls: [imageURL]) { [weak self] (result) in
             switch result {
                 case .failure(let error):
@@ -158,9 +163,8 @@ class RecipeDetailVC: UIViewController {
                 case .success(let image):
                     self?.backgroundImageView.image = image
                     self?.recipeImageView.image = image
-                    self?.removeLoadingScreen()
-                    self?.configureNavigationBarForTranslucence()
             }
+            self?.removeLoadingScreen()
         }
         
     }

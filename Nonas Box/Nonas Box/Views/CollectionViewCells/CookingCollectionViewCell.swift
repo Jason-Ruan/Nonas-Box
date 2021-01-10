@@ -79,7 +79,7 @@ class CookingCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureCell(forRecipe recipe: RecipeDetails) {
-        recipeNameLabel.configureAttributedText(title: recipe.title, servings: recipe.servings, readyInMinutes: recipe.readyInMinutes)
+        recipeNameLabel.text = recipe.title
         
         if let imageURL = recipe.imageURL {
             ImageHelper.shared.getImage(urls: [imageURL]) { (result) in

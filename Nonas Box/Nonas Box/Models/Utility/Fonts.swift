@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+enum Fonts: String {
+    case chalkduster = "Chalkduster"
+    case chalkboard = "ChalkboardSE-Bold"
+    case handwriting = "BradleyHandITCTT-Bold"
+    case tamil = "Tamil Sangam MN"
+}

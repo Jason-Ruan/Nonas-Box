@@ -21,7 +21,7 @@ class UnderlinedSegmentedControl: UIControl {
         
         // Changes color of title colors for selected / unselected segements
         c.setTitleTextAttributes([.foregroundColor : UIColor.systemGray], for: .normal)
-        c.setTitleTextAttributes([.foregroundColor : (traitCollection.userInterfaceStyle == .dark ? UIColor.white : UIColor.black)], for: .selected)
+        c.setTitleTextAttributes([.foregroundColor : UIColor.white], for: .selected)
         c.addTarget(self, action: #selector(changeSegmentedControlLine), for: .valueChanged)
         return c
     }()
@@ -76,7 +76,7 @@ class UnderlinedSegmentedControl: UIControl {
         underlineView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             underlineView.bottomAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
-            underlineView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
+            underlineView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
             underlineView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor, multiplier: 1 / CGFloat(segmentedControl.numberOfSegments)),
             underLineLeadingConstraint
         ])

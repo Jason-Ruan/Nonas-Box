@@ -11,20 +11,21 @@ import UIKit
 public extension UILabel {
     
     // MARK: - Iniitializers
-    convenience init(text textString: String? = nil,
-                     fontName: String? = nil,
+    internal convenience init(text textString: String? = nil,
+                     numLines: Int? = nil,
+                     fontName: Fonts? = nil,
                      fontSize: CGFloat? = nil,
                      alignment: NSTextAlignment? = .natural) {
         
         self.init()
     
         textAlignment = alignment ?? .natural
-        numberOfLines = 0
+        numberOfLines = numLines ?? 0
         adjustsFontSizeToFitWidth = true
         text = textString
         
         if let fontName = fontName, let fontSize = fontSize {
-            font = UIFont(name: fontName, size: fontSize)
+            font = UIFont(name: fontName.rawValue, size: fontSize)
         }
     }
 }

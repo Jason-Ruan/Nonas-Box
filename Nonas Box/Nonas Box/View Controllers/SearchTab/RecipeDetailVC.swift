@@ -111,7 +111,6 @@ class RecipeDetailVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground
         setUpViews()
         synthesizer.delegate = self
         configureAVAudioSession()
@@ -124,7 +123,10 @@ class RecipeDetailVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        overrideUserInterfaceStyle = .dark
+        configureNavigationBarForTranslucence()
         navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
     }
     
     

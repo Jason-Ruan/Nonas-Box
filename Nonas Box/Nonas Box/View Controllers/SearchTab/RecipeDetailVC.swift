@@ -56,7 +56,7 @@ class RecipeDetailVC: UIViewController {
     // MARK: - Private Constraint Variables
     
     private lazy var expandedViewConstraints: [NSLayoutConstraint] = {
-        [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
+        [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.55),
          self.buttonStackView.centerXAnchor.constraint(equalTo: recipeImageView.centerXAnchor),
          self.recipeImageView.bottomAnchor.constraint(equalTo: recipeBlurbInfoLabel.bottomAnchor),
          self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -362,7 +362,7 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
 extension RecipeDetailVC {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y == 0 {
-            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
                 NSLayoutConstraint.deactivate(self.collapsedViewConstraints)
                 NSLayoutConstraint.activate(self.expandedViewConstraints)
                 self.title = self.recipeDetails?.title
@@ -371,7 +371,7 @@ extension RecipeDetailVC {
             }, completion: nil)
             
         } else {
-            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
                 NSLayoutConstraint.deactivate(self.expandedViewConstraints)
                 NSLayoutConstraint.activate(self.collapsedViewConstraints)
                 self.title = nil

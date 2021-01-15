@@ -53,10 +53,11 @@
 		08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */; };
 		08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */; };
 		08E9758224B4215800BF0DC3 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758124B4215800BF0DC3 /* AppError.swift */; };
-		08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758324B61C8400BF0DC3 /* ImageHelper.swift */; };
 		08E9758924B80E0B00BF0DC3 /* SpoonacularClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758824B80E0B00BF0DC3 /* SpoonacularClient.swift */; };
 		08E9758B24B80E4400BF0DC3 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758A24B80E4400BF0DC3 /* Recipe.swift */; };
 		08EF5C362582E27F00B40E75 /* LoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF5C352582E27F00B40E75 /* LoadingScreenView.swift */; };
+		51D7C1281CEEAA021B0670FA /* Pods_Nonas_BoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2C94477E222E5A6AC2E6A7 /* Pods_Nonas_BoxTests.framework */; };
+		D89D5181F64837DD3B35C6D0 /* Pods_Nonas_Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0211F999605EC1045968B6 /* Pods_Nonas_Box.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,10 +120,15 @@
 		08E9757C24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesOnlineVC.swift; sourceTree = "<group>"; };
 		08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		08E9758124B4215800BF0DC3 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
-		08E9758324B61C8400BF0DC3 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		08E9758824B80E0B00BF0DC3 /* SpoonacularClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularClient.swift; sourceTree = "<group>"; };
 		08E9758A24B80E4400BF0DC3 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		08EF5C352582E27F00B40E75 /* LoadingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenView.swift; sourceTree = "<group>"; };
+		12F68D7BBAF01F6EED86AFE2 /* Pods-Nonas Box.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas Box.release.xcconfig"; path = "Target Support Files/Pods-Nonas Box/Pods-Nonas Box.release.xcconfig"; sourceTree = "<group>"; };
+		4A37E6CFB5E9AEEA1238A895 /* Pods-Nonas BoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas BoxTests.release.xcconfig"; path = "Target Support Files/Pods-Nonas BoxTests/Pods-Nonas BoxTests.release.xcconfig"; sourceTree = "<group>"; };
+		5A2C94477E222E5A6AC2E6A7 /* Pods_Nonas_BoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_BoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B9CD454F75C51DC1A6B2D55 /* Pods-Nonas Box.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas Box.debug.xcconfig"; path = "Target Support Files/Pods-Nonas Box/Pods-Nonas Box.debug.xcconfig"; sourceTree = "<group>"; };
+		9F0211F999605EC1045968B6 /* Pods_Nonas_Box.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E321813C8218573FE47638F5 /* Pods-Nonas BoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas BoxTests.debug.xcconfig"; path = "Target Support Files/Pods-Nonas BoxTests/Pods-Nonas BoxTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D89D5181F64837DD3B35C6D0 /* Pods_Nonas_Box.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51D7C1281CEEAA021B0670FA /* Pods_Nonas_BoxTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +261,8 @@
 				0899D6262385F40C0059D9CE /* Nonas Box */,
 				0899D63D2385F4130059D9CE /* Nonas BoxTests */,
 				0899D6252385F40C0059D9CE /* Products */,
+				A4C4B01F0B65301F675B2EC3 /* Pods */,
+				FD6B4208E8286B3EF6585816 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -413,7 +423,6 @@
 				08E9758524B80DC200BF0DC3 /* API Clients */,
 				08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */,
 				08E9758124B4215800BF0DC3 /* AppError.swift */,
-				08E9758324B61C8400BF0DC3 /* ImageHelper.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -427,6 +436,26 @@
 			path = "API Clients";
 			sourceTree = "<group>";
 		};
+		A4C4B01F0B65301F675B2EC3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B9CD454F75C51DC1A6B2D55 /* Pods-Nonas Box.debug.xcconfig */,
+				12F68D7BBAF01F6EED86AFE2 /* Pods-Nonas Box.release.xcconfig */,
+				E321813C8218573FE47638F5 /* Pods-Nonas BoxTests.debug.xcconfig */,
+				4A37E6CFB5E9AEEA1238A895 /* Pods-Nonas BoxTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FD6B4208E8286B3EF6585816 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F0211F999605EC1045968B6 /* Pods_Nonas_Box.framework */,
+				5A2C94477E222E5A6AC2E6A7 /* Pods_Nonas_BoxTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -434,9 +463,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0899D6432385F4130059D9CE /* Build configuration list for PBXNativeTarget "Nonas Box" */;
 			buildPhases = (
+				8D9E38EB1C5B24E7765CF929 /* [CP] Check Pods Manifest.lock */,
 				0899D6202385F40C0059D9CE /* Sources */,
 				0899D6212385F40C0059D9CE /* Frameworks */,
 				0899D6222385F40C0059D9CE /* Resources */,
+				D2A54E11ECD7DEAA1AEFD07C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -451,6 +482,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0899D6462385F4130059D9CE /* Build configuration list for PBXNativeTarget "Nonas BoxTests" */;
 			buildPhases = (
+				ACF1B883EBC34FA8E84ADC16 /* [CP] Check Pods Manifest.lock */,
 				0899D6362385F4130059D9CE /* Sources */,
 				0899D6372385F4130059D9CE /* Frameworks */,
 				0899D6382385F4130059D9CE /* Resources */,
@@ -524,6 +556,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8D9E38EB1C5B24E7765CF929 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nonas Box-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ACF1B883EBC34FA8E84ADC16 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nonas BoxTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2A54E11ECD7DEAA1AEFD07C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nonas Box/Pods-Nonas Box-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nonas Box/Pods-Nonas Box-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nonas Box/Pods-Nonas Box-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0899D6202385F40C0059D9CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -540,7 +636,6 @@
 				08CC3772255725C600EEC9BC /* TimerButton.swift in Sources */,
 				08343B5425857DBF0067D562 /* Spoonacular_PersistenceHelper.swift in Sources */,
 				08CC3778255725C600EEC9BC /* RecipeCollectionViewCell.swift in Sources */,
-				08E9758424B61C8400BF0DC3 /* ImageHelper.swift in Sources */,
 				08CC3777255725C600EEC9BC /* MyStuffOptionCell.swift in Sources */,
 				08CC3776255725C600EEC9BC /* CookingCollectionViewCell.swift in Sources */,
 				08B7449A251AE1160005161D /* PersistenceHelper.swift in Sources */,
@@ -725,6 +820,7 @@
 		};
 		0899D6442385F4130059D9CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B9CD454F75C51DC1A6B2D55 /* Pods-Nonas Box.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -745,6 +841,7 @@
 		};
 		0899D6452385F4130059D9CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12F68D7BBAF01F6EED86AFE2 /* Pods-Nonas Box.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -765,6 +862,7 @@
 		};
 		0899D6472385F4130059D9CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E321813C8218573FE47638F5 /* Pods-Nonas BoxTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -787,6 +885,7 @@
 		};
 		0899D6482385F4130059D9CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A37E6CFB5E9AEEA1238A895 /* Pods-Nonas BoxTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

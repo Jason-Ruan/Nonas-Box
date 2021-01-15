@@ -56,7 +56,7 @@ class RecipeDetailVC: UIViewController {
     // MARK: - Private Constraint Variables
     
     private lazy var expandedViewConstraints: [NSLayoutConstraint] = {
-        [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.55),
+        [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.45),
          self.buttonStackView.centerXAnchor.constraint(equalTo: recipeImageView.centerXAnchor),
          self.recipeImageView.bottomAnchor.constraint(equalTo: recipeBlurbInfoLabel.bottomAnchor),
          self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

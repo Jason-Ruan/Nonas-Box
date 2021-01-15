@@ -46,10 +46,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        recipeImageView.image = nil
-        super.prepareForReuse()
-    }
     
     // MARK: - Private Methods
     private func setUpViews() {
@@ -82,14 +78,7 @@ class CookingCollectionViewCell: UICollectionViewCell {
         recipeNameLabel.text = recipe.title
         
         if let imageURL = recipe.imageURL {
-            ImageHelper.shared.getImage(urls: [imageURL]) { (result) in
-                switch result {
-                    case .success(let image):
-                        self.recipeImageView.image = image
-                    case .failure(let error):
-                        print("Could not find image for \(recipe.title ?? "this recipe"), error: \(error)")
-                }
-            }
+            recipeImageView.kf.setImage(with: imageURL)
         }
         
     }

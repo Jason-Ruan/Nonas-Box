@@ -52,13 +52,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    private lazy var spinner: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
-        spinner.color = .darkGray
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.hidesWhenStopped = true
-        return spinner
-    }()
     
     //MARK: - Properties
     
@@ -95,11 +88,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        foodImage.image = nil
-        super.prepareForReuse()
-    }
-    
     
     //MARK: - Private Functions
     
@@ -120,13 +108,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             foodInfoLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
         
-        foodImage.addSubview(spinner)
-        NSLayoutConstraint.activate([
-            spinner.centerXAnchor.constraint(equalTo: foodImage.centerXAnchor),
-            spinner.centerYAnchor.constraint(equalTo: foodImage.centerYAnchor)
-        ])
-        
-        
         contentView.addSubview(bookmarkedImageView)
         NSLayoutConstraint.activate([
             bookmarkedImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
@@ -146,7 +127,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     private func configureCell(recipe: Recipe) {
         foodImage.image = nil
-        spinner.startAnimating()
         
         loadImage(recipe: recipe)
         
@@ -175,20 +155,12 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     private func loadImage(recipe: Recipe) {
         guard let imageURL = recipe.imageURL else {
-            foodImage.image = UIImage(systemName: "xmark.rectangle.fill")!
-            spinner.stopAnimating()
+            foodImage.image = UIImage(systemName: "xmark.rectangle.fill")
             return
         }
-        ImageHelper.shared.getImage(urls: [imageURL]) { [weak self] (result) in
-            switch result {
-                case .failure(let error):
-                    print(error)
-                    self?.foodImage.image = UIImage(systemName: "xmark.rectangle.fill")!
-                case .success(let image):
-                    self?.foodImage.image = image
-            }
-            self?.spinner.stopAnimating()
-        }
+        foodImage.kf.indicatorType = .activity
+        foodImage.kf.setImage(with: imageURL,
+                              options: [.cacheOriginalImage])
     }
     
     private func convertMinutesToString(time: Int) -> String {

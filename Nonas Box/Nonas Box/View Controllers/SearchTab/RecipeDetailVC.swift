@@ -154,17 +154,15 @@ class RecipeDetailVC: UIViewController {
             removeLoadingScreen()
             return
         }
-        ImageHelper.shared.getImage(urls: [imageURL]) { [weak self] (result) in
+        
+        recipeImageView.kf.setImage(with: imageURL) { [weak self] result in
             switch result {
+                case .success(let retrievedImageResult):
+                    self?.backgroundImageView.image = retrievedImageResult.image
+                    self?.removeLoadingScreen()
                 case .failure(let error):
                     print(error)
-                    self?.backgroundImageView.image = nil
-                    self?.recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")!
-                case .success(let image):
-                    self?.backgroundImageView.image = image
-                    self?.recipeImageView.image = image
             }
-            self?.removeLoadingScreen()
         }
         
     }

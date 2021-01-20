@@ -22,7 +22,7 @@ class LoadingScreenView: UIView {
     
     private lazy var loadingIndicatorView: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
-        spinner.color = .white
+        spinner.color = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         spinner.hidesWhenStopped = true
         return spinner
     }()

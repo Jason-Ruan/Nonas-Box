@@ -158,7 +158,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         layoutIfNeeded()
         
         guard let imageURL = recipe.imageURL else {
-            foodImage.image = UIImage(systemName: "xmark.rectangle.fill")
+            foodImage.image = UIImage(systemName: "xmark.rectangle")
             return
         }
         

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RecipeCollectionViewCell: UICollectionViewCell {
     
@@ -154,13 +155,21 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     private func loadImage(recipe: Recipe) {
+        layoutIfNeeded()
+        
         guard let imageURL = recipe.imageURL else {
             foodImage.image = UIImage(systemName: "xmark.rectangle.fill")
             return
         }
+        
+        let processor = DownsamplingImageProcessor(size: foodImage.bounds.size) |> RoundCornerImageProcessor(cornerRadius: foodImage.layer.cornerRadius)
         foodImage.kf.indicatorType = .activity
+        (foodImage.kf.indicator?.view as? UIActivityIndicatorView)?.color = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         foodImage.kf.setImage(with: imageURL,
-                              options: [.cacheOriginalImage])
+                              options: [.processor(processor),
+                                        .onFailureImage(UIImage(systemName: "xmark.rectangle")),
+                                        .cacheOriginalImage
+                                        ])
     }
     
     private func convertMinutesToString(time: Int) -> String {

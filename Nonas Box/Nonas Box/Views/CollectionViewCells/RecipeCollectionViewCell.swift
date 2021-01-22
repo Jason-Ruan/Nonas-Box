@@ -167,6 +167,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         (foodImage.kf.indicator?.view as? UIActivityIndicatorView)?.color = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         foodImage.kf.setImage(with: imageURL,
                               options: [.processor(processor),
+                                        .scaleFactor(UIScreen.main.scale),
                                         .onFailureImage(UIImage(systemName: "xmark.rectangle")),
                                         .cacheOriginalImage
                                         ])

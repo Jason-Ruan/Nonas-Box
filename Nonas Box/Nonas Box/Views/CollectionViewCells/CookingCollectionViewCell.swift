@@ -72,15 +72,22 @@ class CookingCollectionViewCell: UICollectionViewCell {
             recipeNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
+        layoutIfNeeded()
     }
     
     private func configureCell(forRecipe recipe: RecipeDetails) {
         recipeNameLabel.text = recipe.title
-        
-        if let imageURL = recipe.imageURL {
-            recipeImageView.kf.setImage(with: imageURL)
-        }
-        
+        recipeImageView.kf.setImage(with: recipe.imageURL,
+                                    placeholder: UIImage(systemName: "questionmark"),
+                                    options: [.onFailureImage(UIImage(systemName: "xmark.rectangle.fill"))])
+                                    { [weak self] (result) in
+                                        switch result {
+                                            case .failure:
+                                                self?.recipeImageView.contentMode = .scaleAspectFit
+                                            case .success:
+                                                self?.recipeImageView.contentMode = .scaleAspectFill
+                                        }
+                                    }
     }
     
 }

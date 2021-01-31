@@ -29,16 +29,19 @@ class CookVC: UIViewController {
         }
     }
     
+    
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
-        navigationController?.navigationBar.isHidden = true
-        overrideUserInterfaceStyle = .dark
         configureBackgroundColor()
+        configureSearchController()
+        configureNavigationBarForTranslucence()
         addSubviews()
+        recipes = fetchBookmarkedRecipes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadBookmarkedRecipes()
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+        recipes = fetchBookmarkedRecipes()
     }
     
     

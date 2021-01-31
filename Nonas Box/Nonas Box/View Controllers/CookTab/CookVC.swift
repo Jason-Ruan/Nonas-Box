@@ -110,7 +110,7 @@ extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let recipeDetailVC = RecipeDetailVC(recipeDetails: recipes[indexPath.row])
-        present(recipeDetailVC, animated: true, completion: nil)
+        navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

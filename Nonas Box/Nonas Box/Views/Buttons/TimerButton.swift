@@ -62,10 +62,10 @@ class TimerButton: UIButton {
                 setTitleColor(UIColor.white, for: .normal)
                 setTitleColor(UIColor.systemGreen, for: .highlighted)
             case .pause:
-                layer.borderColor = UIColor.systemOrange.cgColor
-                backgroundColor = UIColor.systemYellow
+                layer.borderColor = UIColor.systemYellow.cgColor
+                backgroundColor = UIColor.systemOrange
                 setTitleColor(UIColor.white, for: .normal)
-                setTitleColor(UIColor.systemOrange, for: .highlighted)
+                setTitleColor(UIColor.systemYellow, for: .highlighted)
         }
     }
     

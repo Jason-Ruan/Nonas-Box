@@ -29,9 +29,9 @@ class LoadingScreenView: UIView {
     
     
     // MARK: - Initializers
-    override init(frame: CGRect) {
+    init(frame: CGRect, blockBackgroundViews: Bool) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = blockBackgroundViews ? .systemBackground : .clear
         configureLoadingScreenView()
         loadingIndicatorView.startAnimating()
     }

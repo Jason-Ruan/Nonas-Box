@@ -173,7 +173,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         guard let query = searchBar.text, !query.isEmpty else { return }
         
-        showLoadingScreen()
+        showLoadingScreen(blockBackgroundViews: false)
         
         // Check if the query has been searched before and show relevant results/alert
         if let searchedResults = searchedQueryResults[query] {

@@ -102,37 +102,28 @@ class RecipeDetailVC: UIViewController {
         return steptv
     }()
     
-    private lazy var closeVCButton: UIButton = {
-        let button = UIButton(type: .close)
-        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        return button
-    }()
-    
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         setUpViews()
-        synthesizer.delegate = self
-        configureAVAudioSession()
+        guard let recipeDetails = recipeDetails else { return }
+        configureViews(forRecipeDetails: recipeDetails)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        if synthesizer.isSpeaking {
-            synthesizer.stopSpeaking(at: .immediate)
-        }
-    }
     
     override func viewWillAppear(_ animated: Bool) {
-        overrideUserInterfaceStyle = .dark
-        configureNavigationBarForTranslucence()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+        configureNavigationBarForTranslucence()
+        if let recipeID = recipeDetails?.id {
+            checkIfRecipeIsBookmarked(id: recipeID)
+        }
     }
     
     
     //MARK: - Private Functions
     private func loadRecipeDetails(recipeID: Int) {
-        showLoadingScreen()
+        showLoadingScreen(blockBackgroundViews: true)
         SpoonacularAPIClient.manager.getRecipeDetails(recipeID: recipeID) { [weak self] (result) in
             switch result {
                 case .failure(let error):

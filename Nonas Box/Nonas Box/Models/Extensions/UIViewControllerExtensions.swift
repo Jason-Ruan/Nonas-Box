@@ -29,8 +29,8 @@ public extension UIViewController {
         present(ac, animated: true, completion: nil)
     }
     
-    func showLoadingScreen() {
-        view.addSubview(LoadingScreenView(frame: view.safeAreaLayoutGuide.layoutFrame))
+    func showLoadingScreen(blockBackgroundViews: Bool) {
+        view.addSubview(LoadingScreenView(frame: view.bounds, blockBackgroundViews: blockBackgroundViews))
     }
     
     func removeLoadingScreen() {

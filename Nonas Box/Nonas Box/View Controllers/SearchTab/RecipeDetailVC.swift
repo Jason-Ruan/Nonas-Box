@@ -6,7 +6,6 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
-import AVFoundation
 import SafariServices
 import UIKit
 
@@ -21,10 +20,6 @@ class RecipeDetailVC: UIViewController {
     init(recipeDetails: RecipeDetails) {
         super.init(nibName: nil, bundle: nil)
         self.recipeDetails = recipeDetails
-        addCloseButton()
-        loadImage(recipeDetails: recipeDetails)
-        checkIfRecipeIsBookmarked(id: recipeDetails.id)
-        recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
     }
     
     required init?(coder: NSCoder) {
@@ -32,14 +27,6 @@ class RecipeDetailVC: UIViewController {
     }
     
     //MARK: - Properties
-    private let synthesizer = AVSpeechSynthesizer()
-    private var selectedCellIndexPath: IndexPath? {
-        willSet {
-            guard let selectedCellIndexPath = selectedCellIndexPath else { return }
-            resetColorOfReadText(selectedCellIndexPath: selectedCellIndexPath)
-        }
-    }
-    
     private var recipeDetails: RecipeDetails? {
         didSet {
             stepByStepInstructionsTableView.tableView.reloadData()
@@ -57,21 +44,21 @@ class RecipeDetailVC: UIViewController {
     
     private lazy var expandedViewConstraints: [NSLayoutConstraint] = {
         [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.45),
-         self.buttonStackView.centerXAnchor.constraint(equalTo: recipeImageView.centerXAnchor),
+         self.recipeBlurbInfoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         self.recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: view.leadingAnchor),
          self.recipeImageView.bottomAnchor.constraint(equalTo: recipeBlurbInfoLabel.bottomAnchor),
-         self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         self.recipeBlurbInfoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         self.recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: recipeImageView.leadingAnchor)]
+         self.recipeImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         self.buttonStackView.centerXAnchor.constraint(equalTo: recipeImageView.centerXAnchor)]
     }()
-    
+
     private lazy var collapsedViewConstraints: [NSLayoutConstraint] = {
         [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15),
-         self.buttonStackView.leadingAnchor.constraint(equalTo: recipeBlurbInfoLabel.leadingAnchor),
-         self.buttonStackView.trailingAnchor.constraint(equalTo: recipeBlurbInfoLabel.trailingAnchor),
-         self.recipeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 25),
+         self.recipeBlurbInfoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+         self.recipeImageView.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 25),
+         self.recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: recipeImageView.leadingAnchor, constant: -5),
+         self.buttonStackView.centerXAnchor.constraint(equalTo: recipeBlurbInfoLabel.centerXAnchor),
          self.recipeImageView.bottomAnchor.constraint(equalTo: buttonStackView.bottomAnchor),
-         self.recipeBlurbInfoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-         self.recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: recipeImageView.leadingAnchor, constant: -5)]
+         ]
     }()
     
     
@@ -131,9 +118,7 @@ class RecipeDetailVC: UIViewController {
                 case .success(let recipeDetails):
                     self?.title = recipeDetails.title
                     self?.recipeDetails = recipeDetails
-                    self?.checkIfRecipeIsBookmarked(id: recipeDetails.id)
-                    self?.loadImage(recipeDetails: recipeDetails)
-                    self?.recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
+                    self?.configureViews(forRecipeDetails: recipeDetails)
             }
         }
     }
@@ -158,13 +143,11 @@ class RecipeDetailVC: UIViewController {
         
     }
     
-    private func configureAVAudioSession() {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
-            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("audioSession properties weren't set because of an error.")
-        }
+    private func configureViews(forRecipeDetails recipeDetails: RecipeDetails) {
+        title = recipeDetails.title
+        loadImage(recipeDetails: recipeDetails)
+        checkIfRecipeIsBookmarked(id: recipeDetails.id)
+        recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
     }
     
     private func checkIfRecipeIsBookmarked(id: Int) {
@@ -174,15 +157,6 @@ class RecipeDetailVC: UIViewController {
         } catch {
             print(error)
         }
-    }
-    
-    private func resetColorOfReadText(selectedCellIndexPath: IndexPath) {
-        // Purpose is to reset the color of text in previous selected cell being read by voice over.
-        guard let cell = stepByStepInstructionsTableView.tableView.cellForRow(at: selectedCellIndexPath) as? StepByStepInstructionTableViewCell,
-              let steps = recipeDetails?.analyzedInstructions?[selectedCellIndexPath.section - 1].steps
-        else { return }
-        
-        cell.stepInstructionLabel.attributedText = NSAttributedString(string: steps[selectedCellIndexPath.row].instruction ?? "")
     }
     
     
@@ -227,7 +201,7 @@ extension RecipeDetailVC {
         recipeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            recipeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            recipeImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ] + expandedViewConstraints)
         
         recipeBlurbInfoLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -244,20 +218,9 @@ extension RecipeDetailVC {
         stepByStepInstructionsTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stepByStepInstructionsTableView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 20),
-            stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-        ])
-    }
-    
-    private func addCloseButton() {
-        view.addSubview(closeVCButton)
-        closeVCButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            closeVCButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            closeVCButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            closeVCButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
-            closeVCButton.widthAnchor.constraint(equalTo: closeVCButton.heightAnchor)
         ])
     }
 }
@@ -329,18 +292,6 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             preferredMeasurementSystem = preferredMeasurementSystem == .usa ? .metric : .usa
             
-        } else {
-            if synthesizer.isSpeaking {
-                synthesizer.stopSpeaking(at: .immediate)
-            }
-            
-            if let stepInstructionString = recipeDetails?.analyzedInstructions?[indexPath.section - 1].steps?[indexPath.row].instruction {
-                selectedCellIndexPath = IndexPath(row: indexPath.row, section: indexPath.section)
-                let utterance = AVSpeechUtterance(string: stepInstructionString)
-                utterance.rate = 0.45
-                utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-                synthesizer.speak(utterance)
-            }
         }
     }
     
@@ -357,6 +308,8 @@ extension RecipeDetailVC {
                 self.title = self.recipeDetails?.title
                 self.recipeImageView.layer.maskedCorners = []
                 self.view.layoutIfNeeded()
+                self.buttonStackView.bookmarkButton.setTitle("Bookmark", for: .normal)
+                self.buttonStackView.weblinkButton.setTitle("Source", for: .normal)
             }, completion: nil)
             
         } else {
@@ -366,6 +319,8 @@ extension RecipeDetailVC {
                 self.title = nil
                 self.recipeImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
                 self.view.layoutIfNeeded()
+                self.buttonStackView.bookmarkButton.setTitle(nil, for: .normal)
+                self.buttonStackView.weblinkButton.setTitle(nil, for: .normal)
             }, completion: nil)
         }
     }
@@ -386,35 +341,6 @@ extension RecipeDetailVC {
         }
     }
 }
-
-
-// MARK: - AVSpeechSynthesizer Delegate Methods
-extension RecipeDetailVC: AVSpeechSynthesizerDelegate {
-    // Highlights just the word(s) being spoken in text
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
-        guard let selectedCell = getSelectedTableViewCell() else { return }
-        let mutableAttributeString = NSMutableAttributedString(string: utterance.speechString)
-        mutableAttributeString.addAttribute(.foregroundColor,
-                                            value: selectedCell.stepNumberLabel.textColor ?? UIColor.yellow,
-                                            range: characterRange)
-        selectedCell.stepInstructionLabel.attributedText = mutableAttributeString
-        
-    }
-    
-    // Resets the color of the selected cell's label when finished speaking
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        guard let selectedCell = getSelectedTableViewCell() else { return }
-        selectedCell.stepInstructionLabel.attributedText = NSAttributedString(string: utterance.speechString)
-    }
-    
-    private func getSelectedTableViewCell() -> StepByStepInstructionTableViewCell? {
-        guard let indexPath = selectedCellIndexPath,
-              let selectedCell = stepByStepInstructionsTableView.tableView.cellForRow(at: indexPath) as? StepByStepInstructionTableViewCell else { return nil }
-        return selectedCell
-    }
-    
-}
-
 
 fileprivate enum MeasurementSystem {
     case usa

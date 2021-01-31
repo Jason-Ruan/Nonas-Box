@@ -1,5 +1,5 @@
 //
-//  ImageName.swift
+//  ImageNames.swift
 //  Nonas Box
 //
 //  Created by Jason Ruan on 1/24/21.
@@ -10,6 +10,7 @@ import Foundation
 
 enum ImageNames: String {
     case darkTableBottomIngredients = "dark-table-ingredients"
-    case lightTableBottomIngredientss = "light-table-ingredients"
+    case lightTableBottomIngredients = "light-table-ingredients"
     case foodBorderEmptyCenter = "food-border"
+    case plainWoodTable = "wood-table"
 }

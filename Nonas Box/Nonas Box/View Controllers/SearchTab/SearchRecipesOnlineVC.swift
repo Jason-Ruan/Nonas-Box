@@ -10,9 +10,18 @@ import UIKit
 
 class SearchRecipesOnlineVC: UIViewController {
     //MARK: - UI Objects
+    private lazy var backgroundImageView: UIImageView = {
+        let iv = UIImageView(frame: view.frame)
+        iv.image = UIImage(named: ImageNames.foodBorderEmptyCenter.rawValue)
+        iv.contentMode = .scaleAspectFill
+        return iv
+    }()
     
     private lazy var appNameLabel: UILabel = {
-        return UILabel(text: "Nona's\nBox", fontName: .chalkduster, fontSize: 60, alignment: .center)
+        let label = UILabel(text: "Nona's\nBox", fontName: .chalkduster, fontSize: 60, alignment: .center)
+        label.layer.masksToBounds = true
+        label.backgroundColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.7005029966)
+        return label
     }()
     
     private lazy var screenTitleLabel: UILabel = {
@@ -22,6 +31,10 @@ class SearchRecipesOnlineVC: UIViewController {
     private lazy var searchBar: UISearchBar = {
         let sb = UISearchBar(placeHolderText: "Search for recipes here")
         sb.delegate = self
+        sb.searchTextField.backgroundColor = .white
+        (sb.searchTextField.leftView as? UIImageView)?.tintColor = .systemOrange
+        sb.searchTextField.textColor = .darkText
+        sb.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search for recipes here", attributes: [.foregroundColor : UIColor.systemGray])
         return sb
     }()
     
@@ -42,6 +55,15 @@ class SearchRecipesOnlineVC: UIViewController {
     private var lastSearchedQuery: String?
     private var searchedQueryResults: [String : [Recipe] ] = [:]
     private var recipes: [Recipe] = [] {
+        willSet {
+            guard recipes.isEmpty else { return }
+            backgroundImageView.image = UIImage(named: ImageNames.plainWoodTable.rawValue)
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.colors = [#colorLiteral(red: 1, green: 0.6405905485, blue: 0.1176991239, alpha: 0.7479130993).cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor]
+            gradientLayer.frame = backgroundImageView.frame
+            backgroundImageView.layer.addSublayer(gradientLayer)
+        }
+        
         didSet {
             recipeCollectionView.reloadData()
         }
@@ -62,6 +84,11 @@ class SearchRecipesOnlineVC: UIViewController {
         // Reload to update cells, in case recipe(s) favorite status is changed
         recipeCollectionView.reloadData()
     }
+    
+    override func viewDidLayoutSubviews() {
+        appNameLabel.layer.cornerRadius = appNameLabel.frame.height / 2
+    }
+    
     
     //MARK: - Private Functions
     private func showNoResultsAlert() {
@@ -110,6 +137,8 @@ class SearchRecipesOnlineVC: UIViewController {
     }()
     
     private func setUpViews() {
+        view.addSubview(backgroundImageView)
+
         view.addSubview(screenTitleLabel)
         screenTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(
@@ -127,10 +156,12 @@ class SearchRecipesOnlineVC: UIViewController {
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             appNameLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            appNameLabel.centerYAnchor.constraint(equalTo: appNameLayoutGuide.centerYAnchor)
+            appNameLabel.centerYAnchor.constraint(equalTo: appNameLayoutGuide.centerYAnchor),
+            appNameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            appNameLabel.heightAnchor.constraint(equalTo: appNameLabel.widthAnchor)
             
         ])
-        
+            
         view.addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(searchBarDefaultContraints)

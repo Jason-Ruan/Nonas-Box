@@ -14,8 +14,8 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewControllers()
-        tabBar.backgroundImage = UIImage()
-        tabBar.barTintColor = .clear
+//        tabBar.backgroundImage = UIImage()
+//        tabBar.barTintColor = .clear
         tabBar.shadowImage = UIImage()
     }
     
@@ -27,7 +27,7 @@ class TabBarController: UITabBarController {
         let timerVC = TimerVC()
         let myStuffVC = UINavigationController(rootViewController: MyStuffVC())
         
-        searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "doc.text.magnifyingglass"), tag: 0)
+        searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
         cookVC.tabBarItem = UITabBarItem(title: "Cook", image: UIImage(systemName: "dial.min.fill"), tag: 1)
         timerVC.tabBarItem = UITabBarItem(title: "Timer", image: UIImage(systemName: "timer"), tag: 2)
         myStuffVC.tabBarItem = UITabBarItem(title: "Pantry", image: UIImage(systemName: "tray.2.fill"), tag: 3)

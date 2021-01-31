@@ -34,8 +34,8 @@ class ButtonStackView: UIStackView {
         addArrangedSubview(webLinkButton)
         
         axis = .horizontal
-        distribution = .fillEqually
-        spacing = 5
+        distribution = .equalSpacing
+        spacing = 30
     }
     
     required init(coder: NSCoder) {

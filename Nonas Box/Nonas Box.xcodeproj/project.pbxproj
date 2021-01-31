@@ -22,6 +22,7 @@
 		086AE0D42586B75900928DEA /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086AE0D32586B75900928DEA /* BackgroundImageView.swift */; };
 		086AE0DB2586C8BE00928DEA /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086AE0DA2586C8BE00928DEA /* ButtonStackView.swift */; };
 		086AE0FB258C213300928DEA /* BarcodeScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086AE0FA258C213200928DEA /* BarcodeScanView.swift */; };
+		086CABD925BE3322003E3F96 /* ImageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086CABD825BE3322003E3F96 /* ImageNames.swift */; };
 		0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */; };
 		0895E44B2569E58400895753 /* UnderlinedSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */; };
 		0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6272385F40C0059D9CE /* AppDelegate.swift */; };
@@ -85,6 +86,7 @@
 		086AE0D32586B75900928DEA /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
 		086AE0DA2586C8BE00928DEA /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
 		086AE0FA258C213200928DEA /* BarcodeScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanView.swift; sourceTree = "<group>"; };
+		086CABD825BE3322003E3F96 /* ImageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNames.swift; sourceTree = "<group>"; };
 		0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStuffVC.swift; sourceTree = "<group>"; };
 		0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedSegmentedControl.swift; sourceTree = "<group>"; };
 		0899D6242385F40C0059D9CE /* Nonas Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nonas Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				08630C7725AACE02007D3358 /* Fonts.swift */,
+				086CABD825BE3322003E3F96 /* ImageNames.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -650,6 +653,7 @@
 				08D7D6D824CFD4FF00891E65 /* UPC_Item.swift in Sources */,
 				08CC3773255725C600EEC9BC /* MenuButton.swift in Sources */,
 				08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */,
+				086CABD925BE3322003E3F96 /* ImageNames.swift in Sources */,
 				08CC3775255725C600EEC9BC /* ItemCollectionViewCell.swift in Sources */,
 				08E9758224B4215800BF0DC3 /* AppError.swift in Sources */,
 				0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */,

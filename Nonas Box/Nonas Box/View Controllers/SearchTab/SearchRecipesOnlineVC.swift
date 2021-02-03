@@ -285,6 +285,7 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard (indexPath.row == recipes.count - 1) && recipes.count % 10 == 0 else { return }
         guard let lastSearchedQuery = lastSearchedQuery else { return }
+        showLoadingScreen(blockBackgroundViews: false)
         SpoonacularAPIClient.manager.getRecipes(query: lastSearchedQuery, offset: recipes.count) { [weak self] (result) in
             switch result {
                 case .failure(let error):
@@ -296,6 +297,7 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
                         self?.searchedQueryResults[lastSearchedQuery] = self?.recipes
                     }
             }
+            self?.removeLoadingScreen()
         }
     }
     

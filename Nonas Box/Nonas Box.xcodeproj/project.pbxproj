@@ -23,7 +23,9 @@
 		086AE0DB2586C8BE00928DEA /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086AE0DA2586C8BE00928DEA /* ButtonStackView.swift */; };
 		086AE0FB258C213300928DEA /* BarcodeScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086AE0FA258C213200928DEA /* BarcodeScanView.swift */; };
 		086CABD925BE3322003E3F96 /* ImageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086CABD825BE3322003E3F96 /* ImageNames.swift */; };
+		086CAC5A25CB9A94003E3F96 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086CAC5925CB9A93003E3F96 /* UIViewExtensions.swift */; };
 		0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */; };
+		088F0C4925CF526F00A0E321 /* SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F0C4825CF526F00A0E321 /* SystemImage.swift */; };
 		0895E44B2569E58400895753 /* UnderlinedSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */; };
 		0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6272385F40C0059D9CE /* AppDelegate.swift */; };
 		0899D62A2385F40C0059D9CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6292385F40C0059D9CE /* SceneDelegate.swift */; };
@@ -87,7 +89,9 @@
 		086AE0DA2586C8BE00928DEA /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
 		086AE0FA258C213200928DEA /* BarcodeScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanView.swift; sourceTree = "<group>"; };
 		086CABD825BE3322003E3F96 /* ImageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNames.swift; sourceTree = "<group>"; };
+		086CAC5925CB9A93003E3F96 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStuffVC.swift; sourceTree = "<group>"; };
+		088F0C4825CF526F00A0E321 /* SystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImage.swift; sourceTree = "<group>"; };
 		0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedSegmentedControl.swift; sourceTree = "<group>"; };
 		0899D6242385F40C0059D9CE /* Nonas Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nonas Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0899D6272385F40C0059D9CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 				08AA2964257455DF00862B14 /* UICollectionViewExtensions.swift */,
 				08343B3E25853E460067D562 /* UIImageExtension.swift */,
 				08343B4F258577C10067D562 /* UISearchBarExtensions.swift */,
+				086CAC5925CB9A93003E3F96 /* UIViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 			children = (
 				08630C7725AACE02007D3358 /* Fonts.swift */,
 				086CABD825BE3322003E3F96 /* ImageNames.swift */,
+				088F0C4825CF526F00A0E321 /* SystemImage.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -632,6 +638,7 @@
 				083FEB6824FDEB4900B4DEE0 /* CookVC.swift in Sources */,
 				08AA292F256F421100862B14 /* TabBarController.swift in Sources */,
 				0899D62C2385F40C0059D9CE /* RecipeCreationVC.swift in Sources */,
+				086CAC5A25CB9A94003E3F96 /* UIViewExtensions.swift in Sources */,
 				08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */,
 				0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */,
 				08EF5C362582E27F00B40E75 /* LoadingScreenView.swift in Sources */,
@@ -654,6 +661,7 @@
 				08CC3773255725C600EEC9BC /* MenuButton.swift in Sources */,
 				08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */,
 				086CABD925BE3322003E3F96 /* ImageNames.swift in Sources */,
+				088F0C4925CF526F00A0E321 /* SystemImage.swift in Sources */,
 				08CC3775255725C600EEC9BC /* ItemCollectionViewCell.swift in Sources */,
 				08E9758224B4215800BF0DC3 /* AppError.swift in Sources */,
 				0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */,

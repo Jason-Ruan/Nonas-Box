@@ -17,6 +17,22 @@ class TimerPickerView: UIPickerView {
     private lazy var minLabel: UILabel = { unitLabel() }()
     private lazy var secLabel: UILabel = { unitLabel() }()
     
+    var hours: Int {
+        return selectedRow(inComponent: 0)
+    }
+    
+    var minutes: Int {
+        return selectedRow(inComponent: 1)
+    }
+    
+    var seconds: Int {
+        return selectedRow(inComponent: 2)
+    }
+    
+    var totalTimeInSeconds: Int {
+        return (hours * 3600) + (minutes * 60) + seconds
+    }
+
     
     // MARK: - Initializers
     override init(frame: CGRect) {

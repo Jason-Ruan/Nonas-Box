@@ -58,11 +58,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
             recipeImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.clear.cgColor, #colorLiteral(red: 0.00280471798, green: 0.2107150853, blue: 0.412620753, alpha: 0.5).cgColor]
-        gradientLayer.frame = bounds
-        recipeImageView.layer.addSublayer(gradientLayer)
-        
         contentView.addSubview(recipeNameLabel)
         recipeNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -73,6 +68,8 @@ class CookingCollectionViewCell: UICollectionViewCell {
         ])
         
         layoutIfNeeded()
+        
+        recipeImageView.addGradientLayer(colors: [.clear, .clear, #colorLiteral(red: 0.00280471798, green: 0.2107150853, blue: 0.412620753, alpha: 0.5)])
     }
     
     private func configureCell(forRecipe recipe: RecipeDetails) {

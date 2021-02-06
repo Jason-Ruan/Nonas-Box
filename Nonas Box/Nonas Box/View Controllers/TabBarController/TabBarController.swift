@@ -28,10 +28,10 @@ class TabBarController: UITabBarController {
         let timerVC = TimerVC()
         let myStuffVC = UINavigationController(rootViewController: MyStuffVC())
         
-        searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
-        cookVC.tabBarItem = UITabBarItem(title: "Cook", image: UIImage(systemName: "dial.min.fill"), tag: 1)
-        timerVC.tabBarItem = UITabBarItem(title: "Timer", image: UIImage(systemName: "timer"), tag: 2)
-        myStuffVC.tabBarItem = UITabBarItem(title: "Pantry", image: UIImage(systemName: "tray.2.fill"), tag: 3)
+        searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: .magnifyingglass), tag: 0)
+        cookVC.tabBarItem = UITabBarItem(title: "Cook", image: UIImage(systemName: .dial), tag: 1)
+        timerVC.tabBarItem = UITabBarItem(title: "Timer", image: UIImage(systemName: .timer), tag: 2)
+        myStuffVC.tabBarItem = UITabBarItem(title: "Pantry", image: UIImage(systemName: .dial), tag: 3)
                         
         viewControllers = [searchVC, cookVC, timerVC, myStuffVC]
     }

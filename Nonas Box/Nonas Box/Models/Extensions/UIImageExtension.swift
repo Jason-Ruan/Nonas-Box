@@ -16,4 +16,8 @@ public extension UIImage {
         self.init(data: image.pngData()!)!
     }
     
+    internal convenience init?(systemName: SystemImageNames) {
+        self.init(systemName: systemName.rawValue)
+    }
+    
 }

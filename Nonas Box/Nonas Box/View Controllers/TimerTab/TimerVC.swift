@@ -6,12 +6,12 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
-import AVFoundation
 import UIKit
+import UserNotifications
 
 class TimerVC: UIViewController {
     //MARK: - UI Objects
-    lazy var timerPickerView: UIPickerView = {
+    lazy var timerPickerView: TimerPickerView = {
         let pickerView = TimerPickerView(frame: .zero)
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.dataSource = self
@@ -76,12 +76,6 @@ class TimerVC: UIViewController {
     //MARK: - Properties
     var timer = Timer()
     var timerDisplayCount = 0 {
-        willSet {
-            if timerDisplayCount != 0 && newValue == 0 {
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            }
-        }
-        
         didSet {
             guard timerDisplayCount >= 0 else {
                 overdueTimerCountLabel.text = "\(timerDisplayCount.description) \(timerDisplayCount == -1 ? "second" : "seconds") overdue"
@@ -94,8 +88,8 @@ class TimerVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground
         addSubviews()
+        requestLocalNotificationPermission()
     }
     
     
@@ -123,9 +117,9 @@ class TimerVC: UIViewController {
     private func adjustTimerValueLabelText() {
         var timeValues: [String] = []
         
-        let numHours = timerPickerView.selectedRow(inComponent: 0)
-        let numMin = timerPickerView.selectedRow(inComponent: 1)
-        let numSec = timerPickerView.selectedRow(inComponent: 2)
+        let numHours = timerPickerView.hours
+        let numMin = timerPickerView.minutes
+        let numSec = timerPickerView.seconds
         
         if numHours > 0 {
             timeValues.append("\(numHours)h")
@@ -137,20 +131,42 @@ class TimerVC: UIViewController {
             timeValues.append("\(numSec)s")
         }
         
-        timerValueLabel.text = " Running timer for:\n\(timeValues.joined(separator: ", ")) "
+        timerValueLabel.text = " Started timer at \(getCurrentTimeString())\nfor: \(timeValues.joined(separator: ", "))"
+    }
+    
+    private func requestLocalNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { [weak self] (_, error) in
+            if let error = error {
+                self?.showAlert(message: "There was an error when requesting permission for local notifications")
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func createLocalNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Timer for Nona's Box is up!"
+        content.sound = UNNotificationSound.default
+    
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timerDisplayCount), repeats: false)
+        let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
+    }
+    
+    private func getCurrentTimeString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        return dateFormatter.string(from: Date())
     }
     
     
     //MARK: - Objective-C Methods
     @objc func startTimer() {
-        // Converts timerPickerView selections into total number of seconds
-        let hoursToSec = timerPickerView.selectedRow(inComponent: 0) * 3600
-        let minsToSec = timerPickerView.selectedRow(inComponent: 1) * 60
-        let sec = timerPickerView.selectedRow(inComponent: 2)
-        let totalTime = hoursToSec + minsToSec + sec
+        let totalTime = timerPickerView.totalTimeInSeconds
         guard totalTime > 0 else { return }
         
         timerDisplayCount = totalTime
+        createLocalNotification()
         
         resumeTimer()
         
@@ -175,6 +191,7 @@ class TimerVC: UIViewController {
         // RunLoop allows the timer to continue running while scrolling through scrollViews
         timer = Timer(timeInterval: 1, target: self, selector: #selector(decrementTimer), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: .common)
+        createLocalNotification()
         
         // Change toggleTimerButton to have pause functionality
         toggleTimerButton.purpose = .pause
@@ -183,6 +200,7 @@ class TimerVC: UIViewController {
     
     @objc func pauseTimer() {
         timer.invalidate()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
         // Change toggleTimerButton to have resume functionality
         toggleTimerButton.purpose = .resume
@@ -191,6 +209,7 @@ class TimerVC: UIViewController {
     
     @objc func resetTimer() {
         timer.invalidate()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         timerDisplayCount = 0
         
         timerLabel.isHidden = true

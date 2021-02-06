@@ -228,6 +228,8 @@ class TimerVC: UIViewController {
     
     //MARK: - Private Constraints
     private func addSubviews() {
+        view.addGradientLayer(colors: [.clear, .white])
+        
         view.addSubview(timerPickerView)
         NSLayoutConstraint.activate([
             timerPickerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),

@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+enum SystemImageNames: String {
+    case magnifyingglass, timer
+    case dial = "dial.min"
+    case tray = "tray.2"
+}

@@ -58,10 +58,7 @@ class SearchRecipesOnlineVC: UIViewController {
         willSet {
             guard recipes.isEmpty else { return }
             backgroundImageView.image = UIImage(named: ImageNames.plainWoodTable.rawValue)
-            let gradientLayer = CAGradientLayer()
-            gradientLayer.colors = [#colorLiteral(red: 1, green: 0.6405905485, blue: 0.1176991239, alpha: 0.7479130993).cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor]
-            gradientLayer.frame = backgroundImageView.frame
-            backgroundImageView.layer.addSublayer(gradientLayer)
+            backgroundImageView.addGradientLayer(colors: [#colorLiteral(red: 0.9658638835, green: 0.5750891566, blue: 0, alpha: 0.753317637), .clear, .clear])
         }
         
         didSet {

@@ -258,6 +258,7 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
                 let ingredientCell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
                 ingredientCell.backgroundColor = .clear
                 ingredientCell.selectionStyle = .none
+                ingredientCell.textLabel?.font = UIFont(name: Fonts.tamil.rawValue, size: 16)
                 ingredientCell.textLabel?.text = "\(ingredientMeasurements) \(ingredientName)"
                 return ingredientCell
                 

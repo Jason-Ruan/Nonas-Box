@@ -127,8 +127,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureCell(recipe: Recipe) {
-        foodImage.image = nil
-        
         loadImage(recipe: recipe)
         
         guard let title = recipe.title else { return }
@@ -158,6 +156,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         layoutIfNeeded()
         
         guard let imageURL = recipe.imageURL else {
+            foodImage.contentMode = .scaleAspectFit
             foodImage.image = UIImage(systemName: "xmark.rectangle")
             return
         }
@@ -168,9 +167,16 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         foodImage.kf.setImage(with: imageURL,
                               options: [.processor(processor),
                                         .scaleFactor(UIScreen.main.scale),
-                                        .onFailureImage(UIImage(systemName: "xmark.rectangle")),
+                                        .onFailureImage(UIImage(systemName: "photo.fill")),
                                         .cacheOriginalImage
-                                        ])
+                              ]) { [weak self] (result) in
+            switch result {
+                case .failure:
+                    self?.foodImage.contentMode = .scaleAspectFit
+                case .success:
+                    self?.foodImage.contentMode = .scaleAspectFill
+            }
+        }
     }
     
     private func convertMinutesToString(time: Int) -> String {

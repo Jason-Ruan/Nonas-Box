@@ -84,6 +84,7 @@ class RecipeDetailVC: UIViewController {
     
     private lazy var stepByStepInstructionsTableView: StepByStepInstructionsTableView = {
         let steptv = StepByStepInstructionsTableView(frame: .zero)
+        steptv.tableView.showsVerticalScrollIndicator = false
         steptv.tableView.dataSource = self
         steptv.tableView.delegate = self
         return steptv

@@ -10,6 +10,6 @@ import Foundation
 
 enum SystemImageNames: String {
     case magnifyingglass, timer
-    case dial = "dial.min"
+    case dial = "dial.max"
     case tray = "tray.2"
 }

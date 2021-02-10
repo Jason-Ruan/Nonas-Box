@@ -20,7 +20,7 @@ class SearchRecipesOnlineVC: UIViewController {
     private lazy var appNameLabel: UILabel = {
         let label = UILabel(text: "Nona's\nBox", fontName: .chalkduster, fontSize: 60, alignment: .center)
         label.layer.masksToBounds = true
-        label.backgroundColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.7005029966)
+        label.backgroundColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517)
         return label
     }()
     

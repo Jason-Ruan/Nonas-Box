@@ -12,4 +12,5 @@ enum SystemImageNames: String {
     case magnifyingglass, timer
     case dial = "dial.max"
     case tray = "tray.2"
+    case xmarkRectangleFill = "xmark.rectangle.fill"
 }

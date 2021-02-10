@@ -127,7 +127,7 @@ class RecipeDetailVC: UIViewController {
     private func loadImage(recipeDetails: RecipeDetails) {
         guard let imageURL = recipeDetails.imageURL  else {
             backgroundImageView.image = nil
-            recipeImageView.image = UIImage(systemName: "xmark.rectangle.fill")
+            recipeImageView.image = UIImage(systemName: .xmarkRectangleFill)
             removeLoadingScreen()
             return
         }
@@ -136,10 +136,11 @@ class RecipeDetailVC: UIViewController {
             switch result {
                 case .success(let retrievedImageResult):
                     self?.backgroundImageView.image = retrievedImageResult.image
-                    self?.removeLoadingScreen()
                 case .failure(let error):
+                    self?.recipeImageView.image = UIImage(systemName: .xmarkRectangleFill)
                     print(error)
             }
+            self?.removeLoadingScreen()
         }
         
     }

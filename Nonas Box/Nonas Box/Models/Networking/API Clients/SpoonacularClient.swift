@@ -40,7 +40,7 @@ class SpoonacularAPIClient {
     }
     
     func getRecipesForIngredients(withIngredients: [String], completionHandler: @escaping (Result<[Recipe], AppError>) -> () ) {
-        guard let url = URL(string: "https://api.spoonacular.com/recipes/findByIngredients?ingredients=\(withIngredients.joined(separator: ",+"))&apiKey=\(Secrets.spoonacular_api_key)") else {
+        guard let url = URL(string: "https://api.spoonacular.com/recipes/findByIngredients?ingredients=\(withIngredients.joined(separator: ",+"))&ranking=1&ignorePantry=true&apiKey=\(Secrets.spoonacular_api_key)") else {
             completionHandler(.failure(.badURL))
             return
         }

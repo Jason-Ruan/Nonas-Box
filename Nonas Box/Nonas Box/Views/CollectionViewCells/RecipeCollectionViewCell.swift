@@ -163,7 +163,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         
         let processor = DownsamplingImageProcessor(size: foodImage.bounds.size) |> RoundCornerImageProcessor(cornerRadius: foodImage.layer.cornerRadius)
         foodImage.kf.indicatorType = .activity
-        (foodImage.kf.indicator?.view as? UIActivityIndicatorView)?.color = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        (foodImage.kf.indicator?.view as? UIActivityIndicatorView)?.color = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517)
         foodImage.kf.setImage(with: imageURL,
                               options: [.processor(processor),
                                         .scaleFactor(UIScreen.main.scale),

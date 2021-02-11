@@ -75,8 +75,8 @@ class CookingCollectionViewCell: UICollectionViewCell {
     private func configureCell(forRecipe recipe: RecipeDetails) {
         recipeNameLabel.text = recipe.title
         recipeImageView.kf.setImage(with: recipe.imageURL,
-                                    placeholder: UIImage(systemName: "questionmark"),
-                                    options: [.onFailureImage(UIImage(systemName: "xmark.rectangle.fill"))])
+                                    placeholder: UIImage(systemName: .questionmark),
+                                    options: [.onFailureImage(UIImage(systemName: .xmarkRectangleFill))])
                                     { [weak self] (result) in
                                         switch result {
                                             case .failure:

@@ -9,7 +9,7 @@
 import Foundation
 
 enum SystemImageNames: String {
-    case magnifyingglass, timer, photo
+    case magnifyingglass, timer, photo, questionmark
     case dial = "dial.max"
     case tray = "tray.2"
     case xmarkRectangleFill = "xmark.rectangle.fill"

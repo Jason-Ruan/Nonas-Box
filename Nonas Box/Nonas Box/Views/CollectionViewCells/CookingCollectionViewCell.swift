@@ -14,11 +14,15 @@ class CookingCollectionViewCell: UICollectionViewCell {
     private lazy var recipeImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
         return iv
     }()
     
-    private lazy var recipeNameLabel:  UILabel = { return UILabel(numLines: 1, fontName: .handwriting, fontSize: 20, alignment: .center )}()
+    private lazy var recipeNameLabel:  UILabel = {
+        return UILabel(numLines: 1,
+                       fontName: .handwriting,
+                       fontSize: 20,
+                       alignment: .center)
+    }()
     
     
     // MARK: - Properties
@@ -38,7 +42,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         clipsToBounds = true
         backgroundColor = .systemBackground
-        layer.cornerRadius = 10
         setUpViews()
     }
     

@@ -34,19 +34,13 @@ class CookVC: UIViewController {
     
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
-        view.addGradientLayer(colors: [#colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), .white])
+        view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         configureSearchController()
         configureNavigationBarForTranslucence()
         addSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-//        if let searchBarText = searchController.searchBar.text?.lowercased(), searchBarText.count > 0 {
-//            recipes = fetchBookmarkedRecipes().filter { ($0.title?.lowercased().contains(searchBarText) ?? false) }
-//        } else {
-//            recipes = fetchBookmarkedRecipes()
-//        }
         recipes = fetchBookmarkedRecipes(withTitleContaining: searchController.searchBar.text,
                                          filteredBy: (1...2).contains(searchController.searchBar.selectedScopeButtonIndex) ?
                                             RecipeFilterCriteria.init(rawValue: searchController.searchBar.selectedScopeButtonIndex) : nil)
@@ -124,7 +118,7 @@ extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width * 0.9, height: view.frame.height / 5)
+        return CGSize(width: view.frame.width, height: view.frame.height / 4)
     }
     
 }

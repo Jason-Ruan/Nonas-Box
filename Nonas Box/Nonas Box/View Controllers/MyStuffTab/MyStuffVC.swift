@@ -18,7 +18,9 @@ class MyStuffVC: UIViewController {
     
     //MARK: - UI Objects
     private lazy var myStuffButtonsCollectionView: UICollectionView = {
-        let cv = UICollectionView(scrollDirection: .vertical, scrollIndicatorsIsVisible: true)
+        let cv = UICollectionView(scrollDirection: .vertical,
+                                  spacing: 5,
+                                  scrollIndicatorsIsVisible: true)
         cv.register(MyStuffOptionCollectionViewCell.self, forCellWithReuseIdentifier: MyStuffOptionCollectionViewCell.identifier)
         cv.dataSource = self
         cv.delegate = self

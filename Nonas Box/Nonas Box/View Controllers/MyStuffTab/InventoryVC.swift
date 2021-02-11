@@ -12,7 +12,9 @@ class InventoryVC: UIViewController {
     
     //MARK: - UI Objects
     private lazy var itemCollectionView: UICollectionView = {
-        let cv = UICollectionView(scrollDirection: .vertical, scrollIndicatorsIsVisible: true)
+        let cv = UICollectionView(scrollDirection: .vertical,
+                                  spacing: 5,
+                                  scrollIndicatorsIsVisible: true)
         cv.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: "itemCell")
         cv.dataSource = self
         cv.delegate = self

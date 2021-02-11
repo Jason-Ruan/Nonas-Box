@@ -12,7 +12,9 @@ import UIKit
 class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     // MARK: - UI Objects
     private lazy var barcodeCollectionView: UICollectionView = {
-        let cv = UICollectionView(scrollDirection: .horizontal, scrollIndicatorsIsVisible: true)
+        let cv = UICollectionView(scrollDirection: .horizontal,
+                                  spacing: 5,
+                                  scrollIndicatorsIsVisible: true)
         cv.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
         cv.dataSource = self
         cv.delegate = self

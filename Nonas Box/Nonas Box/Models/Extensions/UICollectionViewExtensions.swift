@@ -11,12 +11,13 @@ import UIKit
 public extension UICollectionView {
     // MARK: - Initializers
     convenience init(scrollDirection: UICollectionView.ScrollDirection,
+                     spacing: CGFloat,
                      scrollIndicatorsIsVisible: Bool) {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = scrollDirection
-        layout.minimumInteritemSpacing = 5
-        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = spacing
+        layout.minimumLineSpacing = spacing
         layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         
         self.init(frame: .zero, collectionViewLayout: layout)

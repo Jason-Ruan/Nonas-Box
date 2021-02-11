@@ -15,13 +15,10 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     private lazy var foodImage: UIImageView = {
         let iv = UIImageView()
-        iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFill
-        iv.layer.cornerRadius = 25
         iv.layer.borderWidth = 3
-        iv.layer.borderColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
-        iv.backgroundColor = .clear
+        iv.layer.borderColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517).cgColor
         iv.tintColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517)
+        iv.layer.cornerRadius = layer.cornerRadius
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
@@ -33,7 +30,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.backgroundColor = #colorLiteral(red: 0.2295365632, green: 0.2428716421, blue: 0.2767262459, alpha: 0.5)
         label.layer.cornerRadius = 15
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -45,12 +41,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         iv.tintColor = .red
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.yellow.cgColor,  UIColor.red.cgColor]
-        gradientLayer.frame = iv.bounds
-        iv.layer.insertSublayer(gradientLayer, at: 0)
-        
+        iv.addGradientLayer(colors: [.yellow, .red])
         return iv
     }()
     
@@ -74,15 +65,11 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        layer.borderWidth = 2
+        backgroundColor = .white
+        clipsToBounds = true
         layer.cornerRadius = 25
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.2
-        layer.shadowOffset = CGSize(width: 5, height: 3.0)
-        layer.shadowRadius = 3
-        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 25).cgPath
-        adjustBorderColor()
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.systemYellow.cgColor
         setUpCell()
     }
     
@@ -119,14 +106,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         
     }
     
-    private func adjustBorderColor() {
-        if self.traitCollection.userInterfaceStyle == .dark {
-            layer.borderColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-        } else {
-            layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        }
-    }
-    
     private func configureCell(recipe: Recipe) {
         loadImage(recipe: recipe)
         
@@ -157,7 +136,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         layoutIfNeeded()
         
         guard let imageURL = recipe.imageURL else {
-            foodImage.contentMode = .scaleAspectFit
+            foodImage.contentMode = .center
             foodImage.image = UIImage(systemName: .photoFill)
             return
         }
@@ -197,19 +176,4 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         }
     }
     
-}
-
-
-// MARK: - TraitCollection Methods
-extension RecipeCollectionViewCell {
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        switch traitCollection.userInterfaceStyle {
-            case .light:
-                layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-            case .dark:
-                layer.borderColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-            default:
-                layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        }
-    }
 }

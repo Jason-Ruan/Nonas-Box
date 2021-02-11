@@ -157,7 +157,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         
         guard let imageURL = recipe.imageURL else {
             foodImage.contentMode = .scaleAspectFit
-            foodImage.image = UIImage(systemName: "xmark.rectangle")
+            foodImage.image = UIImage(systemName: .photoFill)
             return
         }
         
@@ -167,12 +167,12 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         foodImage.kf.setImage(with: imageURL,
                               options: [.processor(processor),
                                         .scaleFactor(UIScreen.main.scale),
-                                        .onFailureImage(UIImage(systemName: "photo.fill")),
+                                        .onFailureImage(UIImage(systemName: .photoFill)),
                                         .cacheOriginalImage
                               ]) { [weak self] (result) in
             switch result {
                 case .failure:
-                    self?.foodImage.contentMode = .scaleAspectFit
+                    self?.foodImage.contentMode = .center
                 case .success:
                     self?.foodImage.contentMode = .scaleAspectFill
             }

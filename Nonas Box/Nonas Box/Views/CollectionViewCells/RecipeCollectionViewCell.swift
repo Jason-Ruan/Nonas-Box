@@ -21,6 +21,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         iv.layer.borderWidth = 3
         iv.layer.borderColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         iv.backgroundColor = .clear
+        iv.tintColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517)
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()

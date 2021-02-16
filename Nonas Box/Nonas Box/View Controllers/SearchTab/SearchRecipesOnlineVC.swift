@@ -244,6 +244,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
                         
                     case .failure(let error):
                         print(error)
+                        self?.showAlert(message: "Sorry, it seems there was a problem trying to find recipes. Please try again later.")
                 }
             }
         }

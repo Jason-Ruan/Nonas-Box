@@ -61,7 +61,7 @@ class SearchRecipesOnlineVC: UIViewController {
         willSet {
             guard recipes.isEmpty else { return }
             backgroundImageView.image = UIImage(named: ImageNames.plainWoodTable.rawValue)
-            backgroundImageView.addGradientLayer(colors: [#colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517), .clear, .clear])
+            backgroundImageView.addGradientLayer(colors: [#colorLiteral(red: 1, green: 0.6408555508, blue: 0.365842253, alpha: 0.9022502369), .clear, .clear])
         }
         
         didSet {

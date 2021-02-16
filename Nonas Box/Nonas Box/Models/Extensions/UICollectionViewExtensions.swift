@@ -12,18 +12,24 @@ public extension UICollectionView {
     // MARK: - Initializers
     convenience init(scrollDirection: UICollectionView.ScrollDirection,
                      spacing: CGFloat,
-                     scrollIndicatorsIsVisible: Bool) {
+                     scrollIndicatorsIsVisible: Bool,
+                     shouldInset: Bool) {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = scrollDirection
         layout.minimumInteritemSpacing = spacing
         layout.minimumLineSpacing = spacing
-        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        if shouldInset {
+            layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        }
         
         self.init(frame: .zero, collectionViewLayout: layout)
         
         backgroundColor = .clear
-        contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        
+        if shouldInset {
+            contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        }
         
         switch scrollDirection {
             case .horizontal:

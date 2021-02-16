@@ -14,7 +14,8 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     private lazy var barcodeCollectionView: UICollectionView = {
         let cv = UICollectionView(scrollDirection: .horizontal,
                                   spacing: 5,
-                                  scrollIndicatorsIsVisible: true)
+                                  scrollIndicatorsIsVisible: true,
+                                  shouldInset: true)
         cv.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
         cv.dataSource = self
         cv.delegate = self

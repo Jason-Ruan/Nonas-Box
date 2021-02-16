@@ -20,7 +20,8 @@ class MyStuffVC: UIViewController {
     private lazy var myStuffButtonsCollectionView: UICollectionView = {
         let cv = UICollectionView(scrollDirection: .vertical,
                                   spacing: 5,
-                                  scrollIndicatorsIsVisible: true)
+                                  scrollIndicatorsIsVisible: true,
+                                  shouldInset: true)
         cv.register(MyStuffOptionCollectionViewCell.self, forCellWithReuseIdentifier: MyStuffOptionCollectionViewCell.identifier)
         cv.dataSource = self
         cv.delegate = self

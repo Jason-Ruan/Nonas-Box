@@ -45,7 +45,8 @@ class SearchRecipesOnlineVC: UIViewController {
     private lazy var recipeCollectionView: UICollectionView = {
         let cv = UICollectionView(scrollDirection: .horizontal,
                                   spacing: 5,
-                                  scrollIndicatorsIsVisible: false)
+                                  scrollIndicatorsIsVisible: false,
+                                  shouldInset: true)
         cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: RecipeCollectionViewCell.identifier)
         cv.dataSource = self
         cv.delegate = self

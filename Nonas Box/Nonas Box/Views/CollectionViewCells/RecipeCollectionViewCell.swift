@@ -148,6 +148,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
                               options: [.processor(processor),
                                         .scaleFactor(UIScreen.main.scale),
                                         .onFailureImage(UIImage(systemName: .photoFill)),
+                                        .transition(.fade(0.3)),
                                         .cacheOriginalImage
                               ]) { [weak self] (result) in
             switch result {

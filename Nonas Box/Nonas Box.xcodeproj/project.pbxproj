@@ -25,6 +25,7 @@
 		086CABD925BE3322003E3F96 /* ImageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086CABD825BE3322003E3F96 /* ImageNames.swift */; };
 		086CAC5A25CB9A94003E3F96 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086CAC5925CB9A93003E3F96 /* UIViewExtensions.swift */; };
 		0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */; };
+		088D77E925E2CC63006EFF29 /* IngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088D77E825E2CC63006EFF29 /* IngredientTableViewCell.swift */; };
 		088F0C4925CF526F00A0E321 /* SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F0C4825CF526F00A0E321 /* SystemImage.swift */; };
 		0895E44B2569E58400895753 /* UnderlinedSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */; };
 		0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6272385F40C0059D9CE /* AppDelegate.swift */; };
@@ -91,6 +92,7 @@
 		086CABD825BE3322003E3F96 /* ImageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNames.swift; sourceTree = "<group>"; };
 		086CAC5925CB9A93003E3F96 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStuffVC.swift; sourceTree = "<group>"; };
+		088D77E825E2CC63006EFF29 /* IngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTableViewCell.swift; sourceTree = "<group>"; };
 		088F0C4825CF526F00A0E321 /* SystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImage.swift; sourceTree = "<group>"; };
 		0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedSegmentedControl.swift; sourceTree = "<group>"; };
 		0899D6242385F40C0059D9CE /* Nonas Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nonas Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -400,6 +402,7 @@
 		08CC3765255725C600EEC9BC /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				088D77E825E2CC63006EFF29 /* IngredientTableViewCell.swift */,
 				08CC3766255725C600EEC9BC /* StepByStepInstructionTableViewCell.swift */,
 			);
 			path = TableViewCells;
@@ -654,6 +657,7 @@
 				08CC3774255725C600EEC9BC /* InstructionCollectionViewCell.swift in Sources */,
 				082781C32577600200F008E4 /* RecipeBlurbLabel.swift in Sources */,
 				08AA29612574512200862B14 /* UILabelExtensions.swift in Sources */,
+				088D77E925E2CC63006EFF29 /* IngredientTableViewCell.swift in Sources */,
 				086AE0DB2586C8BE00928DEA /* ButtonStackView.swift in Sources */,
 				0869070E23A830A600634F1B /* MultipeerShareVC.swift in Sources */,
 				08B4D53124DF7C71006C30EA /* UIViewControllerExtensions.swift in Sources */,

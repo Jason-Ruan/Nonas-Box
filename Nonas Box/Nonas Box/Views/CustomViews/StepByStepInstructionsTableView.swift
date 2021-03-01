@@ -21,7 +21,7 @@ class StepByStepInstructionsTableView: UIView {
         let tv = UITableView(frame: .zero, style: .grouped)
         tv.backgroundColor = .clear
         tv.bounces = false
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "ingredientCell")
+        tv.register(IngredientTableViewCell.self, forCellReuseIdentifier: IngredientTableViewCell.reuseIdentifier)
         tv.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: StepByStepInstructionTableViewCell.identifier)
         return tv
     }()
@@ -35,6 +35,12 @@ class StepByStepInstructionsTableView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public var numIngredients: Int? {
+        didSet {
+            underlinedSegmentedControl.segmentedControl.setTitle("Ingredients  (\(numIngredients ?? 0))", forSegmentAt: 0)
+        }
     }
     
     

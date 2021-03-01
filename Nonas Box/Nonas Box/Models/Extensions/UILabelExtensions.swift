@@ -15,6 +15,7 @@ public extension UILabel {
                      numLines: Int? = nil,
                      fontName: Fonts? = nil,
                      fontSize: CGFloat? = nil,
+                     fontWeight: FontWeight? = nil,
                      alignment: NSTextAlignment? = .natural) {
         
         self.init()
@@ -25,7 +26,7 @@ public extension UILabel {
         text = textString
         
         if let fontName = fontName, let fontSize = fontSize {
-            font = UIFont(name: fontName.rawValue, size: fontSize)
+            font = UIFont(name: fontName.rawValue + (fontWeight?.rawValue ?? ""), size: fontSize)
         }
     }
 }

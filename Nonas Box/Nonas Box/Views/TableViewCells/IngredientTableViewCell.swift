@@ -35,7 +35,7 @@ class IngredientTableViewCell: UITableViewCell {
     }()
     
     private lazy var measurementLabel: UILabel = {
-        return UILabel(fontName: .tamil, fontSize: 16, fontWeight: .bold, alignment: .left)
+        return UILabel(fontName: .tamil, fontSize: 16, fontWeight: .bold, alignment: .right)
     }()
     
     
@@ -70,7 +70,7 @@ class IngredientTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             measurementLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             measurementLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
-            measurementLabel.leadingAnchor.constraint(equalTo: checklistButton.trailingAnchor, constant: 15),
+            measurementLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             measurementLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.23)
         ])
 
@@ -78,8 +78,8 @@ class IngredientTableViewCell: UITableViewCell {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: measurementLabel.trailingAnchor, constant: 12),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            nameLabel.leadingAnchor.constraint(equalTo: checklistButton.trailingAnchor, constant: 12),
+            nameLabel.trailingAnchor.constraint(equalTo: measurementLabel.leadingAnchor)
         ])
         
 //            contentView.addSubview(measurementLabel)

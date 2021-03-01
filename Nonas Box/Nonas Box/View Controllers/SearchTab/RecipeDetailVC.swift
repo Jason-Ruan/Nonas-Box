@@ -33,12 +33,6 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
-    private var preferredMeasurementSystem: MeasurementSystem = .usa {
-        didSet {
-            stepByStepInstructionsTableView.tableView.reloadData()
-        }
-    }
-    
     
     // MARK: - Private Constraint Variables
     
@@ -150,6 +144,7 @@ class RecipeDetailVC: UIViewController {
         loadImage(recipeDetails: recipeDetails)
         checkIfRecipeIsBookmarked(id: recipeDetails.id)
         recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
+        stepByStepInstructionsTableView.numIngredients = recipeDetails.extendedIngredients.count
     }
     
     private func checkIfRecipeIsBookmarked(id: Int) {
@@ -253,19 +248,17 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         
         switch indexPath.section {
             case 0:
-                guard let ingredientName = ingredients[indexPath.row].name?.capitalized,
-                      let ingredientMeasurements = preferredMeasurementSystem == .usa ? ingredients[indexPath.row].measures.us.shortHandMeasurement : ingredients[indexPath.row].measures.metric.shortHandMeasurement
+                guard let ingredientCell = tableView.dequeueReusableCell(withIdentifier: IngredientTableViewCell.reuseIdentifier,
+                                                                         for: indexPath) as? IngredientTableViewCell
                 else { return UITableViewCell() }
                 
-                let ingredientCell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
-                ingredientCell.backgroundColor = .clear
-                ingredientCell.selectionStyle = .none
-                ingredientCell.textLabel?.font = UIFont(name: Fonts.tamil.rawValue, size: 16)
-                ingredientCell.textLabel?.text = "\(ingredientMeasurements) \(ingredientName)"
+                ingredientCell.ingredient = ingredients[indexPath.row]
+                ingredientCell.delegate = self
                 return ingredientCell
                 
             case 1...analyzedInstructions.count:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: StepByStepInstructionTableViewCell.identifier, for: indexPath) as? StepByStepInstructionTableViewCell
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: StepByStepInstructionTableViewCell.identifier,
+                                                               for: indexPath) as? StepByStepInstructionTableViewCell
                 else { return UITableViewCell() }
                 
                 cell.step = analyzedInstructions[indexPath.section - 1].steps![indexPath.row]
@@ -288,13 +281,6 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
                 return instructionSectionName.count > 0 ? instructionSectionName : "Directions"
             default:
                 return nil
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            preferredMeasurementSystem = preferredMeasurementSystem == .usa ? .metric : .usa
-            
         }
     }
     
@@ -343,9 +329,4 @@ extension RecipeDetailVC {
             stepByStepInstructionsTableView.underlinedSegmentedControl.index = lastIndex.section > 0 ? 1 : 0
         }
     }
-}
-
-fileprivate enum MeasurementSystem {
-    case usa
-    case metric
 }

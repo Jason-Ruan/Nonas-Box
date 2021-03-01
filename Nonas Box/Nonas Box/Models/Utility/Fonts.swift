@@ -10,7 +10,20 @@ import Foundation
 
 enum Fonts: String {
     case chalkduster = "Chalkduster"
-    case chalkboard = "ChalkboardSE-Bold"
-    case handwriting = "BradleyHandITCTT-Bold"
-    case tamil = "Tamil Sangam MN"
+    case chalkboard = "ChalkboardSE"
+    case handwriting = "BradleyHandITCTT"
+    case tamil = "TamilSangamMN"
+}
+
+enum FontWeight: String {
+    case bold = "-Bold"
+    case boldItalic = "-BoldItalic"
+    case condensedBlack = "-CondensedBlack"
+    case condensedBold = "-CondensedBold"
+    case italic = "-Italic"
+    case light = "-Light"
+    case lightItalic = "-LightItalic"
+    case medium = "-Medium"
+    case ultraLight = "-UltraLight"
+    case ultraLightItalic = "-UltraLightItalic"
 }

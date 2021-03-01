@@ -29,6 +29,14 @@ public extension UIViewController {
         present(ac, animated: true, completion: nil)
     }
     
+    func showAlertWithAutoDismiss(title: String?, message: String?) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        present(ac, animated: true) {
+            sleep(1)
+            ac.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     func showLoadingScreen(blockBackgroundViews: Bool) {
         view.addSubview(LoadingScreenView(frame: view.bounds, blockBackgroundViews: blockBackgroundViews))
     }

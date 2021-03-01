@@ -25,7 +25,7 @@ class SearchRecipesOnlineVC: UIViewController {
     }()
     
     private lazy var screenTitleLabel: UILabel = {
-        return UILabel(text: "Discover new recipes!", fontName: .chalkboard, fontSize: 25)
+        return UILabel(text: "Discover new recipes!", fontName: .chalkboard, fontSize: 25, fontWeight: .bold)
     }()
     
     private lazy var searchBar: UISearchBar = {

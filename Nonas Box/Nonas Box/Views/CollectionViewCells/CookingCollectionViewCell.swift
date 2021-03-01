@@ -21,6 +21,7 @@ class CookingCollectionViewCell: UICollectionViewCell {
         return UILabel(numLines: 1,
                        fontName: .handwriting,
                        fontSize: 20,
+                       fontWeight: .bold,
                        alignment: .center)
     }()
     

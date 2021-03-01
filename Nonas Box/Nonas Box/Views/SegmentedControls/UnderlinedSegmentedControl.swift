@@ -75,7 +75,7 @@ class UnderlinedSegmentedControl: UIControl {
         addSubview(underlineView)
         underlineView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            underlineView.bottomAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
+            underlineView.bottomAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: -5),
             underlineView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
             underlineView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor, multiplier: 1 / CGFloat(segmentedControl.numberOfSegments)),
             underLineLeadingConstraint

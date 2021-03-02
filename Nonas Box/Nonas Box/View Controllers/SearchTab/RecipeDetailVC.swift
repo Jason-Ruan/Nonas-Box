@@ -226,7 +226,8 @@ extension RecipeDetailVC {
 extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 + (recipeDetails?.analyzedInstructions?.count ?? 1)
+        guard let recipeDetails = recipeDetails else { return 0 }
+        return 1 + recipeDetails.numOfSectionsOfInstructions
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

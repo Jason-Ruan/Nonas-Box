@@ -78,9 +78,11 @@ class CookingCollectionViewCell: UICollectionViewCell {
     
     private func configureCell(forRecipe recipe: RecipeDetails) {
         recipeNameLabel.text = recipe.title
+        recipeImageView.kf.indicatorType = .activity
+        (recipeImageView.kf.indicator?.view as? UIActivityIndicatorView)?.color = #colorLiteral(red: 0.8859762549, green: 0.6057382822, blue: 0.4648851752, alpha: 1)
         recipeImageView.kf.setImage(with: recipe.imageURL,
-                                    placeholder: UIImage(systemName: .photoFill),
-                                    options: [.onFailureImage(UIImage(systemName: .xmarkRectangleFill))])
+                                    options: [.onFailureImage(UIImage(systemName: .photoFill)),
+                                              .transition(.fade(0.2))])
                                     { [weak self] (result) in
                                         switch result {
                                             case .failure:

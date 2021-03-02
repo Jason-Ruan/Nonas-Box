@@ -18,6 +18,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         iv.layer.borderWidth = 3
         iv.layer.borderColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517).cgColor
         iv.tintColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517)
+        iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = layer.cornerRadius
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -136,7 +137,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         layoutIfNeeded()
         
         guard let imageURL = recipe.imageURL else {
-            foodImage.contentMode = .center
             foodImage.image = UIImage(systemName: .photoFill)
             return
         }
@@ -150,14 +150,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
                                         .onFailureImage(UIImage(systemName: .photoFill)),
                                         .transition(.fade(0.3)),
                                         .cacheOriginalImage
-                              ]) { [weak self] (result) in
-            switch result {
-                case .failure:
-                    self?.foodImage.contentMode = .center
-                case .success:
-                    self?.foodImage.contentMode = .scaleAspectFill
-            }
-        }
+                              ])
     }
     
     private func convertMinutesToString(time: Int) -> String {

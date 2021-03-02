@@ -52,6 +52,10 @@ struct RecipeDetails: Codable {
         case id, title, readyInMinutes, servings, summary, extendedIngredients, analyzedInstructions, sourceUrl
         case imageURL = "image"
     }
+    
+    var numOfSectionsOfInstructions: Int {
+        return analyzedInstructions?.count ?? 0
+    }
 }
 
 struct StepByStepInstructions: Codable {

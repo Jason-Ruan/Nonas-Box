@@ -18,6 +18,9 @@ class TabBarController: UITabBarController {
         tabBar.tintColor = .white
         tabBar.barTintColor = .black
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.4587794542, green: 0.463016808, blue: 0.4736304283, alpha: 0.8525791952)
+        
+        guard let customFont = UIFont(name: Fonts.wideMarker.rawValue, size: 10.5) else { return }
+        UITabBarItem.appearance().setTitleTextAttributes([.font : customFont], for: .normal)
     }
     
 

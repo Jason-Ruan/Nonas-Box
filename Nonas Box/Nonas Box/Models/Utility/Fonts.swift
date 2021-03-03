@@ -13,6 +13,7 @@ enum Fonts: String {
     case chalkboard = "ChalkboardSE"
     case handwriting = "BradleyHandITCTT"
     case tamil = "TamilSangamMN"
+    case wideMarker = "MarkerFelt-Wide"
 }
 
 enum FontWeight: String {

@@ -32,7 +32,7 @@ public extension UIViewController {
     func showAlertWithAutoDismiss(title: String?, message: String?) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         present(ac, animated: true) {
-            sleep(1)
+            sleep(UInt32.min)
             ac.dismiss(animated: true, completion: nil)
         }
     }

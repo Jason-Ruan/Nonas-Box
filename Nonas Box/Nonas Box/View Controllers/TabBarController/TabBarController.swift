@@ -30,13 +30,23 @@ class TabBarController: UITabBarController {
         let cookVC = UINavigationController(rootViewController: CookVC())
         let timerVC = TimerVC()
         let myStuffVC = UINavigationController(rootViewController: MyStuffVC())
+        let shoppingVC = UINavigationController(rootViewController: UIViewController())
         
-        searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: .magnifyingglass), tag: 0)
-        cookVC.tabBarItem = UITabBarItem(title: "Cook", image: UIImage(systemName: .dial), tag: 1)
-        timerVC.tabBarItem = UITabBarItem(title: "Timer", image: UIImage(systemName: .timer), tag: 2)
-        myStuffVC.tabBarItem = UITabBarItem(title: "Pantry", image: UIImage(systemName: .trays), tag: 3)
+        searchVC.tabBarItem = UITabBarItem(title: TabBarTitles.search.title, image: UIImage(systemName: .magnifyingglass), tag: 0)
+        cookVC.tabBarItem = UITabBarItem(title: TabBarTitles.cook.title, image: UIImage(systemName: .dial), tag: 1)
+        timerVC.tabBarItem = UITabBarItem(title: TabBarTitles.timer.title, image: UIImage(systemName: .timer), tag: 2)
+        shoppingVC.tabBarItem = UITabBarItem(title: TabBarTitles.shopping.title, image: UIImage(systemName: .bag), tag: 3)
+        myStuffVC.tabBarItem = UITabBarItem(title: TabBarTitles.pantry.title, image: UIImage(systemName: .trays), tag: 4)
                         
-        viewControllers = [searchVC, cookVC, timerVC, myStuffVC]
+        viewControllers = [searchVC, cookVC, timerVC, shoppingVC, myStuffVC]
     }
 
+}
+
+fileprivate enum TabBarTitles: String {
+    case search, cook, timer, shopping, pantry
+    
+    var title: String {
+        rawValue.uppercased()
+    }
 }

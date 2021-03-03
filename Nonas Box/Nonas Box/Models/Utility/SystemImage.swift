@@ -14,4 +14,5 @@ enum SystemImageNames: String {
     case trays = "tray.2"
     case xmarkRectangleFill = "xmark.rectangle.fill"
     case photoFill = "photo.fill"
+    case bag = "bag"
 }

@@ -29,7 +29,13 @@ class RecipeDetailVC: UIViewController {
     //MARK: - Properties
     private var recipeDetails: RecipeDetails? {
         didSet {
-            stepByStepInstructionsTableView.tableView.reloadData()
+            stepByStepInstructionsTableView.reloadData()
+        }
+    }
+    
+    private var measurementSystem: MeasurementSystem = .usa {
+        didSet {
+            stepByStepInstructionsTableView.reloadData()
         }
     }
     

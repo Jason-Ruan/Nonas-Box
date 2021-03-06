@@ -60,13 +60,13 @@ class StepByStepInstructionsTableView: UIView {
             underlinedSegmentedControl.topAnchor.constraint(equalTo: topAnchor),
             underlinedSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor),
             underlinedSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor),
-            underlinedSegmentedControl.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15)
+            underlinedSegmentedControl.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.12)
         ])
         
         addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: underlinedSegmentedControl.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: underlinedSegmentedControl.bottomAnchor, constant: 25),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)

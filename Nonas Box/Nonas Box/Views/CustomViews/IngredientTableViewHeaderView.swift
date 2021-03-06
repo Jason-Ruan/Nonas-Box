@@ -9,13 +9,95 @@
 import UIKit
 
 class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    // MARK: - UI Objects
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [worldButton, usaButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
+    public lazy var usaButton: UIButton = {
+        let usaButton = UIButton()
+        usaButton.setTitle("🇺🇸", for: .normal)
+        usaButton.showsTouchWhenHighlighted = true
+        usaButton.layer.borderWidth = 0.5
+        usaButton.layer.borderColor = UIColor.clear.cgColor
+        usaButton.addTarget(self, action: #selector(changeSelectedButton), for: .touchUpInside)
+        return usaButton
+    }()
+    
+    public lazy var worldButton: UIButton = {
+        let worldButton = UIButton()
+        worldButton.setTitle("\u{1F310}", for: .normal)
+        worldButton.showsTouchWhenHighlighted = true
+        worldButton.layer.borderWidth = 0.5
+        worldButton.layer.borderColor = UIColor.clear.cgColor
+        worldButton.addTarget(self, action: #selector(changeSelectedButton), for: .touchUpInside)
+        return worldButton
+    }()
+    
+    // MARK: - Public Properties
+    var delegate: TogglableMeasurementSystem?
+    
+    
+    // MARK: - Private Properties
+    private let highlightedBorderColor = UIColor.systemBlue.cgColor
+    
+    
+    // MARK: - Public Properties
+    public var selectedButton: UIButton? {
+        willSet {
+            selectedButton?.layer.borderColor = UIColor.clear.cgColor
+        }
+        
+        didSet {
+            selectedButton?.layer.borderColor = highlightedBorderColor
+        }
     }
-    */
-
+    
+    
+    // MARK: - Initializers
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        configureSubviews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Private Functions
+    private func configureSubviews() {
+        addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2)
+        ])
+    }
+    
+    private func toggleMeasurementSystem() {
+        if selectedButton == usaButton {
+            delegate?.useAmericanMeasurementSystem()
+        } else {
+            delegate?.useMetricSystem()
+        }
+    }
+    
+    
+    // MARK: - Private Objc Functions
+    @objc private func changeSelectedButton(button: UIButton) {
+        selectedButton = button == usaButton ? usaButton : worldButton
+        toggleMeasurementSystem()
+    }
+    
+    
+    // MARK: - ReuseIdentifier
+    static var reuseIdentifier: String {
+        return String(describing: self)
+    }
 }

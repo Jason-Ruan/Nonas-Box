@@ -40,6 +40,7 @@ class RecipeDetailVC: UIViewController {
     }
     
     
+    
     // MARK: - Private Constraint Variables
     
     private lazy var expandedViewConstraints: [NSLayoutConstraint] = {
@@ -220,7 +221,7 @@ extension RecipeDetailVC {
         
         stepByStepInstructionsTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 15),
+            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 10),
             stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)

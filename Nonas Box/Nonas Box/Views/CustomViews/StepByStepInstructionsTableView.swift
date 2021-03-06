@@ -37,10 +37,18 @@ class StepByStepInstructionsTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Public Properties
     public var numIngredients: Int? {
         didSet {
             underlinedSegmentedControl.segmentedControl.setTitle("Ingredients  (\(numIngredients ?? 0))", forSegmentAt: 0)
         }
+    }
+    
+    
+    // MARK: - Public Functions
+    public func reloadData() {
+        tableView.reloadData()
     }
     
     

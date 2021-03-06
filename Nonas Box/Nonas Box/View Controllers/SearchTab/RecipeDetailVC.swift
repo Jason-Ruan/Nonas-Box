@@ -259,7 +259,7 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
                 guard let ingredientCell = tableView.dequeueReusableCell(withIdentifier: IngredientTableViewCell.reuseIdentifier,
                                                                          for: indexPath) as? IngredientTableViewCell
                 else { return UITableViewCell() }
-                
+                ingredientCell.measurementSystem = measurementSystem
                 ingredientCell.ingredient = ingredients[indexPath.row]
                 ingredientCell.delegate = self
                 return ingredientCell
@@ -290,6 +290,16 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
             default:
                 return nil
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section ==  0 {
+            let headerView = IngredientTableViewHeaderView(reuseIdentifier: IngredientTableViewHeaderView.reuseIdentifier)
+            headerView.delegate = self
+            headerView.selectedButton = headerView.usaButton
+            return headerView
+        }
+        return nil
     }
     
 }

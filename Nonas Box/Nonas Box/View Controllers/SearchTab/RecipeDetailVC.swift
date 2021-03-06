@@ -348,3 +348,13 @@ extension RecipeDetailVC {
         }
     }
 }
+
+extension RecipeDetailVC: TogglableMeasurementSystem {
+    func useAmericanMeasurementSystem() {
+        measurementSystem = .usa
+    }
+    
+    func useMetricSystem() {
+        measurementSystem = .metric
+    }
+}

@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+public enum MeasurementSystem {
+    case usa
+    case metric
+}

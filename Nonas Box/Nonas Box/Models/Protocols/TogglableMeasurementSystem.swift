@@ -1,5 +1,5 @@
 //
-//  ToggableMeasurementSystem.swift
+//  TogglableMeasurementSystem.swift
 //  Nonas Box
 //
 //  Created by Jason Ruan on 3/6/21.

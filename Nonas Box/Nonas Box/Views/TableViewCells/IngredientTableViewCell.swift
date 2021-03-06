@@ -39,7 +39,8 @@ class IngredientTableViewCell: UITableViewCell {
     }()
     
     
-    // MARK: Properties
+    // MARK: - Properties
+    var measurementSystem: MeasurementSystem?
     var ingredient: Ingredient? {
         didSet {
             guard let ingredient = ingredient else { return }
@@ -102,7 +103,7 @@ class IngredientTableViewCell: UITableViewCell {
     
     private func configureViews(forIngredient ingredient: Ingredient) {
         nameLabel.text = ingredient.name?.capitalized
-        measurementLabel.text = ingredient.measures.us.shortHandMeasurement
+        measurementLabel.text = measurementSystem == .usa ? ingredient.measures.us.shortHandMeasurement : ingredient.measures.metric.shortHandMeasurement
     }
     
     @objc func showMessage() {

@@ -13,7 +13,7 @@ class CookVC: UIViewController {
     //MARK: - UI Objects
     private lazy var recipesCollectionView: UICollectionView = {
         let cv = UICollectionView(scrollDirection: .vertical,
-                                  spacing: 0.5,
+                                  spacing: 0,
                                   scrollIndicatorsIsVisible: true,
                                   shouldInset: false)
         cv.dataSource = self

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TogglableMeasurementSystem {
+protocol TogglableMeasurementSystem: AnyObject {
     func useAmericanMeasurementSystem()
     func useMetricSystem()
 }

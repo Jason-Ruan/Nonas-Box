@@ -17,7 +17,7 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
         return stackView
     }()
     
-    public lazy var usaButton: UIButton = {
+    private lazy var usaButton: UIButton = {
         let usaButton = UIButton()
         usaButton.setTitle("🇺🇸", for: .normal)
         usaButton.showsTouchWhenHighlighted = true
@@ -27,7 +27,7 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
         return usaButton
     }()
     
-    public lazy var worldButton: UIButton = {
+    private lazy var worldButton: UIButton = {
         let worldButton = UIButton()
         worldButton.setTitle("\u{1F310}", for: .normal)
         worldButton.showsTouchWhenHighlighted = true
@@ -38,15 +38,12 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
     }()
     
     // MARK: - Public Properties
-    var delegate: TogglableMeasurementSystem?
+    weak var delegate: TogglableMeasurementSystem?
     
     
     // MARK: - Private Properties
     private let highlightedBorderColor = UIColor.systemBlue.cgColor
-    
-    
-    // MARK: - Public Properties
-    public var selectedButton: UIButton? {
+    private var selectedButton: UIButton? {
         willSet {
             selectedButton?.layer.borderColor = UIColor.clear.cgColor
         }
@@ -66,7 +63,11 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+   
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        selectedButton = usaButton
+    }
     
     // MARK: - Private Functions
     private func configureSubviews() {

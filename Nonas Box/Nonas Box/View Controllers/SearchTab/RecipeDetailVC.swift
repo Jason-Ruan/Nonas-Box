@@ -296,7 +296,6 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         if section ==  0 {
             let headerView = IngredientTableViewHeaderView(reuseIdentifier: IngredientTableViewHeaderView.reuseIdentifier)
             headerView.delegate = self
-            headerView.selectedButton = headerView.usaButton
             return headerView
         }
         return nil

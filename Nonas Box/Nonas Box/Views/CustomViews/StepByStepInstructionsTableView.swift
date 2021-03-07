@@ -51,6 +51,10 @@ class StepByStepInstructionsTableView: UIView {
         tableView.reloadData()
     }
     
+    public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        tableView.reloadRows(at: indexPaths, with: animation)
+    }
+    
     
     // MARK: - Private Functions
     private func setUpViews() {

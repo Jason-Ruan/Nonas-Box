@@ -10,9 +10,10 @@ import Foundation
 
 enum SystemImageNames: String {
     case magnifyingglass, timer, photo, questionmark
+    case bag = "bag"
+    case chevronUpFill = "chevron.up.circle.fill"
     case dial = "dial.max"
     case trays = "tray.2"
-    case xmarkRectangleFill = "xmark.rectangle.fill"
     case photoFill = "photo.fill"
-    case bag = "bag"
+    case xmarkRectangleFill = "xmark.rectangle.fill"
 }

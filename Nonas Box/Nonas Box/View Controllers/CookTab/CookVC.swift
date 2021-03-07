@@ -22,6 +22,15 @@ class CookVC: UIViewController {
         return cv
     }()
     
+    private lazy var buttonToScrollToTop: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(systemName: .chevronUpFill), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
+        button.isHidden = true
+        return button
+    }()
+    
     private var searchController: UISearchController!
     
     
@@ -71,6 +80,15 @@ class CookVC: UIViewController {
             recipesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             recipesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        view.addSubview(buttonToScrollToTop)
+        buttonToScrollToTop.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            buttonToScrollToTop.bottomAnchor.constraint(equalTo: recipesCollectionView.bottomAnchor, constant: -15),
+            buttonToScrollToTop.trailingAnchor.constraint(equalTo: recipesCollectionView.trailingAnchor, constant: -15),
+            buttonToScrollToTop.heightAnchor.constraint(equalTo: recipesCollectionView.heightAnchor, multiplier: 0.1),
+            buttonToScrollToTop.widthAnchor.constraint(equalTo: buttonToScrollToTop.heightAnchor)
+        ])
     }
     
     private func fetchBookmarkedRecipes(withTitleContaining term: String? = nil, filteredBy criteria: RecipeFilterCriteria? = nil) -> [RecipeDetails] {
@@ -94,6 +112,12 @@ class CookVC: UIViewController {
         }
         
         return recipes
+    }
+    
+    
+    // MARK: - Private ObjC Functions
+    @objc private func scrollToTop() {
+        recipesCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
 }
@@ -120,6 +144,10 @@ extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height / 4)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        buttonToScrollToTop.isHidden = scrollView.contentOffset.y > 0 ? false : true
     }
     
 }

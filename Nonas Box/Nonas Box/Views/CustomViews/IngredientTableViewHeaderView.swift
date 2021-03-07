@@ -65,8 +65,10 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    
+    // MARK: - LifeCycle Methods
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
         selectedButton = usaButton
     }
     

@@ -35,7 +35,9 @@ class RecipeDetailVC: UIViewController {
     
     private var measurementSystem: MeasurementSystem = .usa {
         didSet {
-            stepByStepInstructionsTableView.reloadData()
+            guard let numIngredients = recipeDetails?.extendedIngredients.count else { return }
+            let indexPaths = (0..<numIngredients).map { IndexPath(row: $0, section: 0) }
+            stepByStepInstructionsTableView.reloadRows(at: indexPaths, with: .automatic)
         }
     }
     

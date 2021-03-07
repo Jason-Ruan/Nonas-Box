@@ -42,7 +42,8 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
     
     
     // MARK: - Private Properties
-    private let highlightedBorderColor = UIColor.systemBlue.cgColor
+    private let highlightedBorderColor: CGColor = UIColor.systemBlue.cgColor
+    
     private var selectedButton: UIButton? {
         willSet {
             selectedButton?.layer.borderColor = UIColor.clear.cgColor

@@ -48,7 +48,7 @@ class IngredientTableViewCell: UITableViewCell {
         }
     }
     
-    public var delegate: UIViewController?
+    weak var delegate: UIViewController?
     
     static var reuseIdentifier: String {
         return String(describing: self)

@@ -21,9 +21,9 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
         let usaButton = UIButton()
         usaButton.setTitle("🇺🇸", for: .normal)
         usaButton.showsTouchWhenHighlighted = true
-        usaButton.layer.borderWidth = 0.5
+        usaButton.layer.borderWidth = 1.5
         usaButton.layer.borderColor = UIColor.clear.cgColor
-        usaButton.addTarget(self, action: #selector(changeSelectedButton), for: .touchUpInside)
+        usaButton.addTarget(self, action: #selector(changeSelectedButton(button:)), for: .touchUpInside)
         return usaButton
     }()
     
@@ -31,9 +31,9 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
         let worldButton = UIButton()
         worldButton.setTitle("\u{1F310}", for: .normal)
         worldButton.showsTouchWhenHighlighted = true
-        worldButton.layer.borderWidth = 0.5
+        worldButton.layer.borderWidth = 1.5
         worldButton.layer.borderColor = UIColor.clear.cgColor
-        worldButton.addTarget(self, action: #selector(changeSelectedButton), for: .touchUpInside)
+        worldButton.addTarget(self, action: #selector(changeSelectedButton(button:)), for: .touchUpInside)
         return worldButton
     }()
     

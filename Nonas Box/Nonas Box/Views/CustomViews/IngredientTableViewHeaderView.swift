@@ -95,6 +95,7 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - Private Objc Functions
     @objc private func changeSelectedButton(button: UIButton) {
+        guard selectedButton != button else { return }
         selectedButton = button == usaButton ? usaButton : worldButton
         toggleMeasurementSystem()
     }

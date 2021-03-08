@@ -359,3 +359,9 @@ extension RecipeDetailVC: TogglableMeasurementSystem {
         measurementSystem = .metric
     }
 }
+
+extension RecipeDetailVC: AlertMessengerDelegate {
+    func showAutoDismissingAlert(title: String?, message: String) {
+        showAlertWithAutoDismiss(title: title, message: message)
+    }
+}

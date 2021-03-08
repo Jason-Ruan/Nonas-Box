@@ -48,7 +48,7 @@ class IngredientTableViewCell: UITableViewCell {
         }
     }
     
-    weak var delegate: UIViewController?
+    weak var delegate: AlertMessengerDelegate?
     
     static var reuseIdentifier: String {
         return String(describing: self)
@@ -108,7 +108,7 @@ class IngredientTableViewCell: UITableViewCell {
     
     @objc func showMessage() {
         guard let ingredientName = ingredient?.name?.capitalized, let delegate = delegate else { return }
-        delegate.showAlertWithAutoDismiss(title: nil, message: "'\(ingredientName)' was added to your shopping list.")
+        delegate.showAutoDismissingAlert(title: nil, message: "'\(ingredientName)' was added to your shopping list.")
     }
     
 }

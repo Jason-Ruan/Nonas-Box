@@ -19,6 +19,7 @@
 		083FEB6624FDDF1000B4DEE0 /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083FEB6524FDDF1000B4DEE0 /* TimerVC.swift */; };
 		083FEB6824FDEB4900B4DEE0 /* CookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083FEB6724FDEB4900B4DEE0 /* CookVC.swift */; };
 		085DEBE925F59917005BDCC4 /* ShoppingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DEBE825F59917005BDCC4 /* ShoppingVC.swift */; };
+		085DEBED25F5E72C005BDCC4 /* AlertMessengerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DEBEC25F5E72C005BDCC4 /* AlertMessengerDelegate.swift */; };
 		08630C7825AACE02007D3358 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08630C7725AACE02007D3358 /* Fonts.swift */; };
 		0868904823A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */; };
 		0868904923A29F6F00D6AA32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */; };
@@ -91,6 +92,7 @@
 		083FEB6524FDDF1000B4DEE0 /* TimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
 		083FEB6724FDEB4900B4DEE0 /* CookVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookVC.swift; sourceTree = "<group>"; };
 		085DEBE825F59917005BDCC4 /* ShoppingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingVC.swift; sourceTree = "<group>"; };
+		085DEBEC25F5E72C005BDCC4 /* AlertMessengerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessengerDelegate.swift; sourceTree = "<group>"; };
 		08630C7725AACE02007D3358 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		0868904723A29F6F00D6AA32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0869070D23A830A600634F1B /* MultipeerShareVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerShareVC.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				0803C4E725F437B2005FB8E4 /* TogglableMeasurementSystem.swift */,
+				085DEBEC25F5E72C005BDCC4 /* AlertMessengerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				08CC3772255725C600EEC9BC /* TimerButton.swift in Sources */,
 				08343B5425857DBF0067D562 /* Spoonacular_PersistenceHelper.swift in Sources */,
 				08CC3778255725C600EEC9BC /* RecipeCollectionViewCell.swift in Sources */,
+				085DEBED25F5E72C005BDCC4 /* AlertMessengerDelegate.swift in Sources */,
 				08CC3777255725C600EEC9BC /* MyStuffOptionCell.swift in Sources */,
 				08CC3776255725C600EEC9BC /* CookingCollectionViewCell.swift in Sources */,
 				08B7449A251AE1160005161D /* PersistenceHelper.swift in Sources */,

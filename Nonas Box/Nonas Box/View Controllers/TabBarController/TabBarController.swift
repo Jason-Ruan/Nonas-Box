@@ -88,7 +88,7 @@ fileprivate enum TabBarItemType: String, CaseIterable {
             case .search:           return SearchRecipesOnlineVC()
             case .cook:             return CookVC()
             case .timer:            return TimerVC()
-            case .shopping:         return UIViewController()
+            case .shopping:         return ShoppingVC()
             case .pantry:           return MyStuffVC()
         }
     }

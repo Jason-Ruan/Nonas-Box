@@ -57,7 +57,7 @@ class TabBarController: UITabBarController {
 
 }
 
-fileprivate enum TabBarItemType: String, CaseIterable {
+public enum TabBarItemType: String, CaseIterable {
     case search, cook, timer, shopping, pantry
     
     var title: String { rawValue.uppercased() }

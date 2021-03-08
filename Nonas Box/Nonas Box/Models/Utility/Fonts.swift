@@ -11,7 +11,7 @@ import Foundation
 enum Fonts: String {
     case chalkduster = "Chalkduster"
     case chalkboard = "ChalkboardSE"
-    case handwriting = "BradleyHandITCTT"
+    case handwriting = "BradleyHandITCTT-Bold"
     case tamil = "TamilSangamMN"
     case wideMarker = "MarkerFelt-Wide"
 }

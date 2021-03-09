@@ -65,6 +65,7 @@ class CookVC: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.scopeButtonTitles = ["All", "Quick (<1hr)", "Steady (1hr+)"]
         searchController.searchBar.delegate = self
+        searchController.searchBar.tintColor = .white
         searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Looking for a specific recipe?", attributes: [.foregroundColor : UIColor.white])
         
         navigationItem.title = "Nona's Box"

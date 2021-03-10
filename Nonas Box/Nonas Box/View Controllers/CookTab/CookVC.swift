@@ -126,6 +126,10 @@ class CookVC: UIViewController {
         recipesCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
+    @objc private func composeButtonPressed() {
+        present(UINavigationController(rootViewController: RecipeCreationVC()), animated: true, completion: nil)
+    }
+    
 }
 
 

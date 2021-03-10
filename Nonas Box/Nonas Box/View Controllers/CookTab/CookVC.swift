@@ -45,7 +45,7 @@ class CookVC: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 0.9539069533, green: 0.6485298276, blue: 0.5980203748, alpha: 1)
-        configureSearchController()
+        configureNavigationItems()
         configureNavigationBarForTranslucence()
         addSubviews()
     }
@@ -59,7 +59,7 @@ class CookVC: UIViewController {
     
     
     //MARK: - Private Methods
-    private func configureSearchController() {
+    private func configureNavigationItems() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.automaticallyShowsScopeBar = true
         searchController.obscuresBackgroundDuringPresentation = false
@@ -70,6 +70,11 @@ class CookVC: UIViewController {
         
         navigationItem.title = "Nona's Box"
         navigationItem.searchController = searchController
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: .compose),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(composeButtonPressed))
+        navigationItem.rightBarButtonItem?.tintColor = .white
     }
     
     private func addSubviews() {

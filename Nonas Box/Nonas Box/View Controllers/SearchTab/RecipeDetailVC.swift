@@ -341,6 +341,10 @@ extension RecipeDetailVC {
         updateSegmentedControlIndexWithSection()
     }
     
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        updateSegmentedControlIndexWithSection()
+    }
+    
     private func updateSegmentedControlIndexWithSection() {
         let visiblerows = stepByStepInstructionsTableView.tableView.indexPathsForVisibleRows
         if let lastIndex = visiblerows?.last {

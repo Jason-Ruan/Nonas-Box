@@ -56,7 +56,7 @@ class ShoppingVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.standardAppearance.largeTitleTextAttributes = [.font : UIFont(name: Fonts.handwriting.rawValue, size: 34)!]
         
-        navigationItem.title = TabBarItemType.shopping.title.capitalized
+        navigationItem.title = "Shopping List"
     }
     
 

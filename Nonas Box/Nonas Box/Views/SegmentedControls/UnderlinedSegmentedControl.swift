@@ -39,6 +39,7 @@ class UnderlinedSegmentedControl: UIControl {
         return self.underlineView.leadingAnchor.constraint(equalTo: leadingAnchor)
     }()
     
+    private let underLineViewHeight: CGFloat = 5
     
     // MARK: - Public Properties
     public var index: Int? {
@@ -69,14 +70,15 @@ class UnderlinedSegmentedControl: UIControl {
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalTo: topAnchor),
             segmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor),
-            segmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor)
+            segmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor),
+            segmentedControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -underLineViewHeight)
         ])
         
         addSubview(underlineView)
         underlineView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            underlineView.bottomAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: -5),
-            underlineView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
+            underlineView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            underlineView.heightAnchor.constraint(equalToConstant: underLineViewHeight),
             underlineView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor, multiplier: 1 / CGFloat(segmentedControl.numberOfSegments)),
             underLineLeadingConstraint
         ])

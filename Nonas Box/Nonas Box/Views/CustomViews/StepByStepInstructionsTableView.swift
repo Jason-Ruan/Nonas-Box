@@ -70,7 +70,7 @@ class StepByStepInstructionsTableView: UIView {
         addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: underlinedSegmentedControl.bottomAnchor, constant: 25),
+            tableView.topAnchor.constraint(equalTo: underlinedSegmentedControl.bottomAnchor, constant: 5),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)

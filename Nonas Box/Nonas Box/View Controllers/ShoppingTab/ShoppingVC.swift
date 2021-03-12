@@ -19,16 +19,44 @@ class ShoppingVC: UIViewController {
         return tv
     }()
     
+    private lazy var promptView: PromptView = {
+        return PromptView(colorTheme: .black,
+                          image: UIImage(systemName: "list.bullet")!,
+                          title: "Nothing to see here!",
+                          message: "Looks like your shopping list is empty!\n\nYou can add ingredients to your list from a recipe")
+    }()
+    
     public var recipeDetails: [RecipeDetails] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavController()
+        setUpViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        promptView.isHidden = !recipeDetails.isEmpty
+        shoppingListTableView.isScrollEnabled = promptView.isHidden
+    }
+    
+    private func setUpViews() {
+        view.addSubview(shoppingListTableView)
+        view.addSubview(promptView)
+        promptView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            promptView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
+            promptView.heightAnchor.constraint(equalTo: promptView.widthAnchor),
+            promptView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            promptView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    private func configureNavController() {
         navigationController?.overrideUserInterfaceStyle = .light
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.standardAppearance.largeTitleTextAttributes = [.font : UIFont(name: Fonts.handwriting.rawValue, size: 34)!]
         
         navigationItem.title = TabBarItemType.shopping.title.capitalized
-        view.addSubview(shoppingListTableView)
     }
     
 

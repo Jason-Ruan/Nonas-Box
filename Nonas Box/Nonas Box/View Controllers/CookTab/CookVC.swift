@@ -31,6 +31,13 @@ class CookVC: UIViewController {
         return button
     }()
     
+    private lazy var promptView: PromptView = {
+        return PromptView(colorTheme: .white,
+                          image: UIImage(systemName: "archivebox")!,
+                          title: "Uh-oh!",
+                          message: "It's looking a little empty here.\n\nYou can get started by searching for recipes or by creating your own!")
+    }()
+    
     private var searchController: UISearchController!
     
     
@@ -54,7 +61,8 @@ class CookVC: UIViewController {
         recipes = fetchBookmarkedRecipes(withTitleContaining: searchController.searchBar.text,
                                          filteredBy: (1...2).contains(searchController.searchBar.selectedScopeButtonIndex) ?
                                             RecipeFilterCriteria.init(rawValue: searchController.searchBar.selectedScopeButtonIndex) : nil)
-        
+        promptView.isHidden = !recipes.isEmpty
+        searchController.searchBar.isHidden = recipes.isEmpty
     }
     
     
@@ -78,6 +86,15 @@ class CookVC: UIViewController {
     }
     
     private func addSubviews() {
+        view.addSubview(promptView)
+        promptView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            promptView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
+            promptView.heightAnchor.constraint(equalTo: promptView.widthAnchor),
+            promptView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            promptView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
         view.addSubview(recipesCollectionView)
         recipesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -95,6 +112,7 @@ class CookVC: UIViewController {
             buttonToScrollToTop.heightAnchor.constraint(equalTo: recipesCollectionView.heightAnchor, multiplier: 0.1),
             buttonToScrollToTop.widthAnchor.constraint(equalTo: buttonToScrollToTop.heightAnchor)
         ])
+        
     }
     
     private func fetchBookmarkedRecipes(withTitleContaining term: String? = nil, filteredBy criteria: RecipeFilterCriteria? = nil) -> [RecipeDetails] {
@@ -168,13 +186,13 @@ extension CookVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text,
                                          filteredBy: (1...2).contains(searchBar.selectedScopeButtonIndex) ?
-                                                        RecipeFilterCriteria.init(rawValue: searchBar.selectedScopeButtonIndex) : nil)
+                                            RecipeFilterCriteria.init(rawValue: searchBar.selectedScopeButtonIndex) : nil)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         recipes = fetchBookmarkedRecipes(withTitleContaining: searchText,
                                          filteredBy: (1...2).contains(searchBar.selectedScopeButtonIndex) ?
-                                                        RecipeFilterCriteria.init(rawValue: searchBar.selectedScopeButtonIndex) : nil)
+                                            RecipeFilterCriteria.init(rawValue: searchBar.selectedScopeButtonIndex) : nil)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

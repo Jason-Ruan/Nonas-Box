@@ -14,6 +14,7 @@ class PromptView: UIView {
     private lazy var imageView: UIImageView = {
         let iv = UIImageView()
         iv.tintColor = colorTheme
+        iv.contentMode = .scaleAspectFill
         return iv
     }()
     

@@ -111,12 +111,12 @@ struct Measurement: Codable {
     
     var shortHandMeasurement: String? {
         guard let amount = amount, let unitShort = unitShort else { return nil }
-        return "\(String(format: "%g", amount)) \(unitShort)"
+        return "\(String(format: "%.3g", amount)) \(unitShort)"
     }
     
     var fullMeasurement: String? {
         guard let amount = amount, let unitLong = unitLong else { return nil }
-        return "\(String(format: "%g", amount)) \(unitLong)"
+        return "\(String(format: "%.3g", amount)) \(unitLong)"
     }
 }
 

@@ -9,6 +9,8 @@ Ever wanted to get right into a recipe and not be bogged down with backstories? 
 * Create and manage shopping lists
 * Keep track of ingredients via scanning barcodes and/or user input
 
+## App Demo
+![Searching For Recipes](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/recipe_search%2Bdetails.gif)
 
 ## Technologies
 * __Swift__

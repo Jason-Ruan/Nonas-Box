@@ -10,7 +10,9 @@ Ever wanted to get right into a recipe and not be bogged down with backstories? 
 * Keep track of ingredients via scanning barcodes and/or user input
 
 ## App Demo
-![Searching For Recipes](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/recipe_search%2Bdetails.gif)
+Search for Recipes          |  Timer
+:-------------------------:|:-------------------------:
+![Searching For Recipes](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/recipe_search%2Bdetails.gif) | ![Timer](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/timer_demo.gif)
 
 ## Technologies
 * __Swift__

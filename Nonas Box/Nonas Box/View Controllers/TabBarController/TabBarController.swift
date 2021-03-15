@@ -77,7 +77,7 @@ public enum TabBarItemType: String, CaseIterable {
         switch self {
             case .search:           return #colorLiteral(red: 1, green: 0.6408555508, blue: 0.365842253, alpha: 0.9022502369)
             case .cook:             return #colorLiteral(red: 0.9539069533, green: 0.6485298276, blue: 0.5980203748, alpha: 1)
-            case .timer:            return #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+            case .timer:            return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             case .shopping:         return #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
             case .pantry:           return #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         }

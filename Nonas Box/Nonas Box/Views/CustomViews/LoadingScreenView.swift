@@ -27,6 +27,15 @@ class LoadingScreenView: UIView {
         return spinner
     }()
     
+    private lazy var textLabel: UILabel = {
+       let label = UILabel()
+        label.text = "LOADING"
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
     
     // MARK: - Initializers
     init(frame: CGRect, blockBackgroundViews: Bool) {
@@ -57,6 +66,14 @@ class LoadingScreenView: UIView {
         NSLayoutConstraint.activate([
             loadingIndicatorView.centerXAnchor.constraint(equalTo: loadingBackgroundView.centerXAnchor),
             loadingIndicatorView.centerYAnchor.constraint(equalTo: loadingBackgroundView.centerYAnchor),
+        ])
+        
+        loadingBackgroundView.addSubview(textLabel)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textLabel.bottomAnchor.constraint(equalTo: loadingBackgroundView.bottomAnchor, constant: -5),
+            textLabel.centerXAnchor.constraint(equalTo: loadingBackgroundView.centerXAnchor),
+            textLabel.topAnchor.constraint(equalTo: loadingIndicatorView.bottomAnchor, constant: 5)
         ])
     }
     

@@ -10,14 +10,19 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
+    // MARK: - Private Properties
+    private let tabBarTintColor: UIColor = .black
+    private let tabBarUnselectedItemTintColor: UIColor = #colorLiteral(red: 0.4587794542, green: 0.463016808, blue: 0.4736304283, alpha: 0.8525791952)
+    
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBarItemsVCs(embedWithNavigationController: [.search, .cook, .shopping, .pantry])
         tabBar.isTranslucent = false
-        tabBar.tintColor = #colorLiteral(red: 1, green: 0.7459085584, blue: 0.4750729799, alpha: 1)
-        tabBar.barTintColor = .black
-        tabBar.unselectedItemTintColor = #colorLiteral(red: 0.4587794542, green: 0.463016808, blue: 0.4736304283, alpha: 0.8525791952)
+        tabBar.tintColor = TabBarItemType.allCases.first?.colorScheme
+        tabBar.barTintColor = tabBarTintColor
+        tabBar.unselectedItemTintColor = tabBarUnselectedItemTintColor
         setTabBarTitleFont(font: .wideMarker, size: 10.5)
     }
     

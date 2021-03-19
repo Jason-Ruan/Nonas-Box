@@ -170,11 +170,11 @@ class RecipeDetailVC: UIViewController {
     @objc private func updateBookmarkStatus() {
         guard let recipeDetails = recipeDetails else { return }
         do {
-            if try Spoonacular_PersistenceHelper.manager.getSavedRecipesDictionary()[recipeDetails.id.description] != nil {
-                try Spoonacular_PersistenceHelper.manager.delete(recipeID: recipeDetails.id)
+            if try Spoonacular_PersistenceHelper.manager.getSavedRecipesDictionary(from: .collection)[recipeDetails.id.description] != nil {
+                try Spoonacular_PersistenceHelper.manager.delete(recipeID: recipeDetails.id, persistenceStorage: .collection)
                 buttonStackView.bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             } else {
-                try Spoonacular_PersistenceHelper.manager.save(recipeID: recipeDetails.id, recipeDetails: recipeDetails)
+                try Spoonacular_PersistenceHelper.manager.save(recipeID: recipeDetails.id, recipeDetails: recipeDetails, persistenceStorage: .collection)
                 buttonStackView.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             }
         } catch {

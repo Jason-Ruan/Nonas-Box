@@ -119,7 +119,7 @@ class CookVC: UIViewController {
         var recipes: [RecipeDetails] = []
         
         do {
-            recipes = try Spoonacular_PersistenceHelper.manager.getSavedRecipes()
+            recipes = try Spoonacular_PersistenceHelper.manager.getSavedRecipes(persistenceStorage: .collection)
         } catch {
             print(error)
         }

@@ -43,6 +43,7 @@ class InventoryVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         loadInventory()
+        navigationController?.navigationBar.isHidden = false
     }
     
     

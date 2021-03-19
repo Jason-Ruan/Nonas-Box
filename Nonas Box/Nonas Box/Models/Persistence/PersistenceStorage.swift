@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+public enum PersistenceStorage {
+    case collection
+    case shopping
+}

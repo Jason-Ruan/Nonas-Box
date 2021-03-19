@@ -67,6 +67,10 @@
 		08E9758B24B80E4400BF0DC3 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9758A24B80E4400BF0DC3 /* Recipe.swift */; };
 		08EF5C362582E27F00B40E75 /* LoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF5C352582E27F00B40E75 /* LoadingScreenView.swift */; };
 		51D7C1281CEEAA021B0670FA /* Pods_Nonas_BoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2C94477E222E5A6AC2E6A7 /* Pods_Nonas_BoxTests.framework */; };
+		9641A4A626011E12001E7D2A /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641A4A526011E12001E7D2A /* ShoppingListTableViewCell.swift */; };
+		96DD48C526027E5500EED7CF /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DD48C426027E5500EED7CF /* ShoppingItem.swift */; };
+		96E5B62125FF059200816E9B /* ShoppingItemPersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E5B62025FF059200816E9B /* ShoppingItemPersistenceHelper.swift */; };
+		96EC719225FDBE5B00E20ED0 /* PersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EC719125FDBE5B00E20ED0 /* PersistenceStorage.swift */; };
 		D89D5181F64837DD3B35C6D0 /* Pods_Nonas_Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0211F999605EC1045968B6 /* Pods_Nonas_Box.framework */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +151,10 @@
 		4A37E6CFB5E9AEEA1238A895 /* Pods-Nonas BoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas BoxTests.release.xcconfig"; path = "Target Support Files/Pods-Nonas BoxTests/Pods-Nonas BoxTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A2C94477E222E5A6AC2E6A7 /* Pods_Nonas_BoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_BoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B9CD454F75C51DC1A6B2D55 /* Pods-Nonas Box.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas Box.debug.xcconfig"; path = "Target Support Files/Pods-Nonas Box/Pods-Nonas Box.debug.xcconfig"; sourceTree = "<group>"; };
+		9641A4A526011E12001E7D2A /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
+		96DD48C426027E5500EED7CF /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
+		96E5B62025FF059200816E9B /* ShoppingItemPersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemPersistenceHelper.swift; sourceTree = "<group>"; };
+		96EC719125FDBE5B00E20ED0 /* PersistenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStorage.swift; sourceTree = "<group>"; };
 		9F0211F999605EC1045968B6 /* Pods_Nonas_Box.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nonas_Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E321813C8218573FE47638F5 /* Pods-Nonas BoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas BoxTests.debug.xcconfig"; path = "Target Support Files/Pods-Nonas BoxTests/Pods-Nonas BoxTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -282,6 +290,7 @@
 			children = (
 				08E9758A24B80E4400BF0DC3 /* Recipe.swift */,
 				08D7D6D724CFD4FF00891E65 /* UPC_Item.swift */,
+				96DD48C426027E5500EED7CF /* ShoppingItem.swift */,
 			);
 			path = "JSON Parsers";
 			sourceTree = "<group>";
@@ -427,8 +436,10 @@
 			isa = PBXGroup;
 			children = (
 				08B74499251AE1160005161D /* PersistenceHelper.swift */,
+				96EC719125FDBE5B00E20ED0 /* PersistenceStorage.swift */,
 				08B744C2251E80680005161D /* UPC_Item_PersistenceHelper.swift */,
 				08343B5325857DBF0067D562 /* Spoonacular_PersistenceHelper.swift */,
+				96E5B62025FF059200816E9B /* ShoppingItemPersistenceHelper.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -438,6 +449,7 @@
 			children = (
 				088D77E825E2CC63006EFF29 /* IngredientTableViewCell.swift */,
 				08CC3766255725C600EEC9BC /* StepByStepInstructionTableViewCell.swift */,
+				9641A4A526011E12001E7D2A /* ShoppingListTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -672,6 +684,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				086AE0FB258C213300928DEA /* BarcodeScanView.swift in Sources */,
+				96EC719225FDBE5B00E20ED0 /* PersistenceStorage.swift in Sources */,
 				083FEB6824FDEB4900B4DEE0 /* CookVC.swift in Sources */,
 				0803C4E525F2D76C005FB8E4 /* IngredientTableViewHeaderView.swift in Sources */,
 				08AA292F256F421100862B14 /* TabBarController.swift in Sources */,
@@ -679,6 +692,7 @@
 				0899D62C2385F40C0059D9CE /* RecipeCreationVC.swift in Sources */,
 				086CAC5A25CB9A94003E3F96 /* UIViewExtensions.swift in Sources */,
 				08E5E21023A2AAB1007AABE9 /* Secrets.swift in Sources */,
+				9641A4A626011E12001E7D2A /* ShoppingListTableViewCell.swift in Sources */,
 				0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */,
 				08EF5C362582E27F00B40E75 /* LoadingScreenView.swift in Sources */,
 				08B744C3251E80680005161D /* UPC_Item_PersistenceHelper.swift in Sources */,
@@ -693,6 +707,7 @@
 				08630C7825AACE02007D3358 /* Fonts.swift in Sources */,
 				08CC3774255725C600EEC9BC /* InstructionCollectionViewCell.swift in Sources */,
 				082781C32577600200F008E4 /* RecipeBlurbLabel.swift in Sources */,
+				96DD48C526027E5500EED7CF /* ShoppingItem.swift in Sources */,
 				08AA29612574512200862B14 /* UILabelExtensions.swift in Sources */,
 				088D77E925E2CC63006EFF29 /* IngredientTableViewCell.swift in Sources */,
 				086AE0DB2586C8BE00928DEA /* ButtonStackView.swift in Sources */,
@@ -704,6 +719,7 @@
 				086CABD925BE3322003E3F96 /* ImageNames.swift in Sources */,
 				088F0C4925CF526F00A0E321 /* SystemImage.swift in Sources */,
 				08CC3775255725C600EEC9BC /* ItemCollectionViewCell.swift in Sources */,
+				96E5B62125FF059200816E9B /* ShoppingItemPersistenceHelper.swift in Sources */,
 				0803C4EB25F43F6B005FB8E4 /* MeasurementSystem.swift in Sources */,
 				08E9758224B4215800BF0DC3 /* AppError.swift in Sources */,
 				0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */,

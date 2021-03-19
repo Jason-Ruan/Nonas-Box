@@ -32,6 +32,10 @@ struct PersistenceHelper<T: Codable> {
         try serializedData.write(to: url, options: Data.WritingOptions.atomic)
     }
     
+    func deleteAll() throws {
+        try FileManager.default.removeItem(at: url)
+    }
+    
     //MARK: - Initializer
     init(fileName: String){
         self.fileName = fileName

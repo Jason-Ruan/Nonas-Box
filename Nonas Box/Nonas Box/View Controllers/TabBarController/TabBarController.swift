@@ -14,19 +14,27 @@ class TabBarController: UITabBarController {
     private let tabBarTintColor: UIColor = .black
     private let tabBarUnselectedItemTintColor: UIColor = #colorLiteral(red: 0.4587794542, green: 0.463016808, blue: 0.4736304283, alpha: 0.8525791952)
     
+    private lazy var barIndicatorLineView: UIView = {
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
+        v.backgroundColor = TabBarItemType.init(rawValue: tabBar.items?.first?.title?.lowercased() ?? "")?.colorScheme
+        return v
+    }()
+    
     
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBarItemsVCs(embedWithNavigationController: [.search, .cook, .shopping, .pantry])
+        tabBar.itemWidth = tabBar.frame.width / CGFloat(tabBar.items?.count ?? 5)
         tabBar.isTranslucent = false
         tabBar.tintColor = TabBarItemType.allCases.first?.colorScheme
         tabBar.barTintColor = tabBarTintColor
         tabBar.unselectedItemTintColor = tabBarUnselectedItemTintColor
         setTabBarTitleFont(font: .wideMarker, size: 10.5)
+        createLineView()
     }
     
-
+    
     // MARK: - Private Functions
     private func createTabBarItemVC(tabBarItemType: TabBarItemType) -> UIViewController {
         let vc = tabBarItemType.viewController

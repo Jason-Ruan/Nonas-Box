@@ -9,11 +9,11 @@
 import UIKit
 
 class ShoppingVC: UIViewController {
-    
+    // MARK: - Private Properties
     private lazy var shoppingListTableView: UITableView = {
         let tv = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .plain)
         tv.backgroundColor = TabBarItemType.shopping.colorScheme
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "shoppingCell")
+        tv.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.reuseIdentifier)
         tv.dataSource = self
         tv.delegate = self
         return tv
@@ -26,8 +26,15 @@ class ShoppingVC: UIViewController {
                           message: "Looks like your shopping list is empty!\n\nYou can add ingredients to your list from a recipe")
     }()
     
-    public var recipeDetails: [RecipeDetails] = []
-
+    // MARK: - Public Properties
+    var shoppingList: [ShoppingItem] = [] {
+        didSet {
+            promptView.isHidden = !shoppingList.isEmpty
+        }
+    }
+    
+    
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavController()
@@ -35,13 +42,26 @@ class ShoppingVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        promptView.isHidden = !recipeDetails.isEmpty
+        loadShoppingItems()
+        promptView.isHidden = !shoppingList.isEmpty
         shoppingListTableView.isScrollEnabled = promptView.isHidden
+        shoppingListTableView.reloadData()
     }
     
+    
+    // MARK: - Private Functions
     private func setUpViews() {
         view.addSubview(shoppingListTableView)
         view.addSubview(promptView)
+        
+        shoppingListTableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            shoppingListTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            shoppingListTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            shoppingListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            shoppingListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
         promptView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             promptView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
@@ -54,21 +74,57 @@ class ShoppingVC: UIViewController {
     private func configureNavController() {
         navigationController?.overrideUserInterfaceStyle = .light
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.standardAppearance.largeTitleTextAttributes = [.font : UIFont(name: Fonts.handwriting.rawValue, size: 34)!]
+        navigationController?.navigationBar.standardAppearance.largeTitleTextAttributes = [.font : UIFont(name: Fonts.optima.rawValue, size: 34)!,
+                                                                                           .foregroundColor : UIColor.black,
+                                                                                           .strokeColor : UIColor.white,
+                                                                                           .strokeWidth : -0.5]
         
         navigationItem.title = "Shopping List"
+        
+        let trashBarButton = UIBarButtonItem(image: UIImage(systemName: .trashFill), style: .plain, target: self, action: #selector(clearShoppingList))
+        let addBarButton = UIBarButtonItem(image: UIImage(systemName: .plusCircleFill), style: .plain, target: self, action: nil)
+
+        trashBarButton.tintColor = .systemGray
+        addBarButton.tintColor = .systemBlue
+        
+        navigationItem.rightBarButtonItems = [addBarButton, trashBarButton]
+        
     }
     
-
+    private func loadShoppingItems() {
+        do {
+            shoppingList = try ShoppingItemPersistenceHelper.manager.getSavedItems()
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    // MARK: - ObjC Functions
+    @objc private func clearShoppingList() {
+        do {
+            try ShoppingItemPersistenceHelper.manager.deleteAll()
+            shoppingList.removeAll()
+            promptView.isHidden = false
+            shoppingListTableView.isScrollEnabled = false
+            shoppingListTableView.reloadData()
+        } catch {
+            print(error)
+        }
+    }
+    
+    
 }
 
+// MARK: - TableView Methods
 extension ShoppingVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeDetails.count
+        shoppingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ShoppingListTableViewCell.reuseIdentifier, for: indexPath) as? ShoppingListTableViewCell else { return UITableViewCell() }
+        cell.shoppingItem = shoppingList[indexPath.row]
         return cell
     }
     
@@ -76,8 +132,20 @@ extension ShoppingVC: UITableViewDataSource, UITableViewDelegate {
         return 100
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(RecipeDetailVC(recipeDetails: recipeDetails[indexPath.row]), animated: true)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Remove") { (action, view, completionHandler) in
+            do {
+                try ShoppingItemPersistenceHelper.manager.delete(key: self.shoppingList[indexPath.row].itemName)
+                self.shoppingList.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            } catch {
+                return
+            }
+        }
+        
+        delete.image = UIImage(systemName: .trashFill)
+        
+        return UISwipeActionsConfiguration(actions: [delete])
     }
     
 }

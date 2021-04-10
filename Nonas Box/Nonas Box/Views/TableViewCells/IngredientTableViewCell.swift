@@ -26,7 +26,7 @@ class IngredientTableViewCell: UITableViewCell {
     // MARK: - Lazy Variables
     private lazy var checklistButton: UIButton = {
         let button = UIButton(type: .contactAdd)
-        button.addTarget(self, action: #selector(showMessage), for: .touchUpInside)
+        button.addTarget(self, action: #selector(checklistButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -71,10 +71,10 @@ class IngredientTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             measurementLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             measurementLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
-            measurementLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            measurementLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             measurementLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.23)
         ])
-
+        
         contentView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -82,23 +82,6 @@ class IngredientTableViewCell: UITableViewCell {
             nameLabel.leadingAnchor.constraint(equalTo: checklistButton.trailingAnchor, constant: 12),
             nameLabel.trailingAnchor.constraint(equalTo: measurementLabel.leadingAnchor)
         ])
-        
-//            contentView.addSubview(measurementLabel)
-//            measurementLabel.translatesAutoresizingMaskIntoConstraints = false
-//            NSLayoutConstraint.activate([
-//                measurementLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-//                measurementLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
-//                measurementLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-//            ])
-//
-//            contentView.addSubview(nameLabel)
-//            nameLabel.translatesAutoresizingMaskIntoConstraints = false
-//            NSLayoutConstraint.activate([
-//                nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-//                nameLabel.leadingAnchor.constraint(equalTo: checklistButton.trailingAnchor, constant: 20),
-//                nameLabel.trailingAnchor.constraint(equalTo: measurementLabel.leadingAnchor)
-//            ])
-        
     }
     
     private func configureViews(forIngredient ingredient: Ingredient) {
@@ -106,9 +89,36 @@ class IngredientTableViewCell: UITableViewCell {
         measurementLabel.text = measurementSystem == .usa ? ingredient.measures.us.shortHandMeasurement : ingredient.measures.metric.shortHandMeasurement
     }
     
-    @objc func showMessage() {
+    @objc func checklistButtonPressed() {
         guard let ingredientName = ingredient?.name?.capitalized, let delegate = delegate else { return }
-        delegate.showAutoDismissingAlert(title: nil, message: "'\(ingredientName)' was added to your shopping list.")
+        if let shoppingItem = ShoppingItem(itemName: ingredientName,
+                                           itemQuantity: ingredient?.measures.us.amount,
+                                           itemUnit: ingredient?.measures.us.fullMeasurement,
+                                           imageURL: ingredient?.imageURL) {
+            
+            guard !ShoppingItemPersistenceHelper.manager.contains(item: shoppingItem) else {
+                do {
+                    try ShoppingItemPersistenceHelper.manager.delete(key: ingredientName)
+                    delegate.showAutoDismissingAlert(title: nil, message: "'\(ingredientName)' was removed from your shopping list.")
+                    checklistButton.setImage(UIImage(systemName: .plusCircle), for: .normal)
+                    checklistButton.tintColor = .systemBlue
+                } catch {
+                    delegate.showAutoDismissingAlert(title: "Oops!", message: "Looks like there was a problem trying to edit \(ingredientName) your shopping list.")
+                    print(error)
+                }
+                return
+            }
+            
+            do {
+                try ShoppingItemPersistenceHelper.manager.save(key: ingredientName, item: shoppingItem)
+                delegate.showAutoDismissingAlert(title: nil, message: "'\(ingredientName)' was added to your shopping list.")
+                checklistButton.setImage(UIImage(systemName: .minusCircle), for: .normal)
+                checklistButton.tintColor = .systemRed
+            } catch {
+                delegate.showAutoDismissingAlert(title: "Oops!", message: "Looks like there was a problem trying to edit \(ingredientName) your shopping list.")
+                print(error)
+            }
+        }
     }
     
 }

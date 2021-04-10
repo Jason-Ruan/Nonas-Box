@@ -11,6 +11,6 @@ import Foundation
 enum ImageNames: String {
     case darkTableBottomIngredients = "dark-table-ingredients"
     case lightTableBottomIngredients = "light-table-ingredients"
-    case foodBorderEmptyCenter = "food-border"
+    case brownWoodTable = "brown-wood-table"
     case plainWoodTable = "wood-table"
 }

@@ -14,12 +14,18 @@ class StepByStepInstructionsTableView: UIView {
     public lazy var underlinedSegmentedControl: UnderlinedSegmentedControl = {
         let underlinedSC = UnderlinedSegmentedControl(items: ["Ingredients", "Directions"])
         underlinedSC.segmentedControl.addTarget(self, action: #selector(jumpToSection), for: .valueChanged)
+        underlinedSC.segmentedControl.layer.borderWidth = 0.25
+        underlinedSC.segmentedControl.layer.borderColor = UIColor.lightGray.cgColor
+        underlinedSC.segmentedControl.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        underlinedSC.segmentedControl.backgroundColor = #colorLiteral(red: 0.388763821, green: 0.388763821, blue: 0.388763821, alpha: 0.2483729148)
         return underlinedSC
     }()
     
     public lazy var tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .grouped)
         tv.backgroundColor = .clear
+        tv.layer.borderWidth = 0.25
+        tv.layer.borderColor = UIColor.lightGray.cgColor
         tv.bounces = false
         tv.register(IngredientTableViewCell.self, forCellReuseIdentifier: IngredientTableViewCell.reuseIdentifier)
         tv.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: StepByStepInstructionTableViewCell.identifier)
@@ -64,13 +70,13 @@ class StepByStepInstructionsTableView: UIView {
             underlinedSegmentedControl.topAnchor.constraint(equalTo: topAnchor),
             underlinedSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor),
             underlinedSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor),
-            underlinedSegmentedControl.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.12)
+            underlinedSegmentedControl.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: underlinedSegmentedControl.bottomAnchor, constant: 5),
+            tableView.topAnchor.constraint(equalTo: underlinedSegmentedControl.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)

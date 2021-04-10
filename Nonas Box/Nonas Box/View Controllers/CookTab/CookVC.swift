@@ -71,7 +71,7 @@ class CookVC: UIViewController {
         searchController = UISearchController(searchResultsController: nil)
         searchController.automaticallyShowsScopeBar = true
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.scopeButtonTitles = ["All", "Quick (<1hr)", "Steady (1hr+)"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Quick (<30min)", "Steady (30+min)"]
         searchController.searchBar.delegate = self
         searchController.searchBar.tintColor = .white
         searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Looking for a specific recipe?", attributes: [.foregroundColor : UIColor.white])
@@ -83,6 +83,7 @@ class CookVC: UIViewController {
                                                             target: self,
                                                             action: #selector(composeButtonPressed))
         navigationItem.rightBarButtonItem?.tintColor = .white
+        navigationItem.backButtonTitle = String()
     }
     
     private func addSubviews() {
@@ -128,8 +129,8 @@ class CookVC: UIViewController {
             recipes = recipes.filter {
                 guard let title = $0.title?.lowercased(), let min = $0.readyInMinutes else { return false }
                 switch criteria {
-                    case .underAnHour:              return title.contains(term) && min < 60
-                    case .hourOrMore:               return title.contains(term) && min >= 60
+                    case .underHalfAnHour:              return title.contains(term) && min < 30
+                    case .halfHourOrMore:               return title.contains(term) && min >= 30
                     default:                        return title.contains(term)
                 }
             }
@@ -202,8 +203,8 @@ extension CookVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         switch selectedScope {
             case 0:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text)
-            case 1:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text, filteredBy: .underAnHour)
-            case 2:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text, filteredBy: .hourOrMore)
+            case 1:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text, filteredBy: .underHalfAnHour)
+            case 2:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text, filteredBy: .halfHourOrMore)
             default:                return
         }
     }
@@ -217,6 +218,6 @@ extension CookVC: UISearchBarDelegate {
 }
 
 fileprivate enum RecipeFilterCriteria: Int {
-    case underAnHour = 1
-    case hourOrMore = 2
+    case underHalfAnHour = 1
+    case halfHourOrMore = 2
 }

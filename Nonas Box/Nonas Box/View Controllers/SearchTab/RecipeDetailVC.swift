@@ -46,22 +46,29 @@ class RecipeDetailVC: UIViewController {
     // MARK: - Private Constraint Variables
     
     private lazy var expandedViewConstraints: [NSLayoutConstraint] = {
-        [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.45),
-         self.recipeBlurbInfoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-         self.recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: view.leadingAnchor),
-         self.recipeImageView.bottomAnchor.constraint(equalTo: recipeBlurbInfoLabel.bottomAnchor),
-         self.recipeImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-         self.buttonStackView.centerXAnchor.constraint(equalTo: recipeImageView.centerXAnchor)]
+        [recipeImageView.topAnchor.constraint(equalTo: view.topAnchor),
+         recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
+         recipeImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15),
+         recipeBlurbInfoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+         recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+         recipeBlurbInfoLabel.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor),
+         buttonStackView.topAnchor.constraint(equalTo: recipeBlurbInfoLabel.bottomAnchor, constant: 15),
+         buttonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ]
     }()
-
+    
     private lazy var collapsedViewConstraints: [NSLayoutConstraint] = {
-        [self.recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15),
-         self.recipeBlurbInfoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-         self.recipeImageView.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 25),
-         self.recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: recipeImageView.leadingAnchor, constant: -5),
-         self.buttonStackView.centerXAnchor.constraint(equalTo: recipeBlurbInfoLabel.centerXAnchor),
-         self.recipeImageView.bottomAnchor.constraint(equalTo: buttonStackView.bottomAnchor),
-         ]
+        [recipeBlurbInfoLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
+         recipeBlurbInfoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+         recipeImageView.leadingAnchor.constraint(equalTo: view.centerXAnchor),
+         recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+         recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: recipeImageView.leadingAnchor, constant: -5),
+         recipeBlurbInfoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+         buttonStackView.topAnchor.constraint(equalTo: recipeBlurbInfoLabel.bottomAnchor, constant: 15),
+         buttonStackView.centerXAnchor.constraint(equalTo: recipeBlurbInfoLabel.centerXAnchor),
+         recipeImageView.bottomAnchor.constraint(equalTo: buttonStackView.bottomAnchor)
+        ]
     }()
     
     
@@ -71,8 +78,8 @@ class RecipeDetailVC: UIViewController {
     
     private lazy var recipeImageView: UIImageView = {
         let iv = UIImageView(frame: view.bounds)
-        iv.layer.cornerRadius = 15
-        iv.layer.maskedCorners = []
+        iv.layer.cornerRadius = 20
+        iv.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
         return iv
@@ -117,12 +124,11 @@ class RecipeDetailVC: UIViewController {
         showLoadingScreen(blockBackgroundViews: true)
         SpoonacularAPIClient.manager.getRecipeDetails(recipeID: recipeID) { [weak self] (result) in
             switch result {
-                case .failure(let error):
-                    self?.showAlert(message: "Could not get step by step instructions for the selected recipe.\nError:\(error.localizedDescription)")
-                case .success(let recipeDetails):
-                    self?.title = recipeDetails.title
-                    self?.recipeDetails = recipeDetails
-                    self?.configureViews(forRecipeDetails: recipeDetails)
+            case .failure(let error):
+                self?.showAlert(message: "Could not get step by step instructions for the selected recipe.\nError:\(error.localizedDescription)")
+            case .success(let recipeDetails):
+                self?.recipeDetails = recipeDetails
+                self?.configureViews(forRecipeDetails: recipeDetails)
             }
         }
     }
@@ -137,11 +143,11 @@ class RecipeDetailVC: UIViewController {
         
         recipeImageView.kf.setImage(with: imageURL) { [weak self] result in
             switch result {
-                case .success(let retrievedImageResult):
-                    self?.backgroundImageView.image = retrievedImageResult.image
-                case .failure(let error):
-                    self?.recipeImageView.image = UIImage(systemName: .xmarkRectangleFill)
-                    print(error)
+            case .success(let retrievedImageResult):
+                self?.backgroundImageView.image = retrievedImageResult.image
+            case .failure(let error):
+                self?.recipeImageView.image = UIImage(systemName: .xmarkRectangleFill)
+                print(error)
             }
             self?.removeLoadingScreen()
         }
@@ -149,7 +155,6 @@ class RecipeDetailVC: UIViewController {
     }
     
     private func configureViews(forRecipeDetails recipeDetails: RecipeDetails) {
-        title = recipeDetails.title
         loadImage(recipeDetails: recipeDetails)
         checkIfRecipeIsBookmarked(id: recipeDetails.id)
         recipeBlurbInfoLabel.configureAttributedText(title: recipeDetails.title, servings: recipeDetails.servings, readyInMinutes: recipeDetails.readyInMinutes)
@@ -200,33 +205,28 @@ extension RecipeDetailVC {
     private func setUpViews() {
         view.addSubview(backgroundImageView)
         view.addSubview(recipeImageView)
-        view.addSubview(recipeBlurbInfoLabel)
         view.addSubview(buttonStackView)
+        view.addSubview(recipeBlurbInfoLabel)
         view.addSubview(stepByStepInstructionsTableView)
         
         recipeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             recipeImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ] + expandedViewConstraints)
         
-        recipeBlurbInfoLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            recipeBlurbInfoLabel.topAnchor.constraint(equalTo: recipeImageView.topAnchor, constant: 5),
-        ])
-        
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            buttonStackView.topAnchor.constraint(equalTo: recipeBlurbInfoLabel.bottomAnchor, constant: 15),
-            buttonStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.05)
+            buttonStackView.heightAnchor.constraint(equalToConstant: 25)
         ])
+        
+        recipeBlurbInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         
         stepByStepInstructionsTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 10),
-            stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            stepByStepInstructionsTableView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 15),
+            stepByStepInstructionsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            stepByStepInstructionsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            stepByStepInstructionsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
@@ -242,12 +242,12 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let ingredients = recipeDetails?.extendedIngredients, let analyzedInstructions = recipeDetails?.analyzedInstructions else { return 0 }
         switch section {
-            case 0:
-                return ingredients.count
-            case 1...analyzedInstructions.count:
-                return analyzedInstructions[section - 1].steps?.count ?? 0
-            default:
-                return 0
+        case 0:
+            return ingredients.count
+        case 1...analyzedInstructions.count:
+            return analyzedInstructions[section - 1].steps?.count ?? 0
+        default:
+            return 0
         }
     }
     
@@ -257,25 +257,25 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
         else { return UITableViewCell() }
         
         switch indexPath.section {
-            case 0:
-                guard let ingredientCell = tableView.dequeueReusableCell(withIdentifier: IngredientTableViewCell.reuseIdentifier,
-                                                                         for: indexPath) as? IngredientTableViewCell
-                else { return UITableViewCell() }
-                ingredientCell.measurementSystem = measurementSystem
-                ingredientCell.ingredient = ingredients[indexPath.row]
-                ingredientCell.delegate = self
-                return ingredientCell
-                
-            case 1...analyzedInstructions.count:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: StepByStepInstructionTableViewCell.identifier,
-                                                               for: indexPath) as? StepByStepInstructionTableViewCell
-                else { return UITableViewCell() }
-                
-                cell.step = analyzedInstructions[indexPath.section - 1].steps![indexPath.row]
-                return cell
-                
-            default :
-                print()
+        case 0:
+            guard let ingredientCell = tableView.dequeueReusableCell(withIdentifier: IngredientTableViewCell.reuseIdentifier,
+                                                                     for: indexPath) as? IngredientTableViewCell
+            else { return UITableViewCell() }
+            ingredientCell.measurementSystem = measurementSystem
+            ingredientCell.ingredient = ingredients[indexPath.row]
+            ingredientCell.delegate = self
+            return ingredientCell
+            
+        case 1...analyzedInstructions.count:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: StepByStepInstructionTableViewCell.identifier,
+                                                           for: indexPath) as? StepByStepInstructionTableViewCell
+            else { return UITableViewCell() }
+            
+            cell.step = analyzedInstructions[indexPath.section - 1].steps![indexPath.row]
+            return cell
+            
+        default :
+            print()
         }
         
         return UITableViewCell()
@@ -284,13 +284,13 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let analyzedInstructions = recipeDetails?.analyzedInstructions else { return "placeholder_header"}
         switch section {
-            case 0:
-                return "Ingredients"
-            case 1...analyzedInstructions.count:
-                guard let instructionSectionName = analyzedInstructions[section - 1].name else { return "Directions"}
-                return instructionSectionName.count > 0 ? instructionSectionName : "Directions"
-            default:
-                return nil
+        case 0:
+            return "Ingredients"
+        case 1...analyzedInstructions.count:
+            guard let instructionSectionName = analyzedInstructions[section - 1].name else { return "Directions"}
+            return instructionSectionName.count > 0 ? instructionSectionName : "Directions"
+        default:
+            return nil
         }
     }
     
@@ -313,23 +313,21 @@ extension RecipeDetailVC {
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
                 NSLayoutConstraint.deactivate(self.collapsedViewConstraints)
                 NSLayoutConstraint.activate(self.expandedViewConstraints)
-                self.title = self.recipeDetails?.title
-                self.recipeImageView.layer.maskedCorners = []
+                self.recipeImageView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
                 self.view.layoutIfNeeded()
-                self.buttonStackView.bookmarkButton.setTitle("Bookmark", for: .normal)
-                self.buttonStackView.weblinkButton.setTitle("Source", for: .normal)
             }, completion: nil)
+            
+            navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = false }
             
         } else {
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
                 NSLayoutConstraint.deactivate(self.expandedViewConstraints)
                 NSLayoutConstraint.activate(self.collapsedViewConstraints)
-                self.title = nil
                 self.recipeImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
                 self.view.layoutIfNeeded()
-                self.buttonStackView.bookmarkButton.setTitle(nil, for: .normal)
-                self.buttonStackView.weblinkButton.setTitle(nil, for: .normal)
             }, completion: nil)
+            
+            navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = true }
         }
     }
     

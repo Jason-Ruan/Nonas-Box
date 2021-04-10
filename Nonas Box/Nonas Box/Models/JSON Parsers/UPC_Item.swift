@@ -17,6 +17,7 @@ struct UPC_Item: Codable {
     let description: String?
     let brand: String?
     var images: [URL]?
+    var dateAdded: Date?
     
     var barcode: String? {
         return upc ?? ean

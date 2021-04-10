@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ShoppingItem: Codable, Equatable {
+struct ShoppingItem: Codable, Hashable {
     var itemName: String
     var itemQuantity: Double?
     var itemCustomaryUnit: String?

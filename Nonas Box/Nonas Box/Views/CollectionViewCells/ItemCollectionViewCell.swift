@@ -7,17 +7,33 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ItemCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI Objects
     private lazy var itemImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
+        iv.kf.indicatorType = .activity
+        iv.backgroundColor = .white
+        iv.contentMode = .scaleAspectFit
         return iv
     }()
     
-    private lazy var itemNameLabel: UILabel = { return UILabel(alignment: .center) }()
+    public lazy var itemNameLabel: UILabel = {
+        let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.backgroundColor = . systemBlue
+        return label
+    }()
+    private lazy var dateAddedLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textColor = .systemGray2
+        label.backgroundColor = .systemYellow
+        return label
+    }()
     
     
     //MARK: - Properties

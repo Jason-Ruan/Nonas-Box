@@ -77,9 +77,9 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2)
         ])
     }

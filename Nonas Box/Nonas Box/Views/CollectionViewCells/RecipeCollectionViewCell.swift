@@ -15,7 +15,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     private lazy var foodImage: UIImageView = {
         let iv = UIImageView()
-        iv.layer.borderWidth = 3
+        iv.layer.borderWidth = 0.75
         iv.layer.borderColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517).cgColor
         iv.tintColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517)
         iv.contentMode = .scaleAspectFill
@@ -24,11 +24,8 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    private lazy var foodInfoLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
+    private lazy var foodInfoLabel: RecipeBlurbLabel = {
+        let label = RecipeBlurbLabel()
         label.backgroundColor = #colorLiteral(red: 0.2295365632, green: 0.2428716421, blue: 0.2767262459, alpha: 0.5)
         label.layer.cornerRadius = 15
         label.clipsToBounds = true
@@ -69,7 +66,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         backgroundColor = .white
         clipsToBounds = true
         layer.cornerRadius = 25
-        layer.borderWidth = 2
+        layer.borderWidth = 1.25
         layer.borderColor = UIColor.systemYellow.cgColor
         setUpCell()
     }
@@ -109,28 +106,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     private func configureCell(recipe: Recipe) {
         loadImage(recipe: recipe)
-        
-        guard let title = recipe.title else { return }
-        
-        let foodInfoText = NSMutableAttributedString(string: title, attributes: [.font : UIFont.boldSystemFont(ofSize: 15)])
-        
-        let image1TextAttachment = NSTextAttachment(image: UIImage(systemName: "person.2.fill")!)
-        let image2TextAttachment = NSTextAttachment(image: UIImage(systemName: "clock.fill")!)
-        let image1TextString = NSAttributedString(attachment: image1TextAttachment)
-        let image2TextString = NSAttributedString(attachment: image2TextAttachment)
-        
-        let prepInfo = NSMutableAttributedString(string: "\n\n")
-        
-        if let servings = recipe.servings, let prepTime = recipe.readyInMinutes  {
-            prepInfo.append(image1TextString)
-            prepInfo.append(NSAttributedString(string: servings.description))
-            prepInfo.append(NSAttributedString(string: "  |  "))
-            prepInfo.append(image2TextString)
-            prepInfo.append(NSAttributedString(string: convertMinutesToString(time: prepTime)))
-        }
-        
-        foodInfoText.append(prepInfo)
-        foodInfoLabel.attributedText = foodInfoText
+        foodInfoLabel.configureAttributedText(title: recipe.title, servings: recipe.servings, readyInMinutes: recipe.readyInMinutes)
     }
     
     private func loadImage(recipe: Recipe) {
@@ -151,14 +127,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
                                         .transition(.fade(0.3)),
                                         .cacheOriginalImage
                               ])
-    }
-    
-    private func convertMinutesToString(time: Int) -> String {
-        guard time > 60 else { return "\(time.description)m" }
-        let hours = time / 60
-        let minutes = time % 60
-        guard minutes > 0 else { return "\(hours)h" }
-        return "\(hours)h \(minutes)m"
     }
     
     private func checkIfRecipeIsBookmarked(id: Int) -> Bool {

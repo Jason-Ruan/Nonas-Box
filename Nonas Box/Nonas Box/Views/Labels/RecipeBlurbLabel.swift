@@ -26,29 +26,49 @@ class RecipeBlurbLabel: UILabel {
     
     // MARK: - Public Functions
     public func configureAttributedText(title: String?, servings: Int?, readyInMinutes: Int?) {
-        let recipeTitle = NSAttributedString(string: "\n\(title ?? "placeholder title")\n", attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .bold)])
-        let recipeServings = NSAttributedString(string: "\n\(servings ?? 1) servings", attributes: [.font : UIFont.systemFont(ofSize: 16, weight: .medium)])
-        let recipeTime = NSAttributedString(string: "\nTime: \(formatMinutesToString(minutes: readyInMinutes ?? 1))\n", attributes: [.font : UIFont.systemFont(ofSize: 16, weight: .semibold)])
+        guard let title = title else { return }
         
-        let summaryAttributedString = NSMutableAttributedString()
-        summaryAttributedString.append(recipeTitle)
-        summaryAttributedString.append(recipeServings)
-        summaryAttributedString.append(recipeTime)
+        let foodInfoText = NSMutableAttributedString(string: "\n\(title)", attributes: [.font : UIFont(name: Fonts.optima.rawValue, size: 20)!])
         
-        attributedText = summaryAttributedString
-    }
-    
-    private func formatMinutesToString(minutes: Int) -> String {
-        let numHours = minutes / 60
-        let numMinutes = minutes % 60
+        let image1TextAttachment = NSTextAttachment(image: UIImage(systemName: "person.2.fill")!)
+        let image2TextAttachment = NSTextAttachment(image: UIImage(systemName: "clock.fill")!)
+        let image1TextString = NSAttributedString(attachment: image1TextAttachment)
+        let image2TextString = NSAttributedString(attachment: image2TextAttachment)
         
-        if numHours == 1 {
-            return "1 hour\(numMinutes > 0 ? ", \(numMinutes) minutes" : "")"
-        } else if numHours > 1 {
-            return "\(numHours) hours\(numMinutes > 0 ? ", \(numMinutes) minutes" : "")"
-        } else {
-            return "\(minutes) minutes"
+        let prepInfo = NSMutableAttributedString(string: "\n\n")
+        
+        if let servings = servings, let prepTime = readyInMinutes  {
+            prepInfo.append(image1TextString)
+            prepInfo.append(NSAttributedString(string: servings.description))
+            prepInfo.append(NSAttributedString(string: "  |  "))
+            prepInfo.append(image2TextString)
+            prepInfo.append(convertMinutesToString(time: prepTime))
         }
+        
+        foodInfoText.append(prepInfo)
+        attributedText = foodInfoText
     }
     
+    private func convertMinutesToString(time: Int) -> NSMutableAttributedString {
+        guard time > 60 else {
+            let timeString: NSMutableAttributedString = NSMutableAttributedString(string: time.description)
+            timeString.append(NSMutableAttributedString.superscript(string: "min"))
+            return timeString
+        }
+        
+        let hours = time / 60
+        let minutes = time % 60
+        
+        let timeString: NSMutableAttributedString = NSMutableAttributedString(string: hours.description)
+        timeString.append(NSMutableAttributedString.superscript(string: hours > 1 ? "hrs" : "hr"))
+        
+        guard minutes > 0 else {
+            return timeString
+        }
+        
+        timeString.append(NSAttributedString(string: " \(minutes)"))
+        timeString.append(NSMutableAttributedString.superscript(string: "min"))
+        
+        return timeString
+    }
 }

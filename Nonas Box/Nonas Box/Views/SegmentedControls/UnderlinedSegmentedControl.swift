@@ -17,12 +17,14 @@ class UnderlinedSegmentedControl: UIControl {
         
         // Changes backgroundColor and divider images to clear
         c.setBackgroundImage(UIImage(color: .clear, size: CGSize(width: 1, height: 50)), for: .normal, barMetrics: .default)
-        c.setDividerImage(UIImage(color: .clear, size: CGSize(width: 1, height: 50)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        c.setBackgroundImage(UIImage(color: #colorLiteral(red: 1, green: 0.9918877858, blue: 0.9991216787, alpha: 0.2), size: CGSize(width: 1, height: 50)), for: .selected, barMetrics: .default)
+        c.setDividerImage(UIImage(color: .lightGray, size: CGSize(width: 0.5, height: 0.5)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         
         // Changes color of title colors for selected / unselected segements
         c.setTitleTextAttributes([.foregroundColor : UIColor.systemGray], for: .normal)
         c.setTitleTextAttributes([.foregroundColor : UIColor.white], for: .selected)
         c.addTarget(self, action: #selector(changeSegmentedControlLine), for: .valueChanged)
+        
         return c
     }()
     
@@ -71,7 +73,7 @@ class UnderlinedSegmentedControl: UIControl {
             segmentedControl.topAnchor.constraint(equalTo: topAnchor),
             segmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor),
             segmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor),
-            segmentedControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -underLineViewHeight)
+            segmentedControl.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
         addSubview(underlineView)
@@ -91,7 +93,7 @@ class UnderlinedSegmentedControl: UIControl {
         let segmentIndex = CGFloat(segmentedControl.selectedSegmentIndex)
         let segmentWidth = segmentedControl.frame.width / CGFloat(segmentedControl.numberOfSegments)
         let leadingDistance = segmentWidth * segmentIndex
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
             self?.underLineLeadingConstraint.constant = leadingDistance
             self?.underlineView.backgroundColor = segmentIndex == 0 ? .systemBlue : .systemOrange
             self?.layoutIfNeeded()

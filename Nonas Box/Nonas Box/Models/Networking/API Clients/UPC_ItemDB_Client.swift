@@ -44,6 +44,7 @@ class UPC_ItemDB_Client {
                             return
                         }
                         
+                        // Update all URLs for the upc_item to meet security protocol standards
                         upc_item.images = upc_item.images?.map { url in
                             if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) {
                                 urlComponents.scheme = "https"
@@ -52,6 +53,9 @@ class UPC_ItemDB_Client {
                                 return url
                             }
                         }
+                        
+                        // Set dateAdded property for the upc_item to be current time
+                        upc_item.dateAdded = Date()
                         
                         // Persist item locally on device
                         DispatchQueue.global(qos: .utility).async {

@@ -57,8 +57,7 @@ class InventoryVC: UIViewController {
     }
     
     private func configureNavigationBarItems() {
-        let addItemButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentBarcodeScanVC))
-        navigationItem.rightBarButtonItem = addItemButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentBarcodeScanVC))
     }
     
     private func configureCollectionViewLongPress() {
@@ -123,7 +122,7 @@ extension InventoryVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width / 3.5, height: view.safeAreaLayoutGuide.layoutFrame.height / 4)
+        return CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width * 0.9, height: view.safeAreaLayoutGuide.layoutFrame.height / 4)
     }
     
     

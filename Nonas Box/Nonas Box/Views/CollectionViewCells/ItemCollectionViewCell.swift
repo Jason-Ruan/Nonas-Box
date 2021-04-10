@@ -47,6 +47,8 @@ class ItemCollectionViewCell: UICollectionViewCell {
         return String(describing: self)
     }
     
+    private let padding: CGFloat = 5
+    
     //MARK: - Initializerss
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,19 +66,23 @@ class ItemCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Functions
     private func configureCell(forItem item: UPC_Item) {
-        itemNameLabel.text = item.title?.capitalized
+        itemNameLabel.text = "\(item.title?.capitalized ?? "Item_name")"
+        itemImageView.image = UIImage(systemName: .photoFill)
         
-        guard let imageURLs = item.images else { return }
-        imageURLs.forEach({
-            itemImageView.kf.setImage(with: $0) { result in
-                switch result {
-                    case .success:
-                        break
-                    case .failure(let error):
-                        print(error)
-                }
-            }
-        })
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy"
+        dateAddedLabel.text =  "Added on: \(dateFormatter.string(from: item.dateAdded ?? Date()))"
+        
+        guard let imageURLs = item.images, !imageURLs.isEmpty else {
+            return
+        }
+        
+        for url in imageURLs {
+            guard itemImageView.image == UIImage(systemName: .photoFill) else { return }
+            itemImageView.kf.setImage(with: url,
+                                      options: [.onFailureImage(UIImage(systemName: .photoFill)),
+                                                .cacheOriginalImage])
+        }
     }
     
     
@@ -87,17 +93,26 @@ class ItemCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             itemImageView.topAnchor.constraint(equalTo: topAnchor),
             itemImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            itemImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            itemImageView.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.75)
+            itemImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.33),
+            itemImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-    
+        
         addSubview(itemNameLabel)
         itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            itemNameLabel.topAnchor.constraint(equalTo: itemImageView.bottomAnchor, constant: 5),
-            itemNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            itemNameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -5),
-            itemNameLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            itemNameLabel.topAnchor.constraint(equalTo: topAnchor),
+            itemNameLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor),
+            itemNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            itemNameLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.65)
+        ])
+        
+        addSubview(dateAddedLabel)
+        dateAddedLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dateAddedLabel.topAnchor.constraint(equalTo: itemNameLabel.bottomAnchor),
+            dateAddedLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor),
+            dateAddedLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            dateAddedLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     

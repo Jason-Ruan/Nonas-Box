@@ -12,7 +12,7 @@ class SearchRecipesOnlineVC: UIViewController {
     //MARK: - UI Objects
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView(frame: view.frame)
-        iv.image = UIImage(named: ImageNames.foodBorderEmptyCenter.rawValue)
+        iv.image = UIImage(named: ImageNames.brownWoodTable.rawValue)
         iv.contentMode = .scaleAspectFill
         return iv
     }()
@@ -20,6 +20,8 @@ class SearchRecipesOnlineVC: UIViewController {
     private lazy var appNameLabel: UILabel = {
         let label = UILabel(text: "Nona's\nBox", fontName: .chalkduster, fontSize: 60, alignment: .center)
         label.layer.masksToBounds = true
+        label.layer.borderWidth = 7.5
+        label.layer.borderColor = UIColor.systemOrange.cgColor
         label.backgroundColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517)
         return label
     }()
@@ -75,6 +77,7 @@ class SearchRecipesOnlineVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
+        navigationItem.backButtonTitle = String()
         configureTapGesture()
         setUpViews()
     }

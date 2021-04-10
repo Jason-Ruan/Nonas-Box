@@ -12,7 +12,7 @@ Ever wanted to get right into a recipe and not be bogged down with backstories? 
 ## App Demo
 Search for Recipes          |  Shopping List  |  Timer with Local Notifications
 :-------------------------:|:-------------------------:|:-------------------------:
-![Searching For Recipes](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/recipe_search%2Bdetails.gif) | ![Shopping List](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/shopping_list_demo.gif) | ![Timer](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/tiimer_demo.gif)
+![Searching For Recipes](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/recipe-searchVC.gif) | ![Shopping List](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/shopping-list.gif) | ![Timer](https://github.com/Jason-Ruan/Nonas-Box/blob/master/gifs/tiimer_demo.gif)
 
 ## Technologies
 * __Swift__

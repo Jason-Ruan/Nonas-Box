@@ -11,26 +11,33 @@ import UIKit
 class ButtonStackView: UIStackView {
     
     // MARK: - Public Properties
-    public let bookmarkButton: UIButton
-    public let weblinkButton: UIButton
+    let bookmarkButton: UIButton
+    let shoppingBagButton: UIButton
+    let weblinkButton: UIButton
     
     
     // MARK: - Initializers
     override init(frame: CGRect) {
         let bookmarkButton = UIButton(type: .system)
         bookmarkButton.tintColor = .systemRed
-        bookmarkButton.setTitle("Bookmark", for: .normal)
-        bookmarkButton.titleLabel?.adjustsFontSizeToFitWidth = true
+//        bookmarkButton.setTitle("Bookmark", for: .normal)
+//        bookmarkButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.bookmarkButton = bookmarkButton
+        
+        let shoppingBagButton = UIButton(type: .system)
+        shoppingBagButton.tintColor = TabBarItemType.shopping.colorScheme
+        shoppingBagButton.setImage(UIImage(systemName: .bag), for: .normal)
+        self.shoppingBagButton = shoppingBagButton
         
         let webLinkButton = UIButton(type: .system)
         webLinkButton.setImage(UIImage(systemName: "safari.fill"), for: .normal)
-        webLinkButton.setTitle("Source", for: .normal)
-        webLinkButton.titleLabel?.adjustsFontSizeToFitWidth = true
+//        webLinkButton.setTitle("Source", for: .normal)
+//        webLinkButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.weblinkButton = webLinkButton
         
         super.init(frame: frame)
         addArrangedSubview(bookmarkButton)
+        addArrangedSubview(shoppingBagButton)
         addArrangedSubview(webLinkButton)
         
         axis = .horizontal

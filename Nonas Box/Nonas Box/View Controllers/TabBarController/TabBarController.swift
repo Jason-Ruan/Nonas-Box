@@ -66,7 +66,7 @@ class TabBarController: UITabBarController {
         barIndicatorLineView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             barIndicatorLineView.heightAnchor.constraint(equalTo: tabBar.heightAnchor, multiplier: 0.025),
-            barIndicatorLineView.bottomAnchor.constraint(equalTo: tabBar.bottomAnchor),
+            barIndicatorLineView.bottomAnchor.constraint(equalTo: tabBar.safeAreaLayoutGuide.bottomAnchor),
             barIndicatorLineView.widthAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: CGFloat(1) / CGFloat(tabBar.items?.count ?? 1))
         ])
     }

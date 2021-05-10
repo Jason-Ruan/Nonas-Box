@@ -27,6 +27,7 @@ class StepByStepInstructionsTableView: UIView {
         tv.layer.borderWidth = 0.25
         tv.layer.borderColor = UIColor.lightGray.cgColor
         tv.bounces = false
+        tv.showsVerticalScrollIndicator = false
         tv.register(IngredientTableViewCell.self, forCellReuseIdentifier: IngredientTableViewCell.reuseIdentifier)
         tv.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: StepByStepInstructionTableViewCell.identifier)
         return tv
@@ -48,6 +49,20 @@ class StepByStepInstructionsTableView: UIView {
     public var numIngredients: Int? {
         didSet {
             underlinedSegmentedControl.segmentedControl.setTitle("Ingredients  (\(numIngredients ?? 0))", forSegmentAt: 0)
+        }
+    }
+    
+    weak var delegate: UITableViewDelegate? {
+        didSet {
+            guard let delegate = delegate else { return }
+            tableView.delegate = delegate
+        }
+    }
+    
+    weak var dataSource: UITableViewDataSource? {
+        didSet {
+            guard let dataSource = dataSource else { return }
+            tableView.dataSource = dataSource
         }
     }
     

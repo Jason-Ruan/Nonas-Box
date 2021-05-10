@@ -88,15 +88,15 @@ class RecipeDetailVC: UIViewController {
     private lazy var buttonStackView: ButtonStackView = {
         let sv = ButtonStackView(frame: .zero)
         sv.bookmarkButton.addTarget(self, action: #selector(updateBookmarkStatus), for: .touchUpInside)
+        sv.shoppingBagButton.addTarget(self, action: #selector(shoppingBagButtonPressed), for: .touchUpInside)
         sv.weblinkButton.addTarget(self, action: #selector(openSourceLink), for: .touchUpInside)
         return sv
     }()
     
     private lazy var stepByStepInstructionsTableView: StepByStepInstructionsTableView = {
         let steptv = StepByStepInstructionsTableView(frame: .zero)
-        steptv.tableView.showsVerticalScrollIndicator = false
-        steptv.tableView.dataSource = self
-        steptv.tableView.delegate = self
+        steptv.dataSource = self
+        steptv.delegate = self
         return steptv
     }()
     

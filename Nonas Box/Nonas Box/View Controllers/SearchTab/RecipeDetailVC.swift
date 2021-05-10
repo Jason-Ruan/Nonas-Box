@@ -353,17 +353,25 @@ extension RecipeDetailVC {
         updateSegmentedControlIndexWithSection()
     }
     
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        updateSegmentedControlIndexWithSection()
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        animateExpandedConstraints()
     }
     
     private func updateSegmentedControlIndexWithSection() {
-        let visiblerows = stepByStepInstructionsTableView.tableView.indexPathsForVisibleRows
-        if let lastIndex = visiblerows?.last {
-            stepByStepInstructionsTableView.underlinedSegmentedControl.segmentedControl.selectedSegmentIndex = lastIndex.section > 0 ? 1 : 0
-            stepByStepInstructionsTableView.underlinedSegmentedControl.index = lastIndex.section > 0 ? 1 : 0
-        }
+        guard let visiblerows = stepByStepInstructionsTableView.tableView.indexPathsForVisibleRows else { return }
+        let section = sectionWithMostVisibleRows(visibleRows: visiblerows)
+        stepByStepInstructionsTableView.underlinedSegmentedControl.segmentedControl.selectedSegmentIndex = section
+        stepByStepInstructionsTableView.underlinedSegmentedControl.index = section
     }
+    
+    private func sectionWithMostVisibleRows(visibleRows: [IndexPath]) -> Int {
+        var sectionTracker: [Int : Int] = [:]
+        for row in visibleRows {
+            sectionTracker[row.section] = (sectionTracker[row.section] ?? 0) + 1
+        }
+        return sectionTracker.max { a,b in a.value < b.value }?.key ?? 0
+    }
+    
 }
 
 extension RecipeDetailVC: TogglableMeasurementSystem {

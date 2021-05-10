@@ -170,6 +170,24 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
+    private func animateExpandedConstraints() {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+            NSLayoutConstraint.deactivate(self.collapsedViewConstraints)
+            NSLayoutConstraint.activate(self.expandedViewConstraints)
+            self.recipeImageView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            self.view.layoutIfNeeded()
+        }, completion: { _ in self.updateSegmentedControlIndexWithSection() })
+    }
+    
+    private func animateCollapsedConstraints() {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+            NSLayoutConstraint.deactivate(self.expandedViewConstraints)
+            NSLayoutConstraint.activate(self.collapsedViewConstraints)
+            self.recipeImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     
     // MARK: - Obj-C Functions
     @objc private func updateBookmarkStatus() {
@@ -309,26 +327,7 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
 // MARK: - ScrollView Methods
 extension RecipeDetailVC {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y == 0 {
-            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
-                NSLayoutConstraint.deactivate(self.collapsedViewConstraints)
-                NSLayoutConstraint.activate(self.expandedViewConstraints)
-                self.recipeImageView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-            
-            navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = false }
-            
-        } else {
-            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
-                NSLayoutConstraint.deactivate(self.expandedViewConstraints)
-                NSLayoutConstraint.activate(self.collapsedViewConstraints)
-                self.recipeImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-            
-            navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = true }
-        }
+        animateCollapsedConstraints()
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

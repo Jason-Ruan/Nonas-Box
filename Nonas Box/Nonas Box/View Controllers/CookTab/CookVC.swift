@@ -19,6 +19,10 @@ class CookVC: UIViewController {
         cv.dataSource = self
         cv.delegate = self
         cv.register(CookingCollectionViewCell.self, forCellWithReuseIdentifier: CookingCollectionViewCell.identifier)
+        cv.backgroundView = PromptView(colorTheme: .white,
+                                       image: UIImage(systemName: "archivebox")!,
+                                       title: "Uh-oh!",
+                                       message: "It's looking a little empty here.\n\nYou can get started by searching for recipes or by creating your own!")
         return cv
     }()
     
@@ -29,13 +33,6 @@ class CookVC: UIViewController {
         button.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
         button.isHidden = true
         return button
-    }()
-    
-    private lazy var promptView: PromptView = {
-        return PromptView(colorTheme: .white,
-                          image: UIImage(systemName: "archivebox")!,
-                          title: "Uh-oh!",
-                          message: "It's looking a little empty here.\n\nYou can get started by searching for recipes or by creating your own!")
     }()
     
     private var searchController: UISearchController!
@@ -61,8 +58,10 @@ class CookVC: UIViewController {
         recipes = fetchBookmarkedRecipes(withTitleContaining: searchController.searchBar.text,
                                          filteredBy: (1...2).contains(searchController.searchBar.selectedScopeButtonIndex) ?
                                             RecipeFilterCriteria.init(rawValue: searchController.searchBar.selectedScopeButtonIndex) : nil)
-        promptView.isHidden = !recipes.isEmpty
+        recipesCollectionView.backgroundView?.isHidden = !recipes.isEmpty
+        recipesCollectionView.layoutIfNeeded()
         searchController.searchBar.isHidden = recipes.isEmpty
+        
     }
     
     
@@ -87,15 +86,6 @@ class CookVC: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(promptView)
-        promptView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            promptView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
-            promptView.heightAnchor.constraint(equalTo: promptView.widthAnchor),
-            promptView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            promptView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        
         view.addSubview(recipesCollectionView)
         recipesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

@@ -12,18 +12,15 @@ class ShoppingVC: UIViewController {
     // MARK: - Private Properties
     private lazy var shoppingListTableView: UITableView = {
         let tv = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .plain)
-        tv.backgroundColor = TabBarItemType.shopping.colorScheme
         tv.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.reuseIdentifier)
+        tv.tableFooterView = UIView()
+        tv.backgroundView = PromptView(colorTheme: .black,
+                                       image: UIImage(systemName: "list.bullet.rectangle")!,
+                                       title: "Nothing to see here!",
+                                       message: "Looks like your shopping list is empty!\n\nYou can add ingredients to your list from a recipe.")
         tv.dataSource = self
         tv.delegate = self
         return tv
-    }()
-    
-    private lazy var promptView: PromptView = {
-        return PromptView(colorTheme: .black,
-                          image: UIImage(systemName: "list.bullet")!,
-                          title: "Nothing to see here!",
-                          message: "Looks like your shopping list is empty!\n\nYou can add ingredients to your list from a recipe")
     }()
     
     // MARK: - Public Properties
@@ -52,22 +49,12 @@ class ShoppingVC: UIViewController {
     // MARK: - Private Functions
     private func setUpViews() {
         view.addSubview(shoppingListTableView)
-        view.addSubview(promptView)
-        
         shoppingListTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             shoppingListTableView.topAnchor.constraint(equalTo: view.topAnchor),
             shoppingListTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             shoppingListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             shoppingListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-        
-        promptView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            promptView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
-            promptView.heightAnchor.constraint(equalTo: promptView.widthAnchor),
-            promptView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            promptView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     

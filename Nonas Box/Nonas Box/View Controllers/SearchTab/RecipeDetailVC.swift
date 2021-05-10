@@ -215,6 +215,21 @@ class RecipeDetailVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @objc private func shoppingBagButtonPressed() {
+        do {
+            try recipeDetails?.extendedIngredients.forEach {
+                guard let item = ShoppingItem(itemName: $0.name!,
+                                              itemQuantity: $0.measures.us.amount,
+                                              itemUnit: $0.measures.us.fullMeasurement,
+                                              imageURL: $0.imageURL) else { return }
+                try ShoppingItemPersistenceHelper.manager.save(key: item.itemName, item: item)
+            }
+            buttonStackView.shoppingBagButton.setImage(UIImage(systemName: .bagFill), for: .normal)
+        } catch {
+            print(error)
+        }
+    }
+    
 }
 
 

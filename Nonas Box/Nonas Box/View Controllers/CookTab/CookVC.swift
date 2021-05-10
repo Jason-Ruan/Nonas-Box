@@ -70,13 +70,14 @@ class CookVC: UIViewController {
         searchController = UISearchController(searchResultsController: nil)
         searchController.automaticallyShowsScopeBar = true
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.scopeButtonTitles = ["All", "Quick (<30min)", "Steady (30+min)"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Quick", "Steady"]
         searchController.searchBar.delegate = self
         searchController.searchBar.tintColor = .white
         searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Looking for a specific recipe?", attributes: [.foregroundColor : UIColor.white])
         
         navigationItem.title = "Nona's Box"
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: .compose),
                                                             style: .plain,
                                                             target: self,
@@ -119,9 +120,9 @@ class CookVC: UIViewController {
             recipes = recipes.filter {
                 guard let title = $0.title?.lowercased(), let min = $0.readyInMinutes else { return false }
                 switch criteria {
-                    case .underHalfAnHour:              return title.contains(term) && min < 30
-                    case .halfHourOrMore:               return title.contains(term) && min >= 30
-                    default:                        return title.contains(term)
+                case .upToHalfHour:              return title.contains(term) && min <= 30
+                case .overHalfHour:               return title.contains(term) && min > 30
+                default:                           return title.contains(term)
                 }
             }
         }
@@ -192,22 +193,16 @@ extension CookVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         switch selectedScope {
-            case 0:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text)
-            case 1:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text, filteredBy: .underHalfAnHour)
-            case 2:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text, filteredBy: .halfHourOrMore)
-            default:                return
+        case 0:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text)
+        case 1:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text, filteredBy: .upToHalfHour)
+        case 2:                 recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text, filteredBy: .overHalfHour)
+        default:                return
         }
-    }
-    
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.selectedScopeButtonIndex = 0
-        recipes = fetchBookmarkedRecipes(withTitleContaining: searchBar.text)
-        return true
     }
     
 }
 
 fileprivate enum RecipeFilterCriteria: Int {
-    case underHalfAnHour = 1
-    case halfHourOrMore = 2
+    case upToHalfHour = 1
+    case overHalfHour = 2
 }

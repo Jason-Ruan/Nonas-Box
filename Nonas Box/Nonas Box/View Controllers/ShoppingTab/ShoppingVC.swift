@@ -26,22 +26,27 @@ class ShoppingVC: UIViewController {
     // MARK: - Public Properties
     var shoppingList: [ShoppingItem] = [] {
         didSet {
-            promptView.isHidden = !shoppingList.isEmpty
+            shoppingListTableView.backgroundView?.isHidden = !shoppingList.isEmpty
+            shoppingListTableView.isScrollEnabled = !shoppingList.isEmpty
+            if shoppingList.isEmpty {
+                crossedOutList.removeAll()
+            }
         }
     }
+    
+    var crossedOutList: Set<ShoppingItem> = []
     
     
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavController()
+        configureNavigationBarForTranslucence()
         setUpViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         loadShoppingItems()
-        promptView.isHidden = !shoppingList.isEmpty
-        shoppingListTableView.isScrollEnabled = promptView.isHidden
         shoppingListTableView.reloadData()
     }
     
@@ -69,7 +74,7 @@ class ShoppingVC: UIViewController {
         navigationItem.title = "Shopping List"
         
         let trashBarButton = UIBarButtonItem(image: UIImage(systemName: .trashFill), style: .plain, target: self, action: #selector(clearShoppingList))
-        let addBarButton = UIBarButtonItem(image: UIImage(systemName: .plusCircleFill), style: .plain, target: self, action: nil)
+        let addBarButton = UIBarButtonItem(image: UIImage(systemName: .plusCircleFill), style: .plain, target: self, action: #selector(addBarButtonPressed))
 
         trashBarButton.tintColor = .systemGray
         addBarButton.tintColor = .systemBlue
@@ -92,14 +97,16 @@ class ShoppingVC: UIViewController {
         do {
             try ShoppingItemPersistenceHelper.manager.deleteAll()
             shoppingList.removeAll()
-            promptView.isHidden = false
-            shoppingListTableView.isScrollEnabled = false
+            shoppingListTableView.backgroundView?.isHidden = !shoppingList.isEmpty
             shoppingListTableView.reloadData()
         } catch {
             print(error)
         }
     }
     
+    @objc private func addBarButtonPressed() {
+        present(BarcodeScanVC(), animated: true, completion: nil)
+    }
     
 }
 
@@ -111,12 +118,33 @@ extension ShoppingVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ShoppingListTableViewCell.reuseIdentifier, for: indexPath) as? ShoppingListTableViewCell else { return UITableViewCell() }
-        cell.shoppingItem = shoppingList[indexPath.row]
+        let shoppingItem = shoppingList[indexPath.row]
+        cell.shoppingItem = shoppingItem
+        cell.toggleCrossedLineStatus(isCrossedOut: crossedOutList.contains(shoppingItem))
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 75
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: Update the shoppinglist in PersistenceHelper to match order of current shoppingList
+        guard let cell = tableView.cellForRow(at: indexPath) as? ShoppingListTableViewCell else { return }
+        let shoppingItem = shoppingList[indexPath.row]
+        if crossedOutList.contains(shoppingItem) {
+            crossedOutList.remove(shoppingItem)
+            tableView.moveRow(at: indexPath, to: IndexPath(row: 0, section: 0))
+            shoppingList.remove(at: indexPath.row)
+            shoppingList.insert(shoppingItem, at: 0)
+        } else {
+            crossedOutList.insert(shoppingItem)
+            tableView.moveRow(at: indexPath, to: IndexPath(row: (tableView.numberOfRows(inSection: 0) - 1), section: 0))
+            shoppingList.remove(at: indexPath.row)
+            shoppingList.append(shoppingItem)
+        }
+        cell.toggleCrossedLineStatus(isCrossedOut: crossedOutList.contains(shoppingItem))
+        tableView.reloadRows(at: [tableView.indexPathsForVisibleRows!.last!], with: .none)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

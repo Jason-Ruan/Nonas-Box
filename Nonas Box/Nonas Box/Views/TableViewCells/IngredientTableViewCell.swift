@@ -113,7 +113,7 @@ class IngredientTableViewCell: UITableViewCell {
                 try ShoppingItemPersistenceHelper.manager.save(key: ingredientName, item: shoppingItem)
                 delegate.showAutoDismissingAlert(title: nil, message: "'\(ingredientName)' was added to your shopping list.")
                 checklistButton.setImage(UIImage(systemName: .minusCircle), for: .normal)
-                checklistButton.tintColor = .systemRed
+                checklistButton.tintColor = .lightGray
             } catch {
                 delegate.showAutoDismissingAlert(title: "Oops!", message: "Looks like there was a problem trying to edit \(ingredientName) your shopping list.")
                 print(error)

@@ -32,7 +32,6 @@
 		086CAC5A25CB9A94003E3F96 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086CAC5925CB9A93003E3F96 /* UIViewExtensions.swift */; };
 		0878071824D48F3A00B9F5B2 /* MyStuffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */; };
 		088D77E925E2CC63006EFF29 /* IngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088D77E825E2CC63006EFF29 /* IngredientTableViewCell.swift */; };
-		088F0C4925CF526F00A0E321 /* SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F0C4825CF526F00A0E321 /* SystemImage.swift */; };
 		0895E44B2569E58400895753 /* UnderlinedSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */; };
 		0899D6282385F40C0059D9CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6272385F40C0059D9CE /* AppDelegate.swift */; };
 		0899D62A2385F40C0059D9CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899D6292385F40C0059D9CE /* SceneDelegate.swift */; };
@@ -69,6 +68,7 @@
 		51D7C1281CEEAA021B0670FA /* Pods_Nonas_BoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2C94477E222E5A6AC2E6A7 /* Pods_Nonas_BoxTests.framework */; };
 		9641A4A626011E12001E7D2A /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641A4A526011E12001E7D2A /* ShoppingListTableViewCell.swift */; };
 		9648B0B026048386006F217B /* NSMutableAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9648B0AF26048386006F217B /* NSMutableAttributedStringExtension.swift */; };
+		96D32517265F49CF005A8D3F /* GenericAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D32516265F49CF005A8D3F /* GenericAPIClient.swift */; };
 		96DD48C526027E5500EED7CF /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DD48C426027E5500EED7CF /* ShoppingItem.swift */; };
 		96E5B62125FF059200816E9B /* ShoppingItemPersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E5B62025FF059200816E9B /* ShoppingItemPersistenceHelper.swift */; };
 		96EC719225FDBE5B00E20ED0 /* PersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EC719125FDBE5B00E20ED0 /* PersistenceStorage.swift */; };
@@ -110,7 +110,6 @@
 		086CAC5925CB9A93003E3F96 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		0878071724D48F3A00B9F5B2 /* MyStuffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStuffVC.swift; sourceTree = "<group>"; };
 		088D77E825E2CC63006EFF29 /* IngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTableViewCell.swift; sourceTree = "<group>"; };
-		088F0C4825CF526F00A0E321 /* SystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImage.swift; sourceTree = "<group>"; };
 		0895E44A2569E58400895753 /* UnderlinedSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedSegmentedControl.swift; sourceTree = "<group>"; };
 		0899D6242385F40C0059D9CE /* Nonas Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nonas Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0899D6272385F40C0059D9CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +153,7 @@
 		5B9CD454F75C51DC1A6B2D55 /* Pods-Nonas Box.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nonas Box.debug.xcconfig"; path = "Target Support Files/Pods-Nonas Box/Pods-Nonas Box.debug.xcconfig"; sourceTree = "<group>"; };
 		9641A4A526011E12001E7D2A /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
 		9648B0AF26048386006F217B /* NSMutableAttributedStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedStringExtension.swift; sourceTree = "<group>"; };
+		96D32516265F49CF005A8D3F /* GenericAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPIClient.swift; sourceTree = "<group>"; };
 		96DD48C426027E5500EED7CF /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		96E5B62025FF059200816E9B /* ShoppingItemPersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemPersistenceHelper.swift; sourceTree = "<group>"; };
 		96EC719125FDBE5B00E20ED0 /* PersistenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStorage.swift; sourceTree = "<group>"; };
@@ -429,7 +429,6 @@
 			children = (
 				08630C7725AACE02007D3358 /* Fonts.swift */,
 				086CABD825BE3322003E3F96 /* ImageNames.swift */,
-				088F0C4825CF526F00A0E321 /* SystemImage.swift */,
 				0803C4EA25F43F6B005FB8E4 /* MeasurementSystem.swift */,
 			);
 			path = Utility;
@@ -482,8 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				08E9758524B80DC200BF0DC3 /* API Clients */,
-				08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */,
-				08E9758124B4215800BF0DC3 /* AppError.swift */,
+				96D32518265F56A1005A8D3F /* Generic Helpers */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -495,6 +493,16 @@
 				08D7D6D924CFD6FF00891E65 /* UPC_ItemDB_Client.swift */,
 			);
 			path = "API Clients";
+			sourceTree = "<group>";
+		};
+		96D32518265F56A1005A8D3F /* Generic Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				08E9757F24B4212200BF0DC3 /* NetworkHelper.swift */,
+				08E9758124B4215800BF0DC3 /* AppError.swift */,
+				96D32516265F49CF005A8D3F /* GenericAPIClient.swift */,
+			);
+			path = "Generic Helpers";
 			sourceTree = "<group>";
 		};
 		A4C4B01F0B65301F675B2EC3 /* Pods */ = {
@@ -721,7 +729,6 @@
 				08CC3773255725C600EEC9BC /* MenuButton.swift in Sources */,
 				08E9758024B4212200BF0DC3 /* NetworkHelper.swift in Sources */,
 				086CABD925BE3322003E3F96 /* ImageNames.swift in Sources */,
-				088F0C4925CF526F00A0E321 /* SystemImage.swift in Sources */,
 				08CC3775255725C600EEC9BC /* ItemCollectionViewCell.swift in Sources */,
 				96E5B62125FF059200816E9B /* ShoppingItemPersistenceHelper.swift in Sources */,
 				0803C4EB25F43F6B005FB8E4 /* MeasurementSystem.swift in Sources */,
@@ -736,6 +743,7 @@
 				08D7D6DA24CFD6FF00891E65 /* UPC_ItemDB_Client.swift in Sources */,
 				08343B4B25854DD30067D562 /* StepByStepInstructionsTableView.swift in Sources */,
 				082F189425807B1600035E65 /* TimerPickerView.swift in Sources */,
+				96D32517265F49CF005A8D3F /* GenericAPIClient.swift in Sources */,
 				08E9757D24AC06F000BF0DC3 /* SearchRecipesOnlineVC.swift in Sources */,
 				08AA2965257455DF00862B14 /* UICollectionViewExtensions.swift in Sources */,
 				086AE0D42586B75900928DEA /* BackgroundImageView.swift in Sources */,
@@ -912,7 +920,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -934,7 +942,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

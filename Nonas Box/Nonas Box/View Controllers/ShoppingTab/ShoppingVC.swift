@@ -15,7 +15,7 @@ class ShoppingVC: UIViewController {
         tv.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.reuseIdentifier)
         tv.tableFooterView = UIView()
         tv.backgroundView = PromptView(colorTheme: .black,
-                                       image: UIImage(systemName: "list.bullet.rectangle")!,
+                                       image: UIImage(systemName: .bulletList)!,
                                        title: "Nothing to see here!",
                                        message: "Looks like your shopping list is empty!\n\nYou can add ingredients to your list from a recipe.")
         tv.dataSource = self

@@ -39,7 +39,7 @@ class PromptView: UIView {
     
     
     // MARK: - Private Properties
-    private let titleFontSize: CGFloat = 45
+    private let titleFontSize: CGFloat = 25
     private let messageFontSize: CGFloat = 14
     private var colorTheme: UIColor!
     
@@ -67,23 +67,22 @@ class PromptView: UIView {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.33),
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75)
         ])
         
         NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -50),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
             messageLabel.widthAnchor.constraint(equalTo: widthAnchor),
-            messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
     

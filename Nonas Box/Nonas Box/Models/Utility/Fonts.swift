@@ -9,6 +9,8 @@
 import Foundation
 
 enum Fonts: String {
+    case arial = "Arial"
+    case circular = "Circular"
     case chalkduster = "Chalkduster"
     case chalkboard = "ChalkboardSE"
     case handwriting = "BradleyHandITCTT-Bold"

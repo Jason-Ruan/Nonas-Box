@@ -28,7 +28,7 @@ class RecipeBlurbLabel: UILabel {
     public func configureAttributedText(title: String?, servings: Int?, readyInMinutes: Int?) {
         guard let title = title else { return }
         
-        let foodInfoText = NSMutableAttributedString(string: "\n\(title)", attributes: [.font : UIFont(name: Fonts.optima.rawValue, size: 20)!])
+        let foodInfoText = NSMutableAttributedString(string: "\(title)", attributes: [.font : UIFont(name: Fonts.optima.rawValue, size: 20)!])
         
         let image1TextAttachment = NSTextAttachment(image: UIImage(systemName: "person.2.fill")!)
         let image2TextAttachment = NSTextAttachment(image: UIImage(systemName: "clock.fill")!)

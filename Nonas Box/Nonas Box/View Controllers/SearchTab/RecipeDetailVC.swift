@@ -6,18 +6,18 @@
 //  Copyright © 2020 Jason Ruan. All rights reserved.
 //
 
-import SafariServices
 import UIKit
+import SafariServices
 
 class RecipeDetailVC: UIViewController {
     
     //MARK: - VC Initializer
-    init(recipeID: Int) {
+    init(fetching recipeID: Int) {
         super.init(nibName: nil, bundle: nil)
         loadRecipeDetails(recipeID: recipeID)
     }
     
-    init(recipeDetails: RecipeDetails) {
+    init(from recipeDetails: RecipeDetails) {
         super.init(nibName: nil, bundle: nil)
         self.recipeDetails = recipeDetails
     }
@@ -164,7 +164,7 @@ class RecipeDetailVC: UIViewController {
     private func checkIfRecipeIsBookmarked(id: Int) {
         do {
             let isBookmarked = try Spoonacular_PersistenceHelper.manager.checkIsSaved(forRecipeID: id)
-            buttonStackView.bookmarkButton.setImage(isBookmarked ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
+            buttonStackView.bookmarkButton.setImage(isBookmarked ? UIImage(systemName: .bookmarkFill) : UIImage(systemName: .bookmark), for: .normal)
         } catch {
             print(error)
         }
@@ -195,10 +195,10 @@ class RecipeDetailVC: UIViewController {
         do {
             if try Spoonacular_PersistenceHelper.manager.getSavedRecipesDictionary(from: .collection)[recipeDetails.id.description] != nil {
                 try Spoonacular_PersistenceHelper.manager.delete(recipeID: recipeDetails.id, persistenceStorage: .collection)
-                buttonStackView.bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+                buttonStackView.bookmarkButton.setImage(UIImage(systemName: .bookmark), for: .normal)
             } else {
                 try Spoonacular_PersistenceHelper.manager.save(recipeID: recipeDetails.id, recipeDetails: recipeDetails, persistenceStorage: .collection)
-                buttonStackView.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+                buttonStackView.bookmarkButton.setImage(UIImage(systemName: .bookmarkFill), for: .normal)
             }
         } catch {
             print(error)
@@ -367,9 +367,9 @@ extension RecipeDetailVC {
     private func sectionWithMostVisibleRows(visibleRows: [IndexPath]) -> Int {
         var sectionTracker: [Int : Int] = [:]
         for row in visibleRows {
-            sectionTracker[row.section] = (sectionTracker[row.section] ?? 0) + 1
+            sectionTracker[row.section,default: 1] += 1
         }
-        return sectionTracker.max { a,b in a.value < b.value }?.key ?? 0
+        return (sectionTracker.max { a,b in a.value < b.value }?.key ?? 0) == 0 ? 0 : 1
     }
     
 }

@@ -24,7 +24,7 @@ class TimerVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = self.timerDisplayCount.description
         label.textAlignment = .center
-        label.font = UIFont(name: "Arial", size: 45)
+        label.font = UIFont(name: Fonts.arial.rawValue, size: 45)
         label.adjustsFontSizeToFitWidth = true
         label.isHidden = true
         return label
@@ -65,7 +65,7 @@ class TimerVC: UIViewController {
         label.layer.borderWidth = 2
         label.layer.borderColor = UIColor.lightGray.cgColor
         label.numberOfLines = 0
-        label.font = UIFont(name: "Arial", size: 16)
+        label.font = UIFont(name: Fonts.arial.rawValue, size: 16)
         label.textAlignment = .center
         label.isHidden = true
         label.adjustsFontSizeToFitWidth = true
@@ -240,7 +240,7 @@ class TimerVC: UIViewController {
         view.addSubview(timerLabel)
         NSLayoutConstraint.activate([
             timerLabel.centerXAnchor.constraint(equalTo: timerPickerView.centerXAnchor),
-            timerLabel.centerYAnchor.constraint(equalTo: timerPickerView.centerYAnchor),
+            timerLabel.topAnchor.constraint(equalTo: timerPickerView.centerYAnchor),
             timerLabel.widthAnchor.constraint(equalTo: timerPickerView.widthAnchor)
         ])
         

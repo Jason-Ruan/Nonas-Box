@@ -39,14 +39,7 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
     // MARK: - UI Objects
     lazy var stepNumberLabel: UILabel = {
         let label = UILabel()
-        switch self.traitCollection.userInterfaceStyle {
-            case .light:
-                label.textColor = .systemBlue
-            case .dark:
-                label.textColor = .orange
-            default:
-                label.textColor = .systemBlue
-        }
+        label.textColor = .systemOrange
         label.textAlignment = .center
         label.font = UIFont(name: "Courier-Bold", size: 60)
         label.adjustsFontSizeToFitWidth = true
@@ -87,19 +80,4 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
         stepInstructionLabel.text = step.instruction?.description
     }
     
-}
-
-
-// MARK: - TraitCollection Methods
-extension StepByStepInstructionTableViewCell {
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        switch traitCollection.userInterfaceStyle {
-            case .light:
-                stepNumberLabel.textColor = .systemBlue
-            case .dark:
-                stepNumberLabel.textColor = .orange
-            default:
-                stepNumberLabel.textColor = .systemBlue
-        }
-    }
 }

@@ -19,8 +19,9 @@ class CookVC: UIViewController {
         cv.dataSource = self
         cv.delegate = self
         cv.register(CookingCollectionViewCell.self, forCellWithReuseIdentifier: CookingCollectionViewCell.identifier)
+        cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: RecipeCollectionViewCell.identifier)
         cv.backgroundView = PromptView(colorTheme: .white,
-                                       image: UIImage(systemName: "archivebox")!,
+                                       image: UIImage(systemName: .archiveBox)!,
                                        title: "Uh-oh!",
                                        message: "It's looking a little empty here.\n\nYou can get started by searching for recipes or by creating your own!")
         return cv
@@ -32,10 +33,23 @@ class CookVC: UIViewController {
         button.tintColor = .white
         button.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
         button.isHidden = true
+        
+        button.layer.shadowColor = UIColor.darkGray.cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowOffset = CGSize(width: 2.5, height: 2.5)
+        button.layer.shadowRadius = 5
         return button
     }()
     
+    private lazy var layoutButton: UIBarButtonItem = {
+       return UIBarButtonItem(image: UIImage(systemName: .squareGrid2x2),
+                              style: .plain,
+                              target: self,
+                              action: #selector(layoutBarButtonPressed))
+    }()
+    
     private var searchController: UISearchController!
+    private var layout: Layout = .cardView
     
     
     //MARK: - Properties
@@ -73,16 +87,17 @@ class CookVC: UIViewController {
         searchController.searchBar.scopeButtonTitles = ["All", "Quick", "Steady"]
         searchController.searchBar.delegate = self
         searchController.searchBar.tintColor = .white
+        searchController.searchBar.setImage(UIImage(systemName: .xmarkCircleFill)?.withTintColor(.white), for: .clear, state: .normal)
         searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Looking for a specific recipe?", attributes: [.foregroundColor : UIColor.white])
         
         navigationItem.title = "Nona's Box"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: .compose),
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(composeButtonPressed))
-        navigationItem.rightBarButtonItem?.tintColor = .white
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: .compose),
+                                                              style: .plain,
+                                                              target: self,
+                                                              action: #selector(composeButtonPressed)), layoutButton]
+        navigationItem.rightBarButtonItems?.forEach { $0.tintColor = .white }
         navigationItem.backButtonTitle = String()
     }
     
@@ -101,7 +116,7 @@ class CookVC: UIViewController {
         NSLayoutConstraint.activate([
             buttonToScrollToTop.bottomAnchor.constraint(equalTo: recipesCollectionView.bottomAnchor, constant: -15),
             buttonToScrollToTop.trailingAnchor.constraint(equalTo: recipesCollectionView.trailingAnchor, constant: -15),
-            buttonToScrollToTop.heightAnchor.constraint(equalTo: recipesCollectionView.heightAnchor, multiplier: 0.1),
+            buttonToScrollToTop.heightAnchor.constraint(equalTo: recipesCollectionView.heightAnchor, multiplier: 0.08),
             buttonToScrollToTop.widthAnchor.constraint(equalTo: buttonToScrollToTop.heightAnchor)
         ])
         
@@ -120,14 +135,27 @@ class CookVC: UIViewController {
             recipes = recipes.filter {
                 guard let title = $0.title?.lowercased(), let min = $0.readyInMinutes else { return false }
                 switch criteria {
-                case .upToHalfHour:              return title.contains(term) && min <= 30
-                case .overHalfHour:               return title.contains(term) && min > 30
-                default:                           return title.contains(term)
+                case .upToHalfHour:                 return title.contains(term) && min <= 30
+                case .overHalfHour:                 return title.contains(term) && min > 30
+                default:                            return title.contains(term)
+                }
+            }
+        } else {
+            recipes = recipes.filter {
+                guard let min = $0.readyInMinutes else { return false }
+                switch criteria {
+                case .upToHalfHour:                 return min <= 30
+                case .overHalfHour:                 return min > 30
+                default:                            return true
                 }
             }
         }
         
         return recipes
+    }
+    
+    private func updateScopeBarTitles(numResults: [Int]) {
+        searchController.searchBar.scopeButtonTitles = ["All (\(numResults[0]))", "Quick (\(numResults[1]))", "Steady (\(numResults[2]))"]
     }
     
     
@@ -140,6 +168,11 @@ class CookVC: UIViewController {
         present(UINavigationController(rootViewController: RecipeCreationVC()), animated: true, completion: nil)
     }
     
+    @objc private func layoutBarButtonPressed() {
+        layout = (layout == .cardView) ? .gridView : .cardView
+        layoutButton.image = UIImage(systemName: (layout == .cardView) ? .squareGrid2x2 : .rectangleGrid1x2)
+        recipesCollectionView.reloadData()
+    }
 }
 
 
@@ -150,20 +183,36 @@ extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CookingCollectionViewCell.identifier, for: indexPath) as? CookingCollectionViewCell else {
-            fatalError("Could not make CookingCollectionViewCell")
+        switch layout {
+        case .cardView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CookingCollectionViewCell.identifier, for: indexPath) as? CookingCollectionViewCell else {
+                fatalError("Could not make CookingCollectionViewCell")
+            }
+            cell.recipe = recipes[indexPath.row]
+            return cell
+        case .gridView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeCollectionViewCell.identifier, for: indexPath) as? RecipeCollectionViewCell else {
+                fatalError("Could not make RecipeCollectionViewCell")
+            }
+            cell.layer.cornerRadius = 0
+            cell.layer.borderColor = UIColor.white.cgColor
+            cell.recipeDetails = recipes[indexPath.row]
+            return cell
         }
-        cell.recipe = recipes[indexPath.row]
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let recipeDetailVC = RecipeDetailVC(recipeDetails: recipes[indexPath.row])
+        let recipeDetailVC = RecipeDetailVC(from: recipes[indexPath.row])
         navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height / 4)
+        switch layout {
+        case .cardView:
+            return CGSize(width: view.frame.width, height: view.frame.height / 4)
+        case .gridView:
+            return CGSize(width: view.frame.width / 2, height: collectionView.frame.height / 2.5)
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -185,6 +234,10 @@ extension CookVC: UISearchBarDelegate {
         recipes = fetchBookmarkedRecipes(withTitleContaining: searchText,
                                          filteredBy: (1...2).contains(searchBar.selectedScopeButtonIndex) ?
                                             RecipeFilterCriteria.init(rawValue: searchBar.selectedScopeButtonIndex) : nil)
+        var numResults: [Int] = [0,0,0]
+        numResults[searchBar.selectedScopeButtonIndex] = recipes.count
+        updateScopeBarTitles(numResults: numResults)
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -205,4 +258,9 @@ extension CookVC: UISearchBarDelegate {
 fileprivate enum RecipeFilterCriteria: Int {
     case upToHalfHour = 1
     case overHalfHour = 2
+}
+
+fileprivate enum Layout: Int {
+    case cardView
+    case gridView
 }

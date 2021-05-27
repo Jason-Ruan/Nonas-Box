@@ -25,11 +25,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBarItemsVCs(embedWithNavigationController: [.search, .cook, .shopping, .pantry])
-        tabBar.itemWidth = tabBar.frame.width / CGFloat(tabBar.items?.count ?? 5)
-        tabBar.isTranslucent = false
-        tabBar.tintColor = TabBarItemType.allCases.first?.colorScheme
-        tabBar.barTintColor = tabBarTintColor
-        tabBar.unselectedItemTintColor = tabBarUnselectedItemTintColor
+        configureTabBarAttributes()
         setTabBarTitleFont(font: .wideMarker, size: 10.5)
         createLineView()
     }
@@ -40,6 +36,14 @@ class TabBarController: UITabBarController {
         let vc = tabBarItemType.viewController
         vc.tabBarItem = UITabBarItem(title: tabBarItemType.title, image: tabBarItemType.image, tag: tabBarItemType.index)
         return vc
+    }
+    
+    private func configureTabBarAttributes() {
+        tabBar.itemWidth = tabBar.frame.width / CGFloat(tabBar.items?.count ?? 5)
+        tabBar.isTranslucent = false
+        tabBar.tintColor = TabBarItemType.allCases.first?.colorScheme
+        tabBar.barTintColor = tabBarTintColor
+        tabBar.unselectedItemTintColor = tabBarUnselectedItemTintColor
     }
     
     private func configureTabBarItemsVCs(embedWithNavigationController rootViewControllers: Set<TabBarItemType>? = nil) {

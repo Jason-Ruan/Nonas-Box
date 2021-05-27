@@ -11,106 +11,47 @@ import Foundation
 class SpoonacularAPIClient {
     
     func getRecipes(query: String, offset: Int? = nil, completionHandler: @escaping (Result<[Recipe], AppError>) -> () ) {
-        let formattedQuery = query.replacingOccurrences(of: " ", with: "%20")
-                
+        let formattedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let urlString = "https://api.spoonacular.com/recipes/search?query=\(formattedQuery)&number=10&offset=\(offset ?? 0)&instructionsRequired=true&apiKey=\(Secrets.spoonacular_api_key)"
-        guard let url = URL(string: urlString) else {
-            completionHandler(.failure(AppError.badURL))
-            return
-        }
         
-        NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
+        GenericAPIClient.manager.fetchJSON(ofType: SpoonacularResults.self, urlString: urlString) { result in
             switch result {
-                case .success(let data):
-                    do {
-                        let spoonacularResults = try JSONDecoder().decode(SpoonacularResults.self, from: data)
-                        guard let recipeResults = spoonacularResults.results else {
-                            completionHandler(.failure(.invalidJSONResponse))
-                            return
-                        }
-                        completionHandler(.success(recipeResults))
-                    } catch {
-                        completionHandler(.failure(.couldNotParseJSON))
-                }
-                
-                case .failure:
-                    completionHandler(.failure(.noDataReceived))
+            case .success(let spoonacularResults):
+                guard let recipeResults = spoonacularResults.results else { return completionHandler(.failure(.invalidJSONResponse)) }
+                completionHandler(.success(recipeResults))
+            case .failure(let error):
+                completionHandler(.failure(error))
             }
         }
     }
     
     func getRecipesForIngredients(withIngredients: [String], completionHandler: @escaping (Result<[Recipe], AppError>) -> () ) {
-        guard let url = URL(string: "https://api.spoonacular.com/recipes/findByIngredients?ingredients=\(withIngredients.joined(separator: ",+"))&ranking=1&ignorePantry=true&apiKey=\(Secrets.spoonacular_api_key)") else {
-            completionHandler(.failure(.badURL))
-            return
-        }
+        let urlString = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=\(withIngredients.joined(separator: ",+"))&ranking=1&ignorePantry=true&apiKey=\(Secrets.spoonacular_api_key)"
         
-        NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
+        GenericAPIClient.manager.fetchJSON(ofType: [Recipe].self, urlString: urlString) { result in
             switch result {
-                case .failure(let error):
-                    completionHandler(.failure(error))
-                case .success(let data):
-                    do {
-                        let recipeResults = try JSONDecoder().decode([Recipe].self, from: data)
-                        completionHandler(.success(recipeResults))
-                    } catch {
-                        completionHandler(.failure(.invalidJSONResponse))
-                    }
+            case .success(let recipes):
+                completionHandler(.success(recipes))
+            case .failure(let error):
+                completionHandler(.failure(error))
             }
         }
         
     }
     
     func getRecipeDetails(recipeID: Int, completionHandler: @escaping (Result<RecipeDetails, AppError>) -> () ) {
-        guard let url = URL(string: "https://api.spoonacular.com/recipes/\(recipeID.description)/information?apiKey=\(Secrets.spoonacular_api_key)") else {
-            completionHandler(.failure(.badURL))
-            return
-        }
+        let urlString = "https://api.spoonacular.com/recipes/\(recipeID.description)/information?includeNutrition&apiKey=\(Secrets.spoonacular_api_key)"
         
-        NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
+        GenericAPIClient.manager.fetchJSON(ofType: RecipeDetails.self, urlString: urlString) { result in
             switch result {
-                case .failure(let error):
-                    completionHandler(.failure(error))
-                case .success(let data):
-                    do {
-                        let recipeDetails = try JSONDecoder().decode(RecipeDetails.self, from: data)
-                        completionHandler(.success(recipeDetails))
-                    } catch {
-                        completionHandler(.failure(.couldNotParseJSON))
-                }
+            case .success(let recipeDetails):
+                completionHandler(.success(recipeDetails))
+            case .failure(let error):
+                completionHandler(.failure(error))
             }
-        }
-    }
-    
-    func getBookmarkedRecipes(completionHandler: @escaping (Result<[RecipeDetails], AppError>) -> () ) {
-        if let bookmarkedRecipeIDsString = (UserDefaults.standard.dictionary(forKey: "bookmarkedRecipes") as? [String : String])?.keys.joined(separator: ",") {
-            
-            guard let url = URL(string: "https://api.spoonacular.com/recipes/informationBulk?ids=\(bookmarkedRecipeIDsString)&apiKey=\(Secrets.spoonacular_api_key)") else {
-                completionHandler(.failure(.badURL))
-                return
-            }
-            
-            NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
-                switch result {
-                    case .failure(let error):
-                        completionHandler(.failure(error))
-                    case .success(let data):
-                        do {
-                            let detailedRecipes = try JSONDecoder().decode([RecipeDetails].self, from: data)
-                            completionHandler(.success(detailedRecipes))
-                        } catch {
-                            completionHandler(.failure(.couldNotParseJSON))
-                        }
-                }
-            }
-            
-        } else {
-            print("No bookmarked recipes found")
-            completionHandler(.failure(.other))
         }
     }
     
     private init() {}
     static let manager = SpoonacularAPIClient()
-    
 }

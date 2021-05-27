@@ -27,7 +27,6 @@ class StepByStepInstructionsTableView: UIView {
         tv.layer.borderWidth = 0.25
         tv.layer.borderColor = UIColor.lightGray.cgColor
         tv.bounces = false
-        tv.showsVerticalScrollIndicator = false
         tv.register(IngredientTableViewCell.self, forCellReuseIdentifier: IngredientTableViewCell.reuseIdentifier)
         tv.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: StepByStepInstructionTableViewCell.identifier)
         return tv

@@ -13,7 +13,6 @@ class BackgroundImageView: UIImageView {
     // MARK: - Private Properties
     private let visualEffectView: UIVisualEffectView
 
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         self.visualEffectView = UIVisualEffectView(frame: frame)

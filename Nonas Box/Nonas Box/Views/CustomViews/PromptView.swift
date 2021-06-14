@@ -37,12 +37,10 @@ class PromptView: UIView {
         return label
     }()
     
-    
     // MARK: - Private Properties
     private let titleFontSize: CGFloat = 25
     private let messageFontSize: CGFloat = 14
     private var colorTheme: UIColor!
-    
     
     // MARK: - Initializers
     init(colorTheme: UIColor, image: UIImage, title: String?, message: String?) {

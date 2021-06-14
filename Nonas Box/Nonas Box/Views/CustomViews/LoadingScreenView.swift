@@ -36,7 +36,6 @@ class LoadingScreenView: UIView {
         return label
     }()
     
-    
     // MARK: - Initializers
     init(frame: CGRect, blockBackgroundViews: Bool) {
         super.init(frame: frame)
@@ -48,7 +47,6 @@ class LoadingScreenView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // MARK: - Private Functions
     private func configureLoadingScreenView() {
@@ -65,7 +63,7 @@ class LoadingScreenView: UIView {
         loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             loadingIndicatorView.centerXAnchor.constraint(equalTo: loadingBackgroundView.centerXAnchor),
-            loadingIndicatorView.centerYAnchor.constraint(equalTo: loadingBackgroundView.centerYAnchor),
+            loadingIndicatorView.centerYAnchor.constraint(equalTo: loadingBackgroundView.centerYAnchor)
         ])
         
         loadingBackgroundView.addSubview(textLabel)

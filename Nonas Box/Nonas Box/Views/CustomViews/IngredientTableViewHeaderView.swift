@@ -40,7 +40,6 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
     // MARK: - Public Properties
     weak var delegate: TogglableMeasurementSystem?
     
-    
     // MARK: - Private Properties
     private let highlightedBorderColor: CGColor = UIColor.systemBlue.cgColor
     
@@ -54,7 +53,6 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
         }
     }
     
-    
     // MARK: - Initializers
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -65,7 +63,6 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
    
-    
     // MARK: - LifeCycle Methods
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -92,14 +89,12 @@ class IngredientTableViewHeaderView: UITableViewHeaderFooterView {
         }
     }
     
-    
     // MARK: - Private Objc Functions
     @objc private func changeSelectedButton(button: UIButton) {
         guard selectedButton != button else { return }
         selectedButton = button == usaButton ? usaButton : worldButton
         toggleMeasurementSystem()
     }
-    
     
     // MARK: - ReuseIdentifier
     static var reuseIdentifier: String {

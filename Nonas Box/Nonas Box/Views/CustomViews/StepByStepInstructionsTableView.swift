@@ -22,16 +22,15 @@ class StepByStepInstructionsTableView: UIView {
     }()
     
     public lazy var tableView: UITableView = {
-        let tv = UITableView(frame: .zero, style: .grouped)
-        tv.backgroundColor = .clear
-        tv.layer.borderWidth = 0.25
-        tv.layer.borderColor = UIColor.lightGray.cgColor
-        tv.bounces = false
-        tv.register(IngredientTableViewCell.self, forCellReuseIdentifier: IngredientTableViewCell.reuseIdentifier)
-        tv.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: StepByStepInstructionTableViewCell.identifier)
-        return tv
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.backgroundColor = .clear
+        tableView.layer.borderWidth = 0.25
+        tableView.layer.borderColor = UIColor.lightGray.cgColor
+        tableView.bounces = false
+        tableView.register(IngredientTableViewCell.self, forCellReuseIdentifier: IngredientTableViewCell.reuseIdentifier)
+        tableView.register(StepByStepInstructionTableViewCell.self, forCellReuseIdentifier: StepByStepInstructionTableViewCell.identifier)
+        return tableView
     }()
-    
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -42,7 +41,6 @@ class StepByStepInstructionsTableView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // MARK: - Public Properties
     public var numIngredients: Int? {
@@ -65,7 +63,6 @@ class StepByStepInstructionsTableView: UIView {
         }
     }
     
-    
     // MARK: - Public Functions
     public func reloadData() {
         tableView.reloadData()
@@ -74,7 +71,6 @@ class StepByStepInstructionsTableView: UIView {
     public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         tableView.reloadRows(at: indexPaths, with: animation)
     }
-    
     
     // MARK: - Private Functions
     private func setUpViews() {
@@ -97,13 +93,11 @@ class StepByStepInstructionsTableView: UIView {
         ])
     }
     
-    
     // MARK: - Private ObjC Functions
     @objc
     private func jumpToSection() {
         guard tableView.numberOfSections > underlinedSegmentedControl.segmentedControl.selectedSegmentIndex,
               tableView.numberOfRows(inSection: underlinedSegmentedControl.segmentedControl.selectedSegmentIndex) > 0 else { return }
-        
         tableView.scrollToRow(at: IndexPath(row: 0, section: underlinedSegmentedControl.segmentedControl.selectedSegmentIndex), at: .top, animated: true)
     }
 

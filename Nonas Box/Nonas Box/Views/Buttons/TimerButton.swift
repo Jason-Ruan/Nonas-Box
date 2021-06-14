@@ -27,7 +27,6 @@ class TimerButton: UIButton {
         }
     }
     
-    
     // MARK: - Initializers
     required init(frame: CGRect, purpose: TimerButtonPurpose) {
         super.init(frame: frame)

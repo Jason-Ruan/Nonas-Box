@@ -22,7 +22,7 @@ class MenuButton: UIButton {
     // MARK: - UI Objects
     lazy var unicodeScalarSymbolLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Arial", size: 80)
+        label.font = UIFont.makeFont(.arial, 80)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -31,14 +31,13 @@ class MenuButton: UIButton {
     
     lazy var menuTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Copperplate", size: 25)
+        label.font = UIFont.makeFont(.copperplate, 25)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     // MARK: - Private Properties
     private let symbol: SymbolUnicodeScalar
@@ -58,7 +57,6 @@ class MenuButton: UIButton {
         layer.borderColor = titleLabel?.textColor?.cgColor
         translatesAutoresizingMaskIntoConstraints = false
         
-        
         setUpViews()
         configureViews()
     }
@@ -66,7 +64,6 @@ class MenuButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // MARK: - Private Methods
     private func setUpViews() {
@@ -82,7 +79,7 @@ class MenuButton: UIButton {
         NSLayoutConstraint.activate([
             menuTitleLabel.topAnchor.constraint(equalTo: unicodeScalarSymbolLabel.bottomAnchor),
             menuTitleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            menuTitleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant:  -5),
+            menuTitleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -5),
             menuTitleLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5)
         ])
     }

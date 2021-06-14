@@ -23,7 +23,6 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Properties
     var step: Step? {
         didSet {
@@ -41,7 +40,7 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .systemOrange
         label.textAlignment = .center
-        label.font = UIFont(name: "Courier-Bold", size: 60)
+        label.font = UIFont.makeFont(.courier, 60, .bold)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -49,12 +48,11 @@ class StepByStepInstructionTableViewCell: UITableViewCell {
     
     lazy var stepInstructionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Avenir", size: 16)
+        label.font = UIFont.makeFont(.avenir, 16)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     // MARK: - Private Functions
     private func addSubviews() {

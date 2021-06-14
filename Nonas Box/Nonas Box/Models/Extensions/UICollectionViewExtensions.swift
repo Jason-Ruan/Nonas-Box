@@ -32,12 +32,12 @@ public extension UICollectionView {
         }
         
         switch scrollDirection {
-            case .horizontal:
-                showsHorizontalScrollIndicator = scrollIndicatorsIsVisible
-            case .vertical:
-                showsVerticalScrollIndicator = scrollIndicatorsIsVisible
-            default:
-                return
+        case .horizontal:
+            showsHorizontalScrollIndicator = scrollIndicatorsIsVisible
+        case .vertical:
+            showsVerticalScrollIndicator = scrollIndicatorsIsVisible
+        default:
+            return
         }
     }
     

@@ -23,9 +23,9 @@ class NetworkHelper {
     func performDataTask(withUrl url: URL,
                          andHTTPBody body: Data? = nil,
                          andMethod httpMethod: HTTPMethod,
-                         completionHandler: @escaping ((Result<Data, AppError>) -> ())) {
+                         completionHandler: @escaping (Result<Data, AppError>) -> Void) {
         var request = URLRequest(url: url)
-        request.httpMethod = httpMethod.rawValue
+        request.httpMethod = httpMethod.rawValue.capitalized
         request.httpBody = body
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -47,7 +47,7 @@ class NetworkHelper {
                         completionHandler(.failure(.noInternetConnection))
                         return
                     } else {
-                        completionHandler(.failure(.other))
+                        completionHandler(.failure(.other(error)))
                         return
                     }
                 }

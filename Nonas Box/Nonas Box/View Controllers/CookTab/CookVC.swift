@@ -9,8 +9,18 @@
 import UIKit
 
 class CookVC: UIViewController {
+    // MARK: - Private Enums
+    private enum RecipeFilterCriteria: Int {
+        case upToHalfHour = 1
+        case overHalfHour = 2
+    }
     
-    //MARK: - UI Objects
+    private enum Layout: Int {
+        case cardView
+        case gridView
+    }
+
+    // MARK: - UI Objects
     private lazy var recipesCollectionView: UICollectionView = {
         let cv = UICollectionView(scrollDirection: .vertical,
                                   spacing: 0,
@@ -51,16 +61,14 @@ class CookVC: UIViewController {
     private var searchController: UISearchController!
     private var layout: Layout = .cardView
     
-    
-    //MARK: - Properties
+    // MARK: - Properties
     var recipes: [RecipeDetails] = [] {
         didSet {
             recipesCollectionView.reloadData()
         }
     }
     
-    
-    //MARK: - LifeCycle Methods
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 0.9539069533, green: 0.6485298276, blue: 0.5980203748, alpha: 1)
         configureNavigationItems()
@@ -78,8 +86,7 @@ class CookVC: UIViewController {
         
     }
     
-    
-    //MARK: - Private Methods
+    // MARK: - Private Methods
     private func configureNavigationItems() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.automaticallyShowsScopeBar = true
@@ -88,7 +95,7 @@ class CookVC: UIViewController {
         searchController.searchBar.delegate = self
         searchController.searchBar.tintColor = .white
         searchController.searchBar.setImage(UIImage(systemName: .xmarkCircleFill)?.withTintColor(.white), for: .clear, state: .normal)
-        searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Looking for a specific recipe?", attributes: [.foregroundColor : UIColor.white])
+        searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Looking for a specific recipe?", attributes: [.foregroundColor: UIColor.white])
         
         navigationItem.title = "Nona's Box"
         navigationItem.searchController = searchController
@@ -158,7 +165,6 @@ class CookVC: UIViewController {
         searchController.searchBar.scopeButtonTitles = ["All (\(numResults[0]))", "Quick (\(numResults[1]))", "Steady (\(numResults[2]))"]
     }
     
-    
     // MARK: - Private ObjC Functions
     @objc private func scrollToTop() {
         recipesCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
@@ -174,7 +180,6 @@ class CookVC: UIViewController {
         recipesCollectionView.reloadData()
     }
 }
-
 
 // MARK: - CollectionView Methods
 extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -221,7 +226,6 @@ extension CookVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
 }
 
-
 // MARK: - UISearchBar Methods
 extension CookVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -234,7 +238,7 @@ extension CookVC: UISearchBarDelegate {
         recipes = fetchBookmarkedRecipes(withTitleContaining: searchText,
                                          filteredBy: (1...2).contains(searchBar.selectedScopeButtonIndex) ?
                                             RecipeFilterCriteria.init(rawValue: searchBar.selectedScopeButtonIndex) : nil)
-        var numResults: [Int] = [0,0,0]
+        var numResults: [Int] = [0, 0, 0]
         numResults[searchBar.selectedScopeButtonIndex] = recipes.count
         updateScopeBarTitles(numResults: numResults)
         
@@ -253,14 +257,4 @@ extension CookVC: UISearchBarDelegate {
         }
     }
     
-}
-
-fileprivate enum RecipeFilterCriteria: Int {
-    case upToHalfHour = 1
-    case overHalfHour = 2
-}
-
-fileprivate enum Layout: Int {
-    case cardView
-    case gridView
 }

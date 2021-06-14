@@ -29,8 +29,7 @@ struct Recipe: Codable {
     var imageURL: URL? {
         if let imageString = image, imageString.contains("http"), let imageURL = URL(string: imageString) {
             return imageURL
-        }
-        else {
+        } else {
             return URL(string: "https://spoonacular.com/recipeImages/\(image ?? "\(id)-636x393")")
         }
     }
@@ -83,7 +82,6 @@ struct Step: Codable {
             .joined(separator: ". ")
     }
 }
-
 
 struct Ingredient: Codable {
     let id: Int?

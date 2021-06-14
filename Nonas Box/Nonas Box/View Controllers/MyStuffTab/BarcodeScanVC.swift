@@ -24,8 +24,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     private lazy var barcodeScanArea: BarcodeScanView = { return BarcodeScanView() }()
     
-    
-    //MARK: - Properties
+    // MARK: - Properties
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
     
@@ -36,8 +35,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    
-    //MARK: - LifeCycle Methods
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -60,37 +58,34 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    
     override func viewDidLayoutSubviews() {
         guard previewLayer != nil else { return }
         previewLayer.frame = barcodeScanArea.bounds
     }
     
-    
-    //MARK: - Private Functions
+    // MARK: - Private Functions
     private func requestAVCapturePermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
-            case .authorized: // The user has previously granted access to the camera.
-                setupCaptureSession()
-                
-            case .notDetermined: // The user has not yet been asked for camera access.
-                AVCaptureDevice.requestAccess(for: .video) { granted in
-                    if granted {
-                        DispatchQueue.main.async {
-                            self.setupCaptureSession()
-                        }
+        case .authorized: // The user has previously granted access to the camera.
+            setupCaptureSession()
+            
+        case .notDetermined: // The user has not yet been asked for camera access.
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted {
+                    DispatchQueue.main.async {
+                        self.setupCaptureSession()
                     }
                 }
-                
-            case .denied: // The user has previously denied access.
-                showAlert(message: "Camera access has been denied.")
-                
-                
-            case .restricted: // The user can't grant access due to restrictions.
-                showAlert(message: "Camera access is restricted")
-                
-            default:
-                return
+            }
+            
+        case .denied: // The user has previously denied access.
+            showAlert(message: "Camera access has been denied.")
+            
+        case .restricted: // The user can't grant access due to restrictions.
+            showAlert(message: "Camera access is restricted")
+            
+        default:
+            return
         }
     }
     
@@ -106,7 +101,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             return
         }
         
-        if (captureSession.canAddInput(videoInput)) {
+        if captureSession.canAddInput(videoInput) {
             captureSession.addInput(videoInput)
         } else {
             failed()
@@ -115,7 +110,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         let metadataOutput = AVCaptureMetadataOutput()
         
-        if (captureSession.canAddOutput(metadataOutput)) {
+        if captureSession.canAddOutput(metadataOutput) {
             captureSession.addOutput(metadataOutput)
             
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
@@ -157,8 +152,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         ])
     }
     
-    
-    //MARK: - AVCaptureSession methods
+    // MARK: - AVCaptureSession methods
     private func failed() {
         let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -178,18 +172,18 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     private func found(code: String) {
         scannedBarCodes.append(code)
-        UPC_ItemDB_Client.manager.getItem(barcode: code) { (result) in
+        UPC_ItemDB_Client.getItem(barcode: code) { (result) in
             switch result {
-                case .failure:
-                    self.showAlert(message: "Oops, looks like we don't have this item in our database")
-                case .success(let upc_item):
-                    self.groceryItems.append(upc_item)
+            case .failure:
+                self.showAlert(message: "Oops, looks like we don't have this item in our database")
+            case .success(let upc_item):
+                self.groceryItems.append(upc_item)
             }
         }
     }
     
     private func showCameraPrompt() {
-        let action = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+        let action = UIAlertAction(title: "Ok", style: .default, handler: { _ in
             let cameraCaptureSession = AVCaptureSession()
             guard let cameraCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
             let cameraInput: AVCaptureDeviceInput
@@ -197,7 +191,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             do {
                 cameraInput = try AVCaptureDeviceInput(device: cameraCaptureDevice)
                 
-                if (cameraCaptureSession.canAddInput(cameraInput)) {
+                if cameraCaptureSession.canAddInput(cameraInput) {
                     cameraCaptureSession.addInput(cameraInput)
                 } else {
                     self.failed()
@@ -210,7 +204,7 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             let metadataOutput = AVCaptureMetadataOutput()
             
-            if (cameraCaptureSession.canAddOutput(metadataOutput)) {
+            if cameraCaptureSession.canAddOutput(metadataOutput) {
                 cameraCaptureSession.addOutput(metadataOutput)
                 
                 metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
@@ -223,12 +217,9 @@ class BarcodeScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         })
         self.showAlertWithAction(title: "Uh-oh", message: "We could not find an image for that item in our database. Would you like to take a photo of this item?", withAction: action)
     }
-    
-    
 }
 
-
-//MARK - CollectionView DataSource and DelegateFlowLayout Methods
+// MARK: - CollectionView DataSource and DelegateFlowLayout Methods
 extension BarcodeScanVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

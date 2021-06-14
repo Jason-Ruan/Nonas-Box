@@ -15,11 +15,10 @@ class TabBarController: UITabBarController {
     private let tabBarUnselectedItemTintColor: UIColor = #colorLiteral(red: 0.4587794542, green: 0.463016808, blue: 0.4736304283, alpha: 0.8525791952)
     
     private lazy var barIndicatorLineView: UIView = {
-        let v = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        v.backgroundColor = TabBarItemType.init(rawValue: tabBar.items?.first?.title?.lowercased() ?? "")?.colorScheme
-        return v
+        let lineView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
+        lineView.backgroundColor = TabBarItemType.init(rawValue: tabBar.items?.first?.title?.lowercased() ?? "")?.colorScheme
+        return lineView
     }()
-    
     
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
@@ -30,12 +29,13 @@ class TabBarController: UITabBarController {
         createLineView()
     }
     
-    
     // MARK: - Private Functions
     private func createTabBarItemVC(tabBarItemType: TabBarItemType) -> UIViewController {
-        let vc = tabBarItemType.viewController
-        vc.tabBarItem = UITabBarItem(title: tabBarItemType.title, image: tabBarItemType.image, tag: tabBarItemType.index)
-        return vc
+        let viewController = tabBarItemType.viewController
+        viewController.tabBarItem = UITabBarItem(title: tabBarItemType.title,
+                                                 image: tabBarItemType.image,
+                                                 tag: tabBarItemType.index)
+        return viewController
     }
     
     private func configureTabBarAttributes() {
@@ -61,8 +61,7 @@ class TabBarController: UITabBarController {
     }
     
     private func setTabBarTitleFont(font: Fonts, size: CGFloat) {
-        guard let customFont = UIFont(name: font.rawValue, size: size) else { return }
-        UITabBarItem.appearance().setTitleTextAttributes([.font : customFont], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.makeFont(font, size)], for: .normal)
     }
     
     private func createLineView() {
@@ -76,13 +75,16 @@ class TabBarController: UITabBarController {
     }
     
     private func animateLineView(forTabBar tabBar: UITabBar, toSelectedItem item: UITabBarItem, color: UIColor) {
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: { [weak self] in
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       usingSpringWithDamping: 0.75,
+                       initialSpringVelocity: 0.5,
+                       options: .curveEaseInOut) { [weak self] in
             let translationX: CGFloat = CGFloat(tabBar.items?.firstIndex(of: item) ?? 0) * tabBar.itemWidth
             self?.barIndicatorLineView.backgroundColor = color
             self?.barIndicatorLineView.transform = CGAffineTransform(translationX: translationX, y: 0)
-        }, completion: nil)
+        }
     }
-    
     
     // MARK: - Tab Bar Functions
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -90,9 +92,6 @@ class TabBarController: UITabBarController {
         tabBar.tintColor = color
         animateLineView(forTabBar: tabBar, toSelectedItem: item, color: color)
     }
-    
-    
-    
 }
 
 public enum TabBarItemType: String, CaseIterable {

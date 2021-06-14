@@ -23,30 +23,23 @@ class RecipeBlurbLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Public Functions
     public func configureAttributedText(title: String?, servings: Int?, readyInMinutes: Int?) {
         guard let title = title else { return }
+        let blurbText = NSMutableAttributedString()
         
-        let foodInfoText = NSMutableAttributedString(string: "\(title)", attributes: [.font : UIFont(name: Fonts.optima.rawValue, size: 20)!])
+        blurbText.appendString(string: title, attributes: [.font: UIFont.makeFont(.optima, 20)])
+        blurbText.appendLineBreaks(2)
         
-        let image1TextAttachment = NSTextAttachment(image: UIImage(systemName: "person.2.fill")!)
-        let image2TextAttachment = NSTextAttachment(image: UIImage(systemName: "clock.fill")!)
-        let image1TextString = NSAttributedString(attachment: image1TextAttachment)
-        let image2TextString = NSAttributedString(attachment: image2TextAttachment)
-        
-        let prepInfo = NSMutableAttributedString(string: "\n\n")
-        
-        if let servings = servings, let prepTime = readyInMinutes  {
-            prepInfo.append(image1TextString)
-            prepInfo.append(NSAttributedString(string: servings.description))
-            prepInfo.append(NSAttributedString(string: "  |  "))
-            prepInfo.append(image2TextString)
-            prepInfo.append(convertMinutesToString(time: prepTime))
+        if let servings = servings, let prepTime = readyInMinutes {
+            blurbText.appendImageAsText(systemName: .twoPersonFill)
+            blurbText.appendString(string: servings.description)
+            blurbText.appendString(string: "  |  ")
+            blurbText.appendImageAsText(systemName: .clockFill)
+            blurbText.append(convertMinutesToString(time: prepTime))
         }
         
-        foodInfoText.append(prepInfo)
-        attributedText = foodInfoText
+        attributedText = blurbText
     }
     
     private func convertMinutesToString(time: Int) -> NSMutableAttributedString {

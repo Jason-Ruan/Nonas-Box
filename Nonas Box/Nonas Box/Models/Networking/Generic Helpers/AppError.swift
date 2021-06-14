@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AppError: String, Error {
+enum AppError: Error {
     case unauthenticated
     case invalidJSONResponse
     case couldNotParseJSON
@@ -17,5 +17,5 @@ enum AppError: String, Error {
     case badStatusCode
     case noDataReceived
     case notAnImage
-    case other
+    case other(Error)
 }

@@ -6,17 +6,37 @@
 //  Copyright © 2021 Jason Ruan. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Fonts: String {
-    case arial = "Arial"
-    case circular = "Circular"
-    case chalkduster = "Chalkduster"
-    case chalkboard = "ChalkboardSE"
-    case handwriting = "BradleyHandITCTT-Bold"
-    case tamil = "TamilSangamMN"
-    case wideMarker = "MarkerFelt-Wide"
-    case optima = "Optima"
+    case arial
+    case avenir
+    case circular
+    case chalkduster
+    case chalkboard
+    case copperplate
+    case courier
+    case handwriting
+    case tamil
+    case wideMarker
+    case optima
+    
+    var fontName: String {
+        switch self {
+        case .chalkboard:       return "ChalkboardSE"
+        case .handwriting:      return "BradleyHandITCTT-Bold"
+        case .tamil:            return "TamilSangamMN"
+        case .wideMarker:       return "MarkerFelt-Wide"
+        default:                return rawValue.capitalized
+        }
+    }
+    
+    var isUnique: Bool {
+        switch self {
+        case .handwriting, .wideMarker:     return true
+        default:                           return false
+        }
+    }
 }
 
 enum FontWeight: String {

@@ -8,12 +8,10 @@
 
 import UIKit
 
-//MARK: - UIViewController Extensions
-
+// MARK: - UIViewController Extensions
 public extension UIViewController {
     
     // MARK: - Properties
-    
     
     // MARK: - Functions
     func showAlert(message: String) {
@@ -42,10 +40,8 @@ public extension UIViewController {
     }
     
     func removeLoadingScreen() {
-        for subview in view.subviews {
-            if subview is LoadingScreenView {
-                subview.removeFromSuperview()
-            }
+        for subview in view.subviews where subview is LoadingScreenView {
+            subview.removeFromSuperview()
         }
     }
     

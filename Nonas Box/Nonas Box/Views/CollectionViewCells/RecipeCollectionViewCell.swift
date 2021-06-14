@@ -11,18 +11,17 @@ import Kingfisher
 
 class RecipeCollectionViewCell: UICollectionViewCell {
     
-    //MARK: - UI Objects
-    
+    // MARK: - UI Objects
     private lazy var foodImage: UIImageView = {
-        let iv = UIImageView()
-        iv.layer.borderWidth = 0.75
-        iv.layer.borderColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517).cgColor
-        iv.tintColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517)
-        iv.contentMode = .scaleAspectFill
-        iv.layer.cornerRadius = layer.cornerRadius
-        iv.kf.indicatorType = .activity
-        (iv.kf.indicator?.view as? UIActivityIndicatorView)?.color = #colorLiteral(red: 0.8859762549, green: 0.6057382822, blue: 0.4648851752, alpha: 1)
-        return iv
+        let imageView = UIImageView()
+        imageView.layer.borderWidth = 0.75
+        imageView.layer.borderColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517).cgColor
+        imageView.tintColor = #colorLiteral(red: 1, green: 0.687940836, blue: 0.5207877159, alpha: 0.8489672517)
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = layer.cornerRadius
+        imageView.kf.indicatorType = .activity
+        (imageView.kf.indicator?.view as? UIActivityIndicatorView)?.color = #colorLiteral(red: 0.8859762549, green: 0.6057382822, blue: 0.4648851752, alpha: 1)
+        return imageView
     }()
     
     private lazy var foodInfoLabel: RecipeBlurbLabel = {
@@ -34,17 +33,15 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var bookmarkedImageView: UIImageView = {
-        let iv = UIImageView(image: UIImage(systemName: "bookmark.fill"))
-        iv.isHidden = true
-        iv.tintColor = .red
-        iv.contentMode = .scaleAspectFill
-        iv.addGradientLayer(colors: [.yellow, .red])
-        return iv
+        let imageView = UIImageView(image: UIImage(systemName: "bookmark.fill"))
+        imageView.isHidden = true
+        imageView.tintColor = .red
+        imageView.contentMode = .scaleAspectFill
+        imageView.addGradientLayer(colors: [.yellow, .red])
+        return imageView
     }()
     
-    
-    //MARK: - Properties
-    
+    // MARK: - Properties
     public var recipe: Recipe! {
         didSet {
             guard let recipe = self.recipe else { return }
@@ -64,9 +61,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         return String(describing: self)
     }
     
-    
-    //MARK: - Initializers
-    
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -81,9 +76,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    //MARK: - Private Functions
-    
+    // MARK: - Private Functions
     private func setUpCell() {
         contentView.addSubview(foodImage)
         foodImage.translatesAutoresizingMaskIntoConstraints = false
@@ -99,7 +92,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             foodInfoLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.33),
             foodInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            foodInfoLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -10),
+            foodInfoLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             foodInfoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
         

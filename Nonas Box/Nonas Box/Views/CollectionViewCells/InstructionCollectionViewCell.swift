@@ -35,10 +35,9 @@ class InstructionCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Properties
     private var stepInstruction: Step! {
-        didSet{
+        didSet {
             configureCell(forStep: stepInstruction)
         }
     }
@@ -57,13 +56,13 @@ class InstructionCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             stepNumberLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             stepNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            stepNumberLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stepNumberLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
             stepInstructionLabel.topAnchor.constraint(equalTo: stepNumberLabel.bottomAnchor),
             stepInstructionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            stepInstructionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stepInstructionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
         
     }
@@ -73,6 +72,4 @@ class InstructionCollectionViewCell: UICollectionViewCell {
         stepNumberLabel.text = "STEP \(stepNumber)"
         stepInstructionLabel.text = stepInstruction
     }
-    
-    
 }

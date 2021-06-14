@@ -11,7 +11,7 @@ import Kingfisher
 
 class ItemCollectionViewCell: UICollectionViewCell {
     
-    //MARK: - UI Objects
+    // MARK: - UI Objects
     private lazy var itemImageView: UIImageView = {
         let iv = UIImageView()
         iv.kf.indicatorType = .activity
@@ -35,8 +35,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    
-    //MARK: - Properties
+    // MARK: - Properties
     public var item: UPC_Item! {
         didSet {
             configureCell(forItem: item)
@@ -49,7 +48,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
     
     private let padding: CGFloat = 5
     
-    //MARK: - Initializerss
+    // MARK: - Initializerss
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 15
@@ -63,8 +62,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    //MARK: - Functions
+    // MARK: - Functions
     private func configureCell(forItem item: UPC_Item) {
         itemNameLabel.text = "\(item.title?.capitalized ?? "Item_name")"
         itemImageView.image = UIImage(systemName: .photoFill)
@@ -85,8 +83,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    
-    //MARK: - Constraints
+    // MARK: - Constraints
     private func setUpViews() {
         addSubview(itemImageView)
         itemImageView.translatesAutoresizingMaskIntoConstraints = false

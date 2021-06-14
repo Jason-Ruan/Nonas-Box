@@ -10,7 +10,7 @@ import UIKit
 
 class MyStuffOptionCollectionViewCell: UICollectionViewCell {
     
-    //MARK: - UI Objects
+    // MARK: - UI Objects
     private lazy var buttonLabel: UILabel = {
         let label = UILabel(frame: self.bounds)
         label.adjustsFontSizeToFitWidth = true
@@ -21,7 +21,7 @@ class MyStuffOptionCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    //MARK: - Properties
+    // MARK: - Properties
     var myStuffButtonOption: MyStuffButtonOptions! {
         didSet {
             configureCell(myStuffButtonOption: self.myStuffButtonOption.rawValue)
@@ -32,7 +32,7 @@ class MyStuffOptionCollectionViewCell: UICollectionViewCell {
         return String(describing: self)
     }
     
-    //MARK: - Initializers
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -47,7 +47,7 @@ class MyStuffOptionCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Private Functions
+    // MARK: - Private Functions
     private func setUpViews() {
         self.addSubview(buttonLabel)
     }
@@ -57,4 +57,3 @@ class MyStuffOptionCollectionViewCell: UICollectionViewCell {
     }
     
 }
-

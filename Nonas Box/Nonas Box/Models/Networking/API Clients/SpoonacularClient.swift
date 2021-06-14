@@ -8,13 +8,13 @@
 
 import Foundation
 
-class SpoonacularAPIClient {
+struct SpoonacularAPIClient {
     
-    func getRecipes(query: String, offset: Int? = nil, completionHandler: @escaping (Result<[Recipe], AppError>) -> () ) {
+    static func getRecipes(query: String, offset: Int? = 0, completionHandler: @escaping (Result<[Recipe], AppError>) -> Void ) {
         let formattedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let urlString = "https://api.spoonacular.com/recipes/search?query=\(formattedQuery)&number=10&offset=\(offset ?? 0)&instructionsRequired=true&apiKey=\(Secrets.spoonacular_api_key)"
         
-        GenericAPIClient.manager.fetchJSON(ofType: SpoonacularResults.self, urlString: urlString) { result in
+        GenericAPIClient.fetchJSON(ofType: SpoonacularResults.self, urlString: urlString) { result in
             switch result {
             case .success(let spoonacularResults):
                 guard let recipeResults = spoonacularResults.results else { return completionHandler(.failure(.invalidJSONResponse)) }
@@ -25,10 +25,10 @@ class SpoonacularAPIClient {
         }
     }
     
-    func getRecipesForIngredients(withIngredients: [String], completionHandler: @escaping (Result<[Recipe], AppError>) -> () ) {
+    static func getRecipesForIngredients(withIngredients: [String], completionHandler: @escaping (Result<[Recipe], AppError>) -> Void ) {
         let urlString = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=\(withIngredients.joined(separator: ",+"))&ranking=1&ignorePantry=true&apiKey=\(Secrets.spoonacular_api_key)"
         
-        GenericAPIClient.manager.fetchJSON(ofType: [Recipe].self, urlString: urlString) { result in
+        GenericAPIClient.fetchJSON(ofType: [Recipe].self, urlString: urlString) { result in
             switch result {
             case .success(let recipes):
                 completionHandler(.success(recipes))
@@ -39,10 +39,10 @@ class SpoonacularAPIClient {
         
     }
     
-    func getRecipeDetails(recipeID: Int, completionHandler: @escaping (Result<RecipeDetails, AppError>) -> () ) {
+    static func getRecipeDetails(recipeID: Int, completionHandler: @escaping (Result<RecipeDetails, AppError>) -> Void ) {
         let urlString = "https://api.spoonacular.com/recipes/\(recipeID.description)/information?includeNutrition&apiKey=\(Secrets.spoonacular_api_key)"
         
-        GenericAPIClient.manager.fetchJSON(ofType: RecipeDetails.self, urlString: urlString) { result in
+        GenericAPIClient.fetchJSON(ofType: RecipeDetails.self, urlString: urlString) { result in
             switch result {
             case .success(let recipeDetails):
                 completionHandler(.success(recipeDetails))

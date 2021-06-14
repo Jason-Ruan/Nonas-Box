@@ -13,6 +13,7 @@ enum SystemImageNames: String {
     case archiveBox = "archivebox"
     case bag = "bag"
     case bagFill = "bag.fill"
+    case barcodeScanner = "barcode.viewfinder"
     case bulletList = "list.bullet.rectangle"
     case bookmarkFill = "bookmark.fill"
     case clockFill = "clock.fill"
@@ -30,10 +31,10 @@ enum SystemImageNames: String {
     case trashCircle = "trash.circle"
     case trashCircleFill = "trash.circle.fill"
     case trays = "tray.2"
+    case twoPersonFill = "person.2.fill"
     case xmarkCircleFill = "xmark.circle.fill"
     case xmarkRectangleFill = "xmark.rectangle.fill"
 }
-
 
 enum ImageNames: String {
     case darkTableBottomIngredients = "dark-table-ingredients"

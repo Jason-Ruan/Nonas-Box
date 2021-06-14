@@ -9,25 +9,18 @@
 import UIKit
 
 public extension UILabel {
-    
     // MARK: - Iniitializers
     internal convenience init(text textString: String? = nil,
-                     numLines: Int? = nil,
-                     fontName: Fonts? = nil,
-                     fontSize: CGFloat? = nil,
-                     fontWeight: FontWeight? = nil,
-                     alignment: NSTextAlignment? = .natural) {
+                              numLines: Int? = nil,
+                              font: UIFont? = nil,
+                              alignment: NSTextAlignment? = .natural) {
         
         self.init()
-    
+        
         textAlignment = alignment ?? .natural
         numberOfLines = numLines ?? 0
         adjustsFontSizeToFitWidth = true
         text = textString
-        
-        if let fontName = fontName, let fontSize = fontSize {
-            font = UIFont(name: fontName.rawValue + (fontWeight?.rawValue ?? ""), size: fontSize)
-        }
+        self.font = font
     }
 }
-

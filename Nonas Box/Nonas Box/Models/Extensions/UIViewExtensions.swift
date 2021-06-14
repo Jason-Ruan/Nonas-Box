@@ -9,9 +9,14 @@
 import UIKit
 
 extension UIView {
+    func setUpViews(_ subviews: [UIView]) {
+        subviews.forEach {
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
     
-    //MARK: - Public Functions
-    public func addGradientLayer(colors: [UIColor]) {
+    func addGradientLayer(colors: [UIColor]) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = colors.map { $0.cgColor }
         gradientLayer.frame = frame

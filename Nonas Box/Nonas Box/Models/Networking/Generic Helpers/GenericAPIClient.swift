@@ -8,9 +8,11 @@
 
 import Foundation
 
-class GenericAPIClient {
+struct GenericAPIClient {
     
-    func fetchJSON<T:Codable>(ofType type: T.Type, urlString: String, completionHandler: @escaping (Result<T, AppError>) -> () ) {
+    static func fetchJSON<T: Decodable>(ofType type: T.Type,
+                                        urlString: String,
+                                        completionHandler: @escaping (Result<T, AppError>) -> Void ) {
         guard let url = URL(string: urlString) else { return completionHandler(.failure(.badURL)) }
         
         NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { result in
@@ -28,6 +30,4 @@ class GenericAPIClient {
         }
     }
     
-    static let manager = GenericAPIClient()
-    private init() {}
 }

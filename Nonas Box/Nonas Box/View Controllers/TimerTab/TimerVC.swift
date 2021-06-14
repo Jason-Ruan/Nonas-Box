@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 
 class TimerVC: UIViewController {
-    //MARK: - UI Objects
+    // MARK: - UI Objects
     lazy var timerPickerView: TimerPickerView = {
         let pickerView = TimerPickerView(frame: .zero)
         pickerView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +73,7 @@ class TimerVC: UIViewController {
         return label
     }()
     
-    //MARK: - Properties
+    // MARK: - Properties
     var timer = Timer()
     var timerDisplayCount = 0 {
         didSet {
@@ -86,12 +86,11 @@ class TimerVC: UIViewController {
         }
     }
     
-    //MARK: - LifeCycle Methods
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         addSubviews()
         requestLocalNotificationPermission()
     }
-    
     
     // MARK: - Private Functions
     private func adjustTimerLabelText(timerDisplayCount: Int) {
@@ -147,7 +146,7 @@ class TimerVC: UIViewController {
         let content = UNMutableNotificationContent()
         content.title = "Timer for Nona's Box is up!"
         content.sound = UNNotificationSound.default
-    
+        
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timerDisplayCount), repeats: false)
         let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
@@ -159,8 +158,7 @@ class TimerVC: UIViewController {
         return dateFormatter.string(from: Date())
     }
     
-    
-    //MARK: - Objective-C Methods
+    // MARK: - Objective-C Methods
     @objc func startTimer() {
         let totalTime = timerPickerView.totalTimeInSeconds
         guard totalTime > 0 else { return }
@@ -225,8 +223,7 @@ class TimerVC: UIViewController {
         toggleTimerButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
     }
     
-    
-    //MARK: - Private Constraints
+    // MARK: - Private Constraints
     private func addSubviews() {
         view.addGradientLayer(colors: [.clear, .white])
         
@@ -274,13 +271,11 @@ class TimerVC: UIViewController {
             timerValueLabel.heightAnchor.constraint(equalTo: timerLabel.heightAnchor),
             timerValueLabel.widthAnchor.constraint(equalTo: timerLabel.widthAnchor, multiplier: 0.8)
         ])
-                
+        
     }
-    
-    
 }
 
-//MARK: - PickerView Methods
+// MARK: - PickerView Methods
 extension TimerVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     // PickerView DataSource Methods
@@ -290,12 +285,9 @@ extension TimerVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
-            case 0:
-                return 24
-            case 1, 2:
-                return 60
-            default:
-                return 0
+        case 0:                         return 24
+        case 1, 2:                      return 60
+        default:                        return 0
         }
     }
     

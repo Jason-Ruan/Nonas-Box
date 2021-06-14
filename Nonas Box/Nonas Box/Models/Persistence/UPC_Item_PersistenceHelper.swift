@@ -9,7 +9,7 @@
 import Foundation
 
 class UPC_Item_PersistenceHelper {
-    //MARK: - Persistence Methods
+    // MARK: - Persistence Methods
     func save(key: String, item: UPC_Item) throws {
         try persistenceHelper.save(key: key, newElement: item)
     }
@@ -18,7 +18,7 @@ class UPC_Item_PersistenceHelper {
         try persistenceHelper.delete(key: barcode ?? title ?? "")
     }
     
-    func getSavedItemsDictionary() throws -> [String : UPC_Item] {
+    func getSavedItemsDictionary() throws -> [String: UPC_Item] {
         return try persistenceHelper.getObjects()
     }
     
@@ -29,7 +29,7 @@ class UPC_Item_PersistenceHelper {
         })
     }
     
-    //MARK: - Singleton Properties
+    // MARK: - Singleton Properties
     static let manager = UPC_Item_PersistenceHelper()
     private let persistenceHelper = PersistenceHelper<UPC_Item>(fileName: "UPC_Items.plist")
     private init() {}

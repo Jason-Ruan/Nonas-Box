@@ -22,7 +22,7 @@ class ShoppingItemPersistenceHelper {
         try persistenceHelper.deleteAll()
     }
     
-    func getSavedItemsDictionary() throws -> [String : ShoppingItem] {
+    func getSavedItemsDictionary() throws -> [String: ShoppingItem] {
         return try persistenceHelper.getObjects()
     }
     

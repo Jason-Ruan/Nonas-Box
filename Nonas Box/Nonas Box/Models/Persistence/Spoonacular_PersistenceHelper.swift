@@ -9,7 +9,7 @@
 import Foundation
 
 class Spoonacular_PersistenceHelper {
-    //MARK: - Persistence Methods
+    // MARK: - Persistence Methods
     func save(recipeID: Int, recipeDetails: RecipeDetails, persistenceStorage: PersistenceStorage) throws {
         try (persistenceStorage == .collection ? persistenceHelper : shoppingListPersistenceHelper).save(key: recipeID.description, newElement: recipeDetails)
     }
@@ -18,7 +18,7 @@ class Spoonacular_PersistenceHelper {
         try (persistenceStorage == .collection ? persistenceHelper : shoppingListPersistenceHelper).delete(key: recipeID.description)
     }
     
-    func getSavedRecipesDictionary(from persistenceStorage: PersistenceStorage) throws -> [String : RecipeDetails] {
+    func getSavedRecipesDictionary(from persistenceStorage: PersistenceStorage) throws -> [String: RecipeDetails] {
         return try (persistenceStorage == .collection ? persistenceHelper : shoppingListPersistenceHelper).getObjects()
         
     }
@@ -38,7 +38,7 @@ class Spoonacular_PersistenceHelper {
         return try persistenceHelper.getObjects()[recipeID.description] != nil
     }
     
-    //MARK: - Singleton Properties
+    // MARK: - Singleton Properties
     static let manager = Spoonacular_PersistenceHelper()
     private let persistenceHelper = PersistenceHelper<RecipeDetails>(fileName: "SpoonacularRecipeDetails.plist")
     private let shoppingListPersistenceHelper = PersistenceHelper<RecipeDetails>(fileName: "RecipeDetailsShoppingList.plist")

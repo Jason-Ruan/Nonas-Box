@@ -9,12 +9,12 @@
 import Foundation
 
 struct PersistenceHelper<T: Codable> {
-    //MARK: - Persistence Methods
-    func getObjects() throws -> [String : T] {
+    // MARK: - Persistence Methods
+    func getObjects() throws -> [String: T] {
         guard let data = FileManager.default.contents(atPath: url.path) else {
             return [:]
         }
-        return try PropertyListDecoder().decode([String : T].self, from: data)
+        return try PropertyListDecoder().decode([String: T].self, from: data)
     }
     
     func save(key: String, newElement: T) throws {
@@ -36,12 +36,12 @@ struct PersistenceHelper<T: Codable> {
         try FileManager.default.removeItem(at: url)
     }
     
-    //MARK: - Initializer
-    init(fileName: String){
+    // MARK: - Initializer
+    init(fileName: String) {
         self.fileName = fileName
     }
     
-    //MARK: - Private Properties
+    // MARK: - Private Properties
     private let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     private func filePathFromDocumentsDirectory(name: String) -> URL {

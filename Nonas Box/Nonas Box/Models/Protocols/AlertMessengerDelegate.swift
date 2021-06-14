@@ -11,4 +11,3 @@ import Foundation
 protocol AlertMessengerDelegate: AnyObject {
     func showAutoDismissingAlert(title: String?, message: String)
 }
-

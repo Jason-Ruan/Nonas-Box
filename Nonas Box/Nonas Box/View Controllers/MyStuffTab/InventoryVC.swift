@@ -10,7 +10,7 @@ import UIKit
 
 class InventoryVC: UIViewController {
     
-    //MARK: - UI Objects
+    // MARK: - UI Objects
     private lazy var itemCollectionView: UICollectionView = {
         let cv = UICollectionView(scrollDirection: .vertical,
                                   spacing: 5,
@@ -22,16 +22,14 @@ class InventoryVC: UIViewController {
         return cv
     }()
     
-    
-    //MARK: - Properties
+    // MARK: - Properties
     var inventory: [UPC_Item] = [] {
         didSet {
             itemCollectionView.reloadData()
         }
     }
-    
-    
-    //MARK: - LifeCycle Methods
+
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -46,8 +44,7 @@ class InventoryVC: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    
-    //MARK: - Private Functions
+    // MARK: - Private Functions
     private func loadInventory() {
         do {
             inventory = try UPC_Item_PersistenceHelper.manager.getSavedItems()
@@ -65,7 +62,6 @@ class InventoryVC: UIViewController {
         itemCollectionView.addGestureRecognizer(longPress)
     }
     
-    
     // MARK: - ObjC Functions
     @objc
     private func presentBarcodeScanVC() {
@@ -78,7 +74,7 @@ class InventoryVC: UIViewController {
         guard let indexPath = itemCollectionView.indexPathForItem(at: point) else { return }
         
         let actionSheet = UIAlertController(title: "What would you like to do with this item?", message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] (action) in
+        actionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
             let item = self?.inventory[indexPath.row]
             do {
                 try UPC_Item_PersistenceHelper.manager.delete(barcode: item?.barcode, title: item?.title)
@@ -92,8 +88,7 @@ class InventoryVC: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
-    
-    //MARK: - Constraints
+    // MARK: - Constraints
     private func constrainItemCollectionView() {
         view.addSubview(itemCollectionView)
         itemCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -104,12 +99,9 @@ class InventoryVC: UIViewController {
             itemCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-    
-    
 }
 
-
-//MARK: - CollectionView Methods
+// MARK: - CollectionView Methods
 extension InventoryVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return inventory.count
@@ -124,7 +116,4 @@ extension InventoryVC: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width * 0.9, height: view.safeAreaLayoutGuide.layoutFrame.height / 4)
     }
-    
-    
-    
 }

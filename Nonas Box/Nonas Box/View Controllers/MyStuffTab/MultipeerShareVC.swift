@@ -10,20 +10,18 @@ import UIKit
 import MultipeerConnectivity
 
 class MultipeerShareVC: UIViewController {
-    //MARK: - Properties
+    // MARK: - Properties
     private var peerID: MCPeerID!
     private var mcSession: MCSession!
     private var mcAdvertiserAssistant: MCAdvertiserAssistant!
     
-    
-    //MARK: - LifeCycle Methods
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpMultiPeerSession()
     }
     
-    
-    //MARK: - Private Functions
+    // MARK: - Private Functions
     private func setUpMultiPeerSession() {
 //        peerID = MCPeerID(displayName: displayName)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
@@ -32,8 +30,7 @@ class MultipeerShareVC: UIViewController {
     
 }
 
-
-//MARK: - MCSessionDelegate, MCBrowserViewControllerDelegate
+// MARK: - MCSessionDelegate, MCBrowserViewControllerDelegate
 extension MultipeerShareVC: MCSessionDelegate, MCBrowserViewControllerDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
@@ -49,7 +46,6 @@ extension MultipeerShareVC: MCSessionDelegate, MCBrowserViewControllerDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        //TODO: Decode data into model and add to user collection
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -85,4 +81,3 @@ extension MultipeerShareVC: MCSessionDelegate, MCBrowserViewControllerDelegate {
     }
     
 }
-

@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchRecipesOnlineVC: UIViewController {
-    //MARK: - UI Objects
+    // MARK: - UI Objects
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView(frame: view.frame)
         iv.image = UIImage(named: ImageNames.brownWoodTable.rawValue)
@@ -18,7 +18,8 @@ class SearchRecipesOnlineVC: UIViewController {
     }()
     
     private lazy var appNameLabel: UILabel = {
-        let label = UILabel(text: "Nona's\nBox", fontName: .chalkduster, fontSize: 60, alignment: .center)
+        let label = UILabel(text: "Nona's\nBox",
+                            font: UIFont.makeFont(.chalkduster, 60), alignment: .center)
         label.layer.masksToBounds = true
         label.layer.borderWidth = 7.5
         label.layer.borderColor = UIColor.systemOrange.cgColor
@@ -27,7 +28,8 @@ class SearchRecipesOnlineVC: UIViewController {
     }()
     
     private lazy var screenTitleLabel: UILabel = {
-        return UILabel(text: "Discover new recipes!", fontName: .chalkboard, fontSize: 25, fontWeight: .bold)
+        return UILabel(text: "Discover new recipes!",
+                       font: UIFont.makeFont(.chalkboard, 25, .bold))
     }()
     
     private lazy var searchBar: UISearchBar = {
@@ -36,12 +38,12 @@ class SearchRecipesOnlineVC: UIViewController {
         sb.searchTextField.backgroundColor = .white
         (sb.searchTextField.leftView as? UIImageView)?.tintColor = .systemOrange
         sb.searchTextField.textColor = .darkText
-        sb.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search for recipes here", attributes: [.foregroundColor : UIColor.systemGray])
+        sb.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search for recipes here", attributes: [.foregroundColor: UIColor.systemGray])
         return sb
     }()
     
     private lazy var resultsNumberLabel: UILabel = {
-        return UILabel(fontName: .tamil, fontSize: 12)
+        return UILabel(font: UIFont.makeFont(.tamil, 12))
     }()
     
     private lazy var recipeCollectionView: UICollectionView = {
@@ -50,15 +52,15 @@ class SearchRecipesOnlineVC: UIViewController {
                                   scrollIndicatorsIsVisible: false,
                                   shouldInset: true)
         cv.register(RecipeCollectionViewCell.self, forCellWithReuseIdentifier: RecipeCollectionViewCell.identifier)
+        cv.keyboardDismissMode = .onDrag
         cv.dataSource = self
         cv.delegate = self
         return cv
     }()
     
-    
-    //MARK: - Private Properties
+    // MARK: - Private Properties
     private var lastSearchedQuery: String?
-    private var searchedQueryResults: [String : [Recipe] ] = [:]
+    private var searchedQueryResults: [String: [Recipe] ] = [:]
     private var recipes: [Recipe] = [] {
         willSet {
             guard recipes.isEmpty else { return }
@@ -71,8 +73,7 @@ class SearchRecipesOnlineVC: UIViewController {
         }
     }
     
-    
-    //MARK: - LifeCycle Methods
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -92,8 +93,7 @@ class SearchRecipesOnlineVC: UIViewController {
         appNameLabel.layer.cornerRadius = appNameLabel.frame.height / 2
     }
     
-    
-    //MARK: - Private Functions
+    // MARK: - Private Functions
     private func showNoResultsAlert() {
         let alert = UIAlertController(title: "Oops", message: "Sorry, that search had no results in our database.", preferredStyle: .alert)
         present(alert, animated: true, completion: nil)
@@ -115,9 +115,7 @@ class SearchRecipesOnlineVC: UIViewController {
         view.endEditing(true)
     }
     
-    
-    //MARK: - Private Constraints
-    
+    // MARK: - Private Constraints
     private lazy var screenTitleLabelDefaultConstraints: [NSLayoutConstraint] = {
         [self.screenTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -30),
          self.screenTitleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
@@ -141,7 +139,7 @@ class SearchRecipesOnlineVC: UIViewController {
     
     private func setUpViews() {
         view.addSubview(backgroundImageView)
-
+        
         view.addSubview(screenTitleLabel)
         screenTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(
@@ -164,7 +162,7 @@ class SearchRecipesOnlineVC: UIViewController {
             appNameLabel.heightAnchor.constraint(equalTo: appNameLabel.widthAnchor)
             
         ])
-            
+        
         view.addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(searchBarDefaultContraints)
@@ -185,19 +183,10 @@ class SearchRecipesOnlineVC: UIViewController {
             recipeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    
 }
 
-//MARK: - SearchBar Methods
-
+// MARK: - SearchBar Methods
 extension SearchRecipesOnlineVC: UISearchBarDelegate {
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.enablesReturnKeyAutomatically = false
-        searchBar.placeholder = nil
-        return true
-    }
-    
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.placeholder = "Search for recipes here"
         return true
@@ -223,31 +212,31 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
             
             // Make an API call if query has not been searched before during current session
         } else {
-            SpoonacularAPIClient.manager.getRecipes(query: query) { [weak self] (result) in
+            SpoonacularAPIClient.getRecipes(query: query) { [weak self] (result) in
                 
                 self?.removeLoadingScreen()
                 
                 switch result {
-                    case .success(let recipeResults):
-                        guard !recipeResults.isEmpty else {
-                            // Actions when API call is successful but found no results for query
-                            self?.showNoResultsAlert()
-                            self?.searchedQueryResults[query] = []
-                            return
-                        }
-                        
-                        // Actions when API call is successful and query has results
-                        self?.recipes = recipeResults
-                        self?.searchedQueryResults[query] = self?.recipes
-                        self?.lastSearchedQuery = query
-                        
-                        self?.resultsNumberLabel.text = "Here are some recipes we found for '\(query)'"
-                        self?.animateRecipesRetrieved()
-                        self?.appNameLabel.removeFromSuperview()
-                        
-                    case .failure(let error):
-                        print(error)
-                        self?.showAlert(message: "Sorry, it seems there was a problem trying to find recipes. Please try again later.")
+                case .success(let recipeResults):
+                    guard !recipeResults.isEmpty else {
+                        // Actions when API call is successful but found no results for query
+                        self?.showNoResultsAlert()
+                        self?.searchedQueryResults[query] = []
+                        return
+                    }
+                    
+                    // Actions when API call is successful and query has results
+                    self?.recipes = recipeResults
+                    self?.searchedQueryResults[query] = self?.recipes
+                    self?.lastSearchedQuery = query
+                    
+                    self?.resultsNumberLabel.text = "Here are some recipes we found for '\(query)'"
+                    self?.animateRecipesRetrieved()
+                    self?.appNameLabel.removeFromSuperview()
+                    
+                case .failure(let error):
+                    print(error)
+                    self?.showAlert(message: "Sorry, it seems there was a problem trying to find recipes. Please try again later.")
                 }
             }
         }
@@ -264,8 +253,7 @@ extension SearchRecipesOnlineVC: UISearchBarDelegate {
     
 }
 
-//MARK: - CollectionView Methods
-
+// MARK: - CollectionView Methods
 extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -290,16 +278,16 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
         guard (indexPath.row == recipes.count - 1) && recipes.count % 10 == 0 else { return }
         guard let lastSearchedQuery = lastSearchedQuery else { return }
         showLoadingScreen(blockBackgroundViews: false)
-        SpoonacularAPIClient.manager.getRecipes(query: lastSearchedQuery, offset: recipes.count) { [weak self] (result) in
+        SpoonacularAPIClient.getRecipes(query: lastSearchedQuery, offset: recipes.count) { [weak self] (result) in
             switch result {
-                case .failure(let error):
-                    print(error)
-                    self?.showAlert(message: "Oops, looks like there was an error when trying to load more recipes for this search.")
-                case .success(let recipes):
-                    self?.recipes.append(contentsOf: recipes)
-                    if self?.searchedQueryResults[lastSearchedQuery] != nil {
-                        self?.searchedQueryResults[lastSearchedQuery] = self?.recipes
-                    }
+            case .failure(let error):
+                print(error)
+                self?.showAlert(message: "Oops, looks like there was an error when trying to load more recipes for this search.")
+            case .success(let recipes):
+                self?.recipes.append(contentsOf: recipes)
+                if self?.searchedQueryResults[lastSearchedQuery] != nil {
+                    self?.searchedQueryResults[lastSearchedQuery] = self?.recipes
+                }
             }
             self?.removeLoadingScreen()
         }
@@ -307,8 +295,7 @@ extension SearchRecipesOnlineVC: UICollectionViewDataSource, UICollectionViewDel
     
 }
 
-
-//MARK: - Animation & Visual Methods
+// MARK: - Animation & Visual Methods
 
 extension SearchRecipesOnlineVC {
     // This func is to animate the title and searchbar constraints to move from the initial center to the top to make room for recipeCollectionView to show results of query
@@ -316,9 +303,9 @@ extension SearchRecipesOnlineVC {
         screenTitleLabel.textAlignment = .left
         NSLayoutConstraint.deactivate(screenTitleLabelDefaultConstraints + searchBarDefaultContraints)
         NSLayoutConstraint.activate(constraintsWhenRecipesFound)
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }
     }
     
 }

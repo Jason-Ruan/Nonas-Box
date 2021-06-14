@@ -19,10 +19,9 @@ class CookingCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    private lazy var recipeNameLabel:  UILabel = {
+    private lazy var recipeNameLabel: UILabel = {
         return UILabel(numLines: 1,
-                       fontName: .handwriting,
-                       fontSize: 20,
+                       font: UIFont.makeFont(.handwriting, 20),
                        alignment: .center)
     }()
     
@@ -30,16 +29,14 @@ class CookingCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.layer.cornerRadius = 10
         label.backgroundColor = #colorLiteral(red: 0.4078232283, green: 0.4078232283, blue: 0.4078232283, alpha: 0.7519250987)
-        let image = UIImage(systemName: .clockFill)!
-        let imageTextAttachment = NSTextAttachment(image: image)
-        let text = NSMutableAttributedString(attachment: imageTextAttachment)
-        text.append(NSAttributedString(string: "Under 30 min. ", attributes: [.font : UIFont.boldSystemFont(ofSize: 14)]))
-        label.attributedText = text
         label.isHidden = true
         label.clipsToBounds = true
+        let attributedText = NSMutableAttributedString()
+        attributedText.appendImageAsText(systemName: .clockFill)
+        attributedText.appendString(string: "Under 30 min. ", attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        label.attributedText = attributedText
         return label
     }()
-    
     
     // MARK: - Properties
     var recipe: RecipeDetails! {
@@ -54,7 +51,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
         return String(describing: self)
     }
     
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,7 +62,6 @@ class CookingCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // MARK: - Private Methods
     private func setUpViews() {
@@ -105,8 +100,7 @@ class CookingCollectionViewCell: UICollectionViewCell {
         underHalfHourLabel.isHidden = (recipe.readyInMinutes ?? 10) > 30 ? true : false
         recipeImageView.kf.setImage(with: recipe.imageURL,
                                     options: [.onFailureImage(UIImage(systemName: .photoFill)),
-                                              .transition(.fade(0.2))])
-        { [weak self] (result) in
+                                              .transition(.fade(0.2))]) { [weak self] (result) in
             switch result {
             case .failure:
                 self?.recipeImageView.contentMode = .scaleAspectFit
@@ -117,4 +111,3 @@ class CookingCollectionViewCell: UICollectionViewCell {
     }
     
 }
-

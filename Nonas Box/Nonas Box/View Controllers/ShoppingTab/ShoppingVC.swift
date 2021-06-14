@@ -11,16 +11,16 @@ import UIKit
 class ShoppingVC: UIViewController {
     // MARK: - Private Properties
     private lazy var shoppingListTableView: UITableView = {
-        let tv = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .plain)
-        tv.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.reuseIdentifier)
-        tv.tableFooterView = UIView()
-        tv.backgroundView = PromptView(colorTheme: .black,
-                                       image: UIImage(systemName: .bulletList)!,
-                                       title: "Nothing to see here!",
-                                       message: "Looks like your shopping list is empty!\n\nYou can add ingredients to your list from a recipe.")
-        tv.dataSource = self
-        tv.delegate = self
-        return tv
+        let tableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .plain)
+        tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.reuseIdentifier)
+        tableView.tableFooterView = UIView()
+        tableView.backgroundView = PromptView(colorTheme: .black,
+                                              image: UIImage(systemName: .bulletList)!,
+                                              title: "Nothing to see here!",
+                                              message: "Looks like your shopping list is empty!\n\nYou can add ingredients to your list from a recipe.")
+        tableView.dataSource = self
+        tableView.delegate = self
+        return tableView
     }()
     
     // MARK: - Public Properties
@@ -36,7 +36,6 @@ class ShoppingVC: UIViewController {
     
     var crossedOutList: Set<ShoppingItem> = []
     
-    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +48,6 @@ class ShoppingVC: UIViewController {
         loadShoppingItems()
         shoppingListTableView.reloadData()
     }
-    
     
     // MARK: - Private Functions
     private func setUpViews() {
@@ -66,21 +64,17 @@ class ShoppingVC: UIViewController {
     private func configureNavController() {
         navigationController?.overrideUserInterfaceStyle = .light
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.standardAppearance.largeTitleTextAttributes = [.font : UIFont(name: Fonts.optima.rawValue, size: 34)!,
-                                                                                           .foregroundColor : UIColor.black,
-                                                                                           .strokeColor : UIColor.white,
-                                                                                           .strokeWidth : -0.5]
-        
+        navigationController?.navigationBar.standardAppearance.largeTitleTextAttributes = [.font: UIFont(name: Fonts.optima.rawValue, size: 34)!,
+                                                                                           .foregroundColor: UIColor.black,
+                                                                                           .strokeColor: UIColor.white,
+                                                                                           .strokeWidth: -0.5]
         navigationItem.title = "Shopping List"
         
         let trashBarButton = UIBarButtonItem(image: UIImage(systemName: .trashFill), style: .plain, target: self, action: #selector(clearShoppingList))
-        let addBarButton = UIBarButtonItem(image: UIImage(systemName: .plusCircleFill), style: .plain, target: self, action: #selector(addBarButtonPressed))
-
+        let addBarButton = UIBarButtonItem(image: UIImage(systemName: .barcodeScanner), style: .plain, target: self, action: #selector(addBarButtonPressed))
         trashBarButton.tintColor = .systemGray
         addBarButton.tintColor = .systemBlue
-        
         navigationItem.rightBarButtonItems = [addBarButton, trashBarButton]
-        
     }
     
     private func loadShoppingItems() {
@@ -90,7 +84,6 @@ class ShoppingVC: UIViewController {
             print(error)
         }
     }
-    
     
     // MARK: - ObjC Functions
     @objc private func clearShoppingList() {
@@ -129,7 +122,6 @@ extension ShoppingVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Update the shoppinglist in PersistenceHelper to match order of current shoppingList
         guard let cell = tableView.cellForRow(at: indexPath) as? ShoppingListTableViewCell else { return }
         let shoppingItem = shoppingList[indexPath.row]
         if crossedOutList.contains(shoppingItem) {
@@ -148,7 +140,7 @@ extension ShoppingVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Remove") { (action, view, completionHandler) in
+        let delete = UIContextualAction(style: .destructive, title: "Remove") { (_, _, _) in
             do {
                 try ShoppingItemPersistenceHelper.manager.delete(key: self.shoppingList[indexPath.row].itemName)
                 self.shoppingList.remove(at: indexPath.row)
@@ -162,5 +154,4 @@ extension ShoppingVC: UITableViewDataSource, UITableViewDelegate {
         
         return UISwipeActionsConfiguration(actions: [delete])
     }
-    
 }

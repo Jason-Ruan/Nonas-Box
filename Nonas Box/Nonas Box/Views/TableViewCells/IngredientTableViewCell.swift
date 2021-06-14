@@ -22,7 +22,6 @@ class IngredientTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Lazy Variables
     private lazy var checklistButton: UIButton = {
         let button = UIButton(type: .contactAdd)
@@ -31,13 +30,14 @@ class IngredientTableViewCell: UITableViewCell {
     }()
     
     private lazy var nameLabel: UILabel = {
-        return UILabel(fontName: .tamil, fontSize: 16, alignment: .left)
+        return UILabel(font: UIFont.makeFont(.tamil, 16),
+                       alignment: .left)
     }()
     
     private lazy var measurementLabel: UILabel = {
-        return UILabel(fontName: .tamil, fontSize: 16, fontWeight: .bold, alignment: .right)
+        return UILabel(font: UIFont.makeFont(.tamil, 16, .bold),
+                       alignment: .right)
     }()
-    
     
     // MARK: - Properties
     var measurementSystem: MeasurementSystem?
@@ -53,7 +53,6 @@ class IngredientTableViewCell: UITableViewCell {
     static var reuseIdentifier: String {
         return String(describing: self)
     }
-    
     
     // MARK: - Private Functions
     private func setUpViews() {

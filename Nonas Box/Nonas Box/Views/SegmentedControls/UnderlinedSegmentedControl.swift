@@ -12,20 +12,20 @@ class UnderlinedSegmentedControl: UIControl {
     
     // MARK: - UI Objects
     public lazy var segmentedControl: UISegmentedControl = {
-        let c = UISegmentedControl(items: self.items)
-        c.selectedSegmentIndex = 0
+        let segmentCtrl = UISegmentedControl(items: self.items)
+        segmentCtrl.selectedSegmentIndex = 0
         
         // Changes backgroundColor and divider images to clear
-        c.setBackgroundImage(UIImage(color: .clear, size: CGSize(width: 1, height: 50)), for: .normal, barMetrics: .default)
-        c.setBackgroundImage(UIImage(color: #colorLiteral(red: 1, green: 0.9918877858, blue: 0.9991216787, alpha: 0.2), size: CGSize(width: 1, height: 50)), for: .selected, barMetrics: .default)
-        c.setDividerImage(UIImage(color: .lightGray, size: CGSize(width: 0.5, height: 0.5)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        segmentCtrl.setBackgroundImage(UIImage(color: .clear, size: CGSize(width: 1, height: 50)), for: .normal, barMetrics: .default)
+        segmentCtrl.setBackgroundImage(UIImage(color: #colorLiteral(red: 1, green: 0.9918877858, blue: 0.9991216787, alpha: 0.2), size: CGSize(width: 1, height: 50)), for: .selected, barMetrics: .default)
+        segmentCtrl.setDividerImage(UIImage(color: .lightGray, size: CGSize(width: 0.5, height: 0.5)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         
         // Changes color of title colors for selected / unselected segements
-        c.setTitleTextAttributes([.foregroundColor : UIColor.systemGray], for: .normal)
-        c.setTitleTextAttributes([.foregroundColor : UIColor.white], for: .selected)
-        c.addTarget(self, action: #selector(changeSegmentedControlLine), for: .valueChanged)
+        segmentCtrl.setTitleTextAttributes([.foregroundColor: UIColor.systemGray], for: .normal)
+        segmentCtrl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        segmentCtrl.addTarget(self, action: #selector(changeSegmentedControlLine), for: .valueChanged)
         
-        return c
+        return segmentCtrl
     }()
     
     private lazy var underlineView: UIView = {
@@ -33,7 +33,6 @@ class UnderlinedSegmentedControl: UIControl {
         view.backgroundColor = .systemBlue
         return view
     }()
-    
     
     // MARK: - Private Properties
     private var items: [String]
@@ -50,20 +49,16 @@ class UnderlinedSegmentedControl: UIControl {
         }
     }
     
-    
     // MARK: - Initializers
-    
     init(items: [String]) {
         self.items = items
         super.init(frame: .zero)
         configureSubviews()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // MARK: - Private Functions
     private func configureSubviews() {
@@ -84,8 +79,6 @@ class UnderlinedSegmentedControl: UIControl {
             underlineView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor, multiplier: 1 / CGFloat(segmentedControl.numberOfSegments)),
             underLineLeadingConstraint
         ])
-        
-        
     }
     
     @objc

@@ -15,7 +15,6 @@ class ButtonStackView: UIStackView {
     let shoppingBagButton: UIButton
     let weblinkButton: UIButton
     
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         let bookmarkButton = UIButton(type: .system)

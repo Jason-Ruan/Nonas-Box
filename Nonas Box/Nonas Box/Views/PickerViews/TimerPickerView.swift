@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 class TimerPickerView: UIPickerView {
     
     // MARK: - Properties
@@ -33,7 +31,6 @@ class TimerPickerView: UIPickerView {
         return (hours * 3600) + (minutes * 60) + seconds
     }
 
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,7 +43,6 @@ class TimerPickerView: UIPickerView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 
     // MARK: - Private Functions
     private func setUpViews() {

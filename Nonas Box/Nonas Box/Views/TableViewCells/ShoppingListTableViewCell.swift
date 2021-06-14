@@ -16,8 +16,6 @@ class ShoppingListTableViewCell: UITableViewCell {
         let iv = UIImageView()
         iv.backgroundColor = .white
         iv.layer.cornerRadius = 15
-        iv.layer.borderWidth = 0.5
-        iv.layer.borderColor = #colorLiteral(red: 0.7819456907, green: 0.7819456907, blue: 0.7819456907, alpha: 0.75).cgColor
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         return iv
@@ -25,19 +23,26 @@ class ShoppingListTableViewCell: UITableViewCell {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Fonts.handwriting.rawValue, size: 30)
+        label.font = UIFont(name: Fonts.circular.fontName, size: 16)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private lazy var quantityLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 12.5)
         label.textColor = subtitleTextColor
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 2
         label.textAlignment = .left
         return label
+    }()
+    
+    private lazy var crossedOutLineView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .systemIndigo
+        v.isHidden = true
+        return v
     }()
     
     // MARK: - Properties
@@ -48,13 +53,13 @@ class ShoppingListTableViewCell: UITableViewCell {
     }
     
     private let padding: CGFloat = 15
-    private let subtitleTextColor = #colorLiteral(red: 0.4384076322, green: 0.466779797, blue: 0.594195651, alpha: 1)
-    
+    private let subtitleTextColor: UIColor = .lightGray
     
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
+        selectionStyle = .none
         setUpViews()
     }
     
@@ -62,41 +67,42 @@ class ShoppingListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Private Functions
     private func setUpViews() {
-        addSubview(shoppingItemImageView)
-        addSubview(nameLabel)
-        addSubview(quantityLabel)
+        contentView.addSubview(shoppingItemImageView)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(quantityLabel)
+        contentView.addSubview(crossedOutLineView)
         
         shoppingItemImageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         quantityLabel.translatesAutoresizingMaskIntoConstraints = false
+        crossedOutLineView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             shoppingItemImageView.topAnchor.constraint(equalTo: topAnchor, constant: padding / 2),
             shoppingItemImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding / 2),
-            shoppingItemImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            shoppingItemImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding * 2),
             shoppingItemImageView.widthAnchor.constraint(equalTo: shoppingItemImageView.heightAnchor)
         ])
         
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: shoppingItemImageView.trailingAnchor, constant: padding),
-            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-//            nameLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4)
-            
+            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding)
         ])
         
         NSLayoutConstraint.activate([
-//            quantityLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            quantityLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: padding),
-//            quantityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding)
-            
             quantityLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
             quantityLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            quantityLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding)
+            quantityLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            crossedOutLineView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            crossedOutLineView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            crossedOutLineView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95),
+            crossedOutLineView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
     
@@ -106,10 +112,14 @@ class ShoppingListTableViewCell: UITableViewCell {
         shoppingItemImageView.kf.setImage(with: shoppingItem.imageURL,
                                           options: [.onFailureImage(UIImage(systemName: .photoFill)),
                                                     .cacheOriginalImage])
-        nameLabel.text = shoppingItem.itemName
+        nameLabel.text = shoppingItem.itemName.capitalized
         quantityLabel.text = "\(shoppingItem.itemUnit ?? "")"
     }
     
+    func toggleCrossedLineStatus(isCrossedOut: Bool) {
+        crossedOutLineView.isHidden = !isCrossedOut
+        contentView.alpha = isCrossedOut ? 0.33 : 1
+    }
     
     // MARK: - ReuseIdentifier
     static var reuseIdentifier: String {

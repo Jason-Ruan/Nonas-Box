@@ -11,7 +11,7 @@ import SafariServices
 
 class RecipeDetailVC: UIViewController {
     
-    //MARK: - VC Initializer
+    // MARK: - VC Initializer
     init(fetching recipeID: Int) {
         super.init(nibName: nil, bundle: nil)
         loadRecipeDetails(recipeID: recipeID)
@@ -26,7 +26,7 @@ class RecipeDetailVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Properties
+    // MARK: - Properties
     private var recipeDetails: RecipeDetails? {
         didSet {
             stepByStepInstructionsTableView.reloadData()
@@ -41,10 +41,7 @@ class RecipeDetailVC: UIViewController {
         }
     }
     
-    
-    
     // MARK: - Private Constraint Variables
-    
     private lazy var expandedViewConstraints: [NSLayoutConstraint] = {
         [recipeImageView.topAnchor.constraint(equalTo: view.topAnchor),
          recipeImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
@@ -54,7 +51,7 @@ class RecipeDetailVC: UIViewController {
          recipeBlurbInfoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
          recipeBlurbInfoLabel.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor),
          buttonStackView.topAnchor.constraint(equalTo: recipeBlurbInfoLabel.bottomAnchor, constant: 15),
-         buttonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+         buttonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
     }()
     
@@ -70,7 +67,6 @@ class RecipeDetailVC: UIViewController {
          recipeImageView.bottomAnchor.constraint(equalTo: buttonStackView.bottomAnchor)
         ]
     }()
-    
     
     // MARK: - UI Objects
     private lazy var backgroundImageView: UIImageView = { return BackgroundImageView(frame: view.bounds) }()
@@ -100,29 +96,26 @@ class RecipeDetailVC: UIViewController {
         return steptv
     }()
     
-    
-    //MARK: - LifeCycle Methods
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         setUpViews()
         guard let recipeDetails = recipeDetails else { return }
         configureViews(forRecipeDetails: recipeDetails)
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         configureNavigationBarForTranslucence()
         if let recipeID = recipeDetails?.id {
             checkIfRecipeIsBookmarked(id: recipeID)
         }
     }
     
-    
-    //MARK: - Private Functions
+    // MARK: - Private Functions
     private func loadRecipeDetails(recipeID: Int) {
         showLoadingScreen(blockBackgroundViews: true)
-        SpoonacularAPIClient.manager.getRecipeDetails(recipeID: recipeID) { [weak self] (result) in
+        SpoonacularAPIClient.getRecipeDetails(recipeID: recipeID) { [weak self] (result) in
             switch result {
             case .failure(let error):
                 self?.showAlert(message: "Could not get step by step instructions for the selected recipe.\nError:\(error.localizedDescription)")
@@ -188,7 +181,6 @@ class RecipeDetailVC: UIViewController {
         }, completion: nil)
     }
     
-    
     // MARK: - Obj-C Functions
     @objc private func updateBookmarkStatus() {
         guard let recipeDetails = recipeDetails else { return }
@@ -232,7 +224,6 @@ class RecipeDetailVC: UIViewController {
     
 }
 
-
 // MARK: - Private Constraints
 extension RecipeDetailVC {
     private func setUpViews() {
@@ -243,9 +234,9 @@ extension RecipeDetailVC {
         view.addSubview(stepByStepInstructionsTableView)
         
         recipeImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            recipeImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ] + expandedViewConstraints)
+        NSLayoutConstraint.activate(
+            expandedViewConstraints + [recipeImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)]
+        )
         
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -264,9 +255,8 @@ extension RecipeDetailVC {
     }
 }
 
-//MARK: - TableView Methods
+// MARK: - TableView Methods
 extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let recipeDetails = recipeDetails else { return 0 }
         return 1 + recipeDetails.numOfSectionsOfInstructions
@@ -338,7 +328,6 @@ extension RecipeDetailVC: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-
 // MARK: - ScrollView Methods
 extension RecipeDetailVC {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -365,11 +354,11 @@ extension RecipeDetailVC {
     }
     
     private func sectionWithMostVisibleRows(visibleRows: [IndexPath]) -> Int {
-        var sectionTracker: [Int : Int] = [:]
+        var sectionTracker: [Int: Int] = [:]
         for row in visibleRows {
-            sectionTracker[row.section,default: 1] += 1
+            sectionTracker[row.section, default: 1] += 1
         }
-        return (sectionTracker.max { a,b in a.value < b.value }?.key ?? 0) == 0 ? 0 : 1
+        return (sectionTracker.max { a, b in a.value < b.value }?.key ?? 0) == 0 ? 0 : 1
     }
     
 }
